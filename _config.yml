@@ -1,6 +1,6 @@
----
-redirect_from: "/bootstrap-3.3.6-dist"
----
+# ---
+# redirect_from: "/bootstrap-3.3.6-dist/"
+# ---
 
 gems:
   - jekyll-redirect-from
