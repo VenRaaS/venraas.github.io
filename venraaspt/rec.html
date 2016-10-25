@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js/v1.1/venraaspt.js"></script>
+</head>
+
+<body>
+<p>This example demonstrates the recommendation invocation !!!</p>
+<button type="button" id="btn" onclick='rec();'>Try it</button>
+
+<pre id="demo"></pre>
+
+<script>
+function print(content) {
+	document.getElementById("demo").innerHTML = typeof content;
+}
+
+function rec(){
+	venraastool.getrec(print);
+}
+
+</script>
+</body>
+</html>
+
