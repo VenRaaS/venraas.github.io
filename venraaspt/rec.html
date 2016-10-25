@@ -11,8 +11,9 @@
 <pre id="demo"></pre>
 
 <script>
-function print(content) {
-	document.getElementById("demo").innerHTML = JSON.stringify(JSON.parse(content), null, 2);
+function print(jsonStr) {
+	var prettify = JSON.stringify(JSON.parse(jsonStr), null, 2);
+	document.getElementById("demo").innerHTML = prettify;
 }
 
 function rec(){
