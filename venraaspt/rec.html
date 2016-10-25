@@ -12,7 +12,7 @@
 
 <script>
 function print(content) {
-	document.getElementById("demo").innerHTML = content;
+	document.getElementById("demo").innerHTML = JSON.stringify(JSON.parse(content), null, 2);
 }
 
 function rec(){
