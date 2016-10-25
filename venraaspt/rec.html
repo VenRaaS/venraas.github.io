@@ -11,13 +11,13 @@
 <pre id="demo"></pre>
 
 <script>
-function print(jsonStr) {
-	var prettify = JSON.stringify(JSON.parse(jsonStr), null, 2);
-	document.getElementById("demo").innerHTML = prettify;
+function print_custCB(jsonStr) {
+	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
+	document.getElementById("demo").innerHTML = pretty;
 }
 
 function rec(){
-	venraastool.getrec(print);
+	venraastool.getrec(print_custCB);
 }
 
 </script>
