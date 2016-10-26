@@ -187,7 +187,7 @@ var venraastool = {
 		
 		var str = JSON.stringify(paramJson);
 		alert(str);
-		venraasxhr.send();
+		venraasxhr.send(str);
 	}
 };
 
