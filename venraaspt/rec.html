@@ -8,7 +8,11 @@
 <p>This example demonstrates the recommendation invocation.</p>
 codename: <input type="text" id="codename" value=""/> <br>
 page_type: <input type="text" id="page_typee" value="p"/> <br>
-device: <input type="text" id="codename" value="pc"/> <br>
+device: <input type="text" id="device" value="pc"/> <br>
+topk: <input type="text" id="topk" value="10"/> <br>
+uid: <input type="text" id="uid" value=""/> <br>
+callback fun: <br>
+<input type="text" id="cbfun" value=""/> <br>
 <br>
 <button type="button" id="btn" onclick='rec();'>Try it</button>
 
@@ -22,6 +26,7 @@ function print_custCB(jsonStr) {
 
 function rec(){
 	var paramJson = {};	
+	
 	venraastool.recomd(paramJson, print_custCB);
 }
 
