@@ -70,7 +70,7 @@ function print_custCB(jsonStr) {
 <textarea id="demo" class="t2">HERE is <textarea id="demo"/> for printing result</textarea>
 
 <script>
-function print_custCB(jsonStr) {
+function printRec(jsonStr) {
 	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
 	document.getElementById("demo").innerHTML = pretty;
 }
