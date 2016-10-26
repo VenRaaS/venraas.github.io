@@ -163,14 +163,8 @@ var venraastool = {
 		}catch(e){}
 	},
 	recomd: function(paramJson, funCB) {
-		paramJson = {
-			"page_type": "p",
-			"ven_guid": "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813", 
-			"device": "pc",
-			"token": "5guOvNnKn2",
-			"topk":10,
-			"uid":"w%2BTHTJbJd1uDNYJttgytCw=="
-		};
+		paramJson.ven_guid = "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813";			
+		paramJson.token = "5guOvNnKn2";			
 		
 		var venraasxhr = venraastool.xhr();
 		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
