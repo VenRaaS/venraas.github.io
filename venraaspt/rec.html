@@ -89,12 +89,12 @@ function rec() {
 	if (topk) recParam.topk = Number(topk);
 	if (uid) recParam.uid = uid;
 	
+	//-- define customer callback function
 	var cbfDefStr = "var cbf = " + document.getElementById("cbf_text").value;
 	eval(cbfDefStr);
 	console.log(cbfDefStr);
 	
 	venraastool.recomd(recParam, cbf);		
-///	venraastool.recomd(recParam, print_custCB);
 }
 </script>
 </body>
