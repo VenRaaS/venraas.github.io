@@ -176,27 +176,27 @@ var venraastool = {
 				venfloctl[venfloctl_size]["retry"]=0;
 				venraas.ven_cps(venfloctl_size);
 			}				
-		} else {
-///			paramJson.ven_guid = "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813";			
-			paramJson.ven_guid = ven_guid;
-			paramJson.token = "5guOvNnKn2";			
+		} 
+///		paramJson.ven_guid = "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813";			
+		paramJson.ven_guid = ven_guid;
+		paramJson.token = "5guOvNnKn2";			
 
-			var venraasxhr = venraastool.xhr();
-			venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
-			venraasxhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
-			venraasxhr.withCredentials = true;
-			venraasxhr.onreadystatechange = function(){
-				try {
-					if (this.readyState==4 && this.status==200) {
-						funCB(this.responseText);
-					}
+		var venraasxhr = venraastool.xhr();
+		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
+		venraasxhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
+		venraasxhr.withCredentials = true;
+		venraasxhr.onreadystatechange = function() {
+			try {
+				if (this.readyState==4 && this.status==200) {
+					funCB(this.responseText);
 				}
-				catch(e) {}
-			};
+			}
+			catch(e) {}
+		};
 
-			var jsonStr = JSON.stringify(paramJson);		
-			venraasxhr.send(jsonStr);
-		}
+		var jsonStr = JSON.stringify(paramJson);		
+		venraasxhr.send(jsonStr);
+		
 	}
 };
 
