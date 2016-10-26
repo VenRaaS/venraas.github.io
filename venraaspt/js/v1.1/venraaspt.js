@@ -185,7 +185,7 @@ var venraastool = {
 			catch(e) {}
 		};
 
-		venraasxhr.send(paramJson);
+		venraasxhr.send(JSON.stringify(paramJson));
 	}
 };
 
