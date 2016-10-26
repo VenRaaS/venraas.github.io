@@ -162,7 +162,7 @@ var venraastool = {
 			document.body.appendChild(vjsonp);
 		}catch(e){}
 	},
-	recomd: function(paraJson, funCB) {
+	recomd: function(paramJson, funCB) {
 		paramJson = {
 			"page_type": "p",
 			"ven_guid": "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813", 
