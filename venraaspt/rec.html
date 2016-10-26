@@ -54,12 +54,18 @@ function print_custCB(jsonStr) {
 }
 
 function rec() {
+	var codename = document.getElementById("codename").value;
+	var page_type = document.getElementById("page_type").value;
+	var device = document.getElementById("device").value;
+	var topk = document.getElementById("topk").value;
+	var uid = document.getElementById("uid").value;
+		
 	var recParam = {};
-	recParam.codename = document.getElementById("codename").value;	
-	recParam.page_type = document.getElementById("page_type").value;	
-	recParam.device = document.getElementById("device").value;	
-	recParam.topk = Number(document.getElementById("topk").value);
-	recParam.uid = document.getElementById("uid").value;	
+	if (codename) recParam.codename = codename;
+	if (page_type) recParam.page_type = page_type;
+	if (device) recParam.device = device;
+	if (topk) recParam.topk = Number(topk);
+	if (uid) recParam.uid = uid;
 			
 	venraastool.recomd(recParam, print_custCB);
 }
