@@ -56,7 +56,7 @@ topk: <input type="text" id="topk" value="10"/> <br>
 uid: <input type="text" id="uid" value=""/> <br>
 </div>
 customer callback fun: <br>
-<textarea class="t1">
+<textarea id="cbf_text" class="t1">
 function print_custCB(jsonStr) {
 	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
 	document.getElementById("demo").innerHTML = pretty;
@@ -87,8 +87,10 @@ function rec() {
 	if (device) recParam.device = device;
 	if (topk) recParam.topk = Number(topk);
 	if (uid) recParam.uid = uid;
-			
-	venraastool.recomd(recParam, print_custCB);
+
+	var cbf = document.getElementById("cbf_text").value;
+	console.log(cbf);
+//	venraastool.recomd(recParam, print_custCB);
 }
 </script>
 </body>
