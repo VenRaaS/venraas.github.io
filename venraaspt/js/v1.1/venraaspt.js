@@ -174,7 +174,7 @@ var venraastool = {
 		
 		var venraasxhr = venraastool.xhr();
 		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
-		venraasxhr.setRequestHeader("Content-type","text/html;charset=UTF-8");
+//		venraasxhr.setRequestHeader("Content-type","text/html;charset=UTF-8");
 		venraasxhr.withCredentials = true;
 		venraasxhr.onreadystatechange = function(){
 			try {
