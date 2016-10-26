@@ -12,7 +12,10 @@ device: <input type="text" id="device" value="pc"/> <br>
 topk: <input type="text" id="topk" value="10"/> <br>
 uid: <input type="text" id="uid" value=""/> <br>
 callback fun: <br>
-<input type="text" id="cbfun" value=""/> <br>
+<input type="text" id="cbfun" value='function print_custCB(jsonStr) {
+	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
+	document.getElementById("demo").innerHTML = pretty;
+}'/> <br>
 <br>
 <button type="button" id="btn" onclick='rec();'>Try it</button>
 
