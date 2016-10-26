@@ -60,9 +60,8 @@ function rec() {
 	recParam.device = document.getElementById("device").value;	
 	recParam.topk = Number(document.getElementById("topk").value);
 	recParam.uid = document.getElementById("uid").value;	
-		
-	var jsonStr = JSON.stringify(recParam);
-	venraastool.recomd(jsonStr, print_custCB);
+			
+	venraastool.recomd(recParam, print_custCB);
 }
 
 </script>
