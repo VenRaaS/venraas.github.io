@@ -177,9 +177,8 @@ var venraastool = {
 				venraas.ven_cps(venfloctl_size);
 			}
 		}
-				
+
 		paramJson.ven_guid = ven_guid;
-		paramJson.token = "5guOvNnKn2";		
 		
 		var venraasxhr = venraastool.xhr();
 		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
