@@ -162,7 +162,7 @@ var venraastool = {
 			document.body.appendChild(vjsonp);
 		}catch(e){}
 	},
-	getrec: function(page_type, funCB) {
+	recomd: function(paraJson, funCB) {
 		var venraasxhr = venraastool.xhr();
 		venraasxhr.open('GET','https://apir.venraas.tw/cupid/api/goods/rank?page_type=p&ven_guid=d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813&device=pc&token=5guOvNnKn2&topk=10&uid=w%2BTHTJbJd1uDNYJttgytCw==', true);
 		venraasxhr.setRequestHeader("Content-type","text/html;charset=UTF-8");
