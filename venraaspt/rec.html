@@ -20,7 +20,8 @@ function print_custCB(jsonStr) {
 }
 
 function rec(){
-	venraastool.getrec('p', print_custCB);
+	var paramJson = {};	
+	venraastool.recomd(paramJson, print_custCB);
 }
 
 </script>
