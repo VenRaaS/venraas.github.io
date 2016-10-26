@@ -13,7 +13,7 @@ input {
     resize: none;
 }
 
-textarea {
+.t1 {
     width: 100%;
     height: 150px;
     padding: 12px 20px;
@@ -23,6 +23,15 @@ textarea {
     background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
+}
+
+.t2 {
+    width: 100%;
+    height: 100%;        
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
 }
 </style>
 </head>
@@ -35,24 +44,23 @@ device: <input type="text" id="device" value="pc"/> <br>
 topk: <input type="text" id="topk" value="10"/> <br>
 uid: <input type="text" id="uid" value=""/> <br>
 customer callback fun: <br>
-<textarea>
+<textarea class="t1">
 function print_custCB(jsonStr) {
 	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
 	document.getElementById("demo").innerHTML = pretty;
 }
 </textarea>
-<br>
-<br>
+<br/>
 <button type="button" id="btn" onclick='rec();'>Try it</button>
-
-<textarea id="demo"></textarea>
+<br/>
+<br/>
+<textarea id="demo" class="t2"></textarea>
 
 <script>
 function print_custCB(jsonStr) {
 	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
 	document.getElementById("demo").innerHTML = pretty;
 }
-
 function rec() {
 	var token = document.getElementById("token").value;
 	var page_type = document.getElementById("page_type").value;
@@ -69,8 +77,6 @@ function rec() {
 			
 	venraastool.recomd(recParam, print_custCB);
 }
-
 </script>
 </body>
 </html>
-
