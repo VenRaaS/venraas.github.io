@@ -78,7 +78,7 @@ function rec() {
 	var uid = document.getElementById("uid").value;
 		
 	var recParam = {};
-	if (token) recParam.codename = token;
+	if (token) recParam.token = token;
 	if (page_type) recParam.page_type = page_type;
 	if (device) recParam.device = device;
 	if (topk) recParam.topk = Number(topk);
