@@ -163,8 +163,17 @@ var venraastool = {
 		}catch(e){}
 	},
 	recomd: function(paraJson, funCB) {
+		paramJson = {
+			'page_type': 'p',
+			'ven_guid': 'd0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813', 
+			'device': 'pc',
+			'token': '5guOvNnKn2',
+			'topk':10,
+			'uid':'w%2BTHTJbJd1uDNYJttgytCw=='
+		};
+		
 		var venraasxhr = venraastool.xhr();
-		venraasxhr.open('GET','https://apir.venraas.tw/cupid/api/goods/rank?page_type=p&ven_guid=d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813&device=pc&token=5guOvNnKn2&topk=10&uid=w%2BTHTJbJd1uDNYJttgytCw==', true);
+		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
 		venraasxhr.setRequestHeader("Content-type","text/html;charset=UTF-8");
 		venraasxhr.withCredentials = true;
 		venraasxhr.onreadystatechange = function(){
@@ -176,7 +185,7 @@ var venraastool = {
 			catch(e) {}
 		};
 
-		venraasxhr.send();
+		venraasxhr.send(paramJson);
 	}
 };
 
