@@ -177,15 +177,10 @@ var venraastool = {
 				venraas.ven_cps(venfloctl_size);
 			}
 		}
-		
-		ven_guid = venraastool.getcookie("venguid");		
-///		paramJson.ven_guid = "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813";			
+				
 		paramJson.ven_guid = ven_guid;
-		paramJson.token = "5guOvNnKn2";
+		paramJson.token = "5guOvNnKn2";		
 		
-		funCB(JSON.stringify(paramJson));
-		
-/*
 		var venraasxhr = venraastool.xhr();
 		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
 		venraasxhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
@@ -201,7 +196,7 @@ var venraastool = {
 
 		var jsonStr = JSON.stringify(paramJson);		
 		venraasxhr.send(jsonStr);
-*/		
+		
 	}
 };
 
