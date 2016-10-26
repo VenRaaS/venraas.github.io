@@ -184,8 +184,10 @@ var venraastool = {
 			}
 			catch(e) {}
 		};
-
-		venraasxhr.send(JSON.stringify(paramJson));
+		
+		var str = JSON.stringify(paramJson);
+		alert(str);
+		venraasxhr.send();
 	}
 };
 
