@@ -4,6 +4,15 @@
 <script src="js/v1.1/venraaspt.js"></script>
 	
 <style>
+input {
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
 textarea {
     width: 100%;
     height: 150px;
@@ -25,7 +34,7 @@ page_type: <input type="text" id="page_typee" value="p"/> <br>
 device: <input type="text" id="device" value="pc"/> <br>
 topk: <input type="text" id="topk" value="10"/> <br>
 uid: <input type="text" id="uid" value=""/> <br>
-callback fun: <br>
+customer callback fun: <br>
 <textarea>
 function print_custCB(jsonStr) {
 	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
