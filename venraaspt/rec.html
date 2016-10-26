@@ -58,7 +58,7 @@ uid: <input type="text" id="uid" value=""/> <br>
 </div>
 customer callback fun: <br>
 <textarea id="cbf_text" class="t1">
-function print_custCB(jsonStr) {
+function print_rec(jsonStr) {
 	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
 	document.getElementById("demo").innerHTML = pretty;
 }
@@ -70,11 +70,6 @@ function print_custCB(jsonStr) {
 <textarea id="demo" class="t2">HERE is <textarea id="demo"/> for printing result</textarea>
 
 <script>
-function printRec(jsonStr) {
-	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
-	document.getElementById("demo").innerHTML = pretty;
-}
-
 function rec() {
 	var token = document.getElementById("token").value;
 	var page_type = document.getElementById("page_type").value;
