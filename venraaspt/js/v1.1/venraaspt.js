@@ -175,8 +175,10 @@ var venraastool = {
 				venfloctl[venfloctl_size]["type"]=venstrob.strtypeGuid;
 				venfloctl[venfloctl_size]["retry"]=0;
 				venraas.ven_cps(venfloctl_size);
-			}				
-		} 
+			}
+		}
+		
+		ven_guid = venraastool.getcookie("venguid");		
 ///		paramJson.ven_guid = "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813";			
 		paramJson.ven_guid = ven_guid;
 		paramJson.token = "5guOvNnKn2";
