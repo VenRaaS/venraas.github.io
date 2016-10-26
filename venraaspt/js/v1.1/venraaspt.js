@@ -174,7 +174,7 @@ var venraastool = {
 				venfloctl[venfloctl_size]["objv"]="";
 				venfloctl[venfloctl_size]["type"]=venstrob.strtypeGuid;
 				venfloctl[venfloctl_size]["retry"]=0;
-				this.ven_cps(venfloctl_size);
+				venraas.ven_cps(venfloctl_size);
 			}				
 		} else {
 ///			paramJson.ven_guid = "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813";			
