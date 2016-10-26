@@ -163,24 +163,40 @@ var venraastool = {
 		}catch(e){}
 	},
 	recomd: function(paramJson, funCB) {
-		paramJson.ven_guid = "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813";			
-		paramJson.token = "5guOvNnKn2";			
-		
-		var venraasxhr = venraastool.xhr();
-		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
-		venraasxhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
-		venraasxhr.withCredentials = true;
-		venraasxhr.onreadystatechange = function(){
-			try {
-				if (this.readyState==4 && this.status==200) {
-					funCB(this.responseText);
+		var ven_guid = venraastool.getcookie("venguid");
+		if ("" == ven_guid) {
+			if(typeof venfloctl !== 'undefined'){
+				var venfloctl_size= venraastool.object_size(venfloctl);
+				venfloctl[venfloctl_size]={};
+				venfloctl[venfloctl_size]["status"]=false;
+				venfloctl[venfloctl_size]["contr"]="";
+				venfloctl[venfloctl_size]["venact"]="";
+				venfloctl[venfloctl_size]["objv"]="";
+				venfloctl[venfloctl_size]["type"]=venstrob.strtypeGuid;
+				venfloctl[venfloctl_size]["retry"]=0;
+				this.ven_cps(venfloctl_size);
+			}				
+		} else {
+///			paramJson.ven_guid = "d0200dfe-3592-40fa-a25b-0c1804247fee.api-group-n9t320150813";			
+			paramJson.ven_guid = ven_guid;
+			paramJson.token = "5guOvNnKn2";			
+
+			var venraasxhr = venraastool.xhr();
+			venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
+			venraasxhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
+			venraasxhr.withCredentials = true;
+			venraasxhr.onreadystatechange = function(){
+				try {
+					if (this.readyState==4 && this.status==200) {
+						funCB(this.responseText);
+					}
 				}
-			}
-			catch(e) {}
-		};
-		
-		var jsonStr = JSON.stringify(paramJson);		
-		venraasxhr.send(jsonStr);
+				catch(e) {}
+			};
+
+			var jsonStr = JSON.stringify(paramJson);		
+			venraasxhr.send(jsonStr);
+		}
 	}
 };
 
