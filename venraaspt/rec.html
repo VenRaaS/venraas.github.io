@@ -30,7 +30,7 @@ textarea {
 <body>
 <h2>This example demonstrates the recommendation invocation.</h2>
 codename: <input type="text" id="codename" value=""/> <br>
-page_type: <input type="text" id="page_typee" value="p"/> <br>
+page_type: <input type="text" id="page_type" value="p"/> <br>
 device: <input type="text" id="device" value="pc"/> <br>
 topk: <input type="text" id="topk" value="10"/> <br>
 uid: <input type="text" id="uid" value=""/> <br>
@@ -53,10 +53,16 @@ function print_custCB(jsonStr) {
 	document.getElementById("demo").innerHTML = pretty;
 }
 
-function rec(){
-	var paramJson = {};	
-	
-	venraastool.recomd(paramJson, print_custCB);
+function rec() {
+	var recParam = {};
+	recParam.codename = document.getElementById("codename").value;	
+	recParam.page_type = document.getElementById("page_type").value;	
+	recParam.device = document.getElementById("device").value;	
+	recParam.topk = Number(document.getElementById("topk").value);
+	recParam.uid = document.getElementById("uid").value;	
+		
+	var jsonStr = JSON.stringify(recParam);
+	venraastool.recomd(jsonStr, print_custCB);
 }
 
 </script>
