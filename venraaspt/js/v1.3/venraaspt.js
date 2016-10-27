@@ -183,8 +183,7 @@ var venraastool = {
 		var venraasxhr = venraastool.xhr();
 		venraasxhr.onreadystatechange = function() {
 			try {
-				if (this.readyState==4 && this.status==200) {
-					console.log('onreadystatechange');
+				if (this.readyState==4 && this.status==200) {					
 					funCB(this.responseText);
 				}
 			}
