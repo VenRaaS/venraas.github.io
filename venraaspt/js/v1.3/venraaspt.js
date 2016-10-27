@@ -180,9 +180,7 @@ var venraastool = {
 
 		paramJson.ven_guid = ven_guid;
 		
-		var venraasxhr = venraastool.xhr();		
-		venraasxhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
-		venraasxhr.withCredentials = true;		
+		var venraasxhr = venraastool.xhr();
 		venraasxhr.onreadystatechange = function() {
 			try {
 				if (this.readyState==4 && this.status==200) {
@@ -195,6 +193,8 @@ var venraastool = {
 			}
 		};
 		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
+		venraasxhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
+		venraasxhr.withCredentials = true;
 
 		var jsonStr = JSON.stringify(paramJson);		
 		venraasxhr.send(jsonStr);
