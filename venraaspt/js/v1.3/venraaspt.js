@@ -190,7 +190,9 @@ var venraastool = {
 					funCB(this.responseText);
 				}
 			}
-			catch(e) {}
+			catch(e) {
+				console.log(e.message);
+			}
 		};
 
 		var jsonStr = JSON.stringify(paramJson);		
