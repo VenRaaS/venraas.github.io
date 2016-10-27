@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/v1.1/venraaspt.js"></script>
-	
 <style>
 .container {
 	width: 200px;
@@ -50,11 +48,13 @@ input {
 <h1>Recommendation invocation with Javascript</h1>
 <hr>
 <div class="container">
-token: <input type="text" id="token" value=""/> <br>
-page_type: <input type="text" id="page_type" value="p"/> <br>
-device: <input type="text" id="device" value="pc"/> <br>
-topk: <input type="text" id="topk" value="10"/> <br>
-uid: <input type="text" id="uid" value=""/> <br>
+token:<input type="text" id="token" value="" /><br> 
+page_type: <input type="text" id="page_type" value="p" /><br> 
+uid: <input type="text" id="uid" value="" /><br> 
+gid: <input type="text" id="gid" value="" /><br> 
+categ_code: <input type="text" id="categ_code" value="" /><br> 
+device: <input type="text" id="device" value="pc" /><br> 
+topk: <input type="text" id="topk" value="10" /><br> 
 </div>
 customer callback fun: <br>
 <textarea id="cbf_text" class="t1">
@@ -69,20 +69,26 @@ function print_rec(jsonStr) {
 <br/>
 <textarea id="demo" class="t2">HERE is <textarea id="demo"/> for printing result</textarea>
 
+<script src="js/v1.1/venraaspt.js"></script>
 <script>
 function rec() {
 	var token = document.getElementById("token").value;
 	var page_type = document.getElementById("page_type").value;
-	var device = document.getElementById("device").value;
-	var topk = document.getElementById("topk").value;
 	var uid = document.getElementById("uid").value;
+	var gid = document.getElementById("gid").value;
+	var categ_code = document.getElementById("categ_code").value;
+	var device = document.getElementById("device").value;
+	var topk = document.getElementById("topk").value;	
 		
 	var recParam = {};
 	if (token) recParam.token = token;
 	if (page_type) recParam.page_type = page_type;
-	if (device) recParam.device = device;
-	if (topk) recParam.topk = Number(topk);
 	if (uid) recParam.uid = uid;
+	if (gid) recParam.uid = gid;
+	if (categ_code) recParam.uid = categ_code;
+	if (device) recParam.device = device;
+	if (topk) recParam.topk = Number(topk);	
+	console.log(JSON.stringify(recParam));
 	
 	//-- define customer callback function
 	var cbfDefStr = "var cbf = " + document.getElementById("cbf_text").value;
