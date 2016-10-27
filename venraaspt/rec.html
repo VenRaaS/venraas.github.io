@@ -72,6 +72,9 @@ function print_rec(jsonStr) {
 <script src="js/v1.1/venraaspt.js"></script>
 <script>
 function rec() {
+	//-- reset result
+	document.getElementById("demo").innerHTML = 'HERE is <textarea id="demo"/> for printing result';
+	
 	var token = document.getElementById("token").value;
 	var page_type = document.getElementById("page_type").value;
 	var uid = document.getElementById("uid").value;
@@ -92,10 +95,14 @@ function rec() {
 	
 	//-- define customer callback function
 	var cbfDefStr = "var cbf = " + document.getElementById("cbf_text").value;
-	eval(cbfDefStr);
-	console.log(cbfDefStr);
+	try {
+		eval(cbfDefStr);
+		console.log(cbfDefStr);		
+	} catch (ex) {
+		document.getElementById("demo").innerHTML = 'parsing error of customer callback fun: ' + ex.message;
+	}
 	
-	venraastool.recomd(recParam, cbf);		
+	venraastool.recomd(recParam, cbf);
 }
 </script>
 </body>
