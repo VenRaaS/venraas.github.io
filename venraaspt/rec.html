@@ -82,7 +82,8 @@ function rec() {
 	var categ_code = document.getElementById("categ_code").value;
 	var device = document.getElementById("device").value;
 	var topk = document.getElementById("topk").value;	
-		
+	
+	//-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
 	var recParam = {};
 	if (token) recParam.token = token;
 	if (page_type) recParam.page_type = page_type;
@@ -102,6 +103,7 @@ function rec() {
 		document.getElementById("demo").innerHTML = 'parsing error of customer callback fun: ' + ex.message;
 	}
 	
+	//-- ajax call for recommendation
 	venraastool.recomd(recParam, cbf);
 }
 </script>
