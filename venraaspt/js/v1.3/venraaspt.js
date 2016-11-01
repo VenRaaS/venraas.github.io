@@ -162,7 +162,7 @@ var venraastool = {
 			document.body.appendChild(vjsonp);
 		}catch(e){}
 	},
-	recomd: function(paramJson, funCB) {
+	recomd: function(paramJson, cbf) {
 		var ven_guid = venraastool.getcookie("venguid");
 		if ("" == ven_guid) {
 			if(typeof venfloctl !== 'undefined'){
@@ -184,7 +184,7 @@ var venraastool = {
 		venraasxhr.onreadystatechange = function() {
 			try {
 				if (this.readyState==4 && this.status==200) {					
-					funCB(this.responseText);
+					cbf(this.responseText);
 				}
 			}
 			catch(e) {
