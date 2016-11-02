@@ -19,7 +19,9 @@ var venstrob = {
 	strtypeTracking: '1',
 	strtypeEctrans:'2',
 	strtypeGuid:'3',
-	venfloctl_processing:''
+	venfloctl_processing:'',
+	strDhermesHost:'apih.venraas.tw',
+	strDHermesApi:'/hermes/api/goods/rank'	                
 };
 var venfloctl = new Object();
 var venraastool = {
@@ -190,8 +192,8 @@ var venraastool = {
 			catch(e) {
 				console.log(e.message);
 			}
-		};
-		venraasxhr.open('POST','https://apir.venraas.tw/cupid/api/goods/rank', true);
+		};		
+		venraasxhr.open('POST', venstrob.strDhermesHost + venstrob.strDHermesApi, true);
 		venraasxhr.setRequestHeader("Content-type","application/json; charset=UTF-8");
 		venraasxhr.withCredentials = true;
 
