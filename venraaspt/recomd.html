@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css"/>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+
+<style>
+	.slick-prev:before, .slick-next:before {
+		color:red;
+	}
+
+	.slick-demo{
+		height: 360px;
+	}
+
+	.mb {
+		margin-bottom: 5px;
+	}
+
+	input {
+		box-sizing: border-box;
+		border: 2px solid #ccc;
+		border-radius: 4px;
+		background-color: #f8f8f8;
+		font-size: 16px;
+		resize: none;
+	}
+
+	.t1 {
+		width: 100%;
+		height: 150px;
+		padding: 12px 20px;
+		box-sizing: border-box;
+		border: 2px solid #ccc;
+		border-radius: 4px;
+		background-color: #f8f8f8;
+		font-size: 16px;
+		resize: none;
+	}
+
+	.t2 {
+		width: 100%;
+		height: 400px;
+		padding: 12px 20px;
+		box-sizing: border-box;
+		border-radius: 4px;
+		background-color: transparent; 
+	}
+</style>
+</head>
+
+<body>
+<script src="jquery/jquery.min.js"></script>
+<script src="jquery/jquery-ui.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script src="jquery/jquery-migrate.min.js"></script>
+<script src="slick/slick.min.js"></script>
+
+<script src="https://libs.venraas.tw/js/current/venraaspt.min.js"></script>
+
+<div class="container" style="width: 90%;">
+	<div class="row">
+		<div style="text-align: center;">
+			<h3>Recommendation invocation with Javascript</h3>
+			<hr>
+		</div>
+
+		<div class="col-md-4" style="padding: 0;">
+			<div class="col-md-4 mb">token:</div><div class="col-md-8 mb"><input type="text" id="token" value=""/></div>
+			<div class="col-md-4 mb">page_type:</div><div class="col-md-8 mb"><input type="text" id="page_type" value="p"/></div>
+			<div class="col-md-4 mb">uid:</div><div class="col-md-8 mb"><input type="text" id="uid" value=""/></div>
+			<div class="col-md-4 mb">gid:</div><div class="col-md-8 mb"><input type="text" id="gid" value="" /></div>
+			<div class="col-md-4 mb">categ_code:</div><div class="col-md-8 mb"><input type="text" id="categ_code" value=""/></div>
+			<div class="col-md-4 mb">device:</div><div class="col-md-8 mb"><input type="text" id="device" value="pc"/></div>
+			<div class="col-md-4 mb">topk:</div><div class="col-md-8 mb"><input type="text" id="topk" value="10"/></div>
+			<div class="col-md-4 mb">show_Items:</div><div class="col-md-8 mb"><input type="text" id="showItems" value="5"/></div>
+			<div class="col-md-4 mb">scroll_Items:</div><div class="col-md-8 mb"><input type="text" id="scrollItems" value="1"/></div>
+			<div class="col-md-4 mb">looping:</div><div class="col-md-8 mb"><input type="checkbox" id="loop"></div>
+		</div>
+		<div class="col-md-8">
+			<div class="slider slick-demo">
+			</div>
+		</div>
+		<br>
+		<div class="col-md-12">
+			customer callback fun:<br>
+			<textarea id="cbf_text" class="t1">
+function print_rec(jsonStr) {
+	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
+	document.getElementById("demo").innerHTML = pretty;
+}
+			</textarea>
+		</div>
+
+		<div class="col-md-12">
+			<button type="button" id="btn" onclick='try_it();'>Try it</button><br>	
+			<textarea id="demo" class="t2">HERE is <textarea id="demo"/> for printing result</textarea>
+		</div>
+	</div>
+
+</div>
+
+<script>
+
+function try_it() {
+	//-- reset result
+	document.getElementById("demo").innerHTML = 'HERE is <textarea id="demo"/> for printing result';
+
+	var token = document.getElementById("token").value;
+	var page_type = document.getElementById("page_type").value;
+	var uid = document.getElementById("uid").value;
+	var gid = document.getElementById("gid").value;
+	var categ_code = document.getElementById("categ_code").value;
+	var device = document.getElementById("device").value;
+	var topk = document.getElementById("topk").value;
+
+	rowItems = topk;
+	showItems = document.getElementById("showItems").value;
+	scrollItems = document.getElementById("scrollItems").value;
+	loop = document.getElementById("loop").checked;
+
+	//-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
+	var recomdParam = {};
+	if (token) recomdParam.token = token;
+	if (page_type) recomdParam.page_type = page_type;
+	if (uid) recomdParam.uid = uid;
+	if (gid) recomdParam.gid = gid;
+	if (categ_code) recomdParam.categ_code = categ_code;
+	if (device) recomdParam.device = device;
+	if (topk) recomdParam.topk = Number(topk);
+	console.log(JSON.stringify(recomdParam));
+
+	//-- ajax call for recommendation
+	venraastool.recomd(recomdParam, recomdCallback);
+}
+
+var rowItems;
+var showItems;
+var scrollItems;
+var loop;
+function recomdCallback(jsonStr) {
+	var result = JSON.parse(jsonStr);
+	if (result.recomd_list != null) {
+		process_slick(result, "slick-demo", loop, rowItems, showItems, scrollItems);
+	}
+
+	//-- define customer callback function
+	var cbfDefStr = "var cbf = " + document.getElementById("cbf_text").value;
+	try {
+		eval(cbfDefStr);
+		console.log(cbfDefStr);
+		cbf(jsonStr);
+	}
+	catch (ex) {
+		document.getElementById("demo").innerHTML = 'parsing error of customer callback fun: ' + ex.message;
+	}
+}
+
+var bSlick = false;
+function process_slick(result, div_class, loop, rowItems, showItems, scrollItems) {
+	var html = "";
+	for (i=0; i<result.recomd_list.length; i++) {
+		html += process_item(result.recomd_list[i].goods_page_url, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price);
+	}
+
+	if (bSlick == true) {
+		$("." + div_class).slick("unslick");
+		$("." + div_class).html("");
+		bSlick = false;
+	}
+
+	console.log("loop=" + loop);
+	console.log("rowItems=" + rowItems);
+	console.log("showItems=" + showItems);
+	console.log("scrollItems=" + scrollItems);
+	$("." + div_class).html(html);
+	$("." + div_class).slick({
+		infinite: Boolean(loop),
+		arrows: true,
+		prevArrow: '<button type="button" class="slick-prev" style="left:-40px; width:40px; height:40px; background-color:#ddd;">Previous</button>',
+		nextArrow: '<button type="button" class="slick-next" style="right:-40px; width:40px; height:40px; background-color:#ddd;">Next</button>',
+		slidesPerRow: Number(rowItems),
+		slidesToShow: Number(showItems),
+		slidesToScroll: Number(scrollItems)
+	});
+	bSlick = true;
+}
+
+function process_item(addr, img, name, price) {
+	var html = '<div style="margin:10px;">';
+	html += '<a href="' + addr + '"><img src="' + img + '" style="width: 100%"></a><div>' + name + '</div><div style="color:red; text-align:center;">$' + price + '</div></div>';
+	return html;
+}
+</script>
+</body>
+</html>
