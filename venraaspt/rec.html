@@ -97,10 +97,10 @@ function rec() {
 	if (topk) recParam.topk = Number(topk);	
 	console.log(JSON.stringify(recParam));
 	
-	//var recParam2 = recParam;
-	//console.log("add w_categ_info");
-	//recParam2.w_categ_info = "[ { 'code':'S0' }]"
-	//console.log(JSON.stringify(recParam2));
+	var recParam2 = recParam;
+	console.log("add w_categ_info");
+	recParam2.w_categ_info = [ { 'code':'S0' }]
+	console.log(JSON.stringify(recParam2));
 	
 	//-- define customer callback function
 	var cbfDefStr = "var cbf = " + document.getElementById("cbf_text").value;
