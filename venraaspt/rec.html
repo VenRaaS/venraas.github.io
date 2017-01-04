@@ -97,6 +97,9 @@ function rec() {
 	if (topk) recParam.topk = Number(topk);	
 	console.log(JSON.stringify(recParam));
 	
+	var recParam2 = recParam;
+	console.log(JSON.stringify(recParam2));
+	
 	//-- define customer callback function
 	var cbfDefStr = "var cbf = " + document.getElementById("cbf_text").value;
 	try {
@@ -108,7 +111,7 @@ function rec() {
 	
 	//-- ajax call for recommendation
 	venraastool.recomd(recParam, cbf);
-	venraastool.recomd(recParam, cbf);
+	venraastool.recomd(recParam2, cbf);
 }
 </script>
 </body>
