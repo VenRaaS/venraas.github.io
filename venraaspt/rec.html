@@ -97,8 +97,9 @@ function rec() {
 	if (topk) recParam.topk = Number(topk);	
 	console.log(JSON.stringify(recParam));
 	
-	var recParam2 = _.extend({}, recParam);  //物件複製
-	console.log("add w_categ_info3");
+	console.log("add w_categ_info");
+	var $ = require("jquery");
+	var recParam2 = $.extend({}, recParam);  //物件複製
 	recParam2.w_categ_info = [ { 'code':'S0' }];
 	console.log(JSON.stringify(recParam2));
 	console.log(JSON.stringify(recParam));
