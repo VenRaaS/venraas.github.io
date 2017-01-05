@@ -69,7 +69,7 @@ function print_rec(jsonStr) {
 <br/>
 <br/>
 <textarea id="demo" class="t2">HERE is <textarea id="demo"/> for printing result</textarea>
-
+	
 <script src="https://libs.venraas.tw/js/current/venraaspt.min.js"></script>
 <script>
 function rec() {
@@ -98,7 +98,7 @@ function rec() {
 	console.log(JSON.stringify(recParam));
 	
 	var recParam2 = recParam;
-	console.log("add w_categ_info");
+	console.log("add w_categ_info2");
 	recParam2.w_categ_info = [ { 'code':'S0' }];
 	console.log(JSON.stringify(recParam2));
 	
@@ -113,7 +113,7 @@ function rec() {
 	
 	//-- ajax call for recommendation
 	venraastool.recomd(recParam, cbf);
-	//venraastool.recomd(recParam2, cbf);
+	venraastool.recomd(recParam2, cbf);
 }
 </script>
 </body>
