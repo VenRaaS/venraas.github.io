@@ -112,8 +112,7 @@ function try_it() {
 	//-- reset result
 	document.getElementById("demo").innerHTML = 'HERE is <textarea id="demo"/> for printing result';
 
-	var token = document.getElementById("token").value;
-	var page_type = document.getElementById("page_type").value;
+	var token = document.getElementById("token").value;	
 	var rec_type = document.getElementById("rec_type").value;
 	var rec_pos = document.getElementById("rec_pos").value;
 	var uid = document.getElementById("uid").value;
@@ -129,10 +128,9 @@ function try_it() {
 
 	//-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
 	var recomdParam = {};
-	if (token) recomdParam.token = token;
-	if (page_type) recomdParam.page_type = page_type;
-	if (rec_type) recomdParam.page_type = rec_type;
-	if (rec_pos) recomdParam.page_type = rec_pos;
+	if (token) recomdParam.token = token;	
+	if (rec_type) recomdParam.rec_type = rec_type;
+	if (rec_pos) recomdParam.rec_pos = rec_pos;
 	if (uid) recomdParam.uid = uid;
 	if (gid) recomdParam.gid = gid;
 	if (categ_code) recomdParam.categ_code = categ_code;
