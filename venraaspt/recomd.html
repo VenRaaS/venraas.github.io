@@ -114,6 +114,8 @@ function try_it() {
 
 	var token = document.getElementById("token").value;
 	var page_type = document.getElementById("page_type").value;
+	var rec_type = document.getElementById("rec_type").value;
+	var rec_pos = document.getElementById("rec_pos").value;
 	var uid = document.getElementById("uid").value;
 	var gid = document.getElementById("gid").value;
 	var categ_code = document.getElementById("categ_code").value;
@@ -129,6 +131,8 @@ function try_it() {
 	var recomdParam = {};
 	if (token) recomdParam.token = token;
 	if (page_type) recomdParam.page_type = page_type;
+	if (rec_type) recomdParam.page_type = rec_type;
+	if (rec_pos) recomdParam.page_type = rec_pos;
 	if (uid) recomdParam.uid = uid;
 	if (gid) recomdParam.gid = gid;
 	if (categ_code) recomdParam.categ_code = categ_code;
