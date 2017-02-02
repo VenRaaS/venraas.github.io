@@ -70,7 +70,7 @@
 		</div>
 
 		<div class="col-md-4" style="padding: 0;">
-			<div class="col-md-4 mb">token:</div><div class="col-md-8 mb"><input type="text" id="token" value=""/></div>			
+			<div class="col-md-4 mb">token:</div><div class="col-md-8 mb"><input type="text" id="token" value=""/></div>
 			<div class="col-md-4 mb">rec_type:</div><div class="col-md-8 mb"><input type="text" id="rec_type" value="ClickStream"/></div>
 			<div class="col-md-4 mb">rec_pos:</div><div class="col-md-8 mb"><input type="text" id="rec_pos" value="p"/></div>
 			<div class="col-md-4 mb">uid:</div><div class="col-md-8 mb"><input type="text" id="uid" value=""/></div>
@@ -86,20 +86,15 @@
 			<div class="slider slick-demo">
 			</div>
 		</div>
-		<br>
-		<div class="col-md-12">
-			customer callback fun:<br>
-			<textarea id="cbf_text" class="t1">
-function print_rec(jsonStr) {
-	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
-	document.getElementById("demo").innerHTML = pretty;
-}
-			</textarea>
-		</div>
-
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<button type="button" id="btn" onclick='try_it();'>Try it</button><br>	
-			<textarea id="demo" class="t2">HERE is <textarea id="demo"/> for printing result</textarea>
+			<br>
+			<textarea id="recomd_result" class="t2">HERE is for printing recomd's result</textarea>
+		</div>
+		<div class="col-md-6">
+			<button type="button" id="btn" onclick='show_code();'>Show Code</button><br>	
+			<br>
+			<textarea id="code" class="t2">HERE is for printing soure code</textarea>
 		</div>
 	</div>
 
@@ -107,9 +102,10 @@ function print_rec(jsonStr) {
 
 <script>
 
+
 function try_it() {
 	//-- reset result
-	document.getElementById("demo").innerHTML = 'HERE is <textarea id="demo"/> for printing result';
+	document.getElementById("recomd_result").innerHTML = "HERE is for printing recomd's result";
 
 	var token = document.getElementById("token").value;	
 	var rec_type = document.getElementById("rec_type").value;
@@ -127,7 +123,7 @@ function try_it() {
 
 	//-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
 	var recomdParam = {};
-	if (token) recomdParam.token = token;	
+	if (token) recomdParam.token = token;
 	if (rec_type) recomdParam.rec_type = rec_type;
 	if (rec_pos) recomdParam.rec_pos = rec_pos;
 	if (uid) recomdParam.uid = uid;
@@ -141,25 +137,21 @@ function try_it() {
 	venraastool.recomd(recomdParam, recomdCallback);
 }
 
+function print_rec(jsonStr) {
+	var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
+	document.getElementById("recomd_result").innerHTML = pretty;
+}
+
 var rowItems;
 var showItems;
 var scrollItems;
 var loop;
 function recomdCallback(jsonStr) {
+	print_rec(jsonStr);
+
 	var result = JSON.parse(jsonStr);
 	if (result.recomd_list != null) {
 		process_slick(result, "slick-demo", loop, rowItems, showItems, scrollItems);
-	}
-
-	//-- define customer callback function
-	var cbfDefStr = "var cbf = " + document.getElementById("cbf_text").value;
-	try {
-		eval(cbfDefStr);
-		console.log(cbfDefStr);
-		cbf(jsonStr);
-	}
-	catch (ex) {
-		document.getElementById("demo").innerHTML = 'parsing error of customer callback fun: ' + ex.message;
 	}
 }
 
@@ -197,6 +189,34 @@ function process_item(addr, img, name, price) {
 	var html = '<div style="margin:10px;">';
 	html += '<a href="' + addr + '"><img src="' + img + '" style="width: 100%"></a><div>' + name + '</div><div style="color:red; text-align:center;">$' + price + '</div></div>';
 	return html;
+}
+
+function show_code() {
+	var url = window.location.href;
+	//alert("url=" + url);
+
+	$.ajax({
+		url: url,
+		dataType: 'html',
+		success: function(msg, status, xhr) {
+			//session timeout or other spring security Access Denied.
+			if (xhr.getResponseHeader != null) {
+				raasErr = xhr.getResponseHeader("raasErr");
+				if (raasErr) {
+					window.location.href = raasErr;
+					return;
+				}
+			}
+
+			//alert(msg);
+			document.getElementById("code").innerHTML = msg;
+
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(xhr.status); 
+			alert(thrownError); 
+		}
+	});
 }
 </script>
 </body>
