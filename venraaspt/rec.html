@@ -66,7 +66,7 @@ function print_rec(jsonStr) {
 </textarea>
 <br/>
 <button type="button" id="btn" onclick='rec();'>Try it</button>
-<button type="button" id="btn_notify" onclick='notifyMsg();'>Notify...</button>
+<button type="button" id="btn_notify" onclick='javascript:void(0);'>Notify...</button>
 <br/>
 <br/>
 <textarea id="demo" class="t2">HERE is <textarea id="demo"/> for printing result</textarea>
@@ -74,17 +74,20 @@ function print_rec(jsonStr) {
 <script type="text/javascript" src="js_lib/push.min.js"></script>	
 <script src="https://libs.venraas.tw/js/current/venraaspt.min.js"></script>
 <script>
-function notifyMsg() {
-	Push.create("Hello world!", {
-		body: "How's it hangin'?",
-		icon: 'icon.png',
-		timeout: 4000,
-		onClick: function () {
-			window.focus();
-			this.close();
-		}
-	});
-}
+     document.getElementById('btn_notify').onclick = function () {
+            Push.create('Hello world!', {
+                body: 'How\'s it hangin\'?',
+                icon: 'icon.png',
+                timeout: 4000,
+                onClick: function () {
+                    console.log("Fired!");
+                    window.focus();
+                    this.close();
+                },
+                vibrate: [200, 100, 200, 100, 200, 100, 200]
+            });
+        };	
+
 	
 function rec() {
 	//-- reset result
