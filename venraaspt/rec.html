@@ -74,8 +74,8 @@ function print_rec(jsonStr) {
 <script type="text/javascript" src="js_lib/push.min.js"></script>
 <script type="text/javascript" src="https://libs.venraas.tw/js/current/venraaspt.min.js"></script>
 <script type="text/javascript">
-     document.getElementById('btn_notify').onclick = setTimeout(function () {	    
-            Push.create('Hello world!', {
+     setTimeout(function () {	    
+            Push.create('Hello VenRaas!', {
                 body: 'How\'s it hangin\'?',
                 icon: 'icon.png',
                 timeout: 4000,
@@ -86,7 +86,7 @@ function print_rec(jsonStr) {
                 },
                 vibrate: [200, 100, 200, 100, 200, 100, 200]
             });
-        }, 3000);	
+        }, 2000);
 
 	
 function rec() {
