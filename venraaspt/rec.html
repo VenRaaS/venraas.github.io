@@ -66,12 +66,26 @@ function print_rec(jsonStr) {
 </textarea>
 <br/>
 <button type="button" id="btn" onclick='rec();'>Try it</button>
+<button type="button" id="notify" onclick='notifyMsg();'>Try it</button>
 <br/>
 <br/>
 <textarea id="demo" class="t2">HERE is <textarea id="demo"/> for printing result</textarea>
 	
+<script type="text/javascript" src="js_lib/push.min.js"></script>	
 <script src="https://libs.venraas.tw/js/current/venraaspt.min.js"></script>
 <script>
+function notifyMsg() {
+	Push.create("Hello world!", {
+		body: "How's it hangin'?",
+		icon: 'icon.png',
+		timeout: 4000,
+		onClick: function () {
+			window.focus();
+			this.close();
+		}
+	});
+}
+	
 function rec() {
 	//-- reset result
 	document.getElementById("demo").innerHTML = 'HERE is <textarea id="demo"/> for printing result';
