@@ -182,7 +182,7 @@ var venraastool = {
 		
 		if("" == venraastool.getcookie("vensession")) {
 			console.log('debug in vesession is not exist');			
-			venraastool.getvenuuid("s", f_idx);
+//			venraastool.getvenuuid("s", f_idx);
 		}
 		var ven_session = venraastool.getcookie("vensession");
 		
