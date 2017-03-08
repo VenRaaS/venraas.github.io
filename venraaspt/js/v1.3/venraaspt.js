@@ -182,11 +182,21 @@ var venraastool = {
 			}
 		}
 		
-		if("" == venraastool.getcookie("vensession")) {
-			console.log('debug in vesession is not exist');
-//			venraastool.getvenuuid("s", 0);
-		}
 		var ven_session = venraastool.getcookie("vensession");
+		if("" == ven_session) {
+			console.log('debug in vesession is not exist');			
+			if(typeof venfloctl !== 'undefined'){
+				var venfloctl_size= venraastool.object_size(venfloctl);
+				venfloctl[venfloctl_size]={};
+				venfloctl[venfloctl_size]["status"]=false;
+				venfloctl[venfloctl_size]["contr"]="";
+				venfloctl[venfloctl_size]["venact"]="";
+				venfloctl[venfloctl_size]["objv"]="";
+				venfloctl[venfloctl_size]["type"]=venstrob.strtypeSession;
+				venfloctl[venfloctl_size]["retry"]=0;
+				venraas.ven_cps(venfloctl_size);
+			}
+		}		
 		
 		paramJson.ven_guid = ven_guid;
 		paramJson.ven_session = ven_session;
