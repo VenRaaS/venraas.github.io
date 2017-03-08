@@ -179,8 +179,15 @@ var venraastool = {
 				venraas.ven_cps(venfloctl_size);
 			}
 		}
-
+		
+		if("" == venraastool.getcookie("vensession")) {
+			console.log('debug in vesession is not exist');			
+			venraastool.getvenuuid("s", f_idx);
+		}
+		var ven_session = venraastool.getcookie("vensession");
+		
 		paramJson.ven_guid = ven_guid;
+		paramJson.ven_session = ven_session;
 		
 		var venraasxhr = venraastool.xhr();
 		venraasxhr.onreadystatechange = function() {
