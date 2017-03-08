@@ -19,6 +19,7 @@ var venstrob = {
 	strtypeTracking: '1',
 	strtypeEctrans:'2',
 	strtypeGuid:'3',
+	strtypeSession:'4',
 	venfloctl_processing:'',
 	strDhermesHost:'apih.venraas.tw',
 	strDHermesApi:'/hermes/api/goods/rank'	                
@@ -528,6 +529,9 @@ var venraas = {
 						break;
 					case venstrob.strtypeGuid:
 						venraastool.getvenuuid("g",f_idx);
+						break;
+					case venstrob.strtypeSession:
+						venraastool.getvenuuid("s",f_idx);
 						break;
 					default:
 						break;
