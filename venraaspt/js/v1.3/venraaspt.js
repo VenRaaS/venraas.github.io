@@ -167,6 +167,7 @@ var venraastool = {
 	recomd: function(paramJson, cbf) {
 		var ven_guid = venraastool.getcookie("venguid");
 		if ("" == ven_guid) {
+			console.log('debug in venguid is not exist');
 			if(typeof venfloctl !== 'undefined'){
 				var venfloctl_size= venraastool.object_size(venfloctl);
 				venfloctl[venfloctl_size]={};
@@ -181,7 +182,7 @@ var venraastool = {
 		}
 		
 		if("" == venraastool.getcookie("vensession")) {
-			console.log('debug in vesession is not exist');			
+			console.log('debug in vesession is not exist');
 //			venraastool.getvenuuid("s", f_idx);
 		}
 		var ven_session = venraastool.getcookie("vensession");
