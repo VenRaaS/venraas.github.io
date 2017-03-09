@@ -1,6 +1,6 @@
 /*venraas string definition*/
 var venstrob = {
-	v: '1.3',
+	v: '1.3.1',
 	strserver: 'apid.venraas.tw',
 	struuidapi:'/venapis/vengu',
 	strlogapi: '/venapis/log',
@@ -198,7 +198,6 @@ var venraastool = {
 			}
 		}		
 		
-
 		paramJson.ven_guid = ven_guid;
 		paramJson.ven_session = ven_session;
 		
