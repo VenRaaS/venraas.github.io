@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="source/jquery-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="source/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="source/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="source/colorpicker.css">
+
+    <script src="source/jquery.min.js"></script>
+    <script src="source/jquery-ui.min.js"></script>
+
+    <script src="source/jquery-migrate.min.js"></script>
+    <script src="source/slick.min.js"></script>
+    <script src="source/venraaspt.min.js"></script>
+    <script src="source/clipboard.min.js"></script>
+    <script src="source/colorpicker.js"><</script>
+
+    <!--bootstrap-->
+    <script src="source/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="source/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="source/bootstrap/css/bootstrap-theme.min.css"/>
+
+    <!--fancybox-->
+    <script src="source/fancybox/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="source/fancybox/jquery.fancybox.min.css"/>
+
+    <!--bootstrap helper-->
+    <script src="source/helper/js/bootstrap-formhelpers.js"></script>
+    <link rel="stylesheet" type="text/css" href="source/helper/css/bootstrap-formhelpers.min.css"/>
+
+    <style>
+        body{
+            background-color: #dddddd;
+        }
+
+        .header{
+            background-color: #189DBF;
+            color: #ffffff;
+            width:100%;
+        }
+
+        .header > .title{
+            display: inline-block;
+            padding: 10px 10px;
+            font-weight: 100;
+            font-size: 14px;
+            background-color: #11738b;
+        }
+
+        .up-title{
+            font-size: 18px;
+            font-weight: 900;
+            color: #fff562;
+        }
+
+        .logo-icon{
+            background-image: url("img/account_Admin_icon.png");
+            width: 32px;
+            height: 32px;
+            float: right;
+            margin: 6px 5px;
+        }
+
+        .col-inner{
+            margin: 15px 0;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 10px 15px;
+            position: relative;
+        }
+
+        input{
+            border-radius: 5px;
+            border: 1px solid #189DBF;
+            padding: 2px 5px;
+        }
+
+        .mb{
+            margin-bottom: 10px;
+        }
+
+        .btn-try{
+            border-radius: 5px;
+            background-color: #189DBF;
+            color: #ffffff;
+            text-align: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .slick-prev:before, .slick-next:before {
+            color:white;
+        }
+
+        .slick-demo{
+            margin: 0 50px;
+        }
+
+        .t1{
+            width: 100%;
+            height: 200px;
+        }
+
+        .t2{
+            width: 500px;
+            height: 350px;
+        }
+
+        .sub-title{
+            font-size: 18px;
+            color: #189DBF;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .copy-btn{
+            background-color: #189DBF;
+            color: #ffffff;
+            font-size: 12px;
+            padding: 2px 5px;
+            border-radius: 5px;
+            position: absolute;
+            right:10px;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        .input-sec{
+            margin: 20px 20px 30px 20px;
+            padding: 20px 20px 10px 20px;
+            border: 1px solid #189DBF;
+            position: relative;
+        }
+
+        .input-sec-title{
+            color: #189DBF;
+            background-color: #ffffff;
+            padding: 2px 10px;
+            position: absolute;
+            left: 10px;
+            top: -13px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .hr-12{
+            border-bottom: 1px solid #eeeeee;
+            height: 1px;
+            margin-bottom: 10px;
+        }
+
+        .input-color{
+            width: 130px;
+        }
+
+        .defalut-input{
+            width: 100px;
+        }
+
+        #advence-option {
+
+            /* Custom transition - fade from top*/
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all .3s;
+        }
+
+        .fancybox-slide--complete #advence-option {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .right-tab{
+            position: absolute;
+            top: -33px;
+            border-radius: 5px 5px 0 0 !important;
+            border-bottom: none !important;
+        }
+
+        .filter-btn{
+            border-radius: 100px;
+            height: 100%;
+            background-color: #FFFFFF;
+            display: inline-block;
+            border: 2px solid #999999;
+            color: #999999;
+            padding: 5px 15px;
+            cursor: pointer;
+            margin: 0 10px 10px 0;
+            vertical-align: middle;
+            font-weight: 900;
+        }
+
+        .filter-btn.act{
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function advenced_func(a){
+        if (a == '1'){
+            $('#right-tab-1').removeClass('btn-default').addClass('btn-primary');
+            $('#right-tab-2').removeClass('btn-primary').addClass('btn-default');
+            $('#recomd_result').show();
+            $('#api_ele').hide();
+            $('#advenced-option-title').text("HERE is for printing recomd's result");
+        }
+        else if(a == '2'){
+            $('#right-tab-2').removeClass('btn-default').addClass('btn-primary');
+            $('#right-tab-1').removeClass('btn-primary').addClass('btn-default');
+            $('#recomd_result').hide();
+            $('#api_ele').show();
+            $('#advenced-option-title').text("API 參數格式");
+        }
+    }
+
+    function rwd_func(){
+        var w_w = $(window).width();
+        if(w_w < 768){
+            $('.filter-btn').css({'font-size':'24px'});
+        }
+        else if(w_w >= 768 && w_w<=992){
+            $('.filter-btn').css({'font-size':'24px'});
+        }
+        else if(w_w >= 992 && w_w<=1200){
+            $('.filter-btn').css({'font-size':'24px'});
+        }
+        else if(w_w > 1200){
+            $('.filter-btn').css({'font-size':'18px'});
+        }
+    }
+
+    function filter_func(e, idx) {
+        if($(e).attr('class').indexOf('act') > 0){
+            $(e).removeClass('act');
+            var heart = $(e).find('.glyphicon-heart');
+            heart.removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
+        }
+        else{
+            $(e).addClass('act');
+            var heart = $(e).find('.glyphicon-heart-empty');
+            heart.removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+        }
+
+        selectedGoodsKeywords[idx] = true;
+        goods_keywords = [];
+        for (i=0; i<goodsKeywords.length; i++) {
+            if (selectedGoodsKeywords[i] == true) {
+                goods_keywords.push(goodsKeywords[i]);
+            }
+        }
+        try_it();
+    }
+
+    $(function(){
+        rwd_func();
+        $(window).resize(function(){
+            rwd_func();
+        });
+    });
+</script>
+
+<div style="display: none; position: relative; overflow: visible !important; padding: 0;" id="advence-option">
+    <div id="right-tab-1" class=" btn btn-primary right-tab" onclick="advenced_func('1')" style="left: 0;">Recomd's result</div>
+    <div id="right-tab-2" class=" btn btn-default right-tab" onclick="advenced_func('2')" style="left: 125px;">API 參數格式</div>
+    <div id="advenced-option-title" style="background-color: #337ab7; width: 100%; padding: 10px 24px; color: #FFFFFF; font-size: 18px;">
+        HERE is for printing recomd's result
+    </div>
+    <div style="padding: 24px;">
+        <textarea id="recomd_result" class="t2">HERE is for printing recomd's result</textarea>
+        <textarea id="api_ele" class="t2">
+            {
+                var token = "5guOvNnKn2";
+                var rec_type = "ClickStream";
+                var device = "pc";
+                var topk = "10";
+                var ven_guid = "40622233-09a9-40f0-9b15"
+            }
+        </textarea>
+    </div>
+</div>
+
+<div class="header">
+    <div class="title"><span class="up-title">推薦清單產生器</span> with Javascript</div>
+    <div class="logo-icon"></div>
+</div>
+
+<div class="container-fluid">
+    <form class="main-form">
+        <div class="row">
+            <div class="col-md-12" >
+                <div class="col-inner">
+                    <div class="input-sec">
+                        <div class="input-sec-title">呼叫推薦API</div>
+                        <div class="row">
+                            <div class="col-xs-3 mb">token: <input type="text" id="token" value="5guOvNnKn2" class="defalut-input"/> <button class="btn btn-xs btn-primary">request a token</button></div>
+                            <div class="col-xs-3 mb">uid: <input type="text" id="uid" value="" placeholder="default" class="defalut-input"/></div>
+                            <div class="col-xs-3 mb">gid: <input type="text" id="gid" value="" placeholder="default" class="defalut-input"/></div>
+                            <div class="col-xs-3 mb">categ_code: <input type="text" id="categ_code" value="" placeholder="default" class="defalut-input"/></div>
+                            <div class="col-xs-12 hr-12"></div>
+                            <div class="col-xs-2 mb">推薦版位(rec_pos):</div>
+                            <div class="col-xs-10 mb">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <input class="radio-inline" id="rec_pos_1" type="radio" name="rec_pos" value="p" checked="checked"/>首頁<br><br>
+                                        <label for="rec_pos_1" style="cursor: pointer;"><img src="img/res_pos_1.png" width="100%" height="auto" style="max-width: 300px;"></label>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input class="radio-inline" id="rec_pos_2" type="radio" name="rec_pos" value="p"/>分類頁<br><br>
+                                        <label for="rec_pos_2" style="cursor: pointer;"><img src="img/res_pos_2.png" width="100%" height="auto" style="max-width: 300px;"></label>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input class="radio-inline" id="rec_pos_3" type="radio" name="rec_pos" value="p"/>商品頁<br><br>
+                                        <label for="rec_pos_3" style="cursor: pointer;"><img src="img/res_pos_3.png" width="100%" height="auto" style="max-width: 300px;"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 hr-12"></div>
+                            <div class="col-xs-3 mb">推薦方法(rec_type):<br><br>
+                                <input type="radio" name="rec_type" value="ClickStream" id="rec_type_1" checked="checked"/><label for="rec_type_1">ClickStream</label><br>
+                                <input type="radio" name="rec_type" value="AlsoView" id="rec_type_2"/><label for="rec_type_2">AlsoView</label>
+                            </div>
+                            <div class="col-xs-3 mb">裝置類型(device):<br><br>
+                                <input type="radio" name="device" id="device_1" value="pc" checked="checked"/><label for="device_1">&nbsp;&nbsp;<img src="img/device_1.png"/>&nbsp;&nbsp;pc</label><br>
+                                <input type="radio" name="device" id="device_2" value="mb"/><label for="device_2">&nbsp;&nbsp;<img src="img/device_2.png"/>&nbsp;&nbsp;mb</label><br>
+                                <input type="radio" name="device" id="device_3" value="mbe"/><label for="device_3">&nbsp;&nbsp;<img src="img/device_3.png"/>&nbsp;&nbsp;mbe</label><br>
+                                <input type="radio" name="device" id="device_4" value="tb"/><label for="device_4">&nbsp;&nbsp;<img src="img/device_4.png"/>&nbsp;&nbsp;tb</label><br>
+                                <input type="radio" name="device" id="device_5" value="tbe"/><label for="device_5">&nbsp;&nbsp;<img src="img/device_5.png"/>&nbsp;&nbsp;tbe</label>
+                            </div>
+                            <div class="col-xs-3 mb">推薦商品數(topk):
+                                <input type="text" id="topk" value="10" placeholder="推薦範圍1-100"/>
+                            </div>
+                            <div class="col-xs-3 mb">開發人員進階資訊:<br>
+                                <button data-fancybox data-src="#advence-option" onclick="advenced_func(1)" href="javascript:;" class="btn btn-primary" style="margin-bottom: 12px;margin-top: 12px;">Recomd's result</button><br>
+                                <button data-fancybox data-src="#advence-option" onclick="advenced_func(2)" href="javascript:;" class="btn btn-primary">API 參數格式</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-sec">
+                        <div class="input-sec-title">推薦清單DEMO</div>
+                        <div class="row">
+                            <div class="col-xs-2 mb">自訂外觀</div>
+                            <div class="col-xs-10 mb">
+
+                                按鈕顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker1" id="colorpickerField1" style="display: inline-block" data-color="#999999"></div>
+                                背景顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker2" id="colorpickerField2" style="display: inline-block" data-color="#FFFFFF"></div>　
+                                標題顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker3" id="colorpickerField3" style="display: inline-block" data-color="#333333"></div>
+                                價格顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker4" id="colorpickerField4" style="display: inline-block" data-color="#FF0000"></div>
+                            </div>
+                            <div class="col-xs-12 hr-12"></div>
+                            <div class="col-xs-2 mb">功能選擇</div>
+                            <div class="col-xs-10 mb">
+                                show_Items: <input class="input-color" type="text" id="showItems" value="5"/>　　
+                                scroll_Items: <input class="input-color" type="text" id="scrollItems" value="1"/>　　
+                                <input type="checkbox" id="loop">looping　　<input type="checkbox" id="vs">商品性價比較　　<input type="checkbox" id="feedback">回饋機制　　<input type="checkbox" id="ele">屬性預測　　
+                            </div>
+                        </div>
+                        <div class="row" id="filter-box" style="display: none;">
+                            <div class="col-xs-12">
+                                <div class="filter-btn" onclick="filter_func(this)">抽取式衛生紙 <span class="glyphicon glyphicon-heart-empty"></span> </div>
+                                <div class="filter-btn" onclick="filter_func(this)">紙尿褲 <span class="glyphicon glyphicon-heart-empty"></div>
+                                <div class="filter-btn" onclick="filter_func(this)">泡麵 <span class="glyphicon glyphicon-heart-empty"></div>
+                            </div>
+                        </div>
+                        <div class="slider slick-demo">
+                        </div>
+                        <br>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-xs-12"><div class="btn-try" onclick="link_codepen();">SHOW IT ON CODEPEN</div> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function(){
+        new Clipboard('.copy-btn');
+        $('.main-form').change(function(){
+            if($('#ele').prop('checked') == true){
+                $('#filter-box').show();
+                document.getElementById("categ_code").value = "328208";
+            }
+            else {
+                $('#filter-box').hide();
+                document.getElementById("categ_code").value = null;
+            }
+            getGoodsKeyword();
+        });
+        try_it();
+
+        $('.bfh-colorpicker-palette').on('mouseup',function(){
+            try_it();
+        });
+    });
+
+    function link_codepen(){
+        window.location.href = 'http://codepen.io/anon/pen/dNLamb';
+    }
+
+    var goodsKeywords = null;//stored goods_keywords
+    var selectedGoodsKeywords = [];//for selected goods_keyword
+    var goods_keywords = [];//for recomd
+    function getGoodsKeyword() {
+        var p = {};
+        p.token = document.getElementById("token").value;
+        p.gid = "5742934";//document.getElementById("gid").value;
+
+        //-- ajax call for goods keywords
+        console.log(JSON.stringify(p));
+        venraastool.goods_keywords(p, goodsKeywordsCallback);
+        document.getElementById("gid").value = p.gid;
+
+        try_it();
+    }
+    function goodsKeywordsCallback(jsonStr) {
+        console.log(jsonStr);
+
+        var result = JSON.parse(jsonStr);
+        if (result.goods_keywords) {
+            var htmlStr = '<div class="col-xs-12">';
+            goodsKeywords = result.goods_keywords;
+            for (i=0; i<goodsKeywords.length; i++) {
+                selectedGoodsKeywords[i] = false;
+                htmlStr += '<div class="filter-btn" onclick="filter_func(this, ' + i + ')">' + goodsKeywords[i].value + '<span class="glyphicon glyphicon-heart-empty"></span></div>';
+            }
+            htmlStr += '</div>';
+            document.getElementById("filter-box").innerHTML = htmlStr;
+        }
+    }
+
+    function try_it() {
+        setTimeout(show_code, 500);
+
+        //-- reset result
+        document.getElementById("recomd_result").innerHTML = "";
+
+        var token = document.getElementById("token").value;
+        var rec_type = $('input[name="rec_type"]:checked').val();
+        var rec_pos = $('input[name="rec_pos"]:checked').val();
+        var uid = document.getElementById("uid").value;
+        var gid = document.getElementById("gid").value;
+        var categ_code = document.getElementById("categ_code").value;
+        var device =$('input[name="device"]:checked').val();
+        var topk = document.getElementById("topk").value;
+
+        rowItems = topk;
+        showItems = document.getElementById("showItems").value;
+        scrollItems = document.getElementById("scrollItems").value;
+        loop = document.getElementById("loop").checked;
+
+        //-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
+        var recomdParam = {};
+        if (token) recomdParam.token = token;
+        if (rec_type) recomdParam.rec_type = rec_type;
+        if (rec_pos) recomdParam.rec_pos = rec_pos;
+        if (uid) recomdParam.uid = uid;
+        if (gid) recomdParam.gid = gid;
+        if (categ_code) recomdParam.categ_code = categ_code;
+        if (device) recomdParam.device = device;
+        if (topk) recomdParam.topk = Number(topk);
+        if (goods_keywords.length > 0) recomdParam.goods_keywords = goods_keywords;
+        console.log(JSON.stringify(recomdParam));
+
+        //-- ajax call for recommendation
+        venraastool.recomd(recomdParam, recomdCallback);
+    }
+
+    function print_rec(jsonStr) {
+        var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
+        document.getElementById("recomd_result").innerHTML = document.getElementById("recomd_result").innerHTML + pretty;
+    }
+
+    var rowItems;
+    var showItems;
+    var scrollItems;
+    var loop;
+    function recomdCallback(jsonStr) {
+        print_rec(jsonStr);
+
+        var result = JSON.parse(jsonStr);
+        if (result.recomd_list != null) {
+            process_slick(result, "slick-demo", loop, rowItems, showItems, scrollItems);
+        }
+    }
+
+    var bSlick = false;
+    function process_slick(result, div_class, loop, rowItems, showItems, scrollItems) {
+        var html = "";
+        for (i=0; i<result.recomd_list.length; i++) {
+            html += process_item(result.recomd_list[i].goods_page_url, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price);
+        }
+
+        if (bSlick == true) {
+            $("." + div_class).slick("unslick");
+            $("." + div_class).html("");
+            bSlick = false;
+        }
+
+        var btn_color =  $('input[name="colorpicker1"]').val(),
+            bg_color = $('input[name="colorpicker2"]').val();
+
+
+        $('.filter-btn').css({'color': btn_color , 'background-color' : '#ffffff' , 'border-color':btn_color});
+        $('.filter-btn.act').css({'background-color':  btn_color , 'color':'#ffffff'});
+
+        $('.slick-demo').css({'background-color':bg_color});
+        console.log("loop=" + loop);
+        console.log("rowItems=" + rowItems);
+        console.log("showItems=" + showItems);
+        console.log("scrollItems=" + scrollItems);
+        $("." + div_class).html(html);
+        $("." + div_class).slick({
+            infinite: Boolean(loop),
+            arrows: true,
+            prevArrow: '<button type="button" class="slick-prev" style="left:-40px; width:30px; height:100%; background-color:' + btn_color + ';">Previous</button>',
+            nextArrow: '<button type="button" class="slick-next" style="right:-40px; width:30px; height:100%; background-color:' + btn_color + ';">Next</button>',
+            slidesPerRow: Number(rowItems),
+            slidesToShow: Number(showItems),
+            slidesToScroll: Number(scrollItems)
+        });
+        bSlick = true;
+    }
+
+    function process_item(addr, img, name, price) {
+        var title_color = $('input[name="colorpicker3"]').val(),
+            price_color = $('input[name="colorpicker4"]').val();
+        var html = '<div style="margin:10px;">';
+        html += '<a href="' + addr + '"><img src="' + img + '" style="width: 100%"></a><div><span style="margin: 5px 0;font-size: 14px;height: 40px;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:' + title_color +';">' + name + '</span></div><div style="font-size: 18px;font-weight: 900;color:' + price_color + ';text-align:center;"><span style="font-weight: normal;font-size: 12px; color:' + title_color + ';">$</span>' + price + '</div></div>';
+        return html;
+    }
+
+    function show_code(){
+        var html_slick = $('.slider').parent().html();
+        $('textarea#html_code').val(html_slick);
+    }
+
+</script>
+
+</body>
+</html>
