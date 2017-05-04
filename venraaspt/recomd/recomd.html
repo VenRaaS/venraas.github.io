@@ -238,17 +238,18 @@
 
     function filter_func(e, idx) {
         if($(e).attr('class').indexOf('act') > 0){
+            selectedGoodsKeywords[idx] = false;
             $(e).removeClass('act');
             var heart = $(e).find('.glyphicon-heart');
             heart.removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
         }
         else{
+            selectedGoodsKeywords[idx] = true;
             $(e).addClass('act');
             var heart = $(e).find('.glyphicon-heart-empty');
             heart.removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
         }
 
-        selectedGoodsKeywords[idx] = true;
         goods_keywords = [];
         for (i=0; i<goodsKeywords.length; i++) {
             if (selectedGoodsKeywords[i] == true) {
@@ -348,7 +349,6 @@
                         <div class="row">
                             <div class="col-xs-2 mb">自訂外觀</div>
                             <div class="col-xs-10 mb">
-
                                 按鈕顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker1" id="colorpickerField1" style="display: inline-block" data-color="#999999"></div>
                                 背景顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker2" id="colorpickerField2" style="display: inline-block" data-color="#FFFFFF"></div>　
                                 標題顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker3" id="colorpickerField3" style="display: inline-block" data-color="#333333"></div>
@@ -364,9 +364,9 @@
                         </div>
                         <div class="row" id="filter-box" style="display: none;">
                             <div class="col-xs-12">
-                                <div class="filter-btn" onclick="filter_func(this)">抽取式衛生紙 <span class="glyphicon glyphicon-heart-empty"></span> </div>
-                                <div class="filter-btn" onclick="filter_func(this)">紙尿褲 <span class="glyphicon glyphicon-heart-empty"></div>
-                                <div class="filter-btn" onclick="filter_func(this)">泡麵 <span class="glyphicon glyphicon-heart-empty"></div>
+                                <div class="filter-btn" onclick="filter_func(this)">抽取式衛生紙<span class="glyphicon glyphicon-heart-empty"></span></div>
+                                <div class="filter-btn" onclick="filter_func(this)">紙尿褲<span class="glyphicon glyphicon-heart-empty"></span></div>
+                                <div class="filter-btn" onclick="filter_func(this)">泡麵<span class="glyphicon glyphicon-heart-empty"></span></div>
                             </div>
                         </div>
                         <div class="slider slick-demo">
