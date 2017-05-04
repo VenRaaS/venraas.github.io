@@ -200,73 +200,8 @@
         }
     </style>
 </head>
+
 <body>
-
-<script>
-    function advenced_func(a){
-        if (a == '1'){
-            $('#right-tab-1').removeClass('btn-default').addClass('btn-primary');
-            $('#right-tab-2').removeClass('btn-primary').addClass('btn-default');
-            $('#recomd_result').show();
-            $('#api_ele').hide();
-            $('#advenced-option-title').text("HERE is for printing recomd's result");
-        }
-        else if(a == '2'){
-            $('#right-tab-2').removeClass('btn-default').addClass('btn-primary');
-            $('#right-tab-1').removeClass('btn-primary').addClass('btn-default');
-            $('#recomd_result').hide();
-            $('#api_ele').show();
-            $('#advenced-option-title').text("API 參數格式");
-        }
-    }
-
-    function rwd_func(){
-        var w_w = $(window).width();
-        if(w_w < 768){
-            $('.filter-btn').css({'font-size':'24px'});
-        }
-        else if(w_w >= 768 && w_w<=992){
-            $('.filter-btn').css({'font-size':'24px'});
-        }
-        else if(w_w >= 992 && w_w<=1200){
-            $('.filter-btn').css({'font-size':'24px'});
-        }
-        else if(w_w > 1200){
-            $('.filter-btn').css({'font-size':'18px'});
-        }
-    }
-
-    function filter_func(e, idx) {
-        if($(e).attr('class').indexOf('act') > 0){
-            selectedGoodsKeywords[idx] = false;
-            $(e).removeClass('act');
-            var heart = $(e).find('.glyphicon-heart');
-            heart.removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
-        }
-        else{
-            selectedGoodsKeywords[idx] = true;
-            $(e).addClass('act');
-            var heart = $(e).find('.glyphicon-heart-empty');
-            heart.removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
-        }
-
-        goods_keywords = [];
-        for (i=0; i<goodsKeywords.length; i++) {
-            if (selectedGoodsKeywords[i] == true) {
-                goods_keywords.push(goodsKeywords[i]);
-            }
-        }
-        try_it();
-    }
-
-    $(function(){
-        rwd_func();
-        $(window).resize(function(){
-            rwd_func();
-        });
-    });
-</script>
-
 <div style="display: none; position: relative; overflow: visible !important; padding: 0;" id="advence-option">
     <div id="right-tab-1" class=" btn btn-primary right-tab" onclick="advenced_func('1')" style="left: 0;">Recomd's result</div>
     <div id="right-tab-2" class=" btn btn-default right-tab" onclick="advenced_func('2')" style="left: 125px;">API 參數格式</div>
@@ -384,18 +319,79 @@
 </div>
 
 <script>
+    function advenced_func(a){
+        if (a == '1'){
+            $('#right-tab-1').removeClass('btn-default').addClass('btn-primary');
+            $('#right-tab-2').removeClass('btn-primary').addClass('btn-default');
+            $('#recomd_result').show();
+            $('#api_ele').hide();
+            $('#advenced-option-title').text("HERE is for printing recomd's result");
+        }
+        else if(a == '2'){
+            $('#right-tab-2').removeClass('btn-default').addClass('btn-primary');
+            $('#right-tab-1').removeClass('btn-primary').addClass('btn-default');
+            $('#recomd_result').hide();
+            $('#api_ele').show();
+            $('#advenced-option-title').text("API 參數格式");
+        }
+    }
+
+    function rwd_func(){
+        var w_w = $(window).width();
+        if(w_w < 768){
+            $('.filter-btn').css({'font-size':'24px'});
+        }
+        else if(w_w >= 768 && w_w<=992){
+            $('.filter-btn').css({'font-size':'24px'});
+        }
+        else if(w_w >= 992 && w_w<=1200){
+            $('.filter-btn').css({'font-size':'24px'});
+        }
+        else if(w_w > 1200){
+            $('.filter-btn').css({'font-size':'18px'});
+        }
+    }
+
+    function filter_func(e, idx) {
+        if($(e).attr('class').indexOf('act') > 0){
+            selectedGoodsKeywords[idx] = false;
+            $(e).removeClass('act');
+            var heart = $(e).find('.glyphicon-heart');
+            heart.removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
+        }
+        else{
+            selectedGoodsKeywords[idx] = true;
+            $(e).addClass('act');
+            var heart = $(e).find('.glyphicon-heart-empty');
+            heart.removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+        }
+
+        goods_keywords = [];
+        for (i=0; i<goodsKeywords.length; i++) {
+            if (selectedGoodsKeywords[i] == true) {
+                goods_keywords.push(goodsKeywords[i]);
+            }
+        }
+        try_it();
+    }
+
+    $(function(){
+        rwd_func();
+        $(window).resize(function(){
+            rwd_func();
+        });
+    });
+
     $(function(){
         new Clipboard('.copy-btn');
         $('.main-form').change(function(){
-            if($('#ele').prop('checked') == true){
+            if ($('#ele').prop('checked') == true){
+                getGoodsKeyword();
                 $('#filter-box').show();
-                document.getElementById("categ_code").value = "328208";
             }
             else {
                 $('#filter-box').hide();
-                document.getElementById("categ_code").value = null;
             }
-            getGoodsKeyword();
         });
         try_it();
 
@@ -414,12 +410,17 @@
     function getGoodsKeyword() {
         var p = {};
         p.token = document.getElementById("token").value;
-        p.gid = "5742934";//document.getElementById("gid").value;
+        if (document.getElementById("gid").value == "") {
+            p.gid = "5742934";
+            document.getElementById("gid").value = p.gid;
+        }
+        else {
+            p.gid = document.getElementById("gid").value;
+        }
 
         //-- ajax call for goods keywords
         console.log(JSON.stringify(p));
         venraastool.goods_keywords(p, goodsKeywordsCallback);
-        document.getElementById("gid").value = p.gid;
 
         try_it();
     }
@@ -450,8 +451,7 @@
         var rec_pos = $('input[name="rec_pos"]:checked').val();
         var uid = document.getElementById("uid").value;
         var gid = document.getElementById("gid").value;
-        var categ_code = document.getElementById("categ_code").value;
-        var device =$('input[name="device"]:checked').val();
+        var device = $('input[name="device"]:checked').val();
         var topk = document.getElementById("topk").value;
 
         rowItems = topk;
@@ -466,7 +466,12 @@
         if (rec_pos) recomdParam.rec_pos = rec_pos;
         if (uid) recomdParam.uid = uid;
         if (gid) recomdParam.gid = gid;
-        if (categ_code) recomdParam.categ_code = categ_code;
+        if ($('#ele').prop('checked') == true){
+            if (document.getElementById("categ_code").value == "") {
+                document.getElementById("categ_code").value = "328208";
+            }
+            recomdParam.categ_code = document.getElementById("categ_code").value;
+        }
         if (device) recomdParam.device = device;
         if (topk) recomdParam.topk = Number(topk);
         if (goods_keywords.length > 0) recomdParam.goods_keywords = goods_keywords;
