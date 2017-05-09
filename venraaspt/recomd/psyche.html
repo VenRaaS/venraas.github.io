@@ -258,9 +258,11 @@
                         <div class="input-sec-title">推薦清單DEMO</div>
                         <div class="row">
                             <div class="col-xs-3 mb">token: <input type="text" id="token" value="5guOvNnKn2" class="defalut-input"> <button class="btn btn-xs btn-primary">request a token</button></div>
-                            <div class="col-xs-3 mb">uid: <input type="text" id="uid" value="" placeholder="default" class="defalut-input"></div>
                             <div class="col-xs-3 mb">gid: <input type="text" id="gid" value="" placeholder="default" class="defalut-input"></div>
                             <div class="col-xs-3 mb">categ_code: <input type="text" id="categ_code" value="" placeholder="default" class="defalut-input"></div>
+                            <div class="col-xs-3 mb">推薦商品數(topk):
+                                <input type="text" id="topk" value="10" placeholder="推薦範圍1-100"/>
+                            </div>
                             <div class="col-xs-12 hr-12"></div>
                             <div class="col-xs-2 mb">自訂外觀</div>
                             <div class="col-xs-10 mb">
@@ -274,7 +276,7 @@
                             <div class="col-xs-10 mb">
                                 show_Items: <input class="input-color" type="text" id="showItems" value="5"/>　　
                                 scroll_Items: <input class="input-color" type="text" id="scrollItems" value="1"/>　　
-                                <input type="checkbox" id="loop">looping　　<input type="checkbox" id="vs">商品性價比較　　<input type="checkbox" id="feedback">回饋機制　　<input type="checkbox" id="ele">屬性預測　　
+                                <input type="checkbox" id="loop">looping　　<input type="checkbox" id="vs">商品性價比較　　<input type="checkbox" id="feedback">回饋機制　　<input type="checkbox" id="ele">屬性預測　<button class="btn btn-xs btn-primary">Try It</button>
                             </div>
                         </div>
                         <div class="row" id="filter-box" style="display: none;">
@@ -369,6 +371,7 @@
             }
         });
         try_it();
+        
         $('.bfh-colorpicker-palette').on('mouseup',function(){
             try_it();
         });
@@ -413,29 +416,26 @@
         //-- reset result
         document.getElementById("recomd_result").innerHTML = "";
         var token = document.getElementById("token").value;
-        var rec_type = $('input[name="rec_type"]:checked').val();
-        var rec_pos = $('input[name="rec_pos"]:checked').val();
-        var uid = document.getElementById("uid").value;
+        var rec_type = 'AlsoView';
+        var rec_pos = 'gop';
         var gid = document.getElementById("gid").value;
-        var device = $('input[name="device"]:checked').val();
+        var categ_code = document.getElementById("categ_code").value;
+        var device = 'pc';
         var topk = document.getElementById("topk").value;
         rowItems = topk;
         showItems = document.getElementById("showItems").value;
         scrollItems = document.getElementById("scrollItems").value;
         loop = document.getElementById("loop").checked;
+        
         //-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
         var recomdParam = {};
         if (token) recomdParam.token = token;
         if (rec_type) recomdParam.rec_type = rec_type;
         if (rec_pos) recomdParam.rec_pos = rec_pos;
-        if (uid) recomdParam.uid = uid;
-        if (gid) recomdParam.gid = gid;
-        if ($('#ele').prop('checked') == true){
-            if (document.getElementById("categ_code").value == "") {
-                document.getElementById("categ_code").value = "328208";
-            }
-            recomdParam.categ_code = document.getElementById("categ_code").value;
-        }
+        recomdParam.uid = '';
+        recomdParam.gid = (gid)? gid : '5742934';
+        recomdParam.categ_code = (categ_code)? categ_code : '328208';
+        
         if (device) recomdParam.device = device;
         if (topk) recomdParam.topk = Number(topk);
         if (goods_keywords.length > 0) recomdParam.goods_keywords = goods_keywords;
