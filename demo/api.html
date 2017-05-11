@@ -380,9 +380,12 @@
         var device = $('input[name="device"]:checked').val();
         var topk = document.getElementById("topk").value;
         rowItems = topk;
-        showItems = document.getElementById("showItems").value;
-        scrollItems = document.getElementById("scrollItems").value;
-        loop = document.getElementById("loop").checked;
+///        showItems = document.getElementById("showItems").value;
+        showItems = 5;
+///        scrollItems = document.getElementById("scrollItems").value;
+        scrollItems = 1;
+///        loop = document.getElementById("loop").checked;
+        loop = false;
         //-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
         var recomdParam = {};
         if (token) recomdParam.token = token;
