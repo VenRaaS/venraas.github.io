@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>客製化推薦清單</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="source/jquery-ui.min.css"/>
     <link rel="stylesheet" type="text/css" href="source/slick.css"/>
     <link rel="stylesheet" type="text/css" href="source/slick-theme.css"/>
@@ -32,29 +32,39 @@
     <script src="source/helper/js/bootstrap-formhelpers.js"></script>
     <link rel="stylesheet" type="text/css" href="source/helper/css/bootstrap-formhelpers.min.css"/>
 
+    <!--drag and drop 5/5 新增外掛-->
+    <script src="jquery.dragsort-0.5.2.min.js"></script>
+
+    <!--main js-->
+    <script src="main_javascript.js"></script>
+
+    <!--colorpicker-4-->
+    <script src="source/jscolor-2.0.4/jscolor.min.js"></script>
+
+
     <style>
         body{
-            background-color: #dddddd;
+            overflow-x: hidden;
+            font-family:'Muli',Microsoft JhengHei;
+        }
+
+        .rec-title{
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #0a8bac;
+            padding-top: 26px;
+            padding-bottom: 26px;
+            border-bottom: 1px solid #0a8bac;
         }
 
         .header{
             background-color: #189DBF;
             color: #ffffff;
             width:100%;
-        }
-
-        .header > .title{
-            display: inline-block;
-            padding: 10px 10px;
-            font-weight: 100;
-            font-size: 14px;
-            background-color: #11738b;
-        }
-
-        .up-title{
-            font-size: 18px;
-            font-weight: 900;
-            color: #fff562;
+            height: 45px;
+            position: relative;
         }
 
         .logo-icon{
@@ -63,6 +73,7 @@
             height: 32px;
             float: right;
             margin: 6px 5px;
+            cursor: pointer;
         }
 
         .col-inner{
@@ -98,7 +109,25 @@
         }
 
         .slick-demo{
-            margin: 0 50px;
+            margin: 0 20%;
+        }
+
+        .show_on_codepen{
+            border-radius: 5px;
+            background-color: #189DBF;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 2px 8px;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        .hr-1{
+            width: 100%;
+            height: 1px;
+            border-bottom: 1px solid #0a8bac;
+            position: relative;
         }
 
         .t1{
@@ -107,8 +136,8 @@
         }
 
         .t2{
-            width: 500px;
-            height: 350px;
+            width:80%;
+            height: 100px;
         }
 
         .sub-title{
@@ -182,9 +211,8 @@
             border-bottom: none !important;
         }
 
-        .filter-btn{
+        .filter-btn{ /*-- 修改css 5/5 --*/
             border-radius: 100px;
-            height: 100%;
             background-color: #FFFFFF;
             display: inline-block;
             border: 2px solid #999999;
@@ -198,361 +226,416 @@
 
         .filter-btn.act{
         }
-    </style>
-</head>
 
+        /*-- 新增css 5/5 --*/
+        #list1 li{
+            float: left;
+            list-style: none;
+        }
+
+        .section-select{
+            padding: 15px;
+            color: #189dbf; font-size: 12px;
+            height: 100%;
+        }
+
+        .section-select:first-child{
+            border-right: 1px solid #d8d8d8;
+        }
+
+        .ss-title{
+            font-size: 18px;
+            font-weight: bold;
+            color: #189DBF;
+            width: 100%;
+            text-align: center;
+            padding: 5px;
+        }
+
+        #token , #rec_type_1 , #rec_type_2 , #topk , #categ_code , #uid , #gid{
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            padding: 0 5px;
+            border-radius: 0px;
+            margin-bottom: 5px;
+        }
+
+        .rec-text-16{
+            font-size: 16px !important; color: #189dbf !important; font-weight: 500 !important;
+        }
+
+        .rec-text-14{
+            font-size: 14px !important; color: #189dbf !important; font-weight: 500 !important;
+        }
+
+        .color_frame{
+            font-weight: 400;
+            border: 1px solid #ccc;
+            display: inline-flex;
+        }
+
+        input:disabled::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: #CCCCCC;
+        }
+
+        /*------2017/06/21-------*/
+        .switch-arrow-left{
+            top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; left: -40px; width: 30px; height: 100%;
+        }
+        .switch-arrow-right{
+            top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; right: -40px; width: 30px; height: 100%;
+        }
+        .switch-arrow-left:hover , .switch-arrow-right:hover{
+            background-color: rgba(0,0,0,0.05);
+        }
+        .item-info{
+            cursor: default;
+            position: absolute;
+            border-radius: 8px;
+            font-weight: 900;
+            padding: 0 8px;
+            right: 10px;
+            top: 10px;
+        }
+        .info-hint{
+            padding: 5px 10px;
+            color: white;
+            background-color: #189DBF;
+            border-radius: 5px;
+            text-align: center;
+            position: absolute;
+            z-index: 5;
+            opacity: 0.7;
+        }
+        .display-none{
+            display: none;
+        }
+        .hint-triangle{
+            color: #189dbf;
+            position: absolute;
+            right: 0;
+            bottom: -20px;
+            top: inherit;
+            font-size: 24px;
+            z-index: 4;
+        }
+        /*------2017/06/21------*/
+    </style>
+
+</head>
 <body>
-<div style="display: none; position: relative; overflow: visible !important; padding: 0;" id="advence-option">
-    <div id="right-tab-1" class=" btn btn-primary right-tab" onclick="advenced_func('1')" style="left: 0;">Recomd's result</div>
-    <div id="right-tab-2" class=" btn btn-default right-tab" onclick="advenced_func('2')" style="left: 125px;">API 參數格式</div>
-    <div id="advenced-option-title" style="background-color: #337ab7; width: 100%; padding: 10px 24px; color: #FFFFFF; font-size: 18px;">
-        HERE is for printing recomd's result
-    </div>
-    <div style="padding: 24px;">
-        <textarea id="recomd_result" class="t2">HERE is for printing recomd's result</textarea>
-        <textarea id="api_ele" class="t2">
-            {
-                var token = "5guOvNnKn2";
-                var rec_type = "ClickStream";
-                var device = "pc";
-                var topk = "10";
-                var ven_guid = "40622233-09a9-40f0-9b15"
-            }
-        </textarea>
+
+<!-- hint -->
+<div class="info-hint display-none">
+    <div style="position: relative;">
+        推薦度：95%<br>
+        推薦理由：顧客買了又買！
+    <span class="glyphicon glyphicon-triangle-bottom hint-triangle"></span>
     </div>
 </div>
 
 <div class="header">
-    <div class="title"><span class="up-title">推薦清單產生器</span> with Javascript</div>
-    <div class="logo-icon"></div>
-</div>
-
-<div class="container-fluid">
-    <form class="main-form">
-        <div class="row">
-            <div class="col-md-12" >
-                <div class="col-inner">
-                    <div class="input-sec">
-                        <div class="input-sec-title">呼叫推薦API</div>
-                        <div class="row">
-                            <div class="col-xs-3 mb">token: <input type="text" id="token" value="5guOvNnKn2" class="defalut-input"/> <button class="btn btn-xs btn-primary">request a token</button></div>
-                            <div class="col-xs-3 mb">uid: <input type="text" id="uid" value="" placeholder="default" class="defalut-input"/></div>
-                            <div class="col-xs-3 mb">gid: <input type="text" id="gid" value="" placeholder="default" class="defalut-input"/></div>
-                            <div class="col-xs-3 mb">categ_code: <input type="text" id="categ_code" value="" placeholder="default" class="defalut-input"/></div>
-                            <div class="col-xs-12 hr-12"></div>
-                            <div class="col-xs-2 mb">推薦版位(rec_pos):</div>
-                            <div class="col-xs-10 mb">
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <input class="radio-inline" id="rec_pos_1" type="radio" name="rec_pos" value="p" checked="checked"/>首頁<br><br>
-                                        <label for="rec_pos_1" style="cursor: pointer;"><img src="img/res_pos_1.png" width="100%" height="auto" style="max-width: 300px;"></label>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <input class="radio-inline" id="rec_pos_2" type="radio" name="rec_pos" value="p"/>分類頁<br><br>
-                                        <label for="rec_pos_2" style="cursor: pointer;"><img src="img/res_pos_2.png" width="100%" height="auto" style="max-width: 300px;"></label>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <input class="radio-inline" id="rec_pos_3" type="radio" name="rec_pos" value="p"/>商品頁<br><br>
-                                        <label for="rec_pos_3" style="cursor: pointer;"><img src="img/res_pos_3.png" width="100%" height="auto" style="max-width: 300px;"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 hr-12"></div>
-                            <div class="col-xs-3 mb">推薦方法(rec_type):<br><br>
-                                <input type="radio" name="rec_type" value="ClickStream" id="rec_type_1" checked="checked"/><label for="rec_type_1">ClickStream</label><br>
-                                <input type="radio" name="rec_type" value="AlsoView" id="rec_type_2" /><label for="rec_type_2">AlsoView</label>
-                            </div>
-                            <div class="col-xs-3 mb">裝置類型(device):<br><br>
-                                <input type="radio" name="device" id="device_1" value="pc" checked="checked"/><label for="device_1">&nbsp;&nbsp;<img src="img/device_1.png"/>&nbsp;&nbsp;pc</label><br>
-                                <input type="radio" name="device" id="device_2" value="mb"/><label for="device_2">&nbsp;&nbsp;<img src="img/device_2.png"/>&nbsp;&nbsp;mb</label><br>
-                                <input type="radio" name="device" id="device_3" value="mbe"/><label for="device_3">&nbsp;&nbsp;<img src="img/device_3.png"/>&nbsp;&nbsp;mbe</label><br>
-                                <input type="radio" name="device" id="device_4" value="tb"/><label for="device_4">&nbsp;&nbsp;<img src="img/device_4.png"/>&nbsp;&nbsp;tb</label><br>
-                                <input type="radio" name="device" id="device_5" value="tbe"/><label for="device_5">&nbsp;&nbsp;<img src="img/device_5.png"/>&nbsp;&nbsp;tbe</label>
-                            </div>
-                            <div class="col-xs-3 mb">推薦商品數(topk):
-                                <input type="text" id="topk" value="10" placeholder="推薦範圍1-100"/>
-                            </div>
-                            <div class="col-xs-3 mb">開發人員進階資訊:<br>
-                                <button data-fancybox data-src="#advence-option" onclick="advenced_func(1)" href="javascript:;" class="btn btn-primary" style="margin-bottom: 12px;margin-top: 12px;">Recomd's result</button><br>
-                                <button data-fancybox data-src="#advence-option" onclick="advenced_func(2)" href="javascript:;" class="btn btn-primary">API 參數格式</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-sec">
-                        <div class="input-sec-title">推薦清單DEMO</div>
-                        <div class="row">
-                            <div class="col-xs-2 mb">自訂外觀</div>
-                            <div class="col-xs-10 mb">
-                                按鈕顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker1" id="colorpickerField1" style="display: inline-block" data-color="#999999"></div>
-                                背景顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker2" id="colorpickerField2" style="display: inline-block" data-color="#FFFFFF"></div>　
-                                標題顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker3" id="colorpickerField3" style="display: inline-block" data-color="#333333"></div>
-                                價格顏色 <div class="bfh-colorpicker input-color" data-name="colorpicker4" id="colorpickerField4" style="display: inline-block" data-color="#FF0000"></div>
-                            </div>
-                            <div class="col-xs-12 hr-12"></div>
-                            <div class="col-xs-2 mb">功能選擇</div>
-                            <div class="col-xs-10 mb">
-                                show_Items: <input class="input-color" type="text" id="showItems" value="5"/>　　
-                                scroll_Items: <input class="input-color" type="text" id="scrollItems" value="1"/>　　
-                                <input type="checkbox" id="loop">looping　　
-<!--                                
-                                <input type="checkbox" id="vs">商品性價比較　　<input type="checkbox" id="feedback">回饋機制　　<input type="checkbox" id="ele">屬性預測　　
--->
-                            </div>
-                        </div>
-                        <div class="row" id="filter-box" style="display: none;">
-                            <div class="col-xs-12">
-                                <div class="filter-btn" onclick="filter_func(this)">抽取式衛生紙<span class="glyphicon glyphicon-heart-empty"></span></div>
-                                <div class="filter-btn" onclick="filter_func(this)">紙尿褲<span class="glyphicon glyphicon-heart-empty"></span></div>
-                                <div class="filter-btn" onclick="filter_func(this)">泡麵<span class="glyphicon glyphicon-heart-empty"></span></div>
-                            </div>
-                        </div>
-                        <div class="slider slick-demo" style="height: 280px;">
-                        </div>
-                        <br>
-                    </div>
-
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-xs-12"><div class="btn-try" onclick="link_codepen();">SHOW IT ON CODEPEN</div> </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+    <div class="logo-icon" onclick="refresh_page()"></div>
 </div>
 
 <script>
-    function advenced_func(a){
-        if (a == '1'){
-            $('#right-tab-1').removeClass('btn-default').addClass('btn-primary');
-            $('#right-tab-2').removeClass('btn-primary').addClass('btn-default');
-            $('#recomd_result').show();
-            $('#api_ele').hide();
-            $('#advenced-option-title').text("HERE is for printing recomd's result");
-        }
-        else if(a == '2'){
-            $('#right-tab-2').removeClass('btn-default').addClass('btn-primary');
-            $('#right-tab-1').removeClass('btn-primary').addClass('btn-default');
-            $('#recomd_result').hide();
-            $('#api_ele').show();
-            $('#advenced-option-title').text("API 參數格式");
-        }
+    function refresh_page() {
+        location.reload();
     }
-
-    function rwd_func(){
-        var w_w = $(window).width();
-        if(w_w < 768){
-            $('.filter-btn').css({'font-size':'24px'});
-        }
-        else if(w_w >= 768 && w_w<=992){
-            $('.filter-btn').css({'font-size':'24px'});
-        }
-        else if(w_w >= 992 && w_w<=1200){
-            $('.filter-btn').css({'font-size':'24px'});
-        }
-        else if(w_w > 1200){
-            $('.filter-btn').css({'font-size':'18px'});
-        }
-    }
-
-    function filter_func(e, idx) {
-        if($(e).attr('class').indexOf('act') > 0){
-            selectedGoodsKeywords[idx] = false;
-            $(e).removeClass('act');
-            var heart = $(e).find('.glyphicon-heart');
-            heart.removeClass('glyphicon-heart').addClass('glyphicon-heart-empty');
-        }
-        else{
-            selectedGoodsKeywords[idx] = true;
-            $(e).addClass('act');
-            var heart = $(e).find('.glyphicon-heart-empty');
-            heart.removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
-        }
-
-        goods_keywords = [];
-        for (i=0; i<goodsKeywords.length; i++) {
-            if (selectedGoodsKeywords[i] == true) {
-                goods_keywords.push(goodsKeywords[i]);
-            }
-        }
-        try_it();
-    }
-
-    $(function(){
-        rwd_func();
-        $(window).resize(function(){
-            rwd_func();
-        });
-    });
-
-    $(function(){
-        new Clipboard('.copy-btn');
-        $('.main-form').change(function(){
-            if ($('#ele').prop('checked') == true){
-                getGoodsKeyword();
-                $('#filter-box').show();
-            }
-            else {
-                $('#filter-box').hide();
-            }
-        });
-        try_it();
-
-        $('.bfh-colorpicker-palette').on('mouseup',function(){
-            try_it();
-        });
-    });
-
-    function link_codepen(){
-        window.location.href = 'http://codepen.io/anon/pen/dNLamb';
-    }
-
-    var goodsKeywords = null;//stored goods_keywords
-    var selectedGoodsKeywords = [];//for selected goods_keyword
-    var goods_keywords = [];//for recomd
-    function getGoodsKeyword() {
-        var p = {};
-        p.token = document.getElementById("token").value;
-        if (document.getElementById("gid").value == "") {
-            p.gid = "5742934";
-            document.getElementById("gid").value = p.gid;
-        }
-        else {
-            p.gid = document.getElementById("gid").value;
-        }
-
-        //-- ajax call for goods keywords
-        console.log(JSON.stringify(p));
-        venraastool.goods_keywords(p, goodsKeywordsCallback);
-
-        try_it();
-    }
-    function goodsKeywordsCallback(jsonStr) {
-        console.log(jsonStr);
-
-        var result = JSON.parse(jsonStr);
-        if (result.goods_keywords) {
-            var htmlStr = '<div class="col-xs-12">';
-            goodsKeywords = result.goods_keywords;
-            for (i=0; i<goodsKeywords.length; i++) {
-                selectedGoodsKeywords[i] = false;
-                htmlStr += '<div class="filter-btn" onclick="filter_func(this, ' + i + ')">' + goodsKeywords[i].value + '<span class="glyphicon glyphicon-heart-empty"></span></div>';
-            }
-            htmlStr += '</div>';
-            document.getElementById("filter-box").innerHTML = htmlStr;
-        }
-    }
-
-    function try_it() {
-        setTimeout(show_code, 500);
-
-        //-- reset result
-        document.getElementById("recomd_result").innerHTML = "";
-
-        var token = document.getElementById("token").value;
-        var rec_type = $('input[name="rec_type"]:checked').val();
-        var rec_pos = $('input[name="rec_pos"]:checked').val();
-        var uid = document.getElementById("uid").value;
-        var gid = document.getElementById("gid").value;
-        var device = $('input[name="device"]:checked').val();
-        var topk = document.getElementById("topk").value;
-
-        rowItems = topk;
-        showItems = document.getElementById("showItems").value;
-        scrollItems = document.getElementById("scrollItems").value;
-        loop = document.getElementById("loop").checked;
-
-        //-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
-        var recomdParam = {};
-        if (token) recomdParam.token = token;
-        if (rec_type) recomdParam.rec_type = rec_type;
-        if (rec_pos) recomdParam.rec_pos = rec_pos;
-        if (uid) recomdParam.uid = uid;
-        if (gid) recomdParam.gid = gid;
-        if ($('#ele').prop('checked') == true){
-            if (document.getElementById("categ_code").value == "") {
-                document.getElementById("categ_code").value = "328208";
-            }
-            recomdParam.categ_code = document.getElementById("categ_code").value;
-        }
-        if (device) recomdParam.device = device;
-        if (topk) recomdParam.topk = Number(topk);
-        if (goods_keywords.length > 0) recomdParam.goods_keywords = goods_keywords;
-        console.log(JSON.stringify(recomdParam));
-
-        //-- ajax call for recommendation
-        venraastool.recomd(recomdParam, recomdCallback);
-    }
-
-    function print_rec(jsonStr) {
-        var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
-        document.getElementById("recomd_result").innerHTML = document.getElementById("recomd_result").innerHTML + pretty;
-    }
-
-    var rowItems;
-    var showItems;
-    var scrollItems;
-    var loop;
-    function recomdCallback(jsonStr) {
-        print_rec(jsonStr);
-
-        var result = JSON.parse(jsonStr);
-        if (result.recomd_list != null) {
-            process_slick(result, "slick-demo", loop, rowItems, showItems, scrollItems);
-        }
-    }
-
-    var bSlick = false;
-    function process_slick(result, div_class, loop, rowItems, showItems, scrollItems) {
-        var html = "";
-        for (i=0; i<result.recomd_list.length; i++) {
-            html += process_item(result.recomd_list[i].goods_page_url, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price);
-        }
-
-        if (bSlick == true) {
-            $("." + div_class).slick("unslick");
-            $("." + div_class).html("");
-            bSlick = false;
-        }
-
-        var btn_color =  $('input[name="colorpicker1"]').val(),
-            bg_color = $('input[name="colorpicker2"]').val();
-
-
-        $('.filter-btn').css({'color': btn_color , 'background-color' : '#ffffff' , 'border-color':btn_color});
-        $('.filter-btn.act').css({'background-color':  btn_color , 'color':'#ffffff'});
-
-        $('.slick-demo').css({'background-color':bg_color});
-        console.log("loop=" + loop);
-        console.log("rowItems=" + rowItems);
-        console.log("showItems=" + showItems);
-        console.log("scrollItems=" + scrollItems);
-        $("." + div_class).html(html);
-        $("." + div_class).slick({
-            infinite: Boolean(loop),
-            arrows: true,
-            prevArrow: '<button type="button" class="slick-prev" style="left:-40px; width:30px; height:100%; background-color:' + btn_color + ';">Previous</button>',
-            nextArrow: '<button type="button" class="slick-next" style="right:-40px; width:30px; height:100%; background-color:' + btn_color + ';">Next</button>',
-            slidesPerRow: Number(rowItems),
-            slidesToShow: Number(showItems),
-            slidesToScroll: Number(scrollItems)
-        });
-        bSlick = true;
-    }
-
-    function process_item(addr, img, name, price) {
-        var title_color = $('input[name="colorpicker3"]').val(),
-            price_color = $('input[name="colorpicker4"]').val();
-        var html = '<div style="margin:10px;">';
-        html += '<a href="' + addr + '"><img src="' + img + '" style="width: 100%"></a><div><span style="margin: 5px 0;font-size: 14px;height: 40px;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:' + title_color +';">' + name + '</span></div><div style="font-size: 18px;font-weight: 900;color:' + price_color + ';text-align:center;"><span style="font-weight: normal;font-size: 12px; color:' + title_color + ';">$</span>' + price + '</div></div>';
-        return html;
-    }
-
-    function show_code(){
-        var html_slick = $('.slider').parent().html();
-        $('textarea#html_code').val(html_slick);
-    }
-
 </script>
+
+<div class="rec-title">打造專屬於您的推薦清單，竟是如此簡單！</div>
+
+<br><br>
+
+    <div class="row" id="filter-box" style="display: none;">
+        <div class="col-xs-12">
+            <ul id="list1">
+                <li>
+                    <div class="filter-btn" onclick="filter_func(this)"><span>抽取式衛生紙</span> <span class="glyphicon glyphicon-heart-empty"></span> </div>
+                </li>
+                <li>
+                    <div class="filter-btn" onclick="filter_func(this)"><span>紙尿褲</span> <span class="glyphicon glyphicon-heart-empty"></div>
+                </li>
+                <li>
+                    <div class="filter-btn" onclick="filter_func(this)"><span>泡麵</span> <span class="glyphicon glyphicon-heart-empty"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="slider slick-demo">
+
+    </div>
+    <script>
+        $(function () {
+            setTimeout(trigger_btn,1000);
+            setTimeout(trigger_btn,2000);
+
+            //↓↓↓↓↓2017/06/21
+            function trigger_btn() {
+                $('.switch-arrow-right').trigger('click');
+            }
+            //↑↑↑↑↑2017/06/21
+        })
+    </script>
+
+    <br><br><br>
+
+    <div class="hr-1">
+        <div class="show_on_codepen" onclick="codepen_click()"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Show it on CodePen</div>
+    </div>
+
+    <div class="row" style="border-bottom: 1px solid #d8d8d8;">
+        <div class="col-sm-6">
+            <form id="rec_pos_form">
+                <div class="section-select">
+                <div class="ss-title">推薦版位(rec_pos)</div>
+                <div class="row">
+                    <div class="col-xs-4 text-center"><!--warning-->
+                        <input class="radio-inline rec-text-16" id="rec_pos_1" type="radio" name="rec_pos" value="p"/><br>
+                        <label for="rec_pos_1" style="cursor: pointer; margin-top: 5px;"><img src="img/res_pos_1.png" width="100%" height="auto" style="max-width: 300px;"><br><span class="rec-text-16">首頁(portal)</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <input class="radio-inline rec-text-16" id="rec_pos_2" type="radio" name="rec_pos" value="s"/><br>
+                        <label for="rec_pos_2" style="cursor: pointer; margin-top: 5px;"><img src="img/res_pos_2.png" width="100%" height="auto" style="max-width: 300px;"><br><span class="rec-text-16">分類頁(category page)</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <input class="radio-inline rec-text-16" id="rec_pos_3" type="radio" name="rec_pos" value="i" checked="checked"/><br>
+                        <label for="rec_pos_3" style="cursor: pointer; margin-top: 5px;"><img src="img/res_pos_3.png" width="100%" height="auto" style="max-width: 300px;"><br><span class="rec-text-16">單一商品頁(good page)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <div class="section-select">
+                <div class="ss-title">樣式設定</div>
+                <div class="row">
+                    <form id="style-setting-form">
+                        <div class="col-xs-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">背景</span><br>
+                            <span class="color_frame"><button id="bg-color" class="jscolor {valueElement:null,value:'FFFFFF', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                        </div>
+                        <div class="col-xs-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">左右按鈕</span><br>
+                            <span class="color_frame"><button id="btn-color" class="jscolor {valueElement:null,value:'999999', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                        </div>
+                        <div class="col-xs-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">品名</span><br>
+                            <span class="color_frame"><button id="title-color" class="jscolor {valueElement:null,value:'333333', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>&nbsp;
+                            <select id="title-size" onchange="show_slick()"></select>
+                            <script>
+                                $(function(){
+                                    for(var i=12;i<=20;i++){
+                                        $('#title-size').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#title-size > option[value="14"]').attr('selected','selected');
+                                    try_it();
+                                })
+                            </script>
+
+                        </div>
+                        <div class="col-xs-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">價格</span><br>
+                            <span class="color_frame"><button id="price-color" class="jscolor {valueElement:null,value:'FF0000', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                            <select id="price-size" onchange="show_slick()"></select>
+                            <script>
+                                $(function(){
+                                    for(var i=12;i<=30;i++){
+                                        $('#price-size').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#price-size > option[value="18"]').attr('selected','selected');
+                                })
+                            </script>
+                        </div>
+                        <div class="col-xs-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">$符號</span><br>
+                            <span class="color_frame"><button id="price-sign-color" class="jscolor {valueElement:null,value:'FF0000', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                            <select id="price-sign-size" onchange="show_slick()"></select>
+                            <script>
+                                $(function(){
+                                    for(var i=10;i<=30;i++){
+                                        $('#price-sign-size').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#price-sign-size > option[value="10"]').attr('selected','selected');
+                                })
+                            </script>
+                        </div>
+                        <div class="col-xs-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">推薦理由</span><br>
+                            <span class="color_frame"><button id="hint-color" class="jscolor {valueElement:null,value:'189dbf', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                            <span class="color_frame"><button id="hint-text-color" class="jscolor {valueElement:null,value:'ffffff', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                            <select id="color-opacity" onchange="show_slick()"></select>
+                            <script>
+                                $(function(){
+                                    for(var i=1;i<=10;i++){
+                                        $('#color-opacity').append($('<option/>').val(i/10).html(i*10 + "%"));
+                                    }
+                                    $('#color-opacity > option[value="0.7"]').attr('selected','selected');
+                                })
+                            </script>
+                        </div>
+                    </form>
+                </div>
+
+                <br>
+
+                <div class="row" style="margin-top: 50px;"><!--warning-->
+                    <form id="items-form">
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-4 text-center">
+                            <span class="rec-text-16">顯示推薦商品數</span>
+                            <select id="showItems"></select>
+                            <script>
+                                $(function(){
+                                    for(var i=1;i<=20;i++){
+                                        $('#showItems').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#showItems > option[value="5"]').attr('selected','selected');//2017/06/21
+                                })
+                            </script>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <span class="rec-text-16">一次捲動商品個數</span>
+                            <select id="scrollItems"></select>
+                            <script>
+                                $(function(){
+                                    for(var i=1;i<=20;i++){
+                                        $('#scrollItems').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#scrollItems > option[value="5"]').attr('selected','selected');//2017/06/21
+                                })
+                            </script>
+                        </div>
+                        <div class="col-xs-3">
+                            <label for="loop"><input type="checkbox" id="loop" checked="checked"><span style="font-size: 16px !important;font-weight: 500 !important;">循環呈現</span></label> <!--2017/06/21-->
+                            <label for="vs" style="display: none;"><input type="checkbox" id="vs">商品性價比較&nbsp;&nbsp;</label>
+                            <label for="feedback" style="display: none;"><input type="checkbox" id="feedback">回饋機制&nbsp;&nbsp;</label>
+                            <label for="ele" style="display: none;"><input type="checkbox" id="ele">屬性預測</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="row_bot" style="border-bottom: 1px solid #d8d8d8;"><!--warning-->
+
+        <div class="col-sm-6">
+            <form id="device_form">
+                <div class="section-select" id="bot_0">
+                <div class="ss-title">裝置類型(device)</div>
+                    <!--↓↓↓--2017/06/21--↓↓↓-->
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-2" style="text-align: center;">
+                        <input type="radio" name="device" id="device_1" value="pc" checked="checked" style="cursor: pointer;"/>
+                        <br>
+                        <label for="device_1" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_1.png"/><br>
+                            電腦(pc)</label>
+                    </div>
+                    <div class="col-xs-2" style="text-align: center;">
+                        <input type="radio" name="device" id="device_2" value="mb" style="cursor: pointer;"/>
+                        <br>
+                        <label for="device_2" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_4.png"/><br>
+                            手機(mb)</label>
+                    </div>
+                    <div class="col-xs-2" style="text-align: center;">
+                        <input type="radio" name="device" id="device_3" value="mbe" style="cursor: pointer;"/>
+                        <br>
+                        <label for="device_3" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_5.png"/><br>
+                            手機app(mbe)</label>
+                    </div>
+                    <div class="col-xs-2" style="text-align: center;">
+                        <input type="radio" name="device" id="device_4" value="tb" style="cursor: pointer;"/>
+                        <br>
+                        <label for="device_4" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_2.png"/><br>
+                            平板(tb)</label>
+                    </div>
+                    <div class="col-xs-2" style="text-align: center;">
+                        <input type="radio" name="device" id="device_5" value="tbe" style="cursor: pointer;"/>
+                        <br>
+                        <label for="device_5" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_3.png"/><br>
+                            平板app(tbe)</label>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+                    <!--↑↑↑--2017/06/21--↑↑↑-->
+            </div>
+            </form>
+        </div>
+
+        <div class="col-sm-4">
+            <form id="advenced_option_form">
+                <div class="section-select" id="bot_1">
+                    <div class="ss-title">進階推薦參數設定</div>
+                    <span class="rec-text-16">token: </span><input type="text" id="token" value="5guOvNnKn2" class="defalut-input rec-text-16"/>
+                    <div class="rec-text-16" style="text-decoration: underline; cursor: pointer; display: inline-block;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;取得專屬token</div><br>
+                    <span class="rec-text-16">推薦方法(rec_type): </span>
+                    <input class="rec-text-16" type="radio" name="rec_type" value="ClickStream" id="rec_type_1" checked="checked"/><label for="rec_type_1" class="rec-text-16">&nbsp;ClickStream&nbsp;</label>
+                    <input class="rec-text-16" type="radio" name="rec_type" value="AlsoView" id="rec_type_2"/><label for="rec_type_2" class="rec-text-16">&nbsp;AlsoView&nbsp;</label><br><!--warn-->
+                    <span class="rec-text-16">推薦商品數(topk): </span>
+                    <input class="rec-text-16" type="text" id="topk" value="10" placeholder="推薦範圍1-100" style="width: 50px;"/><br><!--2017/06/21-->
+                    <span class="rec-text-16">使用者編號(uid): </span><input type="text" id="uid" value="u01" placeholder="default" class="defalut-input rec-text-16"/><br><!--warning-->
+                    <span class="rec-text-16">商品分類編號(categ_code): </span><input type="text" id="categ_code" value="328208" placeholder="N/A" class="defalut-input rec-text-16"/><br>
+                    <span class="rec-text-16">商品編號(gid): </span><input type="text" id="gid" value="5742934" placeholder="N/A" class="defalut-input rec-text-16"/>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="section-select" id="bot_2">
+                <div class="ss-title">開發人員進階資訊</div>
+                <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(2,this)">API參數格式
+                    <span class="plusplus glyphicon glyphicon-plus" style="float: right; display: none;"></span>
+                    <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
+                </div>
+                <textarea id="api_ele" class="t2" style="display: none; border-color: #189dbf;"></textarea>
+                <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(1,this)">API回應結果
+                    <span class="plusplus glyphicon glyphicon-plus" style="float: right; display: none;"></span>
+                    <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
+                </div>
+                <textarea id="recomd_result" class="t2" style="display: none; border-color: #189dbf;">HERE is for printing recomd's result</textarea>
+
+                <script>
+                    function toggle_area(num , obj){
+                        if(num == 1){
+                            $('#recomd_result').slideToggle(200);
+                            setTimeout(bot_height,200);
+                            //$(obj).find('.plusplus').toggle();
+                            //$(obj).find('.lessless').toggle();
+                        }else{
+                            $('#api_ele').slideToggle(200);
+                            setTimeout(bot_height,200);
+                            //$(obj).find('.plusplus').toggle();
+                            //$(obj).find('.lessless').toggle();
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+
+        <script>
+            $(function(){
+                bot_height();
+                $(window).resize(bot_height);
+            });
+
+            function bot_height(){
+                $(' #bot_0 , #bot_1 , #bot_2').removeAttr('style');
+
+                var bot_h = $(' #row_bot').height();
+
+                $(' #bot_0 , #bot_1 , #bot_2').css('height',bot_h+'px');
+            }
+        </script>
+
+    </div>
 
 </body>
 </html>
