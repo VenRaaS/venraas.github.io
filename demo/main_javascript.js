@@ -136,6 +136,7 @@ $(function(){
     rwd_func();
     $(window).resize(function(){
         rwd_func();
+        slider_width();
     });
 
     //--------
@@ -193,16 +194,16 @@ function print_api() {
     var categ_code = document.getElementById("categ_code").value;
     var gid = document.getElementById("gid").value;
 
-    var contain_text_entities = "{\n";
-    if (token) contain_text_entities += "var token = &#x22;" + token + "&#x22;;\n";
-    if (rec_type) contain_text_entities += "var rec_type = &#x22;" + rec_type + "&#x22;;\n";
-    if (topk) contain_text_entities += "var topk = &#x22;" + topk + "&#x22;;\n";
-    if (uid) contain_text_entities += "var device = &#x22;" + device + "&#x22;;\n";
-    if (rec_pos) contain_text_entities += "var rec_pos = &#x22;" + rec_pos + "&#x22;;\n";
-    if (device) contain_text_entities += "var device = &#x22;" + device + "&#x22;;\n";
-    if (categ_code) contain_text_entities += "var categ_code = &#x22;" + categ_code + "&#x22;;\n";
-    if (gid) contain_text_entities += "var gid = &#x22;" + gid + "&#x22;;\n";
-    contain_text_entities += "}";
+    var contain_text_entities = '{';
+    if (token) contain_text_entities += '\n\t"token": "' + token + '"';
+    if (rec_type) contain_text_entities += ',\n\t"rec_type": "' + rec_type + '"';
+    if (topk) contain_text_entities += ',\n\t"topk": "' + topk + '"';
+    if (uid) contain_text_entities += ',\n\t"device": "' + device + '"';
+    if (rec_pos) contain_text_entities += ',\n\t"rec_pos": "' + rec_pos + '"';
+    if (device) contain_text_entities += ',\n\t"device": "' + device + '"';
+    if (categ_code) contain_text_entities += ',\n\t"categ_code": "' + categ_code + '"';
+    if (gid) contain_text_entities += ',\n\t"gid": "' + gid + '"';
+    contain_text_entities += '\n}';
 
     var contain_text = $('<div/>').html(contain_text_entities).text();
     $('#api_ele').text(contain_text);
@@ -232,6 +233,25 @@ function show_slick() {
     scrollItems = document.getElementById("scrollItems").value;
     loop = document.getElementById("loop").checked;
     process_slick(result, "slick-demo", loop, rowItems, showItems, scrollItems);
+
+    //--0705--
+    slider_width();
+}
+
+function slider_width(){
+    //--0705--
+    var whole_ad = $('.whole-ad'),
+        whole_height = whole_ad.css('height'),
+        tags_height = $('.tags-area').css('height'),
+        slider_width = ( parseFloat(whole_height) - parseFloat(tags_height) ) * 3.738;
+
+    whole_ad.css('width',slider_width + 50 + "px");
+
+    if($(window).width() < (slider_width + 300)){
+        $('.slider').css('width', 'auto');
+    }else{
+        $('.slider').css('width', slider_width + "px");
+    }
 }
 
 var bSlick = false;
@@ -298,7 +318,22 @@ function show_code(){
     $('textarea#html_code').val(html_slick);
 }
 
+var hint_control_check = true;
+
+$(function(){
+    $('#imgHint').change(function(){
+        if($(this).is(':checked')){
+            hint_control_check = true;
+            $('#imgHintPanel').show();
+        }else {
+            hint_control_check = false;
+            $('#imgHintPanel').hide();
+        }
+    });
+});
+
 function img_hint(){
+    if(hint_control_check){
     $('.slick-slide').each(function () {
         var temp_slide = $(this),
             temp_img = $(this).find('a').find('img'),
@@ -312,6 +347,7 @@ function img_hint(){
 
         $('<div>').attr({'class':'item-info','onmouseenter':'show_hint(this , true);','onmouseleave':'show_hint(this , false);'}).css({'border':'1px solid ' + hint_color ,'color': hint_color}).text('i').prependTo(temp_slide);
     })
+    }
 }
 
 function show_hint(obj , b) {
@@ -331,10 +367,11 @@ function show_hint(obj , b) {
 }
 
 function hint_control() {
+    if(hint_control_check){
     var hint_color = $('#hint-color').css('background-color'),
         hint_text_color = $('#hint-text-color').css('background-color'),
         hint_opacity = $('#color-opacity').val();
 
     $('.info-hint').css({'background-color':hint_color,'color':hint_text_color,'opacity':hint_opacity});
-    $('.hint-triangle').css({'color':hint_color});
+    $('.hint-triangle').css({'color':hint_color});}
 }
