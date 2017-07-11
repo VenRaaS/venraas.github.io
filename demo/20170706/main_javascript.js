@@ -194,16 +194,16 @@ function print_api() {
     var categ_code = document.getElementById("categ_code").value;
     var gid = document.getElementById("gid").value;
 
-    var contain_text_entities = "{\n";
-    if (token) contain_text_entities += "var token = &#x22;" + token + "&#x22;;\n";
-    if (rec_type) contain_text_entities += "var rec_type = &#x22;" + rec_type + "&#x22;;\n";
-    if (topk) contain_text_entities += "var topk = &#x22;" + topk + "&#x22;;\n";
-    if (uid) contain_text_entities += "var device = &#x22;" + device + "&#x22;;\n";
-    if (rec_pos) contain_text_entities += "var rec_pos = &#x22;" + rec_pos + "&#x22;;\n";
-    if (device) contain_text_entities += "var device = &#x22;" + device + "&#x22;;\n";
-    if (categ_code) contain_text_entities += "var categ_code = &#x22;" + categ_code + "&#x22;;\n";
-    if (gid) contain_text_entities += "var gid = &#x22;" + gid + "&#x22;;\n";
-    contain_text_entities += "}";
+    var contain_text_entities = '{';
+    if (token) contain_text_entities += '\n\t"token": "' + token + '"';
+    if (rec_type) contain_text_entities += ',\n\t"rec_type": "' + rec_type + '"';
+    if (topk) contain_text_entities += ',\n\t"topk": "' + topk + '"';
+    if (uid) contain_text_entities += ',\n\t"device": "' + device + '"';
+    if (rec_pos) contain_text_entities += ',\n\t"rec_pos": "' + rec_pos + '"';
+    if (device) contain_text_entities += ',\n\t"device": "' + device + '"';
+    if (categ_code) contain_text_entities += ',\n\t"categ_code": "' + categ_code + '"';
+    if (gid) contain_text_entities += ',\n\t"gid": "' + gid + '"';
+    contain_text_entities += '\n}';
 
     var contain_text = $('<div/>').html(contain_text_entities).text();
     $('#api_ele').text(contain_text);
