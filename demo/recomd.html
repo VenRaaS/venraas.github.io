@@ -36,16 +36,25 @@
     <script src="jquery.dragsort-0.5.2.min.js"></script>
 
     <!--main js-->
-    <script src="main_javascript.js"></script>
+    <script src="main_javascript_notag.js"></script>
 
     <!--colorpicker-4-->
     <script src="source/jscolor-2.0.4/jscolor.min.js"></script>
 
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+
+    <!-- Overscroll -->
+    <script src="source/scroll/jquery.overscroll.js"></script>
 
     <style>
         body{
             overflow-x: hidden;
             font-family:'Muli',Microsoft JhengHei;
+        }
+
+        a:-webkit-any-link{
+            text-decoration: none;
         }
 
         .rec-title{
@@ -110,6 +119,16 @@
 
         .slick-demo{
             margin: 0 20%;
+        }
+
+        /*-- NEW! --*/
+        .p-50{
+            min-width: 65px;
+            width: 40%;
+            padding-right: 10px;
+            font-size: 10px;
+            text-align: right;
+            display: inline-block;
         }
 
         .show_on_codepen{
@@ -292,13 +311,27 @@
         .item-info{
             cursor: default;
             position: absolute;
-            border-radius: 8px;
+            /*border-radius: 8px;
             font-weight: 900;
             padding: 0 8px;
             right: 10px;
-            top: 10px;
+            top: 10px;*/
+            top: 0;
+            right: 14px;
+            width: 20px;
+            height: 20px;
         }
         .info-hint{
+            padding: 5px 10px;
+            color: white;
+            background-color: #189DBF;
+            border-radius: 5px;
+            text-align: left;
+            position: absolute;
+            z-index: 5;
+            opacity: 0.7;
+        }
+        .info-hint-demo{
             padding: 5px 10px;
             color: white;
             background-color: #189DBF;
@@ -320,18 +353,133 @@
             font-size: 24px;
             z-index: 4;
         }
-        /*------2017/06/21------*/
+
+        /*---2017/07/17---*/
+        .item-hint{
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            border: 1px solid #189dbf;
+            z-index: 3;
+            user-select: none;
+        }
+
+        .item-hint-header{
+            padding: 5px 10px;
+            background-color: #189dbf;
+            color: #FFFFFF;
+            text-align: center;
+            cursor: default;
+            white-space: nowrap;
+        }
+
+        .item-hint-container{
+            padding: 5px 10px;
+            color: #999999;
+            text-align: center;
+            background-color: #ffffff;
+            white-space: nowrap;
+            cursor: default;
+        }
+
+        /*2017/07/18*/
+        .tags-area::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        /*2017/08/01*/
+        .nowSeeBox{
+            width: 200px;
+        }
     </style>
 
 </head>
-<body>
+<body style="text-align: center;">
 
 <!-- hint -->
+<!-- hint 2017/07/17 -->
+<script>
+    var target;
+
+    function touches(e){
+        var x = e.touches ? e.touches[0].clientX : e.clientX,
+            y = e.touches ? e.touches[0].clientY : e.clientY;
+        TweenMax.to(target, 0, {
+            top: y-20,
+            left: x-50
+        });
+    }
+
+    $(function(){
+        $('.glyphicon-search').on('click',function(event){
+            event.stopPropagation();
+            var left = event.pageX,
+                top = event.pageY,
+                scrollTop = $(window).scrollTop();
+            target = $(this).attr('data-target');
+            target = $(target);
+            $('.item-hint').css({"z-index":2});
+            target.show(200).css({'left':left + 30,'top':top - scrollTop - 300,'z-index':3});
+        });
+        $('.item-hint')
+            .on('mousedown','.item-hint-header', function(){
+                event.stopPropagation();
+                target = $(this).attr('data-target');
+                target = $(target);
+                $('.item-hint').css({"z-index":2});
+                target.css({"z-index":3});
+                window.addEventListener("mousemove", touches ,false);
+                $('body').css({'user-select':'none'});
+            })
+            .on('mouseup','.item-hint-header',function(){
+                window.removeEventListener("mousemove" , touches , false);
+                $('body').css({'user-select':'initial'});
+            })
+            .on('click','.glyphicon-remove',function(){
+                event.stopPropagation();
+                target = $(this).attr('data-target');
+                target = $(target);
+                target.hide(200);
+            })
+            .on('click','.item-hint-container',function(){
+                event.stopPropagation();
+                target = $(this).attr('data-target');
+                target = $(target);
+                $('.item-hint').css({"z-index":2});
+                target.css({"z-index":3});
+            });
+
+        setTimeout(trigger_btn,1000);
+        setTimeout(trigger_btn,2000);
+
+        function trigger_btn() {
+            $('.switch-arrow-right').trigger('click');
+        }
+    })
+</script>
+<div class="item-hint" id="hint-01">
+    <div data-target="#hint-01" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
+    <div class="item-hint-header" data-target="#hint-01">正在瀏覽的商品分類&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    <div class="item-hint-container" data-target="#hint-01">
+        Oops...<br>
+        此商品分類編號<br>無對應之商品分類
+    </div>
+</div>
+
+<div class="item-hint" id="hint-02">
+    <div data-target="#hint-02" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
+    <div class="item-hint-header" data-target="#hint-02">正在瀏覽的商品</div>
+    <div class="item-hint-container" data-target="#hint-02">
+        Oops...<br>
+        此商品編號無對應之商品
+    </div>
+</div>
+
 <div class="info-hint display-none">
     <div style="position: relative;">
-        推薦度：95%<br>
-        推薦理由：顧客買了又買！
-    <span class="glyphicon glyphicon-triangle-bottom hint-triangle"></span>
+        <div id="hint_text">推薦度：95%<br>推薦理由：顧客買了又買！</div>
+        <span class="glyphicon glyphicon-triangle-bottom hint-triangle"></span>
     </div>
 </div>
 
@@ -353,41 +501,27 @@
         <div class="col-xs-12">
             <ul id="list1">
                 <li>
-                    <div class="filter-btn" onclick="filter_func(this)"><span>抽取式衛生紙</span> <span class="glyphicon glyphicon-heart-empty"></span> </div>
+                    <div class="filter-btn" onclick="filter_func(this)"><span>抽取式衛生紙</span><span class="glyphicon glyphicon-heart-empty"></span></div>
                 </li>
                 <li>
-                    <div class="filter-btn" onclick="filter_func(this)"><span>紙尿褲</span> <span class="glyphicon glyphicon-heart-empty"></div>
+                    <div class="filter-btn" onclick="filter_func(this)"><span>紙尿褲</span><span class="glyphicon glyphicon-heart-empty"></span></div>
                 </li>
                 <li>
-                    <div class="filter-btn" onclick="filter_func(this)"><span>泡麵</span> <span class="glyphicon glyphicon-heart-empty"></div>
+                    <div class="filter-btn" onclick="filter_func(this)"><span>泡麵</span><span class="glyphicon glyphicon-heart-empty"></span></div>
                 </li>
             </ul>
         </div>
     </div>
 
-    <div class="slider slick-demo">
+    <div class="slider slick-demo"></div>
 
-    </div>
-    <script>
-        $(function () {
-            setTimeout(trigger_btn,1000);
-            setTimeout(trigger_btn,2000);
-
-            //↓↓↓↓↓2017/06/21
-            function trigger_btn() {
-                $('.switch-arrow-right').trigger('click');
-            }
-            //↑↑↑↑↑2017/06/21
-        })
-    </script>
-
-    <br><br><br>
+    <div class="row" style="height: 50px;"></div>
 
     <div class="hr-1">
         <div class="show_on_codepen" onclick="codepen_click()"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Show it on CodePen</div>
     </div>
 
-    <div class="row" style="border-bottom: 1px solid #d8d8d8;">
+    <div class="row row-2" style="border-bottom: 1px solid #d8d8d8;">
         <div class="col-sm-6">
             <form id="rec_pos_form">
                 <div class="section-select">
@@ -416,6 +550,7 @@
             <div class="section-select">
                 <div class="ss-title">樣式設定</div>
                 <div class="row">
+                    <!--0706-->
                     <form id="style-setting-form">
                         <div class="col-xs-2 text-center" style="padding: 0;">
                             <span class="rec-text-16">背景</span><br>
@@ -435,7 +570,6 @@
                                         $('#title-size').append($('<option/>').val(i).html(i));
                                     }
                                     $('#title-size > option[value="14"]').attr('selected','selected');
-                                    try_it();
                                 })
                             </script>
 
@@ -466,11 +600,18 @@
                                 })
                             </script>
                         </div>
-                        <div class="col-xs-2 text-center" style="padding: 0;">
+                        <!-- 0717 -->
+                        <div class="col-xs-2 text-center" id="imgHintPanel" style="padding: 0;position: relative;">
+                            <div class="info-hint-demo display-none">
+                                <div style="position: relative;">
+                                    <div>範例文字<br>Demo message</div>
+                                    <span class="glyphicon glyphicon-triangle-bottom hint-triangle"></span>
+                                </div>
+                            </div>
                             <span class="rec-text-16">推薦理由</span><br>
-                            <span class="color_frame"><button id="hint-color" class="jscolor {valueElement:null,value:'189dbf', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
-                            <span class="color_frame"><button id="hint-text-color" class="jscolor {valueElement:null,value:'ffffff', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
-                            <select id="color-opacity" onchange="show_slick()"></select>
+                            <span class="color_frame" onclick="hintFunc2()"><button id="hint-color" class="jscolor {valueElement:null,value:'189dbf', onFineChange:'hintFunc()'}" style="width:15px; height:15px; border: none;"></button></span>
+                            <span class="color_frame" onclick="hintFunc2()"><button id="hint-text-color" class="jscolor {valueElement:null,value:'ffffff', onFineChange:'hintFunc()'}" style="width:15px; height:15px; border: none;"></button></span><br>
+                            <select onclick="hintFunc2()" id="color-opacity" onchange="hintFunc()"></select>
                             <script>
                                 $(function(){
                                     for(var i=1;i<=10;i++){
@@ -479,16 +620,43 @@
                                     $('#color-opacity > option[value="0.7"]').attr('selected','selected');
                                 })
                             </script>
+                            <br>
+                            <select onclick="hintFunc2()" id="hint-style" onchange="hintFunc()">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
                         </div>
                     </form>
                 </div>
+
+                <script>
+                    //2017/07/17
+                    var hint = $('.info-hint');
+                    var hint_demo = $('.info-hint-demo');
+
+                    function hintFunc2() {
+                        hint_demo.removeClass('display-none').css({'width': '150px' , 'top': '-48px' , 'right': '10px'});
+                    }
+
+                    function hintFunc(){
+                        show_slick();
+                        hintFunc2();
+                    }
+
+                    $(function(){
+                        $('div.row').not('.row-2 , .row-2 .row').on('mouseenter',function(){hint_demo.addClass('display-none')});
+                        $(window).resize(function(){
+                            coord = $('#imgHintPanel').offset();
+                        });
+                    })
+                </script>
 
                 <br>
 
                 <div class="row" style="margin-top: 50px;"><!--warning-->
                     <form id="items-form">
-                        <div class="col-xs-1"></div>
-                        <div class="col-xs-4 text-center">
+                        <div class="col-xs-4 text-center" style="padding: 0 5px;">
                             <span class="rec-text-16">顯示推薦商品數</span>
                             <select id="showItems"></select>
                             <script>
@@ -500,7 +668,7 @@
                                 })
                             </script>
                         </div>
-                        <div class="col-xs-4 text-center">
+                        <div class="col-xs-4 text-center" style="padding: 0 5px;">
                             <span class="rec-text-16">一次捲動商品個數</span>
                             <select id="scrollItems"></select>
                             <script>
@@ -512,11 +680,14 @@
                                 })
                             </script>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-2" style="padding: 0 5px;">
                             <label for="loop"><input type="checkbox" id="loop" checked="checked"><span style="font-size: 16px !important;font-weight: 500 !important;">循環呈現</span></label> <!--2017/06/21-->
                             <label for="vs" style="display: none;"><input type="checkbox" id="vs">商品性價比較&nbsp;&nbsp;</label>
                             <label for="feedback" style="display: none;"><input type="checkbox" id="feedback">回饋機制&nbsp;&nbsp;</label>
                             <label for="ele" style="display: none;"><input type="checkbox" id="ele">屬性預測</label>
+                        </div>
+                        <div class="col-xs-2" style="padding: 0 5px;">
+                            <label for="imgHint"><input type="checkbox" id="imgHint" checked="checked"><span style="font-size: 16px !important;font-weight: 500 !important;">推薦理由</span></label> <!--2017/06/21-->
                         </div>
                     </form>
                 </div>
@@ -530,7 +701,7 @@
             <form id="device_form">
                 <div class="section-select" id="bot_0">
                 <div class="ss-title">裝置類型(device)</div>
-                    <!--↓↓↓--2017/06/21--↓↓↓-->
+                <!-- ↓↓↓2017/06/21↓↓↓ -->
                 <div class="row">
                     <div class="col-xs-1"></div>
                     <div class="col-xs-2" style="text-align: center;">
@@ -565,39 +736,39 @@
                     </div>
                     <div class="col-xs-1"></div>
                 </div>
-                    <!--↑↑↑--2017/06/21--↑↑↑-->
+                <!-- ↑↑↑2017/06/21↑↑↑ -->
             </div>
             </form>
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-4 text-left">
             <form id="advenced_option_form">
                 <div class="section-select" id="bot_1">
                     <div class="ss-title">進階推薦參數設定</div>
                     <span class="rec-text-16">token: </span><input type="text" id="token" value="5guOvNnKn2" class="defalut-input rec-text-16"/>
                     <div class="rec-text-16" style="text-decoration: underline; cursor: pointer; display: inline-block;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;取得專屬token</div><br>
                     <span class="rec-text-16">推薦方法(rec_type): </span>
-                    <input class="rec-text-16" type="radio" name="rec_type" value="ClickStream" id="rec_type_1" checked="checked"/><label for="rec_type_1" class="rec-text-16">&nbsp;ClickStream&nbsp;</label>
-                    <input class="rec-text-16" type="radio" name="rec_type" value="AlsoView" id="rec_type_2"/><label for="rec_type_2" class="rec-text-16">&nbsp;AlsoView&nbsp;</label><br><!--warn-->
+                    <input class="rec-text-16" type="radio" name="rec_type" value="ClickStream" id="rec_type_1"/><label for="rec_type_1" class="rec-text-16">&nbsp;ClickStream&nbsp;</label>
+                    <input class="rec-text-16" type="radio" name="rec_type" value="AlsoView" id="rec_type_2" checked="checked"/><label for="rec_type_2" class="rec-text-16">&nbsp;AlsoView&nbsp;</label><br><!--warn-->
                     <span class="rec-text-16">推薦商品數(topk): </span>
                     <input class="rec-text-16" type="text" id="topk" value="10" placeholder="推薦範圍1-100" style="width: 50px;"/><br><!--2017/06/21-->
                     <span class="rec-text-16">使用者編號(uid): </span><input type="text" id="uid" value="u01" placeholder="default" class="defalut-input rec-text-16"/><br><!--warning-->
-                    <span class="rec-text-16">商品分類編號(categ_code): </span><input type="text" id="categ_code" value="328208" placeholder="N/A" class="defalut-input rec-text-16"/><br>
-                    <span class="rec-text-16">商品編號(gid): </span><input type="text" id="gid" value="5742934" placeholder="N/A" class="defalut-input rec-text-16"/>
+                    <span class="rec-text-16">商品分類編號(categ_code): </span><input type="text" id="categ_code" value="328208" placeholder="N/A" class="defalut-input rec-text-16"/><span class="glyphicon glyphicon-search" data-target="#hint-01" style="cursor: pointer;"></span><br>
+                    <span class="rec-text-16">商品編號(gid): </span><input type="text" id="gid" value="5742934" placeholder="N/A" class="defalut-input rec-text-16"/><span class="glyphicon glyphicon-search" data-target="#hint-02" style="cursor: pointer;"></span>
                 </div>
             </form>
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-2 text-left">
             <div class="section-select" id="bot_2">
                 <div class="ss-title">開發人員進階資訊</div>
                 <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(2,this)">API參數格式
-                    <span class="plusplus glyphicon glyphicon-plus" style="float: right; display: none;"></span>
+                    <span class="plusplus glyphicon glyphicon-plus" style="float: right;"></span>
                     <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
                 </div>
                 <textarea id="api_ele" class="t2" style="display: none; border-color: #189dbf;"></textarea>
                 <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(1,this)">API回應結果
-                    <span class="plusplus glyphicon glyphicon-plus" style="float: right; display: none;"></span>
+                    <span class="plusplus glyphicon glyphicon-plus" style="float: right;"></span>
                     <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
                 </div>
                 <textarea id="recomd_result" class="t2" style="display: none; border-color: #189dbf;">HERE is for printing recomd's result</textarea>
@@ -607,13 +778,13 @@
                         if(num == 1){
                             $('#recomd_result').slideToggle(200);
                             setTimeout(bot_height,200);
-                            //$(obj).find('.plusplus').toggle();
-                            //$(obj).find('.lessless').toggle();
+                            $(obj).find('.plusplus').toggle();
+                            $(obj).find('.lessless').toggle();
                         }else{
                             $('#api_ele').slideToggle(200);
                             setTimeout(bot_height,200);
-                            //$(obj).find('.plusplus').toggle();
-                            //$(obj).find('.lessless').toggle();
+                            $(obj).find('.plusplus').toggle();
+                            $(obj).find('.lessless').toggle();
                         }
                     }
                 </script>
@@ -624,6 +795,7 @@
             $(function(){
                 bot_height();
                 $(window).resize(bot_height);
+                try_it();
             });
 
             function bot_height(){
