@@ -54,7 +54,7 @@
         }
 
         a:-webkit-any-link{
-            text-decoration: none;
+            text-decoration: none !important;
         }
 
         .rec-title{
@@ -122,14 +122,6 @@
         }
 
         /*-- NEW! --*/
-        .p-50{
-            min-width: 65px;
-            width: 40%;
-            padding-right: 10px;
-            font-size: 10px;
-            text-align: right;
-            display: inline-block;
-        }
 
         .show_on_codepen{
             border-radius: 5px;
@@ -344,16 +336,23 @@
         .display-none{
             display: none;
         }
-        .hint-triangle{
+        #hint-triangle{
             color: #189dbf;
             position: absolute;
-            right: 0;
             bottom: -20px;
             top: inherit;
             font-size: 24px;
             z-index: 4;
         }
 
+        .p-50{
+            min-width: 75px;
+            width: 40%;
+            padding-right: 10px;
+            font-size: 10px;
+            text-align: right;
+            display: inline-block;
+        }
         /*---2017/07/17---*/
         .item-hint{
             display: none;
@@ -398,66 +397,6 @@
 <body style="text-align: center;">
 
 <!-- hint -->
-<!-- hint 2017/07/17 -->
-<script>
-    var target;
-
-    function touches(e){
-        var x = e.touches ? e.touches[0].clientX : e.clientX,
-            y = e.touches ? e.touches[0].clientY : e.clientY;
-        TweenMax.to(target, 0, {
-            top: y-20,
-            left: x-50
-        });
-    }
-
-    $(function(){
-        $('.glyphicon-search').on('click',function(event){
-            event.stopPropagation();
-            var left = event.pageX,
-                top = event.pageY,
-                scrollTop = $(window).scrollTop();
-            target = $(this).attr('data-target');
-            target = $(target);
-            $('.item-hint').css({"z-index":2});
-            target.show(200).css({'left':left + 30,'top':top - scrollTop - 300,'z-index':3});
-        });
-        $('.item-hint')
-            .on('mousedown','.item-hint-header', function(){
-                event.stopPropagation();
-                target = $(this).attr('data-target');
-                target = $(target);
-                $('.item-hint').css({"z-index":2});
-                target.css({"z-index":3});
-                window.addEventListener("mousemove", touches ,false);
-                $('body').css({'user-select':'none'});
-            })
-            .on('mouseup','.item-hint-header',function(){
-                window.removeEventListener("mousemove" , touches , false);
-                $('body').css({'user-select':'initial'});
-            })
-            .on('click','.glyphicon-remove',function(){
-                event.stopPropagation();
-                target = $(this).attr('data-target');
-                target = $(target);
-                target.hide(200);
-            })
-            .on('click','.item-hint-container',function(){
-                event.stopPropagation();
-                target = $(this).attr('data-target');
-                target = $(target);
-                $('.item-hint').css({"z-index":2});
-                target.css({"z-index":3});
-            });
-
-        setTimeout(trigger_btn,1000);
-        setTimeout(trigger_btn,2000);
-
-        function trigger_btn() {
-            $('.switch-arrow-right').trigger('click');
-        }
-    })
-</script>
 <div class="item-hint" id="hint-01">
     <div data-target="#hint-01" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
     <div class="item-hint-header" data-target="#hint-01">正在瀏覽的商品分類&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -479,7 +418,7 @@
 <div class="info-hint display-none">
     <div style="position: relative;">
         <div id="hint_text">推薦度：95%<br>推薦理由：顧客買了又買！</div>
-        <span class="glyphicon glyphicon-triangle-bottom hint-triangle"></span>
+        <span class="glyphicon glyphicon-triangle-bottom" id="hint-triangle"></span>
     </div>
 </div>
 
@@ -487,11 +426,7 @@
     <div class="logo-icon" onclick="refresh_page()"></div>
 </div>
 
-<script>
-    function refresh_page() {
-        location.reload();
-    }
-</script>
+
 
 <div class="rec-title">打造專屬於您的推薦清單，竟是如此簡單！</div>
 
@@ -605,7 +540,7 @@
                             <div class="info-hint-demo display-none">
                                 <div style="position: relative;">
                                     <div>範例文字<br>Demo message</div>
-                                    <span class="glyphicon glyphicon-triangle-bottom hint-triangle"></span>
+                                    <span class="glyphicon glyphicon-triangle-bottom" id="hint-triangle"></span>
                                 </div>
                             </div>
                             <span class="rec-text-16">推薦理由</span><br>
@@ -625,32 +560,11 @@
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
                         </div>
                     </form>
                 </div>
-
-                <script>
-                    //2017/07/17
-                    var hint = $('.info-hint');
-                    var hint_demo = $('.info-hint-demo');
-
-                    function hintFunc2() {
-                        hint_demo.removeClass('display-none').css({'width': '150px' , 'top': '-48px' , 'right': '10px'});
-                    }
-
-                    function hintFunc(){
-                        show_slick();
-                        hintFunc2();
-                    }
-
-                    $(function(){
-                        $('div.row').not('.row-2 , .row-2 .row').on('mouseenter',function(){hint_demo.addClass('display-none')});
-                        $(window).resize(function(){
-                            coord = $('#imgHintPanel').offset();
-                        });
-                    })
-                </script>
 
                 <br>
 
@@ -772,42 +686,132 @@
                     <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
                 </div>
                 <textarea id="recomd_result" class="t2" style="display: none; border-color: #189dbf;">HERE is for printing recomd's result</textarea>
-
-                <script>
-                    function toggle_area(num , obj){
-                        if(num == 1){
-                            $('#recomd_result').slideToggle(200);
-                            setTimeout(bot_height,200);
-                            $(obj).find('.plusplus').toggle();
-                            $(obj).find('.lessless').toggle();
-                        }else{
-                            $('#api_ele').slideToggle(200);
-                            setTimeout(bot_height,200);
-                            $(obj).find('.plusplus').toggle();
-                            $(obj).find('.lessless').toggle();
-                        }
-                    }
-                </script>
             </div>
         </div>
+    </div>
 
-        <script>
-            $(function(){
-                bot_height();
-                $(window).resize(bot_height);
-                try_it();
+<!-- hint 2017/07/17 -->
+<script>
+    var target;
+
+    function touches(e){
+        var x = e.touches ? e.touches[0].clientX : e.clientX,
+            y = e.touches ? e.touches[0].clientY : e.clientY;
+        TweenMax.to(target, 0, {
+            top: y-20,
+            left: x-50
+        });
+    }
+
+    $(function(){
+        $('.glyphicon-search').on('click',function(event){
+            event.stopPropagation();
+            var left = event.pageX,
+                top = event.pageY,
+                scrollTop = $(window).scrollTop();
+            target = $(this).attr('data-target');
+            target = $(target);
+            $('.item-hint').css({"z-index":2});
+            target.show(200).css({'left':left + 30,'top':top - scrollTop - 300,'z-index':3});
+        });
+        $('.item-hint')
+            .on('mousedown','.item-hint-header', function(){
+                event.stopPropagation();
+                target = $(this).attr('data-target');
+                target = $(target);
+                $('.item-hint').css({"z-index":2});
+                target.css({"z-index":3});
+                window.addEventListener("mousemove", touches ,false);
+                $('body').css({'user-select':'none'});
+            })
+            .on('mouseup','.item-hint-header',function(){
+                window.removeEventListener("mousemove" , touches , false);
+                $('body').css({'user-select':'initial'});
+            })
+            .on('click','.glyphicon-remove',function(){
+                event.stopPropagation();
+                target = $(this).attr('data-target');
+                target = $(target);
+                target.hide(200);
+            })
+            .on('click','.item-hint-container',function(){
+                event.stopPropagation();
+                target = $(this).attr('data-target');
+                target = $(target);
+                $('.item-hint').css({"z-index":2});
+                target.css({"z-index":3});
             });
 
-            function bot_height(){
-                $(' #bot_0 , #bot_1 , #bot_2').removeAttr('style');
+        setTimeout(trigger_btn,1000);
+        setTimeout(trigger_btn,2000);
 
-                var bot_h = $(' #row_bot').height();
+        function trigger_btn() {
+            $('.switch-arrow-right').trigger('click');
+        }
+    })
+</script>
 
-                $(' #bot_0 , #bot_1 , #bot_2').css('height',bot_h+'px');
-            }
-        </script>
+<script>
+    function refresh_page() {
+        location.reload();
+    }
+</script>
 
-    </div>
+<!-- hint demo 2017/07/17 -->
+<script>
+    var hint = $('.info-hint');
+    var hint_demo = $('.info-hint-demo');
+
+    function hintFunc2() {
+        hint_demo.removeClass('display-none').css({'width': '150px' , 'top': '-48px' , 'right': '10px'});
+    }
+
+    function hintFunc(){
+        show_slick();
+        hintFunc2();
+    }
+
+    $(function(){
+        $('div.row').not('.row-2 , .row-2 .row').on('mouseenter',function(){hint_demo.addClass('display-none')});
+        $(window).resize(function(){
+            coord = $('#imgHintPanel').offset();
+        });
+    })
+</script>
+
+<!-- developer mode toggle -->
+<script>
+    function toggle_area(num , obj){
+        if(num == 1){
+            $('#recomd_result').slideToggle(200);
+            setTimeout(bot_height,200);
+            $(obj).find('.plusplus').toggle();
+            $(obj).find('.lessless').toggle();
+        }else{
+            $('#api_ele').slideToggle(200);
+            setTimeout(bot_height,200);
+            $(obj).find('.plusplus').toggle();
+            $(obj).find('.lessless').toggle();
+        }
+    }
+</script>
+
+<!-- col height control -->
+<script>
+    $(function(){
+        bot_height();
+        $(window).resize(bot_height);
+        try_it();
+    });
+
+    function bot_height(){
+        $(' #bot_0 , #bot_1 , #bot_2').removeAttr('style');
+
+        var bot_h = $(' #row_bot').height();
+
+        $(' #bot_0 , #bot_1 , #bot_2').css('height',bot_h+'px');
+    }
+</script>
 
 </body>
 </html>
