@@ -625,7 +625,7 @@ function print_api() {
     if (token) contain_text_entities += '\n\t"token": "' + token + '"';
     if (rec_type) contain_text_entities += ',\n\t"rec_type": "' + rec_type + '"';
     if (topk) contain_text_entities += ',\n\t"topk": "' + topk + '"';
-    if (uid) contain_text_entities += ',\n\t"device": "' + device + '"';
+    if (uid) contain_text_entities += ',\n\t"uid": "' + uid + '"';
     if (rec_pos) contain_text_entities += ',\n\t"rec_pos": "' + rec_pos + '"';
     if (device) contain_text_entities += ',\n\t"device": "' + device + '"';
     if (categ_code) contain_text_entities += ',\n\t"categ_code": "' + categ_code + '"';
