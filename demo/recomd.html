@@ -147,8 +147,8 @@
         }
 
         .t2{
-            width:80%;
-            height: 100px;
+            width: 100%;
+            height: 150px;
         }
 
         .sub-title{
@@ -336,7 +336,7 @@
         .display-none{
             display: none;
         }
-        #hint-triangle{
+        #hint-triangle , #hint-triangle-demo{
             color: #189dbf;
             position: absolute;
             bottom: -20px;
@@ -412,6 +412,22 @@
     <div class="item-hint-container" data-target="#hint-02">
         Oops...<br>
         此商品編號無對應之商品
+    </div>
+</div>
+
+<div class="item-hint" id="hint-03">
+    <div data-target="#hint-03" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
+    <div class="item-hint-header" data-target="#hint-03">API參數格式</div>
+    <div class="item-hint-container" data-target="#hint-03">
+        <textarea id="api_ele_pop" class="t2" style="border-color: #189dbf;"></textarea>
+    </div>
+</div>
+
+<div class="item-hint" id="hint-04">
+    <div data-target="#hint-04" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
+    <div class="item-hint-header" data-target="#hint-04">API回應結果</div>
+    <div class="item-hint-container" data-target="#hint-04">
+        <textarea id="recomd_result_pop" class="t2" style="border-color: #189dbf;">HERE is for printing recomd's result</textarea>
     </div>
 </div>
 
@@ -540,7 +556,7 @@
                             <div class="info-hint-demo display-none">
                                 <div style="position: relative;">
                                     <div>範例文字<br>Demo message</div>
-                                    <span class="glyphicon glyphicon-triangle-bottom" id="hint-triangle"></span>
+                                    <span class="glyphicon glyphicon-triangle-bottom" id="hint-triangle-demo"></span>
                                 </div>
                             </div>
                             <span class="rec-text-16">推薦理由</span><br>
@@ -561,6 +577,7 @@
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
+                                <option value="5">5</option>
                             </select>
                         </div>
                     </form>
@@ -611,7 +628,7 @@
 
     <div class="row" id="row_bot" style="border-bottom: 1px solid #d8d8d8;"><!--warning-->
 
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <form id="device_form">
                 <div class="section-select" id="bot_0">
                 <div class="ss-title">裝置類型(device)</div>
@@ -673,17 +690,19 @@
             </form>
         </div>
 
-        <div class="col-sm-2 text-left">
+        <div class="col-sm-4 text-left">
             <div class="section-select" id="bot_2">
                 <div class="ss-title">開發人員進階資訊</div>
                 <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(2,this)">API參數格式
                     <span class="plusplus glyphicon glyphicon-plus" style="float: right;"></span>
                     <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
+                    <span class="glyphicon glyphicon-search" data-target="#hint-03" style="float: right; cursor: pointer; margin-right: 5px;"></span>
                 </div>
                 <textarea id="api_ele" class="t2" style="display: none; border-color: #189dbf;"></textarea>
                 <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(1,this)">API回應結果
                     <span class="plusplus glyphicon glyphicon-plus" style="float: right;"></span>
                     <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
+                    <span class="glyphicon glyphicon-search" data-target="#hint-04" style="float:right; cursor: pointer; margin-right: 5px;"></span>
                 </div>
                 <textarea id="recomd_result" class="t2" style="display: none; border-color: #189dbf;">HERE is for printing recomd's result</textarea>
             </div>
@@ -708,11 +727,16 @@
             event.stopPropagation();
             var left = event.pageX,
                 top = event.pageY,
-                scrollTop = $(window).scrollTop();
-            target = $(this).attr('data-target');
-            target = $(target);
-            $('.item-hint').css({"z-index":2});
-            target.show(200).css({'left':left + 30,'top':top - scrollTop - 300,'z-index':3});
+                scrollTop = $(window).scrollTop(),
+                targetName = $(this).attr('data-target'),
+                target = $(targetName);
+            if (targetName.indexOf('03')>=0 || targetName.indexOf('04')>=0){
+                $('.item-hint').css({"z-index":2});
+                target.show(200).css({'left':left - 100,'top':top - scrollTop - 300,'z-index':3});
+            }else {
+                $('.item-hint').css({"z-index":2});
+                target.show(200).css({'left':left + 100,'top':top - scrollTop - 300,'z-index':3});
+            }
         });
         $('.item-hint')
             .on('mousedown','.item-hint-header', function(){

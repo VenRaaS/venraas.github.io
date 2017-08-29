@@ -244,7 +244,7 @@ function codepen_click() {
             '    }\n' +
             '\n' +
             '    var ModelType1_ModelType = [&quot;I2I_Model&quot;];\n' +
-            '    var ModelType1_ModelAlg = [&quot;cooc_i2i&quot;, &quot;coocm&quot;, &quot;cooc_rank&quot;, &quot;cooc_98&quot;, &quot;cooc_98v2&quot;];\n' +
+            '    var ModelType1_ModelAlg = [&quot;cooc_i2i&quot;, &quot;coocm&quot;, &quot;cooc_rank&quot;, &quot;cooc_98&quot;, &quot;cooc_98v2&quot;, &quot;cooc_pn&quot;];\n' +
             '    var ModelType1_MsgContent = &quot;&#x770B;&#x6B64;&#x5546;&#x54C1;&#x4E5F;&#x770B;&quot;;\n' +
             '    var ModelType1_recScoreField = &quot;&lt;div class=&apos;p-50&apos;&gt;&#x95DC;&#x806F;&#x5EA6;&lt;/div&gt;&quot;;\n' +
             '\n' +
@@ -387,6 +387,7 @@ function codepen_click() {
             '                hint_style[2] = &apos;&lt;svg width=&quot;30&quot; height=&quot;30&quot;&gt;&lt;circle cx=&quot;20&quot; cy=&quot;10&quot; r=&quot;10&quot; fill=&quot;&apos; + hint_color + &apos;&quot; fill-opacity=&quot;&apos; + hint_opacity + &apos;&quot;&gt;&lt;/circle&gt;&lt;text x=&quot;18&quot; y=&quot;16&quot; fill=&quot;&apos; + hint_text_color + &apos;&quot; style=&quot;font-size: 16px;font-weight: normal;&quot;&gt;i&lt;/text&gt;&lt;/svg&gt;&apos;;\n' +
             '                hint_style[3] = &apos;&lt;svg width=&quot;35&quot; height=&quot;35&quot;&gt;&lt;polygon points=&quot;0,0 35,0 35,35&quot; fill=&quot;&apos; + hint_color + &apos;&quot; fill-opacity=&quot;&apos; + hint_opacity + &apos;&quot;&gt;&lt;/polygon&gt;&lt;text x=&quot;13&quot; y=&quot;12&quot; fill=&quot;&apos; + hint_text_color + &apos;&quot; style=&quot;font-size: 8px;&quot;&gt;INFO&lt;/text&gt;&lt;/svg&gt;&apos;;\n' +
             '                hint_style[4] = &apos;&lt;svg width=&quot;35&quot; height=&quot;35&quot;&gt;&lt;polygon points=&quot;0,0 35,0 35,35&quot; fill=&quot;&apos; + hint_color + &apos;&quot; fill-opacity=&quot;&apos; + hint_opacity + &apos;&quot;&gt;&lt;/polygon&gt;&lt;circle r=&quot;8.5&quot; cx=&quot;24&quot; cy=&quot;10&quot; fill=&quot;&apos; + hint_text_color + &apos;&quot; fill-opacity=&quot;0.8&quot;&gt;&lt;/circle&gt;&lt;text x=&quot;17&quot; y=&quot;12&quot; fill=&quot;&apos; + hint_color + &apos;&quot; style=&quot;font-size: 6px;&quot;&gt;INFO&lt;/text&gt;&lt;/svg&gt;&apos;;\n' +
+            '                hint_style[5] = &apos;&lt;svg width=&quot;35&quot; height=&quot;35&quot;&gt;&lt;polygon points=&quot;0,0 35,0 35,35&quot; fill=&quot;&apos; + hint_color + &apos;&quot; fill-opacity=&quot;&apos; + hint_opacity + &apos;&quot;&gt;&lt;/polygon&gt;&lt;circle r=&quot;8&quot; cx=&quot;24&quot; cy=&quot;10&quot; fill=&quot;none&quot; stroke-opacity=&quot;&apos;+hint_opacity+&apos;&quot; stroke=&quot;&apos;+hint_text_color+&apos;&quot;&gt;&lt;/circle&gt;&lt;text x=&quot;22&quot; y=&quot;14&quot; fill=&quot;&apos; + hint_text_color + &apos;&quot; style=&quot;font-size: 12px; font-weight:normal;&quot; fill-opacity=&quot;&apos;+hint_opacity+&apos;&quot;&gt;i&lt;/text&gt;&lt;/svg&gt;&apos;;\n' +
             '\n' +
             '                temp_img.attr(&apos;title&apos;,temp_title);\n' +
             '                temp_span.attr(&apos;title&apos;,temp_title);\n' +
@@ -403,31 +404,29 @@ function codepen_click() {
             '            })\n' +
             '        }\n' +
             '    }\n' +
+            '   function show_hint(obj , b) {\n' +
+            '    var this_info = $(obj),\n' +
+            '        this_slide = this_info.parent(&apos;.slick-slide&apos;),\n' +
+            '        hint = $(&apos;.info-hint&apos;),\n' +
+            '        coord = this_slide.offset(),\n' +
+            '        a_w = this_info.parent(&apos;.slick-slide&apos;).width(),\n' +
+            '        setbot = $(window).height() - coord.top,\n' +
+            '        hint_tri = hint.find(&apos;#hint-triangle&apos;),\n' +
+            '        right_amount;\n' +
             '\n' +
-            '    function show_hint(obj , b) {\n' +
-            '        var this_info = $(obj),\n' +
-            '            this_slide = this_info.parent(&apos;.slick-slide&apos;),\n' +
-            '            hint = $(&apos;.info-hint&apos;),\n' +
-            '            coord = this_slide.offset(),\n' +
-            '            a_w = this_info.parent(&apos;.slick-slide&apos;).width(),\n' +
-            '            setbot = $(window).height() - coord.top,\n' +
-            '            hint_tri = hint.find(&apos;#hint-triangle&apos;),\n' +
-            '            right_amount;\n' +
+            '    a_w = parseInt(a_w);\n' +
             '\n' +
-            '        a_w = parseInt(a_w);\n' +
-            '\n' +
-            '        var idx = this_info.parent().attr(&quot;hintIndex&quot;);\n' +
-            '        if(b) {\n' +
-            '            $(&quot;#hint_text&quot;).html(hintText[idx]);\n' +
-            '            right_amount = (parseInt(hint.width()) + 18 - a_w)/2;\n' +
-            '            hint.removeClass(&apos;display-none&apos;).css({&apos;top&apos;:&apos;&apos; , &apos;bottom&apos;: setbot + 15 , &apos;left&apos;: coord.left - right_amount });\n' +
-            '            hint_tri.css({&apos;right&apos;: right_amount - 5});\n' +
-            '        }\n' +
-            '        else {\n' +
-            '            hint.addClass(&apos;display-none&apos;);\n' +
-            '        }\n' +
+            '    var idx = this_info.parent().attr(&quot;hintIndex&quot;);\n' +
+            '    if(b) {\n' +
+            '        $(&quot;#hint_text&quot;).html(hintText[idx]);\n' +
+            '        right_amount = (parseInt(hint.width()) + 18 - a_w)/2;\n' +
+            '        hint.removeClass(&apos;display-none&apos;).css({&apos;min-width&apos;: a_w + 20 + &apos;px&apos; ,&apos;top&apos;:&apos;&apos; , &apos;bottom&apos;: setbot + 15 , &apos;left&apos;: coord.left - right_amount });\n' +
+            '        hint_tri.css({&apos;right&apos;: right_amount - 5});\n' +
             '    }\n' +
-            '\n' +
+            '    else {\n' +
+            '        hint.addClass(&apos;display-none&apos;);\n' +
+            '    }\n' +
+            '}\n' +
             '    function hint_control() {\n' +
             '\n' +
             '            $(&apos;.info-hint-demo&apos;).css({&apos;background-color&apos;:hint_color,&apos;color&apos;:hint_text_color,&apos;opacity&apos;:hint_opacity});\n' +
@@ -608,6 +607,7 @@ function print_rec(jsonStr) {
     console.log("print_rec");
     var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
     document.getElementById("recomd_result").innerHTML = pretty;
+    document.getElementById("recomd_result_pop").innerHTML = pretty;
 }
 
 function print_api() {
@@ -633,7 +633,7 @@ function print_api() {
     contain_text_entities += '\n}';
 
     var contain_text = $('<div/>').html(contain_text_entities).text();
-    $('#api_ele').text(contain_text);
+    $('#api_ele , #api_ele_pop').text(contain_text);
 }
 
 var rowItems;
@@ -741,7 +741,7 @@ function percentFormat(str, fn) {
 }
 
 var ModelType1_ModelType = ["I2I_Model"];
-var ModelType1_ModelAlg = ["cooc_i2i", "coocm", "cooc_rank", "cooc_98", "cooc_98v2"];
+var ModelType1_ModelAlg = ["cooc_i2i", "coocm", "cooc_rank", "cooc_98", "cooc_98v2", "cooc_pn"];
 var ModelType1_MsgContent = "看此商品也看";
 var ModelType1_recScoreField = "<div class='p-50'>關聯度</div>";
 
@@ -952,6 +952,7 @@ function img_hint(){
                 hint_style[2] = '<svg width="30" height="30"><circle cx="20" cy="10" r="10" fill="' + hint_color + '" fill-opacity="' + hint_opacity + '"></circle><text x="18" y="16" fill="' + hint_text_color + '" style="font-size: 16px;font-weight: normal;">i</text></svg>';
                 hint_style[3] = '<svg width="35" height="35"><polygon points="0,0 35,0 35,35" fill="' + hint_color + '" fill-opacity="' + hint_opacity + '"></polygon><text x="13" y="12" fill="' + hint_text_color + '" style="font-size: 8px;">INFO</text></svg>';
                 hint_style[4] = '<svg width="35" height="35"><polygon points="0,0 35,0 35,35" fill="' + hint_color + '" fill-opacity="' + hint_opacity + '"></polygon><circle r="8.5" cx="24" cy="10" fill="' + hint_text_color + '" fill-opacity="0.8"></circle><text x="17" y="12" fill="' + hint_color + '" style="font-size: 6px;">INFO</text></svg>';
+                hint_style[5] = '<svg width="35" height="35"><polygon points="0,0 35,0 35,35" fill="' + hint_color + '" fill-opacity="' + hint_opacity + '"></polygon><circle r="8" cx="24" cy="10" fill="none" stroke-opacity="'+hint_opacity+'" stroke="'+hint_text_color+'"></circle><text x="22" y="14" fill="' + hint_text_color + '" style="font-size: 12px; font-weight:normal;" fill-opacity="'+hint_opacity+'">i</text></svg>';
 
             temp_img.attr('title',temp_title);
             temp_span.attr('title',temp_title);
@@ -985,7 +986,7 @@ function show_hint(obj , b) {
     if(b) {
         $("#hint_text").html(hintText[idx]);
         right_amount = (parseInt(hint.width()) + 18 - a_w)/2;
-        hint.removeClass('display-none').css({'top':'' , 'bottom': setbot + 15 , 'left': coord.left - right_amount });
+        hint.removeClass('display-none').css({'min-width': a_w + 20 + 'px' ,'top':'' , 'bottom': setbot + 15 , 'left': coord.left - right_amount });
         hint_tri.css({'right': right_amount - 5});
     }
     else {
@@ -1001,6 +1002,6 @@ function hint_control() {
 
         $('.info-hint-demo').css({'background-color':hint_color,'color':hint_text_color,'opacity':hint_opacity});
         $('.info-hint').css({'background-color':hint_color,'color':hint_text_color,'opacity':hint_opacity});
-        $('#hint-triangle').css({'color':hint_color});
+        $('#hint-triangle , #hint-triangle-demo').css({'color':hint_color});
     }
 }
