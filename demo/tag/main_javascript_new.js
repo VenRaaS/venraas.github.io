@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  * Created by surgeStudio on 17/5/18.
  */
 function advenced_func(a){
@@ -14,7 +14,7 @@ function advenced_func(a){
         $('#right-tab-1').removeClass('btn-primary').addClass('btn-default');
         $('#recomd_result').hide();
         $('#api_ele').show();
-        $('#advenced-option-title').text("API °Ñ¼Æ®æ¦¡");
+        $('#advenced-option-title').text("API åƒæ•¸æ ¼å¼");
     }
 }
 
@@ -74,9 +74,9 @@ function codepen_click() {
         hint_opacity = $('#color-opacity').val(),
         hint_style_choice = $('#hint-style').val();
 
-    //-------------------2017/06/21-------------------------¡õ¡õ¡õ¡õ¡õ
-    var codepen_title = '±ÀÂË²M³æ',
-        codepen_description = '±ÀÂË²M³æ§e²{µ²ªG',
+    //-------------------2017/06/21-------------------------â†“â†“â†“â†“â†“
+    var codepen_title = 'æ¨è–¦æ¸…å–®',
+        codepen_description = 'æ¨è–¦æ¸…å–®å‘ˆç¾çµæœ',
         codepen_html_entities = '&lt;link href=&quot;https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot;&gt;\n' +
             '    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot;&gt;\n' +
             '    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css&quot;&gt;\n' +
@@ -505,7 +505,7 @@ function codepen_click() {
             "css_external": "",
             "js_external": ""
         })
-        //-------------------2017/06/21-------------------------¡ô¡ô¡ô¡ô¡ô
+        //-------------------2017/06/21-------------------------â†‘â†‘â†‘â†‘â†‘
     });
 
     form.append(field).submit();
@@ -738,6 +738,7 @@ var result;
 
 function recomdCallback(jsonStr) {
     print_rec(jsonStr);
+    console.log(jsonStr);
     print_api();
     var tmp_result = JSON.parse(jsonStr);
     if (tmp_result != null) {
@@ -787,10 +788,10 @@ function process_slick(result, div_class, loop, rowItems, showItems, scrollItems
     $("." + div_class).slick({
         infinite: Boolean(loop),
         arrows: true,
-        //-------------------2017/06/21-------------------------¡õ¡õ¡õ¡õ¡õ
+        //-------------------2017/06/21-------------------------â†“â†“â†“â†“â†“
         prevArrow: '<div class="switch-arrow-left"><span class="glyphicon glyphicon-menu-left" style="top: 50%;font-size: 36px; transform: translate(0, -50%); color:' + btn_color + ';"></span></div>',
         nextArrow: '<div class="switch-arrow-right"><span class="glyphicon glyphicon-menu-right" style="top: 50%;font-size: 36px; transform: translate(-4px, -50%); color:' + btn_color + ';"></span></div>',
-        //-------------------2017/06/21-------------------------¡ô¡ô¡ô¡ô¡ô
+        //-------------------2017/06/21-------------------------â†‘â†‘â†‘â†‘â†‘
         slidesPerRow: Number(rowItems),
         slidesToShow: Number(showItems),
         slidesToScroll: Number(scrollItems)
@@ -808,7 +809,7 @@ function percentFormat(str, fn) {
     var num = 0;
 
     if (typeof str == "string") {
-        //¤£¬O¼Æ¦r´N¶Ç¦^­ì¨Óªº
+        //ä¸æ˜¯æ•¸å­—å°±å‚³å›åŸä¾†çš„
         if (isNaN(str)) {
             return str;
         }
@@ -836,32 +837,32 @@ function percentFormat(str, fn) {
 
 var ModelType1_ModelType = ["I2I_Model"];
 var ModelType1_ModelAlg = ["cooc_i2i", "coocm", "cooc_rank", "cooc_98", "cooc_98v2"];
-var ModelType1_MsgContent = "¬İ¦¹°Ó«~¤]¬İ";
-var ModelType1_recScoreField = "<div class='p-50'>ÃöÁp«×</div>";
+var ModelType1_MsgContent = "çœ‹æ­¤å•†å“ä¹Ÿçœ‹";
+var ModelType1_recScoreField = "<div class='p-50'>é—œè¯åº¦</div>";
 
 var ModelType2_ModelType = ["I2I_Model"];
 var ModelType2_ModelAlg = ["content_i2i", "content_rank", "content_tp"];
-var ModelType2_MsgContent = "ªñ¦ü°Ó«~";
-var ModelType2_recScoreField = "<div class='p-50'>¬Û¦ü«×</div>";
+var ModelType2_MsgContent = "è¿‘ä¼¼å•†å“";
+var ModelType2_recScoreField = "<div class='p-50'>ç›¸ä¼¼åº¦</div>";
 
 var ModelType3_ModelType = ["C2I_Model", "CP2I_Model"];
 var ModelType3_ModelAlg = ["tp", "tpm"];
-var ModelType3_MsgContent = "¥»ÃşHOT";
-var ModelType3_recScoreField = "<div class='p-50'>¼öªù«×</div>";
-var ModelType3_recScoreField2 = "<div class='p-50'>ªñ30¤é¾P¶q</div>";
+var ModelType3_MsgContent = "æœ¬é¡HOT";
+var ModelType3_recScoreField = "<div class='p-50'>ç†±é–€åº¦</div>";
+var ModelType3_recScoreField2 = "<div class='p-50'>è¿‘30æ—¥éŠ·é‡</div>";
 
 var ModelType4_ModelType = ["GlobalTP_Major", "GlobalTP_Minor"];
 var ModelType4_ModelAlg = ["tp"];
-var ModelType4_MsgContent = "¥ş¯¸HOT";
-var ModelType4_recScoreField = "<div class='p-50'>¼öªù«×</div>";
-var ModelType4_recScoreField2 = "<div class='p-50'>ªñ30¤é¾P¶q</div>";
+var ModelType4_MsgContent = "å…¨ç«™HOT";
+var ModelType4_recScoreField = "<div class='p-50'>ç†±é–€åº¦</div>";
+var ModelType4_recScoreField2 = "<div class='p-50'>è¿‘30æ—¥éŠ·é‡</div>";
 
 var ModelType5_ModelType = ["CS_ITEM"];
 var ModelType5_ModelAlg = [""];
-var ModelType5_MsgContent = "±z³Ìªñ¬İ¹L";
+var ModelType5_MsgContent = "æ‚¨æœ€è¿‘çœ‹é";
 
-var ModelType6_MsgContent = "¯S§O±ÀÂË";
-var ModelType6_recScoreField = "<div class='p-50'>±ÀÂË«×</div>";
+var ModelType6_MsgContent = "ç‰¹åˆ¥æ¨è–¦";
+var ModelType6_recScoreField = "<div class='p-50'>æ¨è–¦åº¦</div>";
 
 function process_hintText(ref_item_list, sales) {
     if (ref_item_list == null) {
@@ -880,7 +881,7 @@ function process_hintText(ref_item_list, sales) {
                         if (score <= 1) {
                             score = percentFormat(score, "%2") + "%";
                         }
-                        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + ModelType1_MsgContent + "</div><br>" + ModelType1_recScoreField + score;
+                        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + ModelType1_MsgContent + "</div><br>" + ModelType1_recScoreField + score;
                     }
                 }
             }
@@ -895,7 +896,7 @@ function process_hintText(ref_item_list, sales) {
                         if (score <= 1) {
                             score = percentFormat(score, "%2") + "%";
                         }
-                        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + ModelType2_MsgContent + "</div><br>" + ModelType2_recScoreField + score;
+                        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + ModelType2_MsgContent + "</div><br>" + ModelType2_recScoreField + score;
                     }
                 }
             }
@@ -912,9 +913,9 @@ function process_hintText(ref_item_list, sales) {
                         }
                         var salesStr = "";
                         if (sales >= 50) {
-                            salesStr = "<br>" + ModelType3_recScoreField2 + sales + "¥ó";
+                            salesStr = "<br>" + ModelType3_recScoreField2 + sales + "ä»¶";
                         }
-                        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + ModelType3_MsgContent + "</div><br>" + ModelType3_recScoreField + score + salesStr;
+                        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + ModelType3_MsgContent + "</div><br>" + ModelType3_recScoreField + score + salesStr;
                     }
                 }
             }
@@ -931,9 +932,9 @@ function process_hintText(ref_item_list, sales) {
                         }
                         var salseStr = "";
                         if (sales >= 50) {
-                            salesStr = "<br>" + ModelType4_recScoreField2 + sales + "¥ó";
+                            salesStr = "<br>" + ModelType4_recScoreField2 + sales + "ä»¶";
                         }
-                        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + ModelType4_MsgContent + "</div><br>" + ModelType4_recScoreField + score + salesStr;
+                        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + ModelType4_MsgContent + "</div><br>" + ModelType4_recScoreField + score + salesStr;
                     }
                 }
             }
@@ -944,7 +945,7 @@ function process_hintText(ref_item_list, sales) {
             if (ref_item_list[i].model_type == ModelType5_ModelType[j]) {
                 for (var k=0; k<ModelType5_ModelAlg.length; k++) {
                     if (ref_item_list[i].model_alg == ModelType5_ModelAlg[k]) {
-                        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + ModelType5_MsgContent + "</div><br>";
+                        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + ModelType5_MsgContent + "</div><br>";
                     }
                 }
             }
@@ -955,7 +956,7 @@ function process_hintText(ref_item_list, sales) {
     if (score <= 1) {
         score = percentFormat(score, "%2") + "%";
     }
-    return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + ModelType6_MsgContent + "</div><br>" + ModelType6_recScoreField + score;
+    return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + ModelType6_MsgContent + "</div><br>" + ModelType6_recScoreField + score;
 }
 
 function process_item(addr, img, name, price, i) {
@@ -995,7 +996,7 @@ function getGoodsInfo() {
     console.log("\tgid=" + gid);
 
     if (gid == '') {
-        $('#hint-02 .item-hint-container').html('Oops...<br>¦¹°Ó«~½s¸¹µL¹ïÀ³¤§°Ó«~');
+        $('#hint-02 .item-hint-container').html('Oops...<br>æ­¤å•†å“ç·¨è™Ÿç„¡å°æ‡‰ä¹‹å•†å“');
         return;
     }
 
@@ -1121,3 +1122,4 @@ function hint_control() {
         $('#hint-triangle , .hint-triangle , #hint-triangle-demo').css({'color':hint_color});
     }
 }
+v
