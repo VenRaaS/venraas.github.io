@@ -1023,7 +1023,7 @@ function getGoodsInfo() {
             $('#hint-02 .item-hint-container').html(html);
 
             html = '<div style="margin: 0 10px 10px 10px;">';
-            html += '<a><img src="' + ret.goods_img_url + '" style="width: 100%;"></a><div><a class="href-a" target="_blank" href="' + ret.goods_page_url + '"><span style="margin: 5px 0;font-size: ' + title_size + 'px;height: ' + parseInt(title_size * 3) + 'px;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:' + title_color +';">' + ret.goods_name + '</span></div><div style="font-size: ' + price_size + 'px;font-weight: 900;color:' + price_color + ';text-align:center;"><span style="font-weight: normal;font-size: ' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</a></div></div>';
+            html += '<a><img src="' + ret.goods_img_url + '" style="width: 100%;"></a><div><a class="href-a" target="_blank" href="' + ret.goods_page_url + '"><span style="margin: 5px 0;font-size: ' + title_size + 'px;height: ' + parseInt(title_size * 3) + 'px;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:' + title_color +';" title="' +  ret.goods_name + '">' + ret.goods_name + '</span></div><div style="font-size: ' + price_size + 'px;font-weight: 900;color:' + price_color + ';text-align:center;"><span style="font-weight: normal;font-size: ' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</a></div></div>';
             $('#now-item').html(html);
         },
         error: function(xhr, ajaxOptions, thrownError) {
