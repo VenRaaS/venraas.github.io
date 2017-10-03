@@ -1122,4 +1122,3 @@ function hint_control() {
         $('#hint-triangle , .hint-triangle , #hint-triangle-demo').css({'color':hint_color});
     }
 }
-v

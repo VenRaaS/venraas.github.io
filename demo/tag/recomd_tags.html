@@ -493,7 +493,9 @@
             width: 200px;
         }
 
-        /*2017/08/31*/
+        #now-item span {
+          height: auto !important;
+        }
     </style>
 
 </head>
@@ -974,11 +976,13 @@
 
     <!-- try it run timer -->
     <script type="text/javascript">
-      window.onload = function(){
-        setTimeout(function(){
-          try_it(true, true);
-        },50);
-      };
+        $('.tags-area').overscroll();
+        window.onload = function(){
+          setTimeout(function(){
+            try_it(true, true);
+            $('.tags-area div:eq(0), .tags-area div:eq(1)').remove();
+          }, 50);
+        };
     </script>
 </div>
 
