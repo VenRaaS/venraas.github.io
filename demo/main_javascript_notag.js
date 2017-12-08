@@ -45,19 +45,19 @@ function codepen_click() {
     var codepen_title = '推薦清單',
         codepen_description = '推薦清單呈現結果',
         codepen_html_entities = '' +
-            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/source/jquery-ui.min.css&quot;/&gt;\n' +
-            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/source/slick.css&quot;/&gt;\n' +
-            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/source/slick-theme.css&quot;/&gt;\n' +
-            '&lt;script src=&quot;https://venraas.github.io/demo/source/jquery.min.js&quot;&gt;&lt;/script&gt;\n' +
-            '&lt;script src=&quot;https://venraas.github.io/demo/source/jquery-ui.min.js&quot;&gt;&lt;/script&gt;\n' +
-            '&lt;script src=&quot;https://venraas.github.io/demo/source/jquery-migrate.min.js&quot;&gt;&lt;/script&gt;\n' +
-            '&lt;script src=&quot;https://venraas.github.io/demo/source/slick.min.js&quot;&gt;&lt;/script&gt;\n' +
-            '&lt;script src=&quot;https://venraas.github.io/demo/source/venraaspt.min.js&quot;&gt;&lt;/script&gt;\n' +
-            '&lt;script src=&quot;https://venraas.github.io/demo/source/clipboard.min.js&quot;&gt;&lt;/script&gt;\n' +
+            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/eagleeye/source/jquery-ui.min.css&quot;/&gt;\n' +
+            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/eagleeye/source/slick.css&quot;/&gt;\n' +
+            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/eagleeye/source/slick-theme.css&quot;/&gt;\n' +
+            '&lt;script src=&quot;https://venraas.github.io/demo/eagleeye/source/jquery.min.js&quot;&gt;&lt;/script&gt;\n' +
+            '&lt;script src=&quot;https://venraas.github.io/demo/eagleeye/source/jquery-ui.min.js&quot;&gt;&lt;/script&gt;\n' +
+            '&lt;script src=&quot;https://venraas.github.io/demo/eagleeye/source/jquery-migrate.min.js&quot;&gt;&lt;/script&gt;\n' +
+            '&lt;script src=&quot;https://venraas.github.io/demo/eagleeye/source/slick.min.js&quot;&gt;&lt;/script&gt;\n' +
+            '&lt;script src=&quot;https://venraas.github.io/demo/eagleeye/source/venraaspt.min.js&quot;&gt;&lt;/script&gt;\n' +
+            '&lt;script src=&quot;https://venraas.github.io/demo/eagleeye/source/clipboard.min.js&quot;&gt;&lt;/script&gt;\n' +
             '&lt;!--bootstrap--&gt;\n' +
-            '&lt;script src=&quot;https://venraas.github.io/demo/source/bootstrap/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;\n' +
-            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/source/bootstrap/css/bootstrap.min.css&quot;&gt;\n' +
-            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/source/bootstrap/css/bootstrap-theme.min.css&quot;/&gt;\n' +
+            '&lt;script src=&quot;https://venraas.github.io/demo/eagleeye/source/bootstrap/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;\n' +
+            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/eagleeye/source/bootstrap/css/bootstrap.min.css&quot;&gt;\n' +
+            '&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://venraas.github.io/demo/eagleeye/source/bootstrap/css/bootstrap-theme.min.css&quot;/&gt;\n' +
             '\n' +
             '&lt;div class=&quot;info-hint display-none&quot;&gt;\n' +
             '    &lt;div style=&quot;position: relative;&quot;&gt;\n' +
