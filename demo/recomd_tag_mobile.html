@@ -36,7 +36,7 @@
     <script src="jquery.dragsort-0.5.2.min.js"></script>
 
     <!--main js-->
-    <script src="main_javascript_tag_mobile.js"></script>
+    <script src="main_javascript_new.js"></script>
 
     <!--colorpicker-4-->
     <script src="source/jscolor-2.0.4/jscolor.min.js"></script>
@@ -87,6 +87,12 @@
             text-align: left;
             display: flex;
             z-index: 7;
+            transition: 1s;
+            transition-delay: .5s;
+        }
+
+        .header.off{
+          top: -10rem;
         }
 
         .logo-icon{
@@ -673,6 +679,20 @@
     </div>
 </div>
 
+<script type="text/javascript">
+var position = $(window).scrollTop();
+    $(function(){
+      $(window).scroll(function() {
+      var scroll = $(window).scrollTop();
+      if (scroll > position) {
+        $('.header').addClass('off');
+      } else {
+        $('.header').removeClass('off');
+      }
+      position = scroll;
+      })
+    })
+</script>
 <div class="header">
   <div style="width: 8rem; position: relative;"><div class="logo-icon" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" onclick="refresh_page()"></div></div>
   <div class="title-area"><span>打造專屬您的推薦清單</span></div>
@@ -711,13 +731,13 @@
 
 <br><br>
 
-<div class="w-100" id="waypointHide" style="height: 12rem;"></div>
+<div class="w-100" id="waypointHide" style="height: 5rem;"></div>
 
-<div class="whole-ad" style="width: 80%; display: inline-block; position: relative;">
+<div class="whole-ad" style="width: 90%; display: inline-block; position: relative;">
     <div style="position: relative; left: 0; width: 100%; top: 20px; height: 50px;  z-index:3;">
       <div style="color: white; background-color: gray; border-radius: 30px 30px 0 0; padding: 5px 15px; font-weight: bold; font-size: 5rem;">現在觀看商品</div>
     </div>
-    <div id="now-item" style="position: relative; margin: 3rem 0 2rem 0; border: gray solid 2rem; padding: 2rem;"></div>
+    <div id="now-item" style="position: relative; margin: 3rem 0 2rem 0; border: gray solid 2px; padding: 5rem 2rem 2rem 2rem;"></div>
     <div class="tags-area" style="display: none; height: 12rem; z-index: 5; padding: 20px; background-color: rgba(255,255,255,0.8); width: 100%; text-align: left; overflow-y: hidden !important; overflow-x: scroll; position: fixed; bottom: 0; left: 0;  white-space: nowrap;">
       <!-- <span class="glyphicon glyphicon-triangle-left scrollOff" id="TAL" style="color: #07637a; position: absolute; left: -30px; top: 3px; font-size: 30px; cursor: pointer; display: none;"></span>
       <span class="glyphicon glyphicon-triangle-right" id="TAR" style="color: #07637a; position: absolute; right: -30px; top: 3px; font-size: 30px; cursor: pointer; display: none;"></span> -->
@@ -730,7 +750,7 @@
     <div style="position: relative; left: 0; width: 100%; top: -2rem; height: 50px;  z-index:3;">
       <div style="color: white; background-color: #189DBF; border-radius: 30px 30px 0 0; padding: 5px 15px; font-weight: bold; font-size: 5rem;">推薦給您</div>
     </div>
-    <div id="waypointTarget" class="slider slick-demo row" style="margin: 0;">
+    <div id="waypointTarget" class="slider slick-demo row" style="margin: 0; border: 2px solid #189DBF; padding: 2rem;">
 
     </div>
 </div>
