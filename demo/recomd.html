@@ -141,14 +141,15 @@
             position: relative;
         }
 
+        /* 20171221 */
         .t1{
-            width: 100%;
-            height: 200px;
+            width: 25vw;
+            height: 250px;
         }
-
+        /* 20171221 */
         .t2{
-            width: 100%;
-            height: 150px;
+            width: 25vw;
+            height: 250px;
         }
 
         .sub-title{
@@ -690,19 +691,20 @@
             </form>
         </div>
 
+        <!-- 20171221 -->
         <div class="col-sm-4 text-left">
             <div class="section-select" id="bot_2">
                 <div class="ss-title">開發人員進階資訊</div>
-                <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(2,this)">API參數格式
+                <div class="api-pop-up" data-target="#hint-03" style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;">API參數格式
                     <span class="plusplus glyphicon glyphicon-plus" style="float: right; display: none;"></span>
                     <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
-                    <span class="glyphicon glyphicon-search" data-target="#hint-03" style="float: right; cursor: pointer; margin-right: 5px;"></span>
+                    <span class="glyphicon glyphicon-search" style="float: right; cursor: pointer; margin-right: 5px;"></span>
                 </div>
                 <textarea id="api_ele" class="t2" style="display: none; border-color: #189dbf;"></textarea>
-                <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(1,this)">API回應結果
+                <div class="api-pop-up" data-target="#hint-04" style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;">API回應結果
                     <span class="plusplus glyphicon glyphicon-plus" style="float: right; display: none;"></span>
                     <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
-                    <span class="glyphicon glyphicon-search" data-target="#hint-04" style="float:right; cursor: pointer; margin-right: 5px;"></span>
+                    <span class="glyphicon glyphicon-search" style="float:right; cursor: pointer; margin-right: 5px;"></span>
                 </div>
                 <textarea id="recomd_result" class="t2" style="display: none; border-color: #189dbf;">HERE is for printing recomd's result</textarea>
             </div>
@@ -723,16 +725,20 @@
     }
 
     $(function(){
-        $('.glyphicon-search').on('click',function(event){
+    //20171221
+        $('.api-pop-up').on('click',function(event){
             event.stopPropagation();
             var left = event.pageX,
                 top = event.pageY,
                 scrollTop = $(window).scrollTop(),
                 targetName = $(this).attr('data-target'),
                 target = $(targetName);
-            if (targetName.indexOf('03')>=0 || targetName.indexOf('04')>=0){
+            if (targetName.indexOf('03')>=0){
                 $('.item-hint').css({"z-index":2});
-                target.show(200).css({'left':left - 100,'top':top - scrollTop - 300,'z-index':3});
+                target.show(200).css({'left': '20vw','top': '20vw','z-index':3});
+            }else if(targetName.indexOf('04')>=0){
+                $('.item-hint').css({"z-index":2});
+                target.show(200).css({'left': '50vw','top': '20vw','z-index':3});
             }else {
                 $('.item-hint').css({"z-index":2});
                 target.show(200).css({'left':left + 100,'top':top - scrollTop - 300,'z-index':3});
