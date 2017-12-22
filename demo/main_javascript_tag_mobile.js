@@ -37,7 +37,7 @@ function filter_func(e) {
 
 function codepen_click() {
     var token = document.getElementById("token").value;
-    var rec_type = $('input[name="rec_type"]:checked').val();
+    var rec_type = $('input[name="setting-rec_type"]:checked').val();
     var rec_pos = $('input[name="rec_pos"]:checked').val();
     var uid = document.getElementById("uid").value;
     var gid = document.getElementById("gid").value;
@@ -700,7 +700,7 @@ function try_it(bGoodsKeywords, bGoodsInfo) {
     document.getElementById("recomd_result").innerHTML = "HERE is for printing recomd's result";
 
     var token = document.getElementById("token").value;
-    var rec_type = $('input[name="rec_type"]:checked').val();
+    var rec_type = $('input[name="setting-rec_type"]:checked').val();
     var rec_pos = $('input[name="rec_pos"]:checked').val();
     var uid = document.getElementById("uid").value;
     var gid = (document.getElementById("setting-gid").value) ? document.getElementById("setting-gid").value : GLOBAL_gid;
@@ -754,7 +754,7 @@ function print_rec(jsonStr) {
 function print_api() {
     console.log("print_api");
     var token = document.getElementById("token").value;
-    var rec_type = $('input[name="rec_type"]:checked').val();
+    var rec_type = $('input[name="setting-rec_type"]:checked').val();
     var topk = document.getElementById("topk").value;
     var uid = document.getElementById("uid").value;
     var rec_pos = $('input[name="rec_pos"]:checked').val();
@@ -1005,12 +1005,12 @@ function process_hintText(ref_item_list, sales) {
 function process_item(addr, img, name, price, i) {
     var title_color = $('#title-color').css('background-color'),
         price_color = $('#price-color').css('background-color'),
-        title_size = '3rem',
-        price_size = '6rem',
+        title_size = '2rem',
+        price_size = '4rem',
         price_sign_color = $(' #price-sign-color').css('background-color'),
-        price_sign_size = '3rem';
+        price_sign_size = '4rem';
 
-    var html = '<div class="itemSlide col-12" style="border: #189DBF solid 2rem; margin-bottom: -2rem; position: relative;" hintIndex="' + i + '"><div style="padding: 3rem;">';
+    var html = '<div class="itemSlide col-12" style="margin-bottom: -2rem; position: relative;" hintIndex="' + i + '"><div style="padding: 2rem;">';
     html += '<div class="slick-num'+ i +'" onclick="dev_func(this)" style="width: 100%; text-align: center;"><img src="' + img + '" style="width: 100%;" ></div>'
     + '<div><a class="href-a" target="_blank" href="' + addr + '"><span style="height: 12rem; margin: 5px 0;font-size: ' + title_size + ';height: ' + parseInt(title_size * 3) + ';display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:' + title_color +';">' + name + '</span></div><div style="font-size: ' + price_size + ';font-weight: 900;color:' + price_color + ';text-align:center;"><span style="font-weight: normal;font-size: ' + price_sign_size + '; color:' + price_sign_color + ';">$</span><span style="font-size: ' + price_size + '; color: ' + price_color + '">' + price + '</span></a></div></div></div>';
 
@@ -1294,6 +1294,6 @@ function VH(){
       if(horizontal){
         $('.itemSlide').attr('class','itemSlide col-xs-6');
       }else {
-        $('.itemSlide').attr('class','itemSlide col-xs-12');
+        $('.itemSlide').attr('class','itemSlide col-xs-6');
       }
 }
