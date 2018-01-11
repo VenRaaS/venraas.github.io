@@ -517,6 +517,14 @@ $(function(){
 });
 
 function try_it() {
+    //save uid git to cookie
+    if (document.getElementById("categ_code") != null) {
+        document.cookie = "uid=" + document.getElementById("categ_code").value;
+    }
+    if (document.getElementById("gid") != null) {
+        document.cookie = "gid=" + document.getElementById("gid").value;
+    }
+
     setTimeout(show_code,500);
     //-- reset result
     document.getElementById("recomd_result").innerHTML = "HERE is for printing recomd's result";
