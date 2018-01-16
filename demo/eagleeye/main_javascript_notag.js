@@ -867,21 +867,34 @@ function img_hint(){
 }
 
 function show_hint(obj , b) {
-    var this_info = $(obj),
-        this_slide = this_info.parent('.slick-slide'),
-        hint = $('.info-hint'),
-        coord = this_slide.offset(),
-        a_w = this_info.parent('.slick-slide').width(),
-        setbot = $(window).height() - coord.top,
-        right_amount;
+    var this_info = $(obj);
+    //console.log("\n\nitem_info: left=" + this_info.offset().left + ", top=" + this_info.offset().top + ", width=" + this_info.width());
+    var this_slide = this_info.parent('.slick-slide');
+    var slide_left = parseInt(this_slide.offset().left);
+    var slide_top = parseInt(this_slide.offset().top);
+    var slide_width = parseInt(this_slide.width());
+    //console.log("slide: left=" + slide_left + ", top=" + slide_top + ", width=" + slide_width);
 
-    a_w = parseInt(a_w);
+    var hint = $('.info-hint');
+    hint.css({'min-width': slide_width + 20 + 'px'});
+    //console.log("info-hint: top=" + hint.offset().top + ", left=" + hint.offset().left);
+    //console.log("info-hint: width=" + hint.width() + ", height=" + hint.height());
 
     var idx = this_info.parent().attr("hintIndex");
     if(b) {
+        var setbot = $(window).height() - slide_top;
+        //console.log("window.height=" + $(window).height());
+        //console.log("setbot=" + setbot);
+
         $("#hint_text").html(hintText[idx]);
-        right_amount = (parseInt(hint.width()) + 18 - a_w)/2;
-        hint.removeClass('display-none').css({'min-width': a_w + 20 + 'px' ,'top':'' , 'bottom': setbot + 15 , 'left': coord.left - right_amount });
+
+        var right_amount = (parseInt(hint.width()) + 18 - slide_width)/2;
+        //console.log("right_amount=" + right_amount);
+
+        hint.removeClass('display-none').css({'top':'', 'bottom': setbot + 15, 'left': slide_left - right_amount });
+        var hint_tri = hint.find('#hint-triangle');
+        hint_tri.css({'right': right_amount - 5});
+        //console.log("hint-triangle: top=" + $('#hint-triangle').offset().top + ", left=" + $('#hint-triangle').offset().left);
     }
     else {
         hint.addClass('display-none');
