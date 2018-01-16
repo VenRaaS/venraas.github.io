@@ -873,7 +873,6 @@ function show_hint(obj , b) {
         coord = this_slide.offset(),
         a_w = this_info.parent('.slick-slide').width(),
         setbot = $(window).height() - coord.top,
-        hint_tri = hint.find('#hint-triangle'),
         right_amount;
 
     a_w = parseInt(a_w);
@@ -883,7 +882,6 @@ function show_hint(obj , b) {
         $("#hint_text").html(hintText[idx]);
         right_amount = (parseInt(hint.width()) + 18 - a_w)/2;
         hint.removeClass('display-none').css({'min-width': a_w + 20 + 'px' ,'top':'' , 'bottom': setbot + 15 , 'left': coord.left - right_amount });
-        hint_tri.css({'right': right_amount - 5});
     }
     else {
         hint.addClass('display-none');
