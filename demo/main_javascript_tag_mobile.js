@@ -1179,6 +1179,7 @@ function show_hint(obj , b) {
     }
     else {
         hint.addClass('display-none');
+    }
 }
 
 function hint_control() {
