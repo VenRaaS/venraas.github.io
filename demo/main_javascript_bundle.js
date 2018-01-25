@@ -799,6 +799,8 @@ function process_slick(result, div_class, loop, rowItems, showItems, scrollItems
     bSlick = false;
   }
 
+  document.getElementById('hint_text').innerHTML = hintText[0];
+	
   // [].forEach.call(document.querySelectorAll('.filter-btn'), function(el){el.style.cssText = 'color:' + btn_color + '; background-color: #ffffff; border-color:' + btn_color + ';'});
   // [].forEach.call(document.querySelectorAll('.filter-btn.act'), function(el){el.style.cssText = 'background-color:' + btn_color + '; color: #ffffff;'});
 
