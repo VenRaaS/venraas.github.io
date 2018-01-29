@@ -993,7 +993,7 @@ function show_hint(obj, b) {
     hint.classList.remove('display-none');
     hint.setAttribute("style", "bottom:" + (setbot + 15) + "px; left:" + (slide_left - right_amount) + ";");
 
-    var hint_tri = hint.find('#hint-triangle');
+    var hint_tri = document.getElementById("hint-triangle")
     hint_tri.setAttribute("style", "right:" + (right_amount - 5) + ";");
     console.log("hint-triangle: top=" + hint_tri.getBoundingClientRect().top + ", left=" + hint_tri.getBoundingClientRect().left);
   }
