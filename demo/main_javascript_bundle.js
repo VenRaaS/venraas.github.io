@@ -971,13 +971,13 @@ function show_hint(obj, b) {
   var this_slide = this_info.parentNode;
   var slide_left = parseInt(this_slide.getBoundingClientRect().left);
   var slide_top = parseInt(this_slide.getBoundingClientRect().top);
-  var slide_width = parseInt(this_slide.width());
+  var slide_width = parseInt(this_slide.style.width);
   console.log("slide: left=" + slide_left + ", top=" + slide_top + ", width=" + slide_width);
 
   var hint = document.getElementById("info-hint");
   hint.setAttribute("style", "min-width:" + (slide_width + 20) + "px;");
   console.log("info-hint: top=" + hint.getBoundingClientRect().top + ", left=" + hint.getBoundingClientRect().left);
-  console.log("info-hint: width=" + hint.width() + ", height=" + hint.height());
+  console.log("info-hint: width=" + hint.style.width + ", height=" + hint.style.heigt);
 
   var idx = this_slide.getAttribute("hintIndex");
   if (b) {
@@ -987,7 +987,7 @@ function show_hint(obj, b) {
 
     document.getElementById("hint_text").innerHTML = hintText[idx];
 
-    var right_amount = (parseInt(hint.width()) + 18 - slide_width) / 2;
+    var right_amount = (parseInt(hint.style.width) + 18 - slide_width) / 2;
     console.log("right_amount=" + right_amount);
 
     hint.removeClass('display-none').css({'top':'', 'bottom': setbot + 15, 'left': slide_left - right_amount });
