@@ -893,6 +893,9 @@ function show_hint(obj , b) {
         console.log("right_amount=" + right_amount);
 
         hint.removeClass('display-none').css({'top':'', 'bottom': setbot + 15, 'left': slide_left - right_amount });
+        console.log("info-hint: top=" + hint.offset().top + ", left=" + hint.offset().left);
+        console.log("info-hint: width=" + hint.width() + ", height=" + hint.height());
+
         var hint_tri = hint.find('#hint-triangle');
         hint_tri.css({'right': right_amount - 5});
         console.log("hint-triangle: top=" + $('#hint-triangle').offset().top + ", left=" + $('#hint-triangle').offset().left);
