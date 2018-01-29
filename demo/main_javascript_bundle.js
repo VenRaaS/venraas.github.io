@@ -975,9 +975,9 @@ function show_hint(obj, b) {
   console.log("slide: left=" + slide_left + ", top=" + slide_top + ", width=" + slide_width);
 
   var hint = document.getElementById("info-hint");
-  hint.setAttribute("style", "width:" + slide_width + "px;");
-  console.log("info-hint: top=" + hint.getBoundingClientRect().top + ", left=" + hint.getBoundingClientRect().left);
-  console.log("info-hint: width=" + hint.style.width + ", height=" + hint.style.heigt);
+  hint.setAttribute("style", "min-width:" + (slide_width + 20) + "px;");
+  console.log("info-hint: top=" + hint.offsetTop + ", left=" + hint.offsetLeft);
+  console.log("info-hint: width=" + hint.offsetWidth + ", height=" + hint.offsetHeigt);
 
   var idx = this_slide.getAttribute("hintIndex");
   if (b) {
@@ -987,7 +987,7 @@ function show_hint(obj, b) {
 
     document.getElementById("hint_text").innerHTML = hintText[idx];
 
-    var right_amount = (parseInt(hint.style.width) + 18 - slide_width) / 2;
+    var right_amount = (parseInt(hint.offsetWidth) + 18 - slide_width) / 2;
     console.log("right_amount=" + right_amount);
 
     hint.classList.remove('display-none');
@@ -995,7 +995,7 @@ function show_hint(obj, b) {
 
     var hint_tri = document.getElementById("hint-triangle")
     hint_tri.setAttribute("style", "right:" + (right_amount - 5) + ";");
-    console.log("hint-triangle: top=" + hint_tri.getBoundingClientRect().top + ", left=" + hint_tri.getBoundingClientRect().left);
+    console.log("hint-triangle: top=" + hint_tri.clientTop + ", left=" + hint_tri.offsetLeft);
   }
   else {
     hint.classList.add('display-none');
