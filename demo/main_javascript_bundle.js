@@ -991,7 +991,7 @@ function show_hint(obj, b) {
     console.log("right_amount=" + right_amount);
 
     hint.classList.remove('display-none');
-    hint.setAttribute("style", "bottom:" + (setbot + 15) + "px; left:" + (slide_left - right_amount) + ";");
+    hint.setAttribute("style", "bottom:" + (setbot + 15) + "px; left:" + (slide_left - right_amount) + "px;");
 
     var hint_tri = document.getElementById("hint-triangle")
     hint_tri.setAttribute("style", "right:" + (right_amount - 5) + ";");
