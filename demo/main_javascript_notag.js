@@ -45,7 +45,7 @@ function codepen_click() {
     var codepen_title = '推薦清單',
         codepen_description = '推薦清單呈現結果',
         codepen_html_entities = '&lt;div class=&quot;slider slick-demo&quot;&gt; &lt;/div&gt\n' +
-         '&#x3C;script src=&#x22;http://venraas.github.io/demo/main_javascript_bundle.js?123&#x22;&#x3E;&#x3C;/script&#x3E;',
+         '&#x3C;script src=&#x22;http://venraas.github.io/demo/main_javascript_bundle.js?201801291350&#x22;&#x3E;&#x3C;/script&#x3E;',
         codepen_html = $('<div/>').html(codepen_html_entities).text(),
         codepen_js_entities = 'window.onload = function(){try_it({\n'
         + '"token": "'+token+'",\n"rec_type":  "'+rec_type+'",\n"rec_pos": "'+rec_pos+'",\n"uid": "'+uid+'",\n"gid": "'+gid+'",\n"categ_code": "'+categ_code+'",\n"device": "'+device+'",\n"topk": "'+topk+'",\n'
