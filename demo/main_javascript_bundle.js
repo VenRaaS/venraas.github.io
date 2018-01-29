@@ -967,32 +967,27 @@ function img_hint() {
 }
 
 function show_hint(obj, b) {
-  var this_info = obj,
-    this_slide = this_info.parentNode,
-    hint = document.getElementById('info-hint'),
-    coord = this_slide.getBoundingClientRect(),
-    a_w = this_slide.style.width,
-    setbot,
-    hint_tri = document.getElementById('hint-triangle'),
-    right_amount;
+  var this_info = $(obj);
+  var this_slide = this_info.parent('.slick-slide');
+  var slide_left = parseInt(this_slide.offset().left);
+  var slide_top = parseInt(this_slide.offset().top);
+  var slide_width = parseInt(this_slide.width());
 
-    var height = window.innerHeight;
-  a_w = parseInt(a_w);
-  setbot = height - coord.top;
+  var hint = $('.info-hint');
+  hint.css({'min-width': slide_width + 20 + 'px'});
 
-  console.log(coord.left, coord.top, height, a_w);
-
-  var idx = this_slide.getAttribute("hintIndex");
+  var idx = this_info.parent().attr("hintIndex");
   if (b) {
-    document.getElementById('hint_text').innerHTML = hintText[idx];
-    hint.classList.remove('display-none');
-    var hint_width = hint.offsetWidth;
-    right_amount = (hint_width - a_w) / 2;
-    var tempCss =  tempCssHint + ' min-width: ' + (a_w + 20) + 'px; top: auto; bottom: ' + (setbot + 15) + 'px; left: ' + (coord.left - right_amount) + 'px;';
-    hint.setAttribute('style', tempCss);
-    hint_tri.setAttribute('style', 'right: ' + (right_amount - 12) + 'px');
-  } else {
-    hint.classList.add('display-none');
+    var setbot = $(window).height() - slide_top;
+
+    $("#hint_text").html(hintText[idx]);
+    var right_amount = (parseInt(hint.width()) + 18 - slide_width) / 2;
+    hint.removeClass('display-none').css({'top':'', 'bottom': setbot + 15, 'left': slide_left - right_amount });
+    var hint_tri = hint.find('#hint-triangle');
+    hint_tri.css({'right': right_amount - 5});
+  }
+  else {
+    hint.addClass('display-none');
   }
 }
 
