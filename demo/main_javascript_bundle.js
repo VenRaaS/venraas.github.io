@@ -992,7 +992,7 @@ function show_hint(obj, b) {
 
     document.getElementById("hint_text").innerHTML = hintText[idx];
 
-    var right_amount = (parseInt(hint.offsetWidth) - 80 - slide_width) / 2;
+    var right_amount = (parseInt(hint.offsetWidth) - 90 - slide_width) / 2;
     console.log("right_amount=" + right_amount);
 
     hint.setAttribute("style", "bottom:" + (setbot + 15) + "px; left:" + (slide_left - right_amount) + "px;");
