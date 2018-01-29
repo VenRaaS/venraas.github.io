@@ -975,7 +975,7 @@ function show_hint(obj, b) {
   console.log("slide: left=" + slide_left + ", top=" + slide_top + ", width=" + slide_width);
 
   var hint = document.getElementById("info-hint");
-  hint.setAttribute("style", "min-width:" + (slide_width + 20) + "px;");
+  hint.setAttribute("style", "width:" + slide_width + "px;");
   console.log("info-hint: top=" + hint.getBoundingClientRect().top + ", left=" + hint.getBoundingClientRect().left);
   console.log("info-hint: width=" + hint.style.width + ", height=" + hint.style.heigt);
 
