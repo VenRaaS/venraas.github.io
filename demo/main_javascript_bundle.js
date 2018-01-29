@@ -967,38 +967,40 @@ function img_hint() {
 }
 
 function show_hint(obj, b) {
-    var this_info = $(obj);
-    console.log("\n\nitem_info: left=" + this_info.offset().left + ", top=" + this_info.offset().top + ", width=" + this_info.width());
-    var this_slide = this_info.parent('.slick-slide');
-    var slide_left = parseInt(this_slide.offset().left);
-    var slide_top = parseInt(this_slide.offset().top);
-    var slide_width = parseInt(this_slide.width());
-    console.log("slide: left=" + slide_left + ", top=" + slide_top + ", width=" + slide_width);
+  var this_info = obj;
+  var this_slide = this_info.parentNode;
+  var slide_left = parseInt(this_slide.getBoundingClientRect().left);
+  var slide_top = parseInt(this_slide.getBoundingClientRect().top);
+  var slide_width = parseInt(this_slide.width());
+  console.log("slide: left=" + slide_left + ", top=" + slide_top + ", width=" + slide_width);
 
-    var hint = $('.info-hint');
-    hint.css({'min-width': slide_width + 20 + 'px'});
-    console.log("info-hint: top=" + hint.offset().top + ", left=" + hint.offset().left);
-    console.log("info-hint: width=" + hint.width() + ", height=" + hint.height());
+  var hint = document.getElementById("info-hint");
+  hint.setAttribute("style", "min-width:" + (slide_width + 20) + "px;");
+  console.log("info-hint: top=" + hint.getBoundingClientRect().top + ", left=" + hint.getBoundingClientRect().left);
+  console.log("info-hint: width=" + hint.width() + ", height=" + hint.height());
 
-    var idx = this_info.parent().attr("hintIndex");
-    if (b) {
-        var setbot = $(window).height() - slide_top;
-        console.log("window.height=" + $(window).height());
-        console.log("setbot=" + setbot);
+  var idx = this_slide.getAttribute("hintIndex");
+  if (b) {
+    var setbot = window.innerHeight - slide_top;
+    console.log("window.height=" + window.innerHeight);
+    console.log("setbot=" + setbot);
 
-        $("#hint_text").html(hintText[idx]);
+    document.getElementById("hint_text").innerHTML = hintText[idx];
 
-        var right_amount = (parseInt(hint.width()) + 18 - slide_width) / 2;
-        console.log("right_amount=" + right_amount);
+    var right_amount = (parseInt(hint.width()) + 18 - slide_width) / 2;
+    console.log("right_amount=" + right_amount);
 
-        hint.removeClass('display-none').css({'top':'', 'bottom': setbot + 15, 'left': slide_left - right_amount });
-        var hint_tri = hint.find('#hint-triangle');
-        hint_tri.css({'right': right_amount - 5});
-        console.log("hint-triangle: top=" + $('#hint-triangle').offset().top + ", left=" + $('#hint-triangle').offset().left);
-    }
-    else {
-        hint.addClass('display-none');
-    }}
+    hint.removeClass('display-none').css({'top':'', 'bottom': setbot + 15, 'left': slide_left - right_amount });
+    hint.classList.remove('display-none');
+    hint.setAttribute("style", "bottom:" + (setbot + 15) + "px; left:" + (slide_left - right_amount) + ";");
+
+    var hint_tri = hint.find('#hint-triangle');
+    hint_tri.setAttribute("style", "right:" + (right_amount - 5) + ";");
+    console.log("hint-triangle: top=" + hint_tri.getBoundingClientRect().top + ", left=" + hint_tri.getBoundingClientRect().left);
+  }
+  else {
+    hint.addClass('display-none');
+  }}
 
 function hint_control() {
   if (hint_control_check) {
