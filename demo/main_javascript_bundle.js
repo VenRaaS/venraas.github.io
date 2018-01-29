@@ -990,7 +990,6 @@ function show_hint(obj, b) {
     var right_amount = (parseInt(hint.style.width) + 18 - slide_width) / 2;
     console.log("right_amount=" + right_amount);
 
-    hint.removeClass('display-none').css({'top':'', 'bottom': setbot + 15, 'left': slide_left - right_amount });
     hint.classList.remove('display-none');
     hint.setAttribute("style", "bottom:" + (setbot + 15) + "px; left:" + (slide_left - right_amount) + ";");
 
@@ -999,7 +998,7 @@ function show_hint(obj, b) {
     console.log("hint-triangle: top=" + hint_tri.getBoundingClientRect().top + ", left=" + hint_tri.getBoundingClientRect().left);
   }
   else {
-    hint.addClass('display-none');
+    hint.classList.add('display-none');
   }}
 
 function hint_control() {
