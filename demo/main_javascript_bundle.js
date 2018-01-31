@@ -968,29 +968,40 @@ function img_hint() {
 }
 
 function show_hint(obj, b) {
-  var this_info = obj,
-    this_slide = this_info.parentNode,
-    hint = document.getElementById('info-hint'),
-    coord = this_slide.getBoundingClientRect(),
-    a_w = this_slide.clientWidth,
-    setbot,
-    hint_tri = document.getElementById('hint-triangle'),
-    right_amount;
+  var this_info = obj;
+  console.log("\n\nitem_info: left=" + this_info.getBoundingClientRect().left + ", top=" + this_info.getBoundingClientRect().top + ", width=" + this_info.getBoundingClientRect().width);
+  var this_slide = this_info.parentNode;
+  var slide_left = parseInt(this_slide.getBoundingClientRect().left);
+  var slide_top = parseInt(this_slide.getBoundingClientRect().top);
+  var slide_width = parseInt(this_slide.getBoundingClientRect().width);
+  console.log("slide: left=" + slide_left + ", top=" + slide_top + ", width=" + slide_width);
 
-    var height = window.innerHeight;
-    a_w = parseInt(a_w);
-    setbot = height - coord.top;
+  var hint = document.getElementById("info-hint");
+  hint.setAttribute("style", "min-width:" + (slide_width + 20) + "px;");
+  console.log("info-hint: top=" + hint.getBoundingClientRect().top + ", left=" + hint.getBoundingClientRect().left + ", width=" + hint.getBoundingClientRect().width);
 
   var idx = this_slide.getAttribute("hintIndex");
   if (b) {
-    document.getElementById('hint_text').innerHTML = hintText[idx];
     hint.classList.remove('display-none');
-    var hint_width = hint.offsetWidth;
-    right_amount = (hint_width - a_w) / 2;
-    var tempCss =  tempCssHint + ' min-width: ' + (a_w + 20) + 'px; top: auto; bottom: ' + (setbot + 15) + 'px; left: ' + (coord.left - right_amount) + 'px;';
-    hint.setAttribute('style', tempCss);
-    hint_tri.setAttribute('style', 'transform: translateX(' + (a_w / 2 - 30) + 'px);');
-  } else {
+  console.log("info-hint: top=" + hint.getBoundingClientRect().top + ", left=" + hint.getBoundingClientRect().left + ", width=" + hint.getBoundingClientRect().width);
+
+    var setbot = window.innerHeight - slide_top;
+    console.log("window.height=" + window.innerHeight);
+    console.log("setbot=" + setbot);
+
+    document.getElementById("hint_text").innerHTML = hintText[idx];
+
+    var right_amount = (parseInt(hint.getBoundingClientRect().width) - 80 - slide_width) / 2;
+    console.log("right_amount=" + right_amount);
+
+    hint.setAttribute("style", "bottom:" + (setbot + 15) + "px; left:" + (slide_left - right_amount) + "px;");
+  console.log("info-hint: top=" + hint.getBoundingClientRect().top + ", left=" + hint.getBoundingClientRect().left + ", width=" + hint.getBoundingClientRect().width);
+
+    var hint_tri = document.getElementById("hint-triangle")
+    hint_tri.setAttribute("style", "right:" + (right_amount - 5) + ";");
+    console.log("hint-triangle: top=" + hint_tri.getBoundingClientRect().top + ", left=" + hint_tri.getBoundingClientRect().left);
+  }
+  else {
     hint.classList.add('display-none');
   }
 }
