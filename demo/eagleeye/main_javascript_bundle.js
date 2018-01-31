@@ -764,7 +764,6 @@ function try_it(inputs) {
 
   //-- ajax call for recommendation
   venraastool.recomd(recomdParam, recomdCallback);
-	helper();
 }
 
 function recomdCallback(jsonStr) {
@@ -967,24 +966,25 @@ function show_hint(obj, b) {
     coord = this_slide.offset(),
     a_w = this_info.parent('.slick-slide').outerWidth(),
     setbot = $(window).height() - coord.top,
-    hint_tri = hint.find('#hint-triangle'),
-    right_amount = 20;
+    hint_tri = hint.find('#hint-triangle');
 
   a_w = parseInt(a_w);
 
   var idx = this_info.parent().attr("hintIndex");
   if (b) {
-		hint.removeClass('display-none');
-    $("#hint_text").html(hintText[idx]);
-    right_amount = (parseInt($('#info-hint').outerWidth()) + 18 - a_w) / 2;
+		$("#hint_text").html(hintText[idx]);
+		hint.removeClass('display-none').css({
+			'min-width': a_w + 20 + 'px'
+		});
+    var right_amount = (parseInt($('#info-hint').width()) + 18 - a_w) / 2;
+		console.log($('#info-hint').width());
     hint.css({
-      'min-width': a_w + 20 + 'px',
       'top': '',
       'bottom': setbot + 15,
       'left': coord.left - right_amount
     });
     hint_tri.css({
-      'right': right_amount - 28
+      'right': right_amount - 10
     });
   } else {
     hint.addClass('display-none');
@@ -1008,13 +1008,3 @@ function hint_control() {
     });
   }
 }
-
-function helper(){
-	setTimeout(function(){
-		$('.item-info:eq(0)').trigger('mouseenter');
-	},200);
-}
-
-$(window).resize(function() {
-	helper();
-});
