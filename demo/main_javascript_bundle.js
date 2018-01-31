@@ -984,6 +984,7 @@ function show_hint(obj, b) {
   var idx = this_slide.getAttribute("hintIndex");
   if (b) {
     document.getElementById('hint_text').innerHTML = hintText[idx];
+    hint.style.minWidth =  (a_w + 20) + 'px';
     hint.classList.remove('display-none');
     var hint_width = hint.offsetWidth;
     right_amount = (hint_width - a_w) / 2;
@@ -992,7 +993,8 @@ function show_hint(obj, b) {
     hint_tri.setAttribute('style', 'transform: translateX(' + (a_w / 2 - 30) + 'px);');
   } else {
     hint.classList.add('display-none');
-  }}
+  }
+}
 
 function hint_control() {
   if (hint_control_check) {
