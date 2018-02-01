@@ -1,6 +1,3 @@
-/**
- * Created by surgeStudio on 17/5/18.
- */
 function filter_func(e) {
     setTimeout(try_it, 1000);
     if($(e).attr('class').indexOf('act') > 0){
@@ -13,6 +10,64 @@ function filter_func(e) {
         var heart = $(e).find('.glyphicon-heart-empty');
         heart.removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
     }
+}
+
+function codepen_click_quick() {
+    var token = document.getElementById("token").value;
+    var rec_type = $('input[name="rec_type"]:checked').val();
+    var rec_pos = $('input[name="rec_pos"]:checked').val();
+    var uid = document.getElementById("uid").value;
+    var gid = document.getElementById("gid").value;
+    var categ_code = document.getElementById("categ_code").value;
+    var device =$('input[name="device"]:checked').val();
+    var topk = document.getElementById("topk").value;
+    var showItems = document.getElementById("showItems").value;
+    var scrollItems = document.getElementById("scrollItems").value;
+    var loop = document.getElementById("loop").checked;
+
+    var btn_color =  $('#btn-color').css('background-color'),
+        bg_color = $('#bg-color').css('background-color'),
+        title_color = $('#title-color').css('background-color'),
+        price_color = $('#price-color').css('background-color'),
+        title_size = $('#title-size').val(),
+        price_size = $('#price-size').val(),
+        price_sign_color = $(' #price-sign-color').css('background-color'),
+        price_sign_size = $(' #price-sign-size').val(),
+        hint_color = $('#hint-color').css('background-color'),
+        hint_text_color = $('#hint-text-color').css('background-color'),
+        hint_opacity = $('#color-opacity').val(),
+        hint_style_choice = $('#hint-style').val();
+
+    //-------------------2017/06/21-------------------------↓↓↓↓↓
+    var codepen_title = '推薦清單',
+        codepen_description = '推薦清單呈現結果',
+        codepen_html_entities = '&#x3C;div class=&#x22;slider slick-demo&#x22;&#x3E;&#x3C;/div&#x3E;\n&#x3C;script src=&#x22;http://venraas.github.io/demo/eagleeye/main_javascript_bundle.js&#x22;&#x3E;&#x3C;/script&#x3E;',
+        codepen_html = $('<div/>').html(codepen_html_entities).text(),
+        codepen_js_entities = 'window.onload = function(){try_it({\n'
+        + '"token": "'+token+'",\n"rec_type":  "'+rec_type+'",\n"rec_pos": "'+rec_pos+'",\n"uid": "'+uid+'",\n"gid": "'+gid+'",\n"categ_code": "'+categ_code+'",\n"device": "'+device+'",\n"topk": "'+topk+'",\n'
+        + '"showItems": "'+showItems+'",\n"scrollItems": "'+scrollItems+'",\n"scrollItems": "'+scrollItems+'",\n"loop": "'+loop+'",\n"btn_color": "'+btn_color+'",\n"bg_color": "'+bg_color+'",\n'
+        + '"title_color": "'+title_color+'",\n"price_color": "'+price_color+'",\n"title_size": "'+title_size+'",\n"price_size": "'+price_size+'",\n"price_sign_color": "'+price_sign_color+'",\n'
+        + '"price_sign_size": "'+price_sign_size+'",\n"hint_color": "'+hint_color+'",\n"hint_text_color": "'+hint_text_color+'",\n"hint_opacity": "'+hint_opacity+'",\n"hint_style_choice": "'+hint_style_choice+'"});}',
+        codepen_js = $('<div/>').html(codepen_js_entities).text();
+
+    var form=jQuery("<form>").attr({"method":"post","id":"codepen-form","target":"_blank","action":"https://codepen.io/pen/define"}).css("display","none").appendTo("body");
+
+    var field=jQuery("<input>").attr({
+        "type":"hidden",
+        "name":"data",
+        "value":JSON.stringify({
+            "title":codepen_title,
+            "description":codepen_description,
+            "html":codepen_html,
+            "js":codepen_js,
+            "css": "",
+            "css_external": "",
+            "js_external": ""
+        })
+        //-------------------2017/06/21-------------------------↑↑↑↑↑
+    });
+
+    form.append(field).submit();
 }
 
 function codepen_click() {
@@ -310,28 +365,36 @@ function codepen_click() {
             '}\n' +
             '}\n' +
             '\n' +
-            'function show_hint(obj , b) {\n' +
-            'var this_info = $(obj),\n' +
-            'this_slide = this_info.parent(&apos;.slick-slide&apos;),\n' +
-            'hint = $(&apos;.info-hint&apos;),\n' +
-            'coord = this_slide.offset(),\n' +
-            'a_w = this_info.parent(&apos;.slick-slide&apos;).width(),\n' +
-            'setbot = $(window).height() - coord.top,\n' +
-            'hint_tri = hint.find(&apos;#hint-triangle&apos;),\n' +
-            'right_amount = 20;\n' +
+            'function show_hint(obj, b) {\n' +
+            '  var this_info = $(obj),\n' +
+            '    this_slide = this_info.parent(&#x27;.slick-slide&#x27;),\n' +
+            '    hint = $(&#x27;.info-hint&#x27;),\n' +
+            '    coord = this_slide.offset(),\n' +
+            '    a_w = this_info.parent(&#x27;.slick-slide&#x27;).outerWidth(),\n' +
+            '    setbot = $(window).height() - coord.top,\n' +
+            '    hint_tri = hint.find(&#x27;#hint-triangle&#x27;);\n' +
             '\n' +
-            'a_w = parseInt(a_w);\n' +
+            '  a_w = parseInt(a_w);\n' +
             '\n' +
-            'var idx = this_info.parent().attr(&quot;hintIndex&quot;);\n' +
-            'if(b) {\n' +
-            '$(&quot;#hint_text&quot;).html(hintText[idx]);\n' +
-            'right_amount = (parseInt(hint.width()) + 18 - a_w)/2;\n' +
-            'hint.removeClass(&apos;display-none&apos;).css({&apos;min-width&apos;: a_w + 20 + &apos;px&apos; ,&apos;top&apos;:&apos;&apos; , &apos;bottom&apos;: setbot + 15 , &apos;left&apos;: coord.left - right_amount });\n' +
-            'hint_tri.css({&apos;right&apos;: right_amount - 5});\n' +
-            '}\n' +
-            'else {\n' +
-            'hint.addClass(&apos;display-none&apos;);\n' +
-            '}\n' +
+            '  var idx = this_info.parent().attr(&#x22;hintIndex&#x22;);\n' +
+            '  if (b) {\n' +
+            '&#x9;&#x9;$(&#x22;#hint_text&#x22;).html(hintText[idx]);\n' +
+            '&#x9;&#x9;hint.removeClass(&#x27;display-none&#x27;).css({\n' +
+            '&#x9;&#x9;&#x9;&#x27;min-width&#x27;: a_w + 20 + &#x27;px&#x27;\n' +
+            '&#x9;&#x9;});\n' +
+            '    var right_amount = (parseInt($(&#x27;.info-hint&#x27;).width()) + 18 - a_w) / 2;\n' +
+            '&#x9;&#x9;console.log($(&#x27;#info-hint&#x27;).width());\n' +
+            '    hint.css({\n' +
+            '      &#x27;top&#x27;: &#x27;&#x27;,\n' +
+            '      &#x27;bottom&#x27;: setbot + 15,\n' +
+            '      &#x27;left&#x27;: coord.left - right_amount\n' +
+            '    });\n' +
+            '    hint_tri.css({\n' +
+            '      &#x27;right&#x27;: right_amount - 4\n' +
+            '    });\n' +
+            '  } else {\n' +
+            '    hint.addClass(&#x27;display-none&#x27;);\n' +
+            '  }\n' +
             '}\n' +
             '\n' +
             'function hint_control() {\n' +
