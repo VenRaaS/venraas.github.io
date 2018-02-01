@@ -130,9 +130,7 @@
             color: #ffffff;
             cursor: pointer;
             padding: 2px 8px;
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
+            float: right;
         }
 
         .hr-1{
@@ -470,9 +468,14 @@
 
     <div class="row" style="height: 50px;"></div>
 
-    <div class="hr-1">
-        <div class="show_on_codepen" onclick="codepen_click()"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Show it on CodePen</div>
+    <div class="clearfix" style="width: 100%; padding: 0 15px;">
+      <div class="show_on_codepen" onclick="codepen_click()"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;FullView on CodePen</div>
+      <div class="show_on_codepen" style="margin-right: 10px;" onclick="codepen_click_quick()"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;QuickView on CodePen</div>
     </div>
+
+    <div class="row" style="height: 30px;"></div>
+
+    <div class="hr-1"></div>
 
     <div class="row row-2" style="border-bottom: 1px solid #d8d8d8;">
         <div class="col-sm-6">
