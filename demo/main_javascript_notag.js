@@ -51,7 +51,8 @@ function codepen_click_quick() {
         + '"token": "'+token+'",\n"rec_type":  "'+rec_type+'",\n"rec_pos": "'+rec_pos+'",\n"uid": "'+uid+'",\n"gid": "'+gid+'",\n"categ_code": "'+categ_code+'",\n"device": "'+device+'",\n"topk": "'+topk+'",\n'
         + '"showItems": "'+showItems+'",\n"scrollItems": "'+scrollItems+'",\n"scrollItems": "'+scrollItems+'",\n"loop": "'+loop+'",\n"btn_color": "'+btn_color+'",\n"bg_color": "'+bg_color+'",\n'
         + '"title_color": "'+title_color+'",\n"price_color": "'+price_color+'",\n"title_size": "'+title_size+'",\n"price_size": "'+price_size+'",\n"price_sign_color": "'+price_sign_color+'",\n'
-        + '"price_sign_size": "'+price_sign_size+'",\n"hint_color": "'+hint_color+'",\n"hint_text_color": "'+hint_text_color+'",\n"hint_opacity": "'+hint_opacity+'",\n"hint_style_choice": "'+hint_style_choice+'"});}',
+        + '"price_sign_size": "'+price_sign_size+'",\n"hint_color": "'+hint_color+'",\n"hint_text_color": "'+hint_text_color+'",\n"hint_opacity": "'+hint_opacity+'",\n"hint_style_choice": "'+hint_style_choice+'",\n'
+        + '"hint_control_check": '+hint_control_check+'});}',
         codepen_js = $('<div/>').html(codepen_js_entities).text(),
         codepen_css = '';
 
