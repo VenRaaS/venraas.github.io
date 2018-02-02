@@ -750,7 +750,7 @@ function try_it(inputs) {
   if(inputs.hint_text_color)hint_text_color = inputs.hint_text_color;
   if(inputs.hint_opacity)hint_opacity = inputs.hint_opacity;
   if(inputs.hint_style_choice)hint_style_choice = inputs.hint_style_choice;
-  if(inputs.hint_control_check)hint_control_check = inputs.hint_control_check;
+  if(inputs.hint_control_check != null)hint_control_check = inputs.hint_control_check;
 
   var recomdParam = {};
   if (token) recomdParam.token = token;
