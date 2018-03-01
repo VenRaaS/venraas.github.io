@@ -18,7 +18,7 @@
  }
 
 if(getCookie('gid') > 0){var GLOBAL_gid = getCookie('gid');}
-else{var GLOBAL_gid = '5742934';}
+else{var GLOBAL_gid = '5887444';}
 
 
 function filter_func(e) {
