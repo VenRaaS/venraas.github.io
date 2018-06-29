@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VenRaaS購物網</title>
+    <link rel="icon" href="http://220.128.219.108/recomd_mobile_20180524/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="./v2/source/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="./v2/source/slick.css" />
+    <link rel="stylesheet" type="text/css" href="./v2/source/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="./v2/custom.css" />
+
+    <script src="./v2/source/jquery.min.js"></script>
+    <script src="./v2/source/jquery-ui.min.js"></script>
+    <script src="./v2/source/jquery-migrate.min.js"></script>
+
+    <!--bootstrap-->
+    <script src="./v2/source/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./v2/source/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./v2/source/bootstrap/css/bootstrap-theme.min.css">
+
+    <!-- scrollCheck -->
+    <script src="./v2/source/noframework.waypoints.min.js" charset="utf-8"></script>
+
+    <!-- touch swipe -->
+    <script src="./v2/source/jquery.touchSwipe.min.js" charset="utf-8"></script>
+
+    <!-- swiper app -->
+    <script src="./v2/source/swiper.app/js/swiper.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="./v2/source/swiper.app/css/swiper.min.css">
+
+    <style media="screen">
+        html {
+            font-size: 90%;
+        }
+
+        body {
+            overflow-x: hidden;
+            font-family: 'Muli', Microsoft JhengHei;
+        }
+    </style>
+
+</head>
+
+<body style="overflow: hidden;">
+    <!-- header -->
+    <div class="header">
+        <div style="width: 8rem; position: relative;">
+            <div class="logo-icon" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" onclick="refresh_page()"></div>
+        </div>
+        <div class="title-area">
+            <span>VenRaaS購物網</span>
+        </div>
+    </div>
+
+    <!--The object is detected scrolling event -->
+    <div id="waypointHide"></div>
+
+    <!-- recommed main list -->
+    <div class="whole-ad">
+        <div id="waypointTarget" class="slider slick-demo row">
+            <a class="itemSlide col-12" style="position: relative; background-color: #EAEAEA; height: 29vh; margin-bottom: 2rem; display: block;" hintindex="0" href="./portal-v1.html">
+                <div style="padding: 2rem; font-size: 3rem; line-height: calc(29vh - 4rem);">
+                    Version 1
+                </div>
+            </a>
+            <a class="itemSlide col-12" style="position: relative; background-color: #EAEAEA; height: 29vh; margin-bottom: 2rem; display: block;" hintindex="0" href="./portal-v2.html">
+                <div style="padding: 2rem; font-size: 3rem; line-height: calc(29vh - 4rem);">
+                    Version 2
+                </div>
+            </a>
+            <a class="itemSlide col-12" style="position: relative; background-color: #EAEAEA; height: 29vh; display: block;" hintindex="0" href="./portal-v3.html">
+                <div style="padding: 2rem; font-size: 3rem; line-height: calc(29vh - 4rem);">
+                    Version 3
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
