@@ -58,26 +58,45 @@ function touches(e){
 
 function swipeToggle(tar){
     var swipe = $('#swipe');
-    var height = $('.selected').height();
+    var height = $('#ST').height();
+    var noSelectedHeight = $('#FT').height();
+    var data = swipe.attr('swipe-data');
     var changeTo, bottom;
     if(tar == 2){
         changeTo =  'translateY(0)';
         bottom = 0;
+        swipe.css({'transform': changeTo, 'bottom': bottom});
+        swipe.attr('swipe-data', tar);
     }else if(tar == 1){
-        changeTo =  'translateY(calc(100% - 7.5rem))';
-        bottom = '8rem';
+        if( ( height + noSelectedHeight ) > 200 ){
+            changeTo =  'translateY(calc(100% - 7.5rem))';
+            bottom = '8rem';
+            swipe.css({'transform': changeTo, 'bottom': bottom});
+            swipe.attr('swipe-data', tar);
+        }
     }else if(tar == 0){
         changeTo =  'translateY(100%)';
         bottom = '8rem';
+        swipe.css({'transform': changeTo, 'bottom': bottom});
+        swipe.attr('swipe-data', tar);
+    }else if(tar == -1){
+        if(data == 0){
+            swipeToggle(1);
+        }else if(data == 1){
+            swipeToggle(0);
+        }else if(data == 2){
+            swipeToggle(0);
+        }
     }
-    swipe.css({'transform': changeTo, 'bottom': bottom});
-    swipe.attr('swipe-data', tar);
 }
 
 function addEvent(obj){
     $(obj).on('click', function(){
         var target = $(this);
         var copyOne = target.clone();
+        var swipe = $('#swipe');
+        var data = swipe.attr('swipe-data');
+
         // var limit = $('.selected').children().length;
         if(copyOne.hasClass('on')){
             copyOne.removeClass('on');
@@ -97,6 +116,11 @@ function addEvent(obj){
                 target.remove();
                 addEvent(copyOne);
             }
+        }
+
+        // 點擊tag的時候自動將tag選單打開
+        if(data == 0){
+            swipeToggle(1);
         }
     });
 }
@@ -174,7 +198,7 @@ $(function(){
         swipe:function(event, direction, distance, duration, fingerCount)
         {
             var swipe = $('#swipe');
-            data = swipe.attr('swipe-data');
+            var data = swipe.attr('swipe-data');
 
             if(direction === "down"){
                 swipeToggle(0);
@@ -191,6 +215,9 @@ $(function(){
     $('.tag-each-one').on('click', function(){
         var target = $(this);
         var copyOne = target.clone();
+        var swipe = $('#swipe');
+        var data = swipe.attr('swipe-data');
+
         // var limit = $('.selected').children().length;
         if(copyOne.hasClass('on')){
             copyOne.removeClass('on');
@@ -210,6 +237,18 @@ $(function(){
                 target.remove();
                 addEvent(copyOne);
             }
+        }
+
+        // 偵測如果點擊後高度不夠即轉換型態
+        var h1 = $("#ST").height();
+        var h2 = $("#FT").height();
+        if( ( h1 + h2 ) < 150){
+            swipeToggle(0);
+        }
+
+        // 點擊tag的時候自動將tag選單打開
+        if(data == 0){
+            swipeToggle(1);
         }
     });
 
