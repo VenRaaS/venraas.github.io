@@ -41,7 +41,7 @@ if(GLOBAL_url.indexOf('gid') > -1){
         var GLOBAL_gid = '5742934';
         var GLOBAL_cid = '328208';
     }
-    
+
 }
 
 var target;
@@ -95,7 +95,7 @@ function addEvent(obj){
             nameSelect(target);
             target.remove();
             addEvent(copyOne);
-            
+
             // if($('.selected').height() >= 240){
             //     copyOne.remove();
             //     overHintSet($('.not-select'));
@@ -121,6 +121,25 @@ function filter_func(e) {
         $(e).addClass('act');
         var heart = $(e).find('.glyphicon-heart-empty');
         heart.removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+    }
+}
+
+function RFPtoggle(tar){
+    if(tar == 0){
+        $('#RFP').removeClass('open');
+        $('.body-mask').remove();
+    }else if(tar == 1){
+        $('#RFP').addClass('open');
+        $('#RFP').before($('<div/>',{
+            class: 'body-mask',
+            style: 'position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 2;'
+        }).on('touchstart touchmove', function(e){ e.stopPropagation(); }));
+    }else{
+        if($('#RFP').hasClass('open')){
+            RFPtoggle(0);
+        }else{
+            RFPtoggle(1);
+        }
     }
 }
 
@@ -176,21 +195,40 @@ $(function(){
     }
 
 
-    $('#swipe, .selected, .not-select, #switchBar').on('touchstart touchmove', function(e){
+    $('#swipe, .selected, .not-select, #switchBar, #SC').on('touchstart touchmove', function(e){
         e.stopPropagation();
+    });
+
+    $('#ST, #FT').swipe({
+        swipe:function(event, direction, distance, duration, fingerCount)
+        {
+            var swipe = $('#swipe');
+            var data = swipe.attr('swipe-data');
+
+            if(direction === "down"){
+                RFPtoggle(0);
+            }else if (direction === "up") {
+                RFPtoggle(1);
+                // if(data == 0){
+                //     swipeToggle(1);
+                // }else if (data == 1) {
+                //     swipeToggle(2);
+                // }
+            }
+        }
     });
 
     $('#switchBar').swipe({
         swipeUp:function(event, direction, distance, duration, fingerCount) {
-            $('#RFP').addClass('open');
+            RFPtoggle(1);
           },
           swipeDown:function(){
-            $('#RFP').removeClass('open');
+            RFPtoggle(0);
           }
     });
 
     $('#switchBar').on('click', function(){
-        $('#RFP').toggleClass('open');
+        RFPtoggle(-1);
     });
 
     $('#ST').swipe({
@@ -239,7 +277,7 @@ $(function(){
             nameSelect(target);
             target.remove();
             addEvent(copyOne);
-            
+
             // if($('.selected').height() >= 240){
             //     copyOne.remove();
             //     overHintSet($('.not-select'));
@@ -339,7 +377,7 @@ function getGoodsKeyword() {
     console.log("getGoodsKeyword()");
     var p = {};
     p.token = document.getElementById("token").value;
-    
+
     if (! document.getElementById("setting-gid").value){
         // document.getElementById("gid").value = p.gid;
         document.getElementById("setting-gid").value = '5742934';
@@ -811,7 +849,13 @@ function dev_func(obj) {
     document.cookie = "uid=" + item_cid;
     document.cookie = "gid=" + item_gid;
     // $('#now-item').html(clone_item.html());
-    var url = window.location.href;    
+
+    // 點擊推薦項目後收回推薦 fixed 選單
+    $('#RFP').removeClass('open');
+
+    // fixed選單動畫完成後再轉跳
+    setTimeout(function(){
+        var url = window.location.href;
         // if (url.indexOf('?') > -1){
         // url += '&param=1';
         // }else{
@@ -822,8 +866,9 @@ function dev_func(obj) {
         }
         url += '?gid=' + GLOBAL_gid + '&cid=' + GLOBAL_cid;
         window.location.href = url;
-    try_it(true, true);
-    $(document).scrollTop(0);
+    },400);
+    // try_it(true, true);
+    // $(document).scrollTop(0);
 }
 
 function getGoodsInfo() {

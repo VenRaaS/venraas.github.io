@@ -131,12 +131,15 @@ a:-webkit-any-link {
   right: 0;
   bottom: 0;
   height: 114px;
-  transition: .5s all
+  transition: .5s all;
+  z-index: 3;
+  background-color: white;
 }
 
 .recommed-fixed-panel .slick-container{
   flex: 1;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .recommed-fixed-panel + .switch-bar{
@@ -144,16 +147,17 @@ a:-webkit-any-link {
   left: 0;
   right: 0;
   bottom: 112px;
-  height: 50px;
+  height: 70px;
   background-image: url(./img/switch-icon.svg);
-  background-size: 200px 60px;
+  background-size: 250px 70px;
   background-position: center 0;
   background-repeat: no-repeat;
   transition: .5s all;
+  z-index: 3;
 }
 
 .recommed-fixed-panel.open{
-  position: fixed; 
+  position: fixed;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -1006,7 +1010,7 @@ input:disabled::-webkit-input-placeholder {
 
 .selected > .tag-each-one{
   color: #66f6ff;
-  border-color: #66f6ff; 
+  border-color: #66f6ff;
 }
 
 .selected > .tag-each-one::after{
@@ -1022,6 +1026,7 @@ input:disabled::-webkit-input-placeholder {
   overflow: scroll;
   background-color: rgba(24, 157, 191, 1);
   padding: 0 6rem 0 2rem;
+  min-height: 8rem;
   align-items: flex-start;
   position: relative;
 }
