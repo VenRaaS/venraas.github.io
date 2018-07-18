@@ -85,6 +85,16 @@
         /**
          * Created by surgeStudio on 17/5/18.
          */
+         function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
         function getCookie(cname) {
             var name = cname + "=";
             var decodedCookie = decodeURIComponent(document.cookie);
@@ -101,11 +111,10 @@
             return "";
         }
 
-        if(getCookie('enter').length != 0){
-            var firstEntering = false;   
-        }
-        else{
-            document.cookie = "enter='1'";
+        if (getCookie('enter').length != 0) {
+            var firstEntering = false;
+        } else {
+            setCookie('enter', 1, 1);
             var firstEntering = true;
         }
         

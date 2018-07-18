@@ -19,9 +19,12 @@
     <!-- <script src="./v1/source/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./v1/source/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./v1/source/bootstrap/css/bootstrap-theme.min.css"> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
 
     <!-- scrollCheck -->
     <script src="./v1/source/noframework.waypoints.min.js" charset="utf-8"></script>
@@ -85,6 +88,16 @@
         /**
          * Created by surgeStudio on 17/5/18.
          */
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
         function getCookie(cname) {
             var name = cname + "=";
             var decodedCookie = decodeURIComponent(document.cookie);
@@ -101,26 +114,25 @@
             return "";
         }
 
-        if(getCookie('enter').length != 0){
-            var firstEntering = false;   
-        }
-        else{
-            document.cookie = "enter='1'";
+        if (getCookie('enter').length != 0) {
+            var firstEntering = false;
+        } else {
+            setCookie('enter', 1, 1);
             var firstEntering = true;
         }
-        
-        $(function(){
-            if(firstEntering){
+
+        $(function () {
+            if (firstEntering) {
                 $('#firstEnteringDialog, #firstEnteringDialogBlackMask').show();
-            }else{
+            } else {
                 $('#firstEnteringDialog, #firstEnteringDialogBlackMask').hide();
             }
 
-            $('#firstEnteringDialogCloseIcon, #firstEnteringDialogBlackMask').on('click', function(){
+            $('#firstEnteringDialogCloseIcon, #firstEnteringDialogBlackMask').on('click', function () {
                 $('#firstEnteringDialog, #firstEnteringDialogBlackMask').hide();
             });
 
-            $('#DialogOpenIcon').on('click', function(){
+            $('#DialogOpenIcon').on('click', function () {
                 $('#firstEnteringDialog, #firstEnteringDialogBlackMask').show();
             });
         });
