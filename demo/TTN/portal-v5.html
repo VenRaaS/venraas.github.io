@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VenRaaS購物網</title>
+    <link rel="icon" href="http://220.128.219.108/recomd_mobile_20180524/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="./v5/source/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="./v5/source/slick.css" />
+    <link rel="stylesheet" type="text/css" href="./v5/source/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="./v5/custom.css" />
+
+    <script src="./v5/source/jquery.min.js"></script>
+    <script src="./v5/source/jquery-ui.min.js"></script>
+    <script src="./v5/source/jquery-migrate.min.js"></script>
+
+    <!--bootstrap-->
+    <!-- <script src="./v5/source/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./v5/source/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./v5/source/bootstrap/css/bootstrap-theme.min.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- scrollCheck -->
+    <script src="./v5/source/noframework.waypoints.min.js" charset="utf-8"></script>
+
+    <!-- touch swipe -->
+    <script src="./v5/source/jquery.touchSwipe.min.js" charset="utf-8"></script>
+
+    <!-- swiper app -->
+    <script src="./v5/source/swiper.app/js/swiper.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="./v5/source/swiper.app/css/swiper.min.css">
+
+    <style media="screen">
+        html {
+            font-size: 90%;
+        }
+
+        body {
+            overflow-x: hidden;
+            font-family: 'Muli', Microsoft JhengHei;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- header -->
+    <div class="header">
+        <div style="width: 8rem; position: relative;">
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                <div class="logo-icon" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" onclick="refresh_page()"></div>
+            </div>
+        </div>
+        <div class="title-area">
+            <span>VenRaaS購物網</span>
+        </div>
+        <div id="DialogOpenIcon" style="margin-right: 30px; cursor: pointer;">
+            <img src="./info.svg" width="70" height="70" alt="">
+        </div>
+    </div>
+
+    <!-- first entering dialog -->
+    <div id="firstEnteringDialog" class="header" style="z-index: 1000; flex-wrap: wrap;">
+        <div style="width: 8rem; position: relative;">
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                <div class="logo-icon" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);" onclick="refresh_page()"></div>
+            </div>
+        </div>
+        <div class="title-area">
+            <span>VenRaaS購物網</span>
+        </div>
+        <div id="firstEnteringDialogCloseIcon" style="margin-right: 30px; cursor: pointer;">
+            <img src="./remove-icon.svg" width="50" height="50" alt="">
+        </div>
+        <div style="width: 100%; background-color: #189dbf; color: white; padding: 0 20px 20px 20px;">
+            <div style="font-size: 40px; text-align: center;">您好，歡迎來到模擬線上購物網站的商品展示頁。</div>
+            <img src="./readme.png" width="100%" height="auto" alt="">
+        </div>
+    </div>
+    <div id="firstEnteringDialogBlackMask" style="position: fixed; z-index: 999; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, .3);"></div>
+    <script>
+        /**
+         * Created by surgeStudio on 17/5/18.
+         */
+         function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        if (getCookie('enter').length != 0) {
+            var firstEntering = false;
+        } else {
+            setCookie('enter', 1, 1);
+            var firstEntering = true;
+        }
+
+        $(function(){
+            if(firstEntering){
+                $('#firstEnteringDialog, #firstEnteringDialogBlackMask').show();
+            }else{
+                $('#firstEnteringDialog, #firstEnteringDialogBlackMask').hide();
+            }
+
+            $('#firstEnteringDialogCloseIcon, #firstEnteringDialogBlackMask').on('click', function(){
+                $('#firstEnteringDialog, #firstEnteringDialogBlackMask').hide();
+            });
+
+            $('#DialogOpenIcon').on('click', function(){
+                $('#firstEnteringDialog, #firstEnteringDialogBlackMask').show();
+            });
+        });
+    </script>
+
+    <!--The object is detected scrolling event -->
+    <div id="waypointHide"></div>
+
+    <!-- recommed main list -->
+    <div class="whole-ad">
+        <div class="rec-item-title" style="background-color: white;">&nbsp;</div>
+        <div id="waypointTarget" class="slider slick-demo row">
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=1000588&cid=334740">
+                        <img src="http://img.gohappy.com.tw/images/product/33/1000588/1000588_2.jpg" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=1000588&cid=178337&sid=8&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">《Homelike》樟木2.7尺收納餐櫃</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">8499</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=5887444&cid=328208">
+                        <img src="http://img.gohappy.com.tw/images/product/196/5887444/5887444_2.jpg?727757" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=5887444&cid=328210&sid=9&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">【幫寶適Pampers】超薄乾爽 嬰兒紙尿褲 (S) 74片 x4包/箱</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">1466</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=1009855&cid=121175">
+                        <img src="http://img.gohappy.com.tw/images/product/33/1009855/1009855_2.jpg" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=1009855&cid=310860&sid=8&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">環球-網布(雙扶手)無段式氣壓棒辦公椅電腦椅(含後仰功能)</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">1328</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=1017372&cid=384380">
+                        <img src="http://img.gohappy.com.tw/images/product/33/1017372/1017372_2.jpg?341352" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=1017372&cid=384540&sid=699&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">桂格100%喝的燕麥-無糖920ML</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">55</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=1017991&cid=384618">
+                        <img src="http://img.gohappy.com.tw/images/product/33/1017991/1017991_2.jpg?5402" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=1017991&cid=384618&sid=699&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">豐力富高優質特濃奶粉1.8kg</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">699</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=1019584&cid=4004">
+                        <img src="http://img.gohappy.com.tw/images/product/33/1019584/1019584_2.gif" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=1019584&cid=4004&sid=4&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">TITONI 漾動系列 玫瑰金色石英腕錶</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">35500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=1024133&cid=36430">
+                        <img src="http://img.gohappy.com.tw/images/product/34/1024133/1024133_2.jpg" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=1024133&cid=61219&sid=3&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">SHISEIDO資生堂 ELIXIR WHITE 淨白肌密卸妝凍蜜(140g)</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">998</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=1026869&cid=36430">
+                        <img src="http://img.gohappy.com.tw/images/product/34/1026869/1026869_2.jpg" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=1026869&cid=36430&sid=3&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">SHISEIDO資生堂 REVITAL莉薇特麗 除皺精露AA(125ml)</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">2340</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintindex="0">
+                <div style="padding: 2rem;">
+                    <a class="slick-num0" style="width: 100%; text-align: center;" href="./v5/recomd_tags_cam.html?gid=1031239&cid=42788">
+                        <img src="http://img.gohappy.com.tw/images/product/34/1031239/1031239_2.jpg" style="width: 100%;">
+                    </a>
+                    <a href="https://shopping.friday.tw/ec2/product?pid=1031239&cid=42788&sid=7&mid=1" target="_blank">
+                        <div class="href-a" target="_blank"></div>
+                        <span style="margin: 5px 0;font-size: 2rem;height: NaN;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:rgb(51, 51, 51);">INTEX《懶骨頭》單人充氣沙發椅-附腳椅(灰色) (68564)</span>
+                    </a>
+                    <div style="font-size: 3.4rem;font-weight: 900;color:rgb(255, 0, 0);text-align:left;">
+                        <div class="href-a" target="_blank">
+                            <span style="font-weight: normal;font-size: 3.4rem; color:rgb(255, 0, 0);">$</span>
+                            <span style="font-size: 3.4rem; color: rgb(255, 0, 0)">1080</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
