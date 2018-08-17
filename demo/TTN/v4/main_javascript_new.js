@@ -19,8 +19,8 @@ function getCookie(cname) {
 
 var GLOBAL_url = window.location.href;
 if(GLOBAL_url.indexOf('gid') > -1){
-    var gid_where = GLOBAL_url.indexOf('gid=')+4,
-    cid_where = GLOBAL_url.indexOf('cid=')+4,
+    var gid_where = GLOBAL_url.indexOf('gid=') + 4,
+    cid_where = GLOBAL_url.indexOf('cid=') + 4,
     item_gid = parseInt(GLOBAL_url.substr(gid_where, 7)),
     item_cid = parseInt(GLOBAL_url.substr(cid_where, 6));
 
