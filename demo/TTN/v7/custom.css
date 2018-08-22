@@ -912,7 +912,7 @@ input:disabled::-webkit-input-placeholder {
   display: block;
   font-size: 3rem;
   padding: 3px 25px;
-  margin: 20px 10px;
+  margin: 8px;
   border-radius: 5rem;
   border: 2px solid #666;
   color: #666;
@@ -1098,7 +1098,7 @@ input:disabled::-webkit-input-placeholder {
   justify-content: flex-start;
   /* transition: all 1s; */
   background-color: white;
-  padding: 0 6rem 0 2rem;
+  padding: .5rem 2rem 0 2rem;
   transition: .3s all;
 }
 
@@ -1115,7 +1115,7 @@ input:disabled::-webkit-input-placeholder {
   flex-wrap: wrap;
   overflow: scroll;
   background-color: white;
-  padding: 0 6rem 0 2rem;
+  padding: .5rem 2rem;
   align-items: flex-start;
   position: relative;
   /* min-height: 8rem; */
