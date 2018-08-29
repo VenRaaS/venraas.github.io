@@ -423,7 +423,11 @@ function nameSelect(obj) {
     try_it(false, false);
 
     // 選取TAG自動滾到 "您可能會喜歡"
-    // $(window).scrollTop($('#now-item').height() + 160);
+    var youMayLikePos = $('#YML').offset().top;
+    var a = $(this).scrollTop();
+    if(a >= youMayLikePos){
+        $(window).scrollTop($('#now-item').height() + 285);
+    }
 }
 
 // *****TAGS*****

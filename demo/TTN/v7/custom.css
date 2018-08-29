@@ -935,6 +935,7 @@ input:disabled::-webkit-input-placeholder {
   text-align: left;
   white-space: nowrap;
   flex-direction: column;
+  border-bottom: 1px solid #BBB;
 }
 
 .new-tags-area {
@@ -948,22 +949,7 @@ input:disabled::-webkit-input-placeholder {
   flex-direction: column;
   max-height: 48rem;
   overflow: hidden;
-  border-bottom: 1px solid #BBB;
   background-color: white;
-}
-
-.tags-area-out::after{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transition: .5s all;
-  transform: translateY( calc(100% - 1px) );
-  height: 30px;
-  opacity: 0;
-  background: linear-gradient(to bottom, rgba(255,255,255,.8) 0%,rgba(255,255,255,0) 100%); ;
-  content: "";
-  display: block;
 }
 
 .new-tags-area.limit{
@@ -974,11 +960,6 @@ input:disabled::-webkit-input-placeholder {
   position: fixed;
   top: 115px;
   left: 0;
-}
-
-.tags-area-out.fixed::after {
-  height: 50px;
-  opacity: 1;
 }
 
 .new-tags-area + .toggle-btn {
