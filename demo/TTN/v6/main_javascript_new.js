@@ -111,13 +111,13 @@ function toggleBtnController(){
 
         // 將 swipe 箭頭樣式改變為 2
         swipe.attr('swipe-type', 2); // down-blue
-    }else if(data == 0 && height > 100){
+    }else if(data == 0 && height > 80){
         // 如果 data 狀態是關閉，選取區只有一行時
         //console.log('type4');
 
         // 將 swipe 箭頭樣式改變為 4
         swipe.attr('swipe-type', 4); // up-green
-    }else if(data == 1 && height > 100){
+    }else if(data == 1 && height > 80){
         // 如果 data 狀態是開啟，且有 tag 被選取
 
         // 將 swipe 箭頭樣式改變為 3
@@ -587,7 +587,11 @@ function nameSelect(obj) {
     try_it(false, false);
 
     // 選取TAG自動滾到 "您可能會喜歡"
-    // $(window).scrollTop($('#now-item').height() + 160);
+    var youMayLikePos = $('#YML').offset().top;
+    var a = $(this).scrollTop();
+    if(a >= youMayLikePos){
+        $(window).scrollTop($('#now-item').height() + 285);
+    }
 }
 
 // *****TAGS*****

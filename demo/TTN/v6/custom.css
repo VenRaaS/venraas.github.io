@@ -912,7 +912,7 @@ input:disabled::-webkit-input-placeholder {
   display: block;
   font-size: 3rem;
   padding: 3px 25px;
-  margin: 20px 10px;
+  margin: 8px;
   border-radius: 5rem;
   border: 2px solid #666;
   color: #666;
@@ -935,6 +935,7 @@ input:disabled::-webkit-input-placeholder {
   text-align: left;
   white-space: nowrap;
   flex-direction: column;
+  border-bottom: 1px solid #BBB;
 }
 
 .new-tags-area {
@@ -948,26 +949,11 @@ input:disabled::-webkit-input-placeholder {
   flex-direction: column;
   max-height: 48rem;
   overflow: hidden;
-  border-bottom: 1px solid #BBB;
   background-color: white;
 }
 
-.tags-area-out::after{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transition: .5s all;
-  transform: translateY( calc(100% - 1px) );
-  height: 30px;
-  opacity: 0;
-  background: linear-gradient(to bottom, rgba(255,255,255,.8) 0%,rgba(255,255,255,0) 100%); ;
-  content: "";
-  display: block;
-}
-
 .new-tags-area.limit{
-  max-height: 8rem;
+  max-height: 7rem;
 }
 
 .tags-area-out.fixed {
@@ -976,19 +962,17 @@ input:disabled::-webkit-input-placeholder {
   left: 0;
 }
 
-.tags-area-out.fixed::after {
-  height: 50px;
-  opacity: 1;
-}
-
 .new-tags-area + .toggle-btn {
   font-size: 3rem;
-  border-radius: 5rem;
+  border-radius: 50%;
   transition: all 1s;
   position: absolute;
+  width: 75px;
+  height: 75px;
   right: 0;
   top: 0;
-  margin: 20px 10px;
+  text-align: center;
+  margin: 10px 10px;
   padding: 3px 8px;
   z-index: 5;
   border-color: unset;
@@ -1098,12 +1082,12 @@ input:disabled::-webkit-input-placeholder {
   justify-content: flex-start;
   /* transition: all 1s; */
   background-color: white;
-  padding: 0 6rem 0 2rem;
+  padding: .5rem 6rem 0 2rem;
   transition: .3s all;
 }
 
 .selected.limit {
-  max-height: 8rem;
+  max-height: 7rem;
 }
 
 .selected:empty {
@@ -1115,14 +1099,14 @@ input:disabled::-webkit-input-placeholder {
   flex-wrap: wrap;
   overflow: scroll;
   background-color: white;
-  padding: 0 6rem 0 2rem;
+  padding: .5rem 6rem .5rem 2rem;
   align-items: flex-start;
   position: relative;
   /* min-height: 8rem; */
 }
 
 .not-select.limit{
-  max-height: 8rem;
+  max-height: 7rem;
 }
 
 .over-hint {
