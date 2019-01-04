@@ -853,8 +853,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (getCookie('gid') != "") {
             $('#gid').val(getCookie('gid'));
         }
-        setTimeout(try_it, 5000);
     });
+
+    window.onload = function () {
+        try_it();
+    }
 
     function getCookie(cname) {
         var name = cname + "=";
