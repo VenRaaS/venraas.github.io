@@ -189,5 +189,33 @@ function venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, 
     venraastool.recomd(recomdParam, recomdCallback);
 }
 
-var url_finder = "http://shopping.friday.tw/ec2/product?";
-var url_replace = location.href;
+var url_finder = "http://shopping.friday.tw/ec2/product";
+var url_replace = location.href.replace(location.search, "").replace("portal", "good").replace("category", "good");
+
+function getGoodsInfo(token, gid, url, imgClass) {
+    if (gid == '') {
+        return;
+    }
+
+    var data = {};
+    if (token) data["token"] = token;
+    if (gid) data["gid"] = gid;
+
+    $.ajax({
+        url: "https://apir.venraas.tw/cupid/api/goods/info",
+        dataType:'html',
+        type: 'GET',
+        data: data,
+        success: function(msg, status, xhr) {
+            console.log(msg);
+            var ret = JSON.parse(msg);
+            var html = '<img src="' + url + '" style="width:320px;"><div><span style="margin:5px 0; font-size:' + title_size + 'px; height:' + parseInt(title_size * 3) + 'px; display:block; overflow:hidden; word-wrap:break-word; word-break:break-all; color:' + title_color +';">' + ret.goods_name + '</span></div><div style="font-size:' + price_size + 'px; font-weight:900; color:' + price_color + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</div></a></div>';
+            $("#" +imgClass).html(html);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert("error");
+            alert(xhr.status);
+            alert(thrownError);
+        }
+    });
+}
