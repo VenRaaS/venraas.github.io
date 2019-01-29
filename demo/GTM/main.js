@@ -98,6 +98,8 @@ var price_color = "#ff0000";
 var price_size = 18;
 var price_sign_color = "#ff0000";
 var price_sign_size = 10;
+var btn_color = "#999999";
+var bg_color = "#ffffff";
 function process_item(addr, img, name, price, i) {
     var html = '<div style="margin: 0 10px 10px 10px;" hintIndex="' + i + '">';
     html += '<a href="' + addr + '"><img src="' + img + '" style="width: 100%;"><div><span style="margin: 5px 0;font-size: ' + title_size + 'px;height: ' + parseInt(title_size * 3) + 'px;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:' + title_color +';">' + name + '</span></div><div style="font-size: ' + price_size + 'px;font-weight: 900;color:' + price_color + ';text-align:center;"><span style="font-weight: normal;font-size: ' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + price + '</div></a></div>';
@@ -126,13 +128,6 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
         $("." + slickClass).html("");
         bSlick["" + slickClass] = false;
     }
-
-    var btn_color =  $('#btn-color').css('background-color'),
-        bg_color = $('#bg-color').css('background-color');
-
-
-    $('.filter-btn').css({'color': btn_color , 'background-color' : '#ffffff' , 'border-color':btn_color});
-    $('.filter-btn.act').css({'background-color':  btn_color , 'color':'#ffffff'});
 
     $('.' + slickClass).css({'background-color':bg_color});
     console.log("loop=" + loop);
