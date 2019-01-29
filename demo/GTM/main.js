@@ -1,8 +1,8 @@
-function percentFormat(str, fn) {
+ï»¿function percentFormat(str, fn) {
     var num = 0;
 
     if (typeof str == "string") {
-        //¤£¬O¼Æ¦r´N¶Ç¦^­ì¨Óªº
+        //ä¸æ˜¯æ•¸å­—å°±å‚³å›åŸä¾†çš„
         if (isNaN(str)) {
             return str;
         }
@@ -28,30 +28,30 @@ function percentFormat(str, fn) {
     return Number((num * 100).toFixed(Number(fn1)));
 }
 
-//var MsgType1_Msg = "¬İ¦¹°Ó«~¤]¬İ";
+//var MsgType1_Msg = "çœ‹æ­¤å•†å“ä¹Ÿçœ‹";
 var MsgType1_MsgType = ["bsim"];
-var MsgType1_recScoreField = "<div class='p-50'>ÃöÁp«×</div>";
+var MsgType1_recScoreField = "<div class='p-50'>é—œè¯åº¦</div>";
 
-//var MsgType2_Msg = "ªñ¦ü°Ó«~";
+//var MsgType2_Msg = "è¿‘ä¼¼å•†å“";
 var MsgType2_MsgType = ["csim"];
-var MsgType2_recScoreField = "<div class='p-50'>¬Û¦ü«×</div>";
+var MsgType2_recScoreField = "<div class='p-50'>ç›¸ä¼¼åº¦</div>";
 
-//var MsgType3_Msg = "¥»ÃşHOT";
+//var MsgType3_Msg = "æœ¬é¡HOT";
 var MsgType3_MsgType = ["ctp"];
-var MsgType3_recScoreField = "<div class='p-50'>¼öªù«×</div>";
-var MsgType3_recScoreField2 = "<div class='p-50'>ªñ30¤é¾P¶q</div>";
+var MsgType3_recScoreField = "<div class='p-50'>ç†±é–€åº¦</div>";
+var MsgType3_recScoreField2 = "<div class='p-50'>è¿‘30æ—¥éŠ·é‡</div>";
 
-//var MsgType4_Msg = "¥ş¯¸HOT";
+//var MsgType4_Msg = "å…¨ç«™HOT";
 var MsgType4_MsgType = ["gtp"];
-var MsgType4_recScoreField = "<div class='p-50'>¼öªù«×</div>";
-var MsgType4_recScoreField2 = "<div class='p-50'>ªñ30¤é¾P¶q</div>";
+var MsgType4_recScoreField = "<div class='p-50'>ç†±é–€åº¦</div>";
+var MsgType4_recScoreField2 = "<div class='p-50'>è¿‘30æ—¥éŠ·é‡</div>";
 
-//var MsgType5_Msg = "±z³Ìªñ¬İ¹L";
+//var MsgType5_Msg = "æ‚¨æœ€è¿‘çœ‹é";
 var MsgType5_MsgType = ["cs"];
 
-//var MsgType6_Msg = "¯S§O±ÀÂË";
+//var MsgType6_Msg = "ç‰¹åˆ¥æ¨è–¦";
 var MsgType6_MsgType = ["etc"];
-var MsgType6_recScoreField = "<div class='p-50'>±ÀÂË«×</div>";
+var MsgType6_recScoreField = "<div class='p-50'>æ¨è–¦åº¦</div>";
 
 function process_hintText(msgType, msg, msgScore, sales) {
     //console.log("msgType:" + msgType + ", msg:" + msg + ", msgScore:" + msgScore + ", sales:" + sales);
@@ -61,30 +61,30 @@ function process_hintText(msgType, msg, msgScore, sales) {
     }
 
     if (msgType == MsgType1_MsgType) {
-        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType1_recScoreField + score;
+        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType1_recScoreField + score;
     }
     else if (msgType == MsgType2_MsgType) {
-        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType2_recScoreField + score;
+        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType2_recScoreField + score;
     }
     else if (msgType == MsgType3_MsgType) {
         var salesStr = "";
         if (sales >= 50) {
-            salesStr = "<br>" + MsgType3_recScoreField2 + sales + "¥ó";
+            salesStr = "<br>" + MsgType3_recScoreField2 + sales + "ä»¶";
         }
-        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType3_recScoreField + score + salesStr;
+        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType3_recScoreField + score + salesStr;
     }
     else if (msgType == MsgType4_MsgType) {
         var salesStr = "";
         if (sales >= 50) {
-            salesStr = "<br>" + MsgType4_recScoreField2 + sales + "¥ó";
+            salesStr = "<br>" + MsgType4_recScoreField2 + sales + "ä»¶";
         }
-        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType4_recScoreField + score;
+        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType4_recScoreField + score;
     }
     else if (msgType == MsgType5_MsgType) {
-        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + msg + "</div><br>";
+        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + msg + "</div><br>";
     }
     else if (msgType == MsgType6_MsgType) {
-        return "<div class='p-50'>±ÀÂË²z¥Ñ</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType6_recScoreField + score;
+        return "<div class='p-50'>æ¨è–¦ç†ç”±</div><div style='display: inline-block'>" + msg + "</div><br>" + MsgType6_recScoreField + score;
     }
     else {
         return "";
@@ -110,6 +110,17 @@ var hintText = [];
 function process_slick(result, slickClass, loop, rowItems, showItems, scrollItems) {
     console.log("process_slick");
 
+    var html = "";
+    var addr = "";
+    hintText = [];
+    for (var i=0; i<result.recomd_list.length; i++) {
+        addr = "" + result.recomd_list[i].goods_page_url;
+        addr = addr.replace(url_finder, url_replace);
+        addr += "&img_url=" + result.recomd_list[i].goods_img_url;
+        html += process_item(addr, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i);
+        hintText[i] = process_hintText(result.recomd_list[i].msg_type, result.recomd_list[i].msg, result.recomd_list[i].msg_score, result.recomd_list[i].sales);
+    }
+
     if (bSlick["" + slickClass] == true) {
         $("." + slickClass).slick("unslick");
         $("." + slickClass).html("");
@@ -132,24 +143,18 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
     $("." + slickClass).slick({
         infinite: Boolean(loop),
         arrows: true,
-        //-------------------2017/06/21-------------------------¡õ¡õ¡õ¡õ¡õ
+        //-------------------2017/06/21-------------------------â†“â†“â†“â†“â†“
         prevArrow: '<div class="switch-arrow-left"><span class="glyphicon glyphicon-menu-left" style="top: 50%;font-size: 36px; transform: translate(0, -50%); color:' + btn_color + ';"></span></div>',
         nextArrow: '<div class="switch-arrow-right"><span class="glyphicon glyphicon-menu-right" style="top: 50%;font-size: 36px; transform: translate(-4px, -50%); color:' + btn_color + ';"></span></div>',
-        //-------------------2017/06/21-------------------------¡ô¡ô¡ô¡ô¡ô
+        //-------------------2017/06/21-------------------------â†‘â†‘â†‘â†‘â†‘
         slidesPerRow: Number(rowItems),
         slidesToShow: Number(showItems),
         slidesToScroll: Number(scrollItems)
     });
     bSlick["" + slickClass] = true;
-/*
-    var html = "";
-    hintText = [];
-    for (var i=0; i<result.recomd_list.length; i++) {
-        html += process_item(result.recomd_list[i].goods_page_url, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i);
-        hintText[i] = process_hintText(result.recomd_list[i].msg_type, result.recomd_list[i].msg, result.recomd_list[i].msg_score, result.recomd_list[i].sales);
-    }
-    img_hint();
-*/
+
+//    img_hint();
+
 }
 
 function show_slick(showItems, scrollItems, loop) {
@@ -183,3 +188,6 @@ function venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, 
     //-- ajax call for recommendation
     venraastool.recomd(recomdParam, recomdCallback);
 }
+
+var url_finder = "http://shopping.friday.tw/ec2/product?";
+var url_replace = location.href;
