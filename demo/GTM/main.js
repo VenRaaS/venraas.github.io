@@ -128,8 +128,8 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
     console.log("rowItems=" + rowItems);
     console.log("showItems=" + showItems);
     console.log("scrollItems=" + scrollItems);
-    $("." + div_class).html(html);
-    $("." + div_class).slick({
+    $("." + slickClass).html(html);
+    $("." + slickClass).slick({
         infinite: Boolean(loop),
         arrows: true,
         //-------------------2017/06/21-------------------------¡õ¡õ¡õ¡õ¡õ
@@ -152,11 +152,8 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
 */
 }
 
-function show_slick() {
+function show_slick(showItems, scrollItems, loop) {
 //    hint_control();
-    showItems = document.getElementById("showItems").value;
-    scrollItems = document.getElementById("scrollItems").value;
-    loop = document.getElementById("loop").checked;
     process_slick(recomd_result, "slick-demo", loop, rowItems, showItems, scrollItems);
 }
 
@@ -164,12 +161,13 @@ function recomdCallback(jsonStr) {
     var tmp_result = JSON.parse(jsonStr);
     if (tmp_result != null) {
         recomd_result = tmp_result;
-        show_slick();
+        show_slick(showItems, scrollItems, loop);
     }
 }
 
-var token, rec_type, rec_pos, uid, gid, categ_code, device, topk;
-function venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, topk) {
+var showItems, scrollItems, loop;
+var token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems;
+function venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems) {
     //-- recommentation parameter with JSON form, e.g. https://github.com/VenRaaS/venraas-user-guide/wiki/Recommendation-Request-(Rec-API)#user-content-examples---post-with-json-form
     var recomdParam = {};
     if (token) recomdParam.token = token;
@@ -179,7 +177,7 @@ function venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, 
     if (gid) recomdParam.gid = gid;
     if (categ_code) recomdParam.categ_code = categ_code;
     if (device) recomdParam.device = device;
-    if (topk) recomdParam.topk = Number(topk);
+    if (rowItems) recomdParam.topk = Number(rowItems);
     console.log("recomdParam: " + JSON.stringify(recomdParam));
 
     //-- ajax call for recommendation
