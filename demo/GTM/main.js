@@ -139,8 +139,8 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
         infinite: Boolean(loop),
         arrows: true,
         //-------------------2017/06/21-------------------------↓↓↓↓↓
-        prevArrow: '<div class="switch-arrow-left"><span class="glyphicon glyphicon-menu-left" style="top:50%;font-size:26px;transform:translate(0, -47%);color:white;"></span></div>',
-        nextArrow: '<div class="switch-arrow-right"><span class="glyphicon glyphicon-menu-right" style="top:50%;font-size:26px;transform:translate(0, -47%);color:white;"></span></div>',
+        prevArrow: '<div class="switch-arrow-left"><span class="glyphicon glyphicon-menu-left" style="top:50%;font-size:26px;transform:translate(0,-47%);color:white;"></span></div>',
+        nextArrow: '<div class="switch-arrow-right"><span class="glyphicon glyphicon-menu-right" style="top:50%;font-size:26px;transform:translate(0,-47%);color:white;"></span></div>',
         //-------------------2017/06/21-------------------------↑↑↑↑↑
         slidesPerRow: Number(rowItems),
         slidesToShow: Number(showItems),
@@ -205,7 +205,7 @@ function getGoodsInfo(token, gid, url, imgClass) {
         success: function(msg, status, xhr) {
             console.log(msg);
             var ret = JSON.parse(msg);
-            var html = '<img src="' + url + '" style="width:320px;"><div><span style="margin:5px 0; font-size:' + title_size + 'px; height:' + parseInt(title_size * 3) + 'px; display:block; overflow:hidden; word-wrap:break-word; word-break:break-all; color:' + title_color +';">' + ret.goods_name + '</span></div><div style="font-size:' + price_size + 'px; font-weight:900; color:' + price_color + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</div></a></div>';
+            var html = '<img src="' + url + '" style="width:320px;"><div><span style="margin:5px 0;font-size:' + title_size + 'px;height:' + parseInt(title_size * 3) + 'px;display:block;overflow:hidden;word-wrap:break-word;word-break:break-all;color:' + title_color +';">' + ret.goods_name + '</span></div><div style="font-size:' + price_size + 'px; font-weight:900; color:' + price_color + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</div></a></div>';
             $("#" +imgClass).html(html);
         },
         error: function(xhr, ajaxOptions, thrownError) {
