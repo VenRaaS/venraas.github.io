@@ -35,12 +35,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <style>
 .slick-demo {
     margin: 10% 20%;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 .switch-arrow-left{
-    top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; left: -40px; width: 30px; height: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    position: absolute;
+    cursor: pointer;
+    left: -35px;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    background-color: rgba(0,0,0,0.3);
 }
 .switch-arrow-right{
-    top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; right: -40px; width: 30px; height: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+    position: absolute;
+    cursor: pointer;
+    right: -35px;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    background-color: rgba(0,0,0,0.3);
 }
 .switch-arrow-left:hover , .switch-arrow-right:hover{
     background-color: rgba(0,0,0,0.05);
@@ -55,6 +72,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+    <div style="display:flex;justify-content:center;margin:2% 0;">
+        <div class="btn btn-primary" style="cursor:default;">&nbsp;首頁&nbsp;</div>
+    </div>
     <div class="slider slick-demo"></div>
 
 <script>

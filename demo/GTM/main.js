@@ -101,7 +101,7 @@ var price_sign_size = 10;
 var btn_color = "#999999";
 var bg_color = "#ffffff";
 function process_item(addr, img, name, price, i) {
-    var html = '<div style="margin: 0 10px 10px 10px;" hintIndex="' + i + '">';
+    var html = '<div style="padding:10px;border-right:1px solid rgba(0,0,0,0.2);margin:0 !important;" hintIndex="' + i + '">';
     html += '<a href="' + addr + '"><img src="' + img + '" style="width: 100%;"><div><span style="margin: 5px 0;font-size: ' + title_size + 'px;height: ' + parseInt(title_size * 3) + 'px;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all;color:' + title_color +';">' + name + '</span></div><div style="font-size: ' + price_size + 'px;font-weight: 900;color:' + price_color + ';text-align:center;"><span style="font-weight: normal;font-size: ' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + price + '</div></a></div>';
 
     return html;
@@ -139,8 +139,8 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
         infinite: Boolean(loop),
         arrows: true,
         //-------------------2017/06/21-------------------------↓↓↓↓↓
-        prevArrow: '<div class="switch-arrow-left"><span class="glyphicon glyphicon-menu-left" style="top: 50%;font-size: 36px; transform: translate(0, -50%); color:' + btn_color + ';"></span></div>',
-        nextArrow: '<div class="switch-arrow-right"><span class="glyphicon glyphicon-menu-right" style="top: 50%;font-size: 36px; transform: translate(-4px, -50%); color:' + btn_color + ';"></span></div>',
+        prevArrow: '<div class="switch-arrow-left"><span class="glyphicon glyphicon-menu-left" style="top:50%;font-size:26px;transform:translate(0, -47%);color:white;"></span></div>',
+        nextArrow: '<div class="switch-arrow-right"><span class="glyphicon glyphicon-menu-right" style="top:50%;font-size:26px;transform:translate(0, -47%);color:white;"></span></div>',
         //-------------------2017/06/21-------------------------↑↑↑↑↑
         slidesPerRow: Number(rowItems),
         slidesToShow: Number(showItems),
@@ -186,6 +186,7 @@ function venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, 
 
 var url_finder = "http://shopping.friday.tw/ec2/product";
 var url_replace = location.href.replace(location.search, "").replace("portal", "good").replace("category", "good");
+var url_category = location.href.replace(location.search, "").replace("portal", "category").replace("good", "category");
 
 function getGoodsInfo(token, gid, url, imgClass) {
     if (gid == '') {
