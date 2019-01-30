@@ -39,7 +39,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 .switch-arrow-left{
     top: 50%;
-    transform: translate(100%, -50%);
+    transform: translate(-100%, -50%);
     position: absolute;
     cursor: pointer;
     left: -10px;
@@ -50,7 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 .switch-arrow-right{
     top: 50%;
-    transform: translate(-100%, -50%);
+    transform: translate(100%, -50%);
     position: absolute;
     cursor: pointer;
     right: -10px;
@@ -98,7 +98,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         getGoodsInfo(token, gid, aryPara["img_url"], "good_img");
     }
 
-    $("#category_link").html('<a class="btn btn-primary" href="' + url_category + '?cid=' + categ_code + '">前往分類頁</a>');
+    $("#category_link").html('<a class="btn btn-primary" href="' + url_portal + '">&nbsp;前往首頁&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="' + url_category + '?cid=' + categ_code + '">前往分類頁</a>');
 
     window.onload = function () {
         rec_type = "AlsoView";

@@ -186,6 +186,7 @@ function venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, 
 
 var url_finder = "http://shopping.friday.tw/ec2/product";
 var url_replace = location.href.replace(location.search, "").replace("portal", "good").replace("category", "good");
+var url_portal = location.href.replace(location.search, "").replace("category", "portal").replace("good", "portal");
 var url_category = location.href.replace(location.search, "").replace("portal", "category").replace("good", "category");
 
 function getGoodsInfo(token, gid, url, imgClass) {
