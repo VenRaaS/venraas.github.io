@@ -114,12 +114,14 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
 
     var html = "";
     var addr = "";
+    var goods_img_url = null;
     hintText = [];
     for (var i=0; i<result.recomd_list.length; i++) {
+        goods_img_url = result.recomd_list[i].goods_img_url.replace("http:", location.protocol);
         addr = "" + result.recomd_list[i].goods_page_url;
         addr = addr.replace(url_finder, url_replace);
-        addr += "&img_url=" + result.recomd_list[i].goods_img_url;
-        html += process_item(addr, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i);
+        addr += "&img_url=" + goods_img_url;
+        html += process_item(addr, rgoods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i);
         hintText[i] = process_hintText(result.recomd_list[i].msg_type, result.recomd_list[i].msg, result.recomd_list[i].msg_score, result.recomd_list[i].sales);
     }
 
@@ -199,7 +201,7 @@ function getGoodsInfo(token, gid, url, imgClass) {
     if (gid) data["gid"] = gid;
 
     $.ajax({
-        url: "https://apir.venraas.tw/cupid/api/goods/info",
+        url: location.protocol + "//apir.venraas.tw/cupid/api/goods/info",
         dataType:'html',
         type: 'GET',
         data: data,
