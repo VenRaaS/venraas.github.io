@@ -121,7 +121,7 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
         addr = "" + result.recomd_list[i].goods_page_url;
         addr = addr.replace(url_finder, url_replace);
         addr += "&img_url=" + goods_img_url;
-        html += process_item(addr, rgoods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i);
+        html += process_item(addr, goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i);
         hintText[i] = process_hintText(result.recomd_list[i].msg_type, result.recomd_list[i].msg, result.recomd_list[i].msg_score, result.recomd_list[i].sales);
     }
 
