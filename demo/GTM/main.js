@@ -220,7 +220,7 @@ function getGoodsInfo(token, gid, url, imgClass, isAddCart) {
                      + ';">$</span>' + ret.sale_price
                      + '</div></a></div>';
             if (isAddCart == true) {
-                html += '<a class="btn btn-primary" onclick="addCart(' + gid + ')">&nbsp;放入購物車&nbsp;</a>;
+                html += '<a class="btn btn-primary" onclick="addCart(\'' + gid + '\')">&nbsp;放入購物車&nbsp;</a>';
             }
             $("#" +imgClass).html(html);
         },
