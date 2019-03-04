@@ -77,7 +77,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="btn btn-primary" href="edm.html">&nbsp;前往eDM&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
         <a class="btn btn-primary" href="search.html">&nbsp;前往查詢頁&nbsp;</a>
     </div>
-    <div id="result" style="display:flex;justify-content:center;margin:2% 0;">
+    <div id="result">
     </div>
 
 <script>
@@ -109,7 +109,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             for (i=0; i<cartList.length; i++) {
                 total += Number(ret.sale_price);
             }
-            var htmlStr = "<div>購買" + cartList.length + "件商品</div><div>金額:" + total + "</div>";
+            var htmlStr = "<h2>購買 " + cartList.length + " 件商品</h2><br><h2>金額: $" + total + "</h2>";
             $("#result").html(htmlStr);
         }
     }
