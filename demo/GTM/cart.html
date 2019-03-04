@@ -92,12 +92,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 htmlStr += '<div id="good_' + i + '"></div>';
                 $("#good_list").html(htmlStr);
             }
-            var total = 0;
+            total = 0;
             for (i=0; i<cartList.length; i++) {
-                total += Number(getGoodsInfo1(token, cartList[i], "good_" + i));
+                getGoodsInfo1(token, cartList[i], "good_" + i);
             }
-            htmlStr = '<a class="btn btn-primary" href="checkout.html?amount=' + cartList.length + '&total=' + total + '">&nbsp;結帳&nbsp;</a>';
-            $("#checkout").html(htmlStr);
+            setTimeout(function(){
+                htmlStr = '<a class="btn btn-primary" href="checkout.html?amount=' + cartList.length + '&total=' + total + '">&nbsp;結帳&nbsp;</a>';
+                $("#checkout").html(htmlStr);
+            }, 1000);
         }
     }
 </script>
