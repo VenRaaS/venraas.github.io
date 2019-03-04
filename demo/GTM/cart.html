@@ -77,20 +77,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="btn btn-primary" href="edm.html">&nbsp;前往eDM&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
         <a class="btn btn-primary" href="search.html">&nbsp;前往查詢頁&nbsp;</a>
     </div>
-    <div class="slider slick-demo"></div>
+    <div id="good_list"></div>
 
 <script>
     window.onload = function () {
         token = "5guOvNnKn2";
-        rec_type = "AlsoView";
-        rec_pos = "p";
-        device = "pc";
-        rowItems = 10;
-        showItems = 5;
-        scrollItems = 5;
-        loop = true;
-
-        venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems);
+        var c_cartList = getCookie("cart_list");
+        if (c_cartList == null) {
+            var cartList = JSON.parse(c_cartList);
+            var htmlStr = "";
+            for (i=0; i<cartList.length; i++) {
+                htmlStr += '<div id="good_' + i + '"></div>';
+                $("#good_list").html(htmlStr);
+            }
+            for (i=0; i<cartList.length; i++) {
+                getGoodsInfo1(token, cartList[i], "good_" + i);
+            }
+        }
     }
 </script>
 </body>

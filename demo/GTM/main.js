@@ -221,7 +221,36 @@ function getGoodsInfo(token, gid, url, imgClass, isAddCart) {
         }
     });
 }
-function get_cookie(cname) {
+
+function getGoodsInfo1(token, gid, goodsClass) {
+    if (gid == '') {
+        return;
+    }
+
+    var data = {};
+    if (token) data["token"] = token;
+    if (gid) data["gid"] = gid;
+
+    $.ajax({
+        url: location.protocol + "//apir.venraas.tw/cupid/api/goods/info",
+        dataType:'html',
+        type: 'GET',
+        data: data,
+        success: function(msg, status, xhr) {
+            console.log(msg);
+            var ret = JSON.parse(msg);
+            var html = '<img src="' + url + '" style="width:320px;"><div><span style="margin:5px 0;font-size:' + title_size + 'px;height:' + parseInt(title_size * 3) + 'px;display:block;overflow:hidden;word-wrap:break-word;word-break:break-all;color:' + title_color +';">' + ret.goods_name + '</span></div><div style="font-size:' + price_size + 'px; font-weight:900; color:' + price_color + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</div></a></div>';
+            $("#" +goodsClass).html(html);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert("error");
+            alert(xhr.status);
+            alert(thrownError);
+        }
+    });
+}
+
+function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(";");
     for (var i=0; i<ca.length; i++) {
@@ -233,7 +262,7 @@ function get_cookie(cname) {
     return null;
 }
 function addCart(gid) {
-    var c_cartList = get_cookie("cart_list");
+    var c_cartList = getCookie("cart_list");
     var cartList = [];
     if (c_cartList == null) {
         cartList.push(gid);
