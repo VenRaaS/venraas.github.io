@@ -78,8 +78,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="btn btn-primary" href="search.html">&nbsp;前往查詢頁&nbsp;</a>
     </div>
     <div id="good_list"></div>
-    <div style="display:flex;justify-content:center;margin:2% 0;">
-        <a class="btn btn-primary" href="checkout.html">&nbsp;結帳&nbsp;</a>
+    <div id="checkout" style="display:flex;justify-content:center;margin:2% 0;">
     </div>
 
 <script>
@@ -93,9 +92,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 htmlStr += '<div id="good_' + i + '"></div>';
                 $("#good_list").html(htmlStr);
             }
+            var total = 0;
             for (i=0; i<cartList.length; i++) {
                 getGoodsInfo1(token, cartList[i], "good_" + i);
+                total += Number(ret.sale_price);
             }
+            htmlStr = '<a class="btn btn-primary" href="checkout.html?amount=' + cartList.length + '&total=' + total + '">&nbsp;結帳&nbsp;</a>';
+            $("#checkout").html(htmlStr);
         }
     }
 </script>
