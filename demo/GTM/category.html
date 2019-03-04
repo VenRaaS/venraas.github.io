@@ -73,7 +73,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
     <div style="display:flex;justify-content:center;margin:2% 0;">
-        <div class="btn btn-primary" style="cursor:default;">&nbsp;分類頁&nbsp;</div>
+        <a class="btn btn-primary" href="portal.html">&nbsp;前往首頁&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" href="edm.html">&nbsp;前往eDM&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" href="search.html">&nbsp;前往查詢頁&nbsp;</a>
     </div>
     <div class="slider slick-demo"></div>
 
@@ -96,8 +98,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         categ_code = aryPara["cid"];
     }
-
-    $("#category_link").html('<a class="btn btn-primary" href="' + url_category + '?cid=' + categ_code + '">分類頁</a>');
 
     window.onload = function () {
         rec_type = "AlsoView";

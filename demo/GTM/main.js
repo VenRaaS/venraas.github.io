@@ -191,7 +191,7 @@ var url_replace = location.href.replace(location.search, "").replace("portal", "
 var url_portal = location.href.replace(location.search, "").replace("category", "portal").replace("good", "portal");
 var url_category = location.href.replace(location.search, "").replace("portal", "category").replace("good", "category");
 
-function getGoodsInfo(token, gid, url, imgClass) {
+function getGoodsInfo(token, gid, url, imgClass, isAddCart) {
     if (gid == '') {
         return;
     }
@@ -208,7 +208,20 @@ function getGoodsInfo(token, gid, url, imgClass) {
         success: function(msg, status, xhr) {
             console.log(msg);
             var ret = JSON.parse(msg);
-            var html = '<img src="' + url + '" style="width:320px;"><div><span style="margin:5px 0;font-size:' + title_size + 'px;height:' + parseInt(title_size * 3) + 'px;display:block;overflow:hidden;word-wrap:break-word;word-break:break-all;color:' + title_color +';">' + ret.goods_name + '</span></div><div style="font-size:' + price_size + 'px; font-weight:900; color:' + price_color + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</div></a></div>';
+            var html = '<img src="' + url
+                     + '" style="width:320px;"><div><span style="margin:5px 0;font-size:' + title_size
+                     + 'px;height:' + parseInt(title_size * 3)
+                     + 'px;display:block;overflow:hidden;word-wrap:break-word;word-break:break-all;color:' + title_color
+                     + ';">' + ret.goods_name
+                     + '</span></div><div style="font-size:' + price_size
+                     + 'px; font-weight:900; color:' + price_color
+                     + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size
+                     + 'px; color:' + price_sign_color
+                     + ';">$</span>' + ret.sale_price
+                     + '</div></a></div>';
+            if (isAddCart == true) {
+                html += '<a class="btn btn-primary" onclick="addCart(\'' + gid + '\')">&nbsp;放入購物車&nbsp;</a>;
+            }
             $("#" +imgClass).html(html);
         },
         error: function(xhr, ajaxOptions, thrownError) {
@@ -217,4 +230,31 @@ function getGoodsInfo(token, gid, url, imgClass) {
             alert(thrownError);
         }
     });
+}
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(";");
+    for (var i=0; i<ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return null;
+}
+function addCart(gid) {
+    var c_cartList = getCookie("cart_list");
+    var cartList = [];
+    if (c_cartList == null) {
+        cartList.push(gid);
+    }
+    else {
+        carList = JSON.parse(c_cartList);
+        cartList.push(gid);
+    }
+
+    var d = new Date();
+    d.setTime(d.getTime() + 1800000);//30 minutes
+    var domain = window.location.host.split(".").slice(-3).join(".");
+    document.cookie = "cart_list=" + JSON.stringify(cartList) + ";expires=" + d.toUTCString() + ";path=/;domain=" + domain;
 }

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>商品頁</title>
+    <title>結帳頁</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
 <!-- Google Tag Manager -->
@@ -34,7 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <style>
 .slick-demo {
-    margin: 2% 20%;
+    margin: 10% 20%;
     border: 1px solid rgba(0,0,0,0.2);
 }
 .switch-arrow-left{
@@ -72,42 +72,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-    <div id="category_link" style="display:flex;justify-content:center;margin:2% 0;"></div>
-    <div id="good_img"></div>
+    <div style="display:flex;justify-content:center;margin:2% 0;">
+        <a class="btn btn-primary" href="portal.html">&nbsp;前往首頁&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" href="edm.html">&nbsp;前往eDM&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" href="search.html">&nbsp;前往查詢頁&nbsp;</a>
+    </div>
     <div class="slider slick-demo"></div>
 
 <script>
-    var strUrl = location.search;
-    var getPara, ParaVal;
-    var aryPara = {};
-    token = "5guOvNnKn2";
-    rec_type = "AlsoView";
-
-    if (strUrl.indexOf("?") != -1) {
-        var getSearch = strUrl.split("?");
-        getPara = getSearch[1].split("&");
-        for (i = 0; i < getPara.length; i++) {
-            console.log("[" + i + "]getPara: " + getPara[i]);
-            ParaVal = getPara[i].split("=");
-            console.log("ParaVal: " + ParaVal);
-            aryPara[ParaVal[0]] = decodeURIComponent(ParaVal[1]);
-        }
-
-        categ_code = aryPara["cid"];
-        gid = aryPara["pid"];
-        getGoodsInfo(token, gid, aryPara["img_url"], "good_img");
-    }
-
-    var htmlStr = "";
-    htmlStr += '<a class="btn btn-primary" href="portal.html">&nbsp;前往首頁&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;'
-            += '<a class="btn btn-primary" href="edm.html">&nbsp;前往eDM&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;'
-            += '<a class="btn btn-primary" href="search.html">&nbsp;前往查詢頁&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;'
-            += '<a class="btn btn-primary" href="category.html?cid=' + categ_code + '">前往分類頁</a>';
-    $("#category_link").html(htmlStr);
-
     window.onload = function () {
+        token = "5guOvNnKn2";
         rec_type = "AlsoView";
-        rec_pos = "gop";
+        rec_pos = "p";
+        device = "pc";
         rowItems = 10;
         showItems = 5;
         scrollItems = 5;
@@ -117,4 +94,4 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 </script>
 </body>
-</html>  
+</html> 
