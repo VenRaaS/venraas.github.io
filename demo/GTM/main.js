@@ -236,12 +236,11 @@ function addCart(gid) {
     var c_cartList = get_cookie("cart_list");
     var cartList = [];
     if (c_cartList == null) {
-        cartList[0] = gid;
+        cartList.push(gid);
     }
     else {
-        carList = JSON.parse(c_cartList);
-        var len = cartList.length;
-        cartList[len] = gid;
+        cartList = JSON.parse(c_cartList);
+        cartList.push(gid);
     }
 
     var d = new Date();
