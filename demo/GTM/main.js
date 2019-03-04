@@ -208,17 +208,7 @@ function getGoodsInfo(token, gid, url, imgClass, isAddCart) {
         success: function(msg, status, xhr) {
             console.log(msg);
             var ret = JSON.parse(msg);
-            var html = '<img src="' + url
-                     + '" style="width:320px;"><div><span style="margin:5px 0;font-size:' + title_size
-                     + 'px;height:' + parseInt(title_size * 3)
-                     + 'px;display:block;overflow:hidden;word-wrap:break-word;word-break:break-all;color:' + title_color
-                     + ';">' + ret.goods_name
-                     + '</span></div><div style="font-size:' + price_size
-                     + 'px; font-weight:900; color:' + price_color
-                     + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size
-                     + 'px; color:' + price_sign_color
-                     + ';">$</span>' + ret.sale_price
-                     + '</div></a></div>';
+            var html = '<img src="' + url + '" style="width:320px;"><div><span style="margin:5px 0;font-size:' + title_size + 'px;height:' + parseInt(title_size * 3) + 'px;display:block;overflow:hidden;word-wrap:break-word;word-break:break-all;color:' + title_color +';">' + ret.goods_name + '</span></div><div style="font-size:' + price_size + 'px; font-weight:900; color:' + price_color + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</div></a></div>';
             if (isAddCart == true) {
                 html += '<a class="btn btn-primary" onclick="addCart(\'' + gid + '\')">&nbsp;放入購物車&nbsp;</a>';
             }
@@ -258,3 +248,4 @@ function addCart(gid) {
     var domain = window.location.host.split(".").slice(-3).join(".");
     document.cookie = "cart_list=" + JSON.stringify(cartList) + ";expires=" + d.toUTCString() + ";path=/;domain=" + domain;
 }
+
