@@ -98,18 +98,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 console.log("ParaVal: " + ParaVal);
                 aryPara[ParaVal[0]] = decodeURIComponent(ParaVal[1]);
             }
-            var htmlStr = "<div>購買" + aryPara["amount"] + "件商品</div><div>金額:" + aryPara["total"] + "</div>";
-            $("#result").html(htmlStr);
-        }
-
-        var c_cartList = getCookie("cart_list");
-        if (c_cartList != null) {
-            var cartList = JSON.parse(c_cartList);
-            var total = 0;
-            for (i=0; i<cartList.length; i++) {
-                total += Number(ret.sale_price);
-            }
-            var htmlStr = "<h2>購買 " + cartList.length + " 件商品</h2><br><h2>金額: $" + total + "</h2>";
+            var htmlStr = "<h2>購買 " + aryPara["amount"] + " 件商品</h2><br><h2>金額: $" + aryPara["total"] + "</h2>";
             $("#result").html(htmlStr);
         }
     }
