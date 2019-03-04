@@ -83,7 +83,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     window.onload = function () {
         token = "5guOvNnKn2";
         var c_cartList = getCookie("cart_list");
-        if (c_cartList == null) {
+        if (c_cartList != null) {
             var cartList = JSON.parse(c_cartList);
             var htmlStr = "";
             for (i=0; i<cartList.length; i++) {
