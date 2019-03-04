@@ -221,7 +221,7 @@ function getGoodsInfo(token, gid, url, imgClass, isAddCart) {
         }
     });
 }
-function getCookie(cname) {
+function get_cookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(";");
     for (var i=0; i<ca.length; i++) {
@@ -233,14 +233,15 @@ function getCookie(cname) {
     return null;
 }
 function addCart(gid) {
-    var c_cartList = getCookie("cart_list");
+    var c_cartList = get_cookie("cart_list");
     var cartList = [];
     if (c_cartList == null) {
-        cartList.push(gid);
+        cartList[0] = gid;
     }
     else {
         carList = JSON.parse(c_cartList);
-        cartList.push(gid);
+        var len = cartList.length;
+        cartList[len] = gid;
     }
 
     var d = new Date();
