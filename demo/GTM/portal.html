@@ -82,10 +82,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="slider slick-demo"></div>
 
 <script>
-    var n = 0;
+    var check_cnt = 0;
     waitting4gtmReady();
 
-    function waitting4gtmReady(n) {
+    function waitting4gtmReady() {
         // Ensure venraas_gtm_XMLHttpRequest_detect is available before anything
         if (typeof venraas_gtm_XMLHttpRequest_detect !== 'undefined') {
             token = "5guOvNnKn2";
@@ -101,13 +101,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         // Check for up to 10 seconds
         }
-        else if (n < 20) {
-            n++;
-            console.log("waitting..." + n);
+        else if (check_cnt < 20) {
+            check_cnt++;
+            console.log("waitting..." + check_cnt);
             setTimeout(waitting4gtmReady, 500);
         }
         else {
-            console.log("watting more then 10 seconds...");
+            console.log("waitting more then 10 seconds...");
         }
     }
 </script>
