@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <title>首頁</title>
@@ -16,12 +16,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" type="text/css" href="lib/slick.css"/>
     <link rel="stylesheet" type="text/css" href="lib/slick-theme.css"/>
 
-    <script src="lib/jquery-1.12.4.min.js"></script>
-<!--    <script src="lib/jquery-3.3.1.min.js"></script> -->
+    <script src="lib/jquery-3.3.1.min.js"></script>
     <script src="lib/jquery-ui.min.js"></script>
 
-    <script src="lib/jquery-migrate-1.4.1.min.js"></script>
-<!--    <script src="lib/jquery-migrate-3.0.0.min.js"></script> -->
+    <script src="lib/jquery-migrate-3.0.0.min.js"></script>
     <script src="lib/slick.min.js"></script>
 
     <!--bootstrap-->
@@ -74,7 +72,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-    <div style="display:flex;justify-content:center;margin:2% 0;">
+    <div style="display:flex;justify-content:center;margin:1% 0;">
+        <div class="btn btn-success" style="cursor:default;">&nbsp;首&nbsp;&nbsp;頁&nbsp;</div>
+    </div>
+    <div style="display:flex;justify-content:center;margin:1% 0;">
         <a class="btn btn-primary" href="edm.html">&nbsp;前往eDM&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
         <a class="btn btn-primary" href="search.html?search=iPhone+XS+MAX+512G">&nbsp;前往查詢頁&nbsp;</a>
     </div>
@@ -82,16 +83,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
     window.onload = function () {
-        token = "5guOvNnKn2";
-        rec_type = "AlsoView";
-        rec_pos = "p";
-        device = "pc";
-        rowItems = 10;
-        showItems = 5;
-        scrollItems = 5;
-        loop = true;
+        var n = 0;
+        waitting4gtmReady();
+    }
 
-        venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems);
+    function waitting4gtmReady(n) {
+        // Ensure venraas_gtm_XMLHttpRequest_detect is available before anything
+        if (typeof venraas_gtm_XMLHttpRequest_detect !== 'undefined') {
+            token = "5guOvNnKn2";
+            rec_type = "AlsoView";
+            rec_pos = "p";
+            device = "pc";
+            rowItems = 10;
+            showItems = 5;
+            scrollItems = 5;
+            loop = true;
+
+            venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems);
+
+        // Check for up to 10 seconds
+        }
+        else if (n < 20) {
+            n++;
+            console.log("waitting..." + n);
+            setTimeout(waitting4gtmReady, 500);
+        }
+        else {
+            console.log("watting more then 10 seconds...");
+        }
     }
 </script>
 </body>
