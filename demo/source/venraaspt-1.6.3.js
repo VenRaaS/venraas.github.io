@@ -264,6 +264,28 @@ var venraastool = {
 		var jsonStr = JSON.stringify(paramObj);
 		venraasxhr.send(jsonStr);
 	},
+	saveLocalStorage: function(paramJson, responseText) {
+		try {
+			//-- key of the recom'd response in localStorage
+			var cacheKey = {
+				'device':paramJson.device,
+				'rec_pos': paramJson.rec_pos,
+				'rec_type': paramJson.rec_type,
+				'token': paramJson.token
+			};
+			var cacheKeyJson = JSON.stringify(cacheKey);
+			var recObj = JSON.parse(this.responseText);
+			if (recObj.recomd_list && 0 < recObj.recomd_list.length) {
+				//-- set recom'd response into localStorage
+				localStorage.setItem(cacheKeyJson, responseText);
+
+				venraastool.updateCachekeys(paramJson.token, cacheKeyJson);
+			}
+		}
+		catch(e) {
+			console.log(e.message);
+		}
+	},
 	recomd: function(paramJson, cbf) {
 		var ven_guid = venraastool.getcookie("venguid");
 		if ("" == ven_guid) {
@@ -307,6 +329,7 @@ var venraastool = {
 							xhr_recomd.onreadystatechange = function() {
 							try {
 								if (this.readyState == 4 && this.status == 200) {
+									venraastool.saveLocalStorage(paramJson, this.responseText);
 									cbf(this.responseText, paramJson);
 								}
 							}
@@ -357,6 +380,7 @@ var venraastool = {
 					xhr_recomd.onreadystatechange = function() {
 					try {
 						if (this.readyState == 4 && this.status == 200) {
+							venraastool.saveLocalStorage(paramJson, this.responseText);
 							cbf(this.responseText, paramJson);
 						}
 					}
@@ -388,6 +412,7 @@ var venraastool = {
 		xhr_recomd.onreadystatechange = function() {
 		try {
 			if (this.readyState == 4 && this.status == 200) {
+				venraastool.saveLocalStorage(paramJson, this.responseText);
 				cbf(this.responseText, paramJson);
 			}
 		}
