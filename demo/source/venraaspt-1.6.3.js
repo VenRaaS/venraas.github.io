@@ -274,7 +274,7 @@ var venraastool = {
 				'token': paramJson.token
 			};
 			var cacheKeyJson = JSON.stringify(cacheKey);
-			var recObj = JSON.parse(this.responseText);
+			var recObj = JSON.parse(responseText);
 			if (recObj.recomd_list && 0 < recObj.recomd_list.length) {
 				//-- set recom'd response into localStorage
 				localStorage.setItem(cacheKeyJson, responseText);
