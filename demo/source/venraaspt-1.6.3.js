@@ -286,6 +286,22 @@ var venraastool = {
 			console.log(e.message);
 		}
 	},
+	getLocalStorage: function(paramJson) {
+		try {
+			//-- key of the recom'd response in localStorage
+			var cacheKey = {
+				'device':paramJson.device,
+				'rec_pos': paramJson.rec_pos,
+				'rec_type': paramJson.rec_type,
+				'token': paramJson.token
+			};
+			var cacheKeyJson = JSON.stringify(cacheKey);
+			return localStorage.getItem(cacheKeyJson, responseText);
+		}
+		catch(e) {
+			console.log(e.message);
+		}
+	},
 	recomd: function(paramJson, cbf) {
 		var ven_guid = venraastool.getcookie("venguid");
 		if ("" == ven_guid) {
@@ -340,7 +356,7 @@ var venraastool = {
 
 							xhr_recomd.timeout = 2000;
 							xhr_recomd.ontimeout = function(e) {
-								var lastRespText = localStorage.getItem(cacheKeyJson);
+								var lastRespText = venraastool.getLocalStorage(paramJson);
 								if (lastRespText) {
 									console.log('venraas recomd timeout! response the last result');
 								}
@@ -406,7 +422,7 @@ var venraastool = {
 
 					xhr_recomd.timeout = 2000;
 					xhr_recomd.ontimeout = function(e) {
-						var lastRespText = localStorage.getItem(cacheKeyJson);
+						var lastRespText = venraastool.getLocalStorage(paramJson);
 						if (lastRespText) {
 							console.log('venraas recomd timeout! response the last result');
 						}
@@ -453,7 +469,7 @@ var venraastool = {
 
 		xhr_recomd.timeout = 5;
 		xhr_recomd.ontimeout = function(e) {
-			var lastRespText = localStorage.getItem(cacheKeyJson);
+			var lastRespText = venraastool.getLocalStorage(paramJson);
 			if (lastRespText) {
 				console.log('venraas recomd timeout! response the last result');
 			}
