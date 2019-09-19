@@ -296,7 +296,7 @@ var venraastool = {
 				'token': paramJson.token
 			};
 			var cacheKeyJson = JSON.stringify(cacheKey);
-			return localStorage.getItem(cacheKeyJson, responseText);
+			return localStorage.getItem(cacheKeyJson);
 		}
 		catch(e) {
 			console.log(e.message);
