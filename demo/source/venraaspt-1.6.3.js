@@ -467,7 +467,7 @@ var venraastool = {
 		}
 		};
 
-		xhr_recomd.timeout = 5;
+		xhr_recomd.timeout = 2000;
 		xhr_recomd.ontimeout = function(e) {
 			var lastRespText = venraastool.getLocalStorage(paramJson);
 			if (lastRespText) {
