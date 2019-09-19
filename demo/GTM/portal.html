@@ -86,9 +86,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     waitting4gtmReady();
 
     function waitting4gtmReady() {
-        // Ensure venraas_gtm_XMLHttpRequest_detect is available before anything
-        if (typeof venraas_gtm_XMLHttpRequest_detect !== 'undefined') {
-            console.log("gtm script code loading ready...");
+        // Ensure venraas_script_done is available before anything
+        if (typeof venraas_script_done !== 'undefined') {
+            console.log("venraaspt script code loading ready...");
+            
             token = "5guOvNnKn2";
             rec_type = "AlsoView";
             rec_pos = "p";
