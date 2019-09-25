@@ -85,34 +85,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var check_cnt = 0;
     waitting4gtmReady();
 
-    function waitting4gtmReady() {
-        // Ensure venraas_script_done is available before anything
-        if (typeof venraas_script_done !== 'undefined') {
-            console.log("venraaspt script code loading ready...");
+    function venraasJob() {
+        ven_portal();
             
-            ven_portal();
-            
-            token = "5guOvNnKn2";
-            rec_type = "AlsoView";
-            rec_pos = "p";
-            device = "pc";
-            rowItems = 10;
-            showItems = 5;
-            scrollItems = 5;
-            loop = true;
+        token = "5guOvNnKn2";
+        rec_type = "AlsoView";
+        rec_pos = "p";
+        device = "pc";
+        rowItems = 10;
+        showItems = 5;
+        scrollItems = 5;
+        loop = true;
 
-            venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems);
-
-        // Check for up to 10 seconds
-        }
-        else if (check_cnt < 20) {
-            check_cnt++;
-            console.log("waitting..." + check_cnt);
-            setTimeout(waitting4gtmReady, 500);
-        }
-        else {
-            console.log("waitting more then 10 seconds...");
-        }
+        venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems);
     }
 </script>
 </body>
