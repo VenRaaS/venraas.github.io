@@ -109,32 +109,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             +  '<a class="btn btn-primary" href="cart.html">前往購物車</a>';
     $("#category_link").html(htmlStr);
 
-    var check_cnt = 0;
-    waitting4gtmReady();
+    function venraasJob() {
+        ven_good();
+        ven_categ_code();
+        ven_gid();
 
-    function waitting4gtmReady() {
-        // Ensure venraas_gtm_XMLHttpRequest_detect is available before anything
-        if (typeof venraas_gtm_XMLHttpRequest_detect !== 'undefined') {
-            console.log("gtm script code loading ready...");
-            rec_pos = "gop";
-            device = "pc";
-            rowItems = 10;
-            showItems = 5;
-            scrollItems = 5;
-            loop = true;
+        ven_recomd("AlsoView", 10, recomd_callback);
+    }
+    
+    function recomd_callback(jsonStr) {
+        console.log("recomd callback data: " + jsonStr);
 
-            venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems);
-
-        // Check for up to 10 seconds
-        }
-        else if (check_cnt < 20) {
-            check_cnt++;
-            console.log("waitting..." + check_cnt);
-            setTimeout(waitting4gtmReady, 500);
-        }
-        else {
-            console.log("waitting more then 10 seconds...");
-        }
+        //處理recomd傳回資料, 並顯示在網頁上.
+        rowItems = 10;
+        showItems = 5;
+        scrollItems = 5;
+        loop = true;
+        recomdCallback(jsonStr);
     }
 </script>
 </body>
