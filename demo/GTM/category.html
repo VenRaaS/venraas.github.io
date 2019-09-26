@@ -83,27 +83,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="slider slick-demo"></div>
 
 <script>
-    var strUrl = location.search;
-    var getPara, ParaVal;
-    var aryPara = {};
-    token = "5guOvNnKn2";
-    rec_type = "AlsoView";
-
-    if (strUrl.indexOf("?") != -1) {
-        var getSearch = strUrl.split("?");
-        getPara = getSearch[1].split("&");
-        for (i = 0; i < getPara.length; i++) {
-            console.log("[" + i + "]getPara: " + getPara[i]);
-            ParaVal = getPara[i].split("=");
-            console.log("ParaVal: " + ParaVal);
-            aryPara[ParaVal[0]] = decodeURIComponent(ParaVal[1]);
-        }
-
-        categ_code = aryPara["cid"];
-    }
-
     function venraasJob() {
         ven_category();
+        ven_categ_code();
 
         ven_recomd("AlsoView", 10, recomd_callback);
     }
