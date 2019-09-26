@@ -84,7 +84,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
     function venraasJob() {
         ven_portal();
-            
+
+        ven_recomd("AlsoView", 10, recomd_callback);
         token = "5guOvNnKn2";
         rec_type = "AlsoView";
         rec_pos = "p";
@@ -95,6 +96,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         loop = true;
 
         venraas_recomd(token, rec_type, rec_pos, uid, gid, categ_code, device, rowItems);
+    }
+    
+    function recomd_callback(jsonStr) {
+        console.log("recomd callback data: " + jsonStr);
+
+        //處理recomd傳回資料, 並顯示在網頁上.
+        rowItems = 10;
+        showItems = 5;
+        scrollItems = 5;
+        recomdCallback(jsonStr);
     }
 </script>
 </body>
