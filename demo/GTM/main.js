@@ -263,20 +263,3 @@ function getCookie(cname) {
     }
     return null;
 }
-function addCart(gid) {
-    var c_cartList = getCookie("cart_list");
-    var cartList = [];
-    if (c_cartList == null) {
-        cartList.push(gid);
-    }
-    else {
-        cartList = JSON.parse(c_cartList);
-        cartList.push(gid);
-    }
-
-    var d = new Date();
-    d.setTime(d.getTime() + 1800000);//30 minutes
-    var domain = window.location.host.split(".").slice(-3).join(".");
-    document.cookie = "cart_list=" + JSON.stringify(cartList) + ";expires=" + d.toUTCString() + ";path=/;domain=" + domain;
-}
-
