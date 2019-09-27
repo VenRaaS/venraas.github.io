@@ -109,6 +109,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             +  '<a class="btn btn-primary" href="cart.html">前往購物車</a>';
     $("#category_link").html(htmlStr);
 
+    function addCart(gid) {
+        var c_cartList = getCookie("cart_list");
+        var cartList = [];
+        if (c_cartList == null) {
+            cartList.push(gid);
+        }
+        else {
+            cartList = JSON.parse(c_cartList);
+            cartList.push(gid);
+        }
+
+        var d = new Date();
+        d.setTime(d.getTime() + 1800000);//30 minutes
+        var domain = window.location.host.split(".").slice(-3).join(".");
+        document.cookie = "cart_list=" + JSON.stringify(cartList) + ";expires=" + d.toUTCString() + ";path=/;domain=" + domain;
+        
+        ven_cart_add(gid);
+    }
+
     function venraasJob() {
         ven_good();
         ven_categ_code();
