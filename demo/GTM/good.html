@@ -125,7 +125,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         var domain = window.location.host.split(".").slice(-3).join(".");
         document.cookie = "cart_list=" + JSON.stringify(cartList) + ";expires=" + d.toUTCString() + ";path=/;domain=" + domain;
         
-        ven_cart_add(gid);
+        ven_cartAdd(gid);
     }
 
     function venraasJob() {
