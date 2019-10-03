@@ -86,7 +86,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
     function venraasJob() {
-        ven_trans_i();
+        //"trans_i":{
+        //  "id":"",
+        //  "ilist":[
+        //    {"id":"5528837"},
+        //    {"id":"2683039"},
+        //    {"id":"5110974"},
+        //    {"id":"5653443"}
+        //  ]
+        //}
+
+        //preocess good item
+        //此範例為商品編號存在cookie:cart_list中
+        //cookie cart_list 存放商品編號
+        var ca = document.cookie.split(";");
+        for (var i=0; i<ca.length; i++) {
+            var c = ca[i].trim();
+            var name = "cart_list=";
+            if (c.indexOf(name) == 0) {
+                //購物車有商品
+                var trans_i = {};
+                var id = null;
+                var iList = [];
+
+                var cartList = JSON.parse(c.substring(name.length, c.length));
+                for (var j=0; j<cartList.length; j++) {
+                    var item = {};
+                    item["id"] = cartList[j];//商品編號
+                    iList.push(item);
+                }
+
+                trans_i["id"] = id;//購物車編號(cartload)或訂單編號(checkout)
+                trans_i["ilist"] = iList;
+                dataLayer.push({
+                    "ven_weblog.trans_i": trans_i
+                });
+            }
+        }
+
+        ven_trans_i(trans_i);
         ven_cart();
 
         token = "5guOvNnKn2";
