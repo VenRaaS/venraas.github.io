@@ -83,13 +83,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
     function venraasJob() {
-        ven_categ_code();
-        ven_gid();
-        ven_keyword();
-        ven_from_rec();
         ven_search();
 
-        ven_recomd("AlsoView", 10, recomd_callback);
+        ven_recomd("sep", "AlsoView", 10, recomd_callback);
     }
     
     function recomd_callback(jsonStr) {
