@@ -118,8 +118,9 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
     hintText = [];
     for (var i=0; i<result.recomd_list.length; i++) {
         goods_img_url = result.recomd_list[i].goods_img_url.replace("http:", location.protocol);
-        addr = "" + result.recomd_list[i].goods_page_url;
-        addr = addr.replace(url_finder, url_replace);
+        addr = url_replace;
+        addr += "&cid=" + result.recomd_list[i].category_code;
+        addr += "&pid=" + result.recomd_list[i].id;
         addr += "&img_url=" + goods_img_url;
         html += process_item(addr, goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i);
         hintText[i] = process_hintText(result.recomd_list[i].msg_type, result.recomd_list[i].msg, result.recomd_list[i].msg_score, result.recomd_list[i].sales);
