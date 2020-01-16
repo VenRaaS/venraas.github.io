@@ -96,7 +96,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
         */
 
-        console.log("venguid=" + venraastool.getcookie("venguid") + "\nvensession=" + venraastool.getcookie("vensession"));
+        console.log("venguid=" + venraastool.getcookie("venguid"));
+        console.log("vensession=" + venraastool.getcookie("vensession"));
+        console.log("guid=" + venraastool.getcookie("guid"));
         
         //"trans_i":{
         //  "id":"",
@@ -151,7 +153,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 aryPara[ParaVal[0]] = decodeURIComponent(ParaVal[1]);
             }
             var htmlStr = "<h2><br>購買 " + aryPara["amount"] + " 件商品<br><br>金額: $" + aryPara["total"] + "</h2>";
-            htmlStr += "<h3>venguid=" + venraastool.getcookie("guid") + "<br>vensession=" + venraastool.getcookie("vensession") + "</h3>";
+            htmlStr += "<h3>venguid=" + venraastool.getcookie("venguid") + "<br>vensession=" + venraastool.getcookie("vensession") + "</h3>";
 
             $("#result").html(htmlStr);
         }
