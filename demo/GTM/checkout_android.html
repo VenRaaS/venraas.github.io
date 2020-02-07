@@ -85,6 +85,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
 <script>
+        console.log("venguid=" + venraastool.getcookie("venguid"));
+        console.log("vensession=" + venraastool.getcookie("vensession"));
+        console.log("guid=" + venraastool.getcookie("guid"));
+        console.log("uid=" + venraastool.getcookie("uid"));
+        console.log("id=" + venraastool.getcookie("id"));
+
     function venraasJob() {
         /*
         var url = new URL(location.href);
@@ -95,10 +101,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             venraastool.doCookieSetup("vensession", this.responseText, 1800000);
         }
         */
-
-        console.log("venguid=" + venraastool.getcookie("venguid"));
-        console.log("vensession=" + venraastool.getcookie("vensession"));
-        console.log("guid=" + venraastool.getcookie("guid"));
         
         //"trans_i":{
         //  "id":"",
