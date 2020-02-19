@@ -53,50 +53,120 @@ public class Venraaspt {
 
     private Venraaspt() {}
 
-    public void ven_init(final String serverLog, final String serverHermes, String token, final String domain, String clientHost, String topHost) {
-        Log.i("[ven_init]", "serverLog='" + serverLog + "', serverHermes='" + serverHermes + "', token='" + token + "', domain='" + domain + "'");
-        this.serverLog = serverLog;
-        this.serverHermes = serverHermes;
-        this.token = token;
-        this.domain = domain;
-        this.clientHost = clientHost;
-        this.topHost = topHost;
+    /**
+     * Venraaspt 使用前必須先呼叫ven_init設定必需的參數
+     *
+     * @param _serverLog  weblog server domain
+     * @param _serverHermes  recomd server domain
+     * @param _token  電商的token
+     * @param _domain  電商的domain
+     * @param _clientHost
+     * @param _topHost
+     * @param _venGuid  使用者的guid(null或""將會由server產生)
+     *
+     */
+    public void ven_init(String _serverLog, String _serverHermes, String _token, String _domain,
+                         String _clientHost, String _topHost, String _venGuid) {
+        Log.i("[ven_init]", "serverLog='" + _serverLog + "', serverHermes='" + _serverHermes + "', token='" + _token + "', domain='" + _domain + "'");
+        this.serverLog = _serverLog;
+        this.serverHermes = _serverHermes;
+        this.token = _token;
+        this.domain = _domain;
+        this.clientHost = _clientHost;
+        this.topHost = _topHost;
+        this.venGuid = _venGuid;
         new Thread(new Runnable() {
             @Override
             public void run() {
-                venGuid = httpGet("https://" + serverLog + apiUuid + "?id=" + domain + "&typ=g&pt=a");
+                if ((venGuid == null) || (venGuid.length() == 0)) {
+                    venGuid = httpGet("https://" + serverLog + apiUuid + "?id=" + domain + "&typ=g&pt=a");
+                }
                 venSession = httpGet("https://" + serverLog + apiUuid + "?id=" + domain + "&typ=s&pt=a");
         }}).start();
     }
 
-    //設定user id
+    /**
+     * 讀取使用者的guid
+     *
+     * @return 使用者的guid(venGuid)
+     *
+     */
+    public String ven_getVenGuid() {
+        return this.venGuid;
+    }
+
+    /**
+     * 設定使用者的帳號
+     *
+     * @param userId  使用者的帳號
+     *
+     */
     public void ven_uid(String userId) {
         this.userId = userId;
     }
 
-    //頁面瀏覽紀錄
+    /**
+     * 讀取使用者的帳號
+     *
+     * @return userId  使用者的帳號
+     *
+     */
+    public String ven_getUid() {
+        return this.userId;
+    }
+
+    /**
+     * webLog for portal(首頁)
+     *
+     */
     public void ven_portal() {
         ven_clear();
         ven_log("pageload", "p");
     }
 
+    /**
+     * webLog for eDM(廣告頁)
+     *
+     */
     public void ven_edm() {
         ven_clear();
         ven_log("pageload", "edm");
     }
 
+    /**
+     * webLog for search(搜尋頁)
+     *
+     * @param keyword 搜尋字串
+     *
+     */
     public void ven_search(String keyword) {
         ven_clear();
         this.keyword = keyword;
         ven_log("pageload", "sep");
     }
 
+    /**
+     * webLog for category(分類頁)
+     *
+     * @param categoryCode 分類頁代碼
+     *
+     */
     public void ven_category(String categoryCode) {
         ven_clear();
         this.categoryCode = categoryCode;
         ven_log("pageload", "cap");
     }
 
+    /**
+     * webLog for goods(商品頁)
+     *
+     * @param categoryCode 分類頁代碼
+     * @param goodsId 商品代碼
+     * @param keyword 搜尋字串
+     * @param fromRec 來源推薦方式代碼
+     * @param nowRec 推薦方式代碼
+     *
+     */
     public void ven_goods(String categoryCode, String goodsId, String keyword, String fromRec, String nowRec) {
         ven_clear();
         this.categoryCode = categoryCode;
@@ -107,18 +177,37 @@ public class Venraaspt {
         ven_log("pageload", "gop");
     }
 
+    /**
+     * webLog for cart(購物車頁)
+     *
+     * @param transI 購物車資訊
+     *
+     */
     public void ven_cart(String transI) {
         ven_clear();
         this.transI = transI;
         ven_log("cartload", "scp");
     }
 
+    /**
+     * webLog for order(結帳頁)
+     *
+     * @param transI 結帳資訊
+     *
+     */
     public void ven_order(String transI) {
         ven_clear();
         this.transI = transI;
         ven_log("checkout", "orp");
     }
 
+    /**
+     * webLog for user define
+     *
+     * @param _action pageload, cartload, checkout, cartadd, reccall
+     * @param _pageType p, edm, sep, cap, gop, scp, orp...
+     *
+     */
     public void ven_log(String _action, String _pageType) {
         this.action = _action;
         this.pageType = _pageType;
@@ -205,23 +294,34 @@ public class Venraaspt {
                 else {
                     params += ",\"keyword\":null";
                 }
-                params += "\"}";
-                httpPost("https://" + serverLog + apiLog, params);
+                params += "}";
+                try {
+                    params = java.net.URLEncoder.encode(params, "UTF-8");
+                }
+                catch (Exception e) {
+                    Log.i("[ven_log]", "Exception='" + e.toString() + "'");
+                }
+                httpPost("https://" + serverLog + apiLog, "application/x-www-form-urlencoded;charset=UTF-8", params);
         }}).start();
     }
 
-    //商品放入購物車時呼叫
+    /**
+     * webLog for 商品放入購物車時呼叫
+     *
+     * @param _goodsId 商品代碼
+     *
+     */
     public void ven_cartAdd(String _goodsId) {
         this.goodsId = _goodsId;
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.i("[ven_log]", "venGuid='" + venGuid + "'");
+                Log.i("[ven_cartAdd]", "venGuid='" + venGuid + "'");
                 if (check_venGuid() == false) {
                     venGuid = httpGet("https://" + serverLog + apiUuid + "?id=" + domain + "&typ=g&pt=a");
                 }
-                Log.i("[ven_log]", "venSession='" + venSession + "'");
+                Log.i("[ven_cartAdd]", "venSession='" + venSession + "'");
                 if (check_venSession() == false) {
                     venSession = httpGet("https://" + serverLog + apiUuid + "?id=" + domain + "&typ=s&pt=a");
                 }
@@ -294,13 +394,27 @@ public class Venraaspt {
                 else {
                     params += ",\"keyword\":null";
                 }
-                params += "\"}";
-                httpPost("https://" + serverLog + apiLog, params);
+                params += "}";
+                try {
+                    params = java.net.URLEncoder.encode(params, "UTF-8");
+                }
+                catch (Exception e) {
+                    Log.i("[ven_cartAdd]", "Exception='" + e.toString() + "'");
+                }
+                httpPost("https://" + serverLog + apiLog, "application/x-www-form-urlencoded;charset=UTF-8", params);
             }
         }).start();
     }
 
-    //推薦
+    /**
+     * 商品推薦
+     *
+     * @param recPos p, cap, gop...
+     * @param recType AlsoView, ClickStream
+     * @param rowItems 推薦數量
+     * @param callback callback函數
+     *
+     */
     public void ven_recomd(final String recPos, final String recType, final int rowItems, final VenraasptCallback callback) {
         new Thread(new Runnable() {
             @Override
@@ -323,7 +437,7 @@ public class Venraaspt {
                         + ",\"ven_session\":\"" + venSession + "\""
                         + ",\"topk\":" + rowItems
                         + "}";
-                String result = httpPost("https://" + serverHermes + apiHermes, params);
+                String result = httpPost("https://" + serverHermes + apiHermes, "application/json;charset=UTF-8", params);
                 Log.i("[ven_recomd]", "result='" + result + "'");
 
                 try {
@@ -338,6 +452,12 @@ public class Venraaspt {
         }).start();
     }
 
+    /**
+     * webLog for 紀錄推薦方式
+     *
+     * @param _nowRec 推薦方式代碼
+     *
+     */
     private void ven_reccall(String _nowRec) {
         this.nowRec = _nowRec;
 
@@ -400,8 +520,14 @@ public class Venraaspt {
         } else {
             params += ",\"keyword\":null";
         }
-        params += "\"}";
-        httpPost("https://" + serverLog + apiLog, params);
+        params += "}";
+        try {
+            params = java.net.URLEncoder.encode(params, "UTF-8");
+        }
+        catch (Exception e) {
+            Log.i("[ven_reccall]", "Exception='" + e.toString() + "'");
+        }
+        httpPost("https://" + serverLog + apiLog, "application/x-www-form-urlencoded;charset=UTF-8", params);
     }
 
     //private function
@@ -449,11 +575,12 @@ public class Venraaspt {
         }
     }
 
-    private String httpPost(String url, String postData) {
+    private String httpPost(String url, String contentType, String postData) {
         Log.i("[httpPost]", "url='" + url + "'\npostData='" + postData + "'");
         try {
             URL obj = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+            conn.setRequestProperty("Content-Type", contentType);
             conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             conn.setRequestProperty("Accept", "application/json");
             conn.setReadTimeout(20000);
