@@ -83,6 +83,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div id="result">
     </div>
+    <div class="btn btn-primary" onclick="androidData();">傳送資料回android</div>
 
 <script>
     console.log("cookie=" + document.cookie);
@@ -157,6 +158,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             $("#result").html(htmlStr);
         }
+    }
+    function andriodData() {
+        Android.setUid("venraaspt.web");
     }
 </script>
 </body>
