@@ -141,13 +141,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         ven_order(trans_i);
 
+        var htmlStr = "<h2><br>購買 " + aryPara["amount"] + " 件商品<br><br>金額: $" + aryPara["total"] + "</h2>";
+        htmlStr += "<h3>venguid=" + venraastool.getcookie("venguid") + "<br>vensession=" + venraastool.getcookie("vensession") + "</h3>";
+
         var strUrl = location.search;
         var getPara, ParaVal;
         var aryPara = {};
         if (strUrl.indexOf("?") != -1) {
-            var htmlStr = "<h2><br>購買 " + aryPara["amount"] + " 件商品<br><br>金額: $" + aryPara["total"] + "</h2>";
-            htmlStr += "<h3>venguid=" + venraastool.getcookie("venguid") + "<br>vensession=" + venraastool.getcookie("vensession") + "</h3>";
-
             var getSearch = strUrl.split("?");
             getPara = getSearch[1].split("&");
             for (i = 0; i < getPara.length; i++) {
@@ -157,9 +157,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 aryPara[ParaVal[0]] = decodeURIComponent(ParaVal[1]);
                 htmlStr += "<h3>" + ParaVal[0] + "=" + ParaVal[1] + "</h3>";
             }
-
-            $("#result").html(htmlStr);
         }
+
+        htmlStr += "<h3>" + document.cookie + "</h3>";
+        $("#result").html(htmlStr);
     }
     function appleData() {
         //apple.setUid("venraaspt.web");
