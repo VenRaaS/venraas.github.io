@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>結帳頁</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K4T7HCQ');</script>
+<!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" type="text/css" href="lib/jquery-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/slick-theme.css"/>
+
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+
+    <script src="lib/jquery-migrate-3.0.0.min.js"></script>
+    <script src="lib/slick.min.js"></script>
+
+    <!--bootstrap-->
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap-theme.min.css"/>
+
+    <script src="lib/venraaspt.min.js"></script>
+
+    <!--main js-->
+    <script src="main.js"></script>
+
+<style>
+.slick-demo {
+    margin: 10% 20%;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.switch-arrow-left{
+    top: 50%;
+    transform: translate(-100%, -50%);
+    position: absolute;
+    cursor: pointer;
+    left: -10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    background-color: rgba(0,0,0,0.3);
+}
+.switch-arrow-right{
+    top: 50%;
+    transform: translate(100%, -50%);
+    position: absolute;
+    cursor: pointer;
+    right: -10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    background-color: rgba(0,0,0,0.3);
+}
+.switch-arrow-left:hover , .switch-arrow-right:hover{
+    background-color: rgba(0,0,0,0.05);
+}
+</style>
+</head>
+
+<body style="text-align: center;">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4T7HCQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <div style="display:flex;justify-content:center;margin:0;color:#fff;background-color:#5cb85c;padding:12px">
+        &nbsp;結帳頁&nbsp;
+    </div>
+    <div style="display:flex;justify-content:center;margin:1% 0;">
+        <a class="btn btn-primary" href="Apple.MainActivity">&nbsp;前往首頁&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" href="Apple.EdmActivity">&nbsp;前往eDM&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" href="Apple.SearchActivity">&nbsp;前往查詢頁&nbsp;</a>
+    </div>
+    <div id="result">
+    </div>
+    <div class="btn btn-primary" onclick="appleData();">傳送資料回apple</div>
+
+<script>
+    console.log("cookie=" + document.cookie);
+    function venraasJob() {
+        /*
+        var url = new URL(location.href);
+        if (url.searchParams.has("venguid")) {
+            venraastool.doCookieSetup("venguid", this.responseText, 315360000000);
+        }
+        if (url.searchParams.has("vensession")) {
+            venraastool.doCookieSetup("vensession", this.responseText, 1800000);
+        }
+        */
+        
+        console.log("venguid=" + venraastool.getcookie("venguid"));
+        console.log("vensession=" + venraastool.getcookie("vensession"));
+
+        //"trans_i":{
+        //  "id":"",
+        //  "ilist":[
+        //    {"id":"5528837"},
+        //    {"id":"2683039"},
+        //    {"id":"5110974"},
+        //    {"id":"5653443"}
+        //  ]
+        //}
+
+        //preocess good item
+        //此範例為商品編號存在cookie:cart_list中
+        //cookie cart_list 存放商品編號
+        var ca = document.cookie.split(";");
+        for (var i=0; i<ca.length; i++) {
+            var c = ca[i].trim();
+            var name = "cart_list=";
+            if (c.indexOf(name) == 0) {
+                //購物車有商品
+                var trans_i = {};
+                var id = null;
+                var iList = [];
+
+                var cartList = JSON.parse(c.substring(name.length, c.length));
+                for (var j=0; j<cartList.length; j++) {
+                    var item = {};
+                    item["id"] = cartList[j];//商品編號
+                    iList.push(item);
+                }
+
+                trans_i["id"] = id;//購物車編號(cartload)或訂單編號(checkout)
+                trans_i["ilist"] = iList;
+                dataLayer.push({
+                    "ven_weblog.trans_i": trans_i
+                });
+            }
+        }
+
+        ven_order(trans_i);
+
+        var strUrl = location.search;
+        var getPara, ParaVal;
+        var aryPara = {};
+        if (strUrl.indexOf("?") != -1) {
+            var getSearch = strUrl.split("?");
+            getPara = getSearch[1].split("&");
+            for (i = 0; i < getPara.length; i++) {
+                console.log("[" + i + "]getPara: " + getPara[i]);
+                ParaVal = getPara[i].split("=");
+                console.log("ParaVal: " + ParaVal);
+                aryPara[ParaVal[0]] = decodeURIComponent(ParaVal[1]);
+            }
+            var htmlStr = "<h2><br>購買 " + aryPara["amount"] + " 件商品<br><br>金額: $" + aryPara["total"] + "</h2>";
+            htmlStr += "<h3>venguid=" + venraastool.getcookie("venguid") + "<br>vensession=" + venraastool.getcookie("vensession") + "</h3>";
+
+            $("#result").html(htmlStr);
+        }
+    }
+    function appleData() {
+        //apple.setUid("venraaspt.web");
+    }
+</script>
+</body>
+</html>
