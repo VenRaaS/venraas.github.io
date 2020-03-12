@@ -163,7 +163,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         $("#result").html(htmlStr);
     }
     function appleData() {
-        //apple.setUid("venraaspt.web");
+        window.webkit.messageHandlers.appleApp.postMessage("venraaspt.web");
     }
 </script>
 </body>
