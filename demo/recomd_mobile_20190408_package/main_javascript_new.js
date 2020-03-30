@@ -20,14 +20,13 @@ function getCookie(cname) {
   return ''
 }
 
+var GLOBAL_URL = new URL(window.location.href)
+var GLOBAL_urlParams = new URLSearchParams(window.location.search)
 var GLOBAL_photo = ""
-var GLOBAL_url = window.location.href
 var GLOBAL_gid, GLOBAL_cid
-if (GLOBAL_url.indexOf('gid') > -1) {
-    var gid_where = GLOBAL_url.indexOf('gid=') + 4,
-        cid_where = GLOBAL_url.indexOf('cid=') + 4,
-        item_gid = parseInt(GLOBAL_url.substr(gid_where, 7)),
-        item_cid = parseInt(GLOBAL_url.substr(cid_where, 6))
+if (GLOBAL_urlParams.has('gid')) {
+    var item_gid = GLOBAL_gid = GLOBAL_urlParams.get("gid")
+    var item_cid = GLOBAL_urlParams.get("cid")
 
     GLOBAL_gid = item_gid
     GLOBAL_cid = item_cid
@@ -37,7 +36,8 @@ if (GLOBAL_url.indexOf('gid') > -1) {
 
     document.cookie = "uid=" + item_cid
     document.cookie = "gid=" + item_gid
-} else {
+}
+else {
     if (getCookie('gid').length != 0) {
         GLOBAL_gid = getCookie('gid')
         GLOBAL_cid = getCookie('cid')
@@ -52,8 +52,12 @@ $(function () {
   if (getCookie('photo').length != 0) {
       GLOBAL_photo = getCookie('photo')
       var photoDir = ''
-      if(GLOBAL_url.indexOf('photo=') !== -1) photoDir = GLOBAL_url.substr(GLOBAL_url.indexOf('photo=') + 6)
-      else photoDir = GLOBAL_photo
+      if (GLOBAL_urlParams.has('photo=')) {
+          photoDir = GLOBAL_urlParams.get('photo=')
+      }
+      else {
+          photoDir = GLOBAL_photo
+      }
 
       cameraType = false
       $('#RT1').addClass('on')
@@ -83,7 +87,7 @@ $(function () {
               return xhr
           },
 
-      url: 'http://35.201.207.10:8000/cupid/api/image/rank/' + photoDir.split('/').pop(),
+      url: 'https://35.201.207.10:8000/cupid/api/image/rank/' + photoDir.split('/').pop(),
       type: 'POST',
       data: {
         'file': photoDir
