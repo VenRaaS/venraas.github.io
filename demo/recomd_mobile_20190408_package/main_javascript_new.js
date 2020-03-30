@@ -935,7 +935,7 @@ function process_slick(result, div_class, loop, rowItems, showItems, scrollItems
   var html = ''
   hintText = []
   for (var i = 0; i < result.recomd_list.length; i++) {
-    html += process_item(result.recomd_list[i].goods_page_url, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i)
+    html += process_item(result.recomd_list[i].goods_page_url, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i, result.recomd_list[i].id, result.recomd_list[i].category_code)
     hintText[i] = process_hintText(result.recomd_list[i].ref_item_list, result.recomd_list[i].sales)
   }
 
@@ -1165,7 +1165,7 @@ function process_hintText(ref_item_list, sales) {
   return '<div class=\'p-50\'>推薦理由</div><div style=\'display: inline-block\'>' + ModelType6_MsgContent + '</div><br>' + ModelType6_recScoreField + score
 }
 
-function process_item(addr, img, name, price, i) {
+function process_item(addr, img, name, price, i, gid, cid) {
   var title_color = $('#title-color').css('background-color'),
     price_color = $('#price-color').css('background-color'),
     title_size = '2rem',
@@ -1176,7 +1176,7 @@ function process_item(addr, img, name, price, i) {
   var html = `
     <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintIndex="${i}">
       <div style="padding: 2rem;">
-        <div class="slick-num${i}" onclick="dev_func(this)" style="width: 100%; text-align: center;">
+        <div class="slick-num${i}" onclick="dev_func(this)" style="width: 100%; text-align: center;" data-gid="${gid}" data-cid="${cid}">
             <img src="${img}" style="width: 100%;" >
         </div>
         <div style="text-align: left;">
@@ -1229,36 +1229,17 @@ function process_item1(addr, img, name, price, i, id) {
 
 
 function dev_func(obj) {
-  var clone_item = $(obj).parents('.itemSlide')
-  var item_href = clone_item.find('.href-a').attr('href')
-  if(item_href.indexOf('pid=') !== -1) {
-    var gid_where = item_href.indexOf('pid=') + 4
-    var item_gid = parseInt(item_href.substr(gid_where, 7))
-  } else {
-    var item_gid = $(obj).attr('data-id')
-  }
-  if(item_href.indexOf('cid=') !== -1) {
-    var cid_where = item_href.indexOf('cid=') + 4
-    var item_cid = parseInt(item_href.substr(cid_where, 6))
-  } else {
-    var item_cid = ''
-  }
-
-    // alert(gid_where+','+cid_where);
-    // alert(item_href+" .gid:" + item_gid + " .cid:" + item_cid);
+  var item_cid = $(obj).attr('data-cid')
+  var item_gid = $(obj).attr('data-gid')
   GLOBAL_gid = item_gid
   GLOBAL_cid = item_cid
   $('#categ_code').val(item_cid)
   $('#setting-gid').val(item_gid)
   document.cookie = 'uid=' + item_cid
   document.cookie = 'gid=' + item_gid
+
   // $('#now-item').html(clone_item.html());
   var url = window.location.href
-  // if (url.indexOf('?') > -1){
-  // url += '&param=1';
-  // }else{
-  // url += '?param=1';
-  // }
   if (url.indexOf('?') > -1) {
     url = url.substring(0, url.indexOf('?'))
   }
