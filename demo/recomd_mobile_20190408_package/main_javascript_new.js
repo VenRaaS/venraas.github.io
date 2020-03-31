@@ -86,7 +86,7 @@ $(function () {
         return xhr
       },
 
-      url: 'https://35.201.207.10:8000/cupid/api/image/rank/' + photoDir.split('/').pop(),
+      url: 'https://titan.venraas.tw/cupid/api/image/rank/' + photoDir.split('/').pop(),
       type: 'POST',
       data: {
         'file': photoDir
@@ -110,7 +110,7 @@ $(function () {
       },
       error: function (xhr, status, error) {
         $('.preloader').addClass('off')
-        console.log('error for https://35.201.207.10:8000/cupid/api/image/rank/')
+        console.log('error for https://titan.venraas.tw/cupid/api/image/rank/')
       }
     })
   }
@@ -973,7 +973,7 @@ function process_result(result, div_class, loop, rowItems, showItems, scrollItem
   var html = ''
   hintText = []
   for (var i = 0; i < result.recomd_list.length; i++) {
-    html += process_item1(result.recomd_list[i].goods_page_url, 'https://35.201.207.10:8000' + result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i, result.recomd_list[i].id)
+    html += process_item1(result.recomd_list[i].goods_page_url, 'https://titan.venraas.tw' + result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price, i, result.recomd_list[i].id)
     hintText[i] = process_hintText(result.recomd_list[i].ref_item_list, result.recomd_list[i].sales)
   }
 
@@ -1383,7 +1383,7 @@ $(function () {
         return xhr
       },
 
-      url: 'https://35.201.207.10:8000/cupid/api/image/rank/' + $('#file').val().split('\\').pop(),
+      url: 'https://titan.venraas.tw/cupid/api/image/rank/' + $('#file').val().split('\\').pop(),
       type: 'POST',
       data: new FormData(this),
       contentType: false,
@@ -1392,7 +1392,7 @@ $(function () {
       success: function (data, status, xhr) {
         $('.preloader').addClass('off')
 
-        let str = 'https://35.201.207.10:8000' + data.uploaded_file_url
+        let str = 'https://titan.venraas.tw' + data.uploaded_file_url
         document.cookie = 'photo=' + str
         GLOBAL_photo = str
 
@@ -1411,7 +1411,7 @@ $(function () {
       },
       error: function (xhr, status, error) {
         $('.preloader').addClass('off')
-        console.log('error for https://35.201.207.10:8000/cupid/api/image/rank/')
+        console.log('error for https://titan.venraas.tw/cupid/api/image/rank/')
         console.log('file path: ' + $('#file').val())
       }
     })
