@@ -86,7 +86,7 @@ $(function () {
         return xhr
       },
 
-      url: 'https://35.201.207.10:8000/cupid/api/image/rank/' + photoDir.split('/').pop(),
+      url: 'http://35.201.207.10:8000/cupid/api/image/rank/' + photoDir.split('/').pop(),
       type: 'POST',
       data: {
         'file': photoDir
@@ -110,7 +110,7 @@ $(function () {
       },
       error: function (xhr, status, error) {
         $('.preloader').addClass('off')
-        console.log('error for https://35.201.207.10:8000/cupid/api/image/rank/')
+        console.log('error for http://35.201.207.10:8000/cupid/api/image/rank/')
       }
     })
   }
