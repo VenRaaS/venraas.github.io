@@ -25,67 +25,66 @@ var GLOBAL_urlParams = new URLSearchParams(window.location.search)
 var GLOBAL_photo = ""
 var GLOBAL_gid, GLOBAL_cid
 if (GLOBAL_urlParams.has('gid')) {
-    var item_gid = GLOBAL_gid = GLOBAL_urlParams.get("gid")
-    var item_cid = GLOBAL_urlParams.get("cid")
+  var item_gid = GLOBAL_gid = GLOBAL_urlParams.get("gid")
+  var item_cid = GLOBAL_urlParams.get("cid")
 
-    GLOBAL_gid = item_gid
-    GLOBAL_cid = item_cid
+  GLOBAL_gid = item_gid
+  GLOBAL_cid = item_cid
 
-    $('#categ_code').val(item_cid)
-    $('#setting-gid').val(item_gid)
+  $('#categ_code').val(item_cid)
+  $('#setting-gid').val(item_gid)
 
-    document.cookie = "uid=" + item_cid
-    document.cookie = "gid=" + item_gid
+  document.cookie = "uid=" + item_cid
+  document.cookie = "gid=" + item_gid
 }
 else {
-    if (getCookie('gid').length != 0) {
-        GLOBAL_gid = getCookie('gid')
-        GLOBAL_cid = getCookie('cid')
-    } else {
-        GLOBAL_gid = '5742934'
-        GLOBAL_cid = '328208'
-    }
-
+  if (getCookie('gid').length != 0) {
+    GLOBAL_gid = getCookie('gid')
+    GLOBAL_cid = getCookie('cid')
+  } else {
+    GLOBAL_gid = '5742934'
+    GLOBAL_cid = '328208'
+  }
 }
 
 $(function () {
   if (getCookie('photo').length != 0) {
-      GLOBAL_photo = getCookie('photo')
-      var photoDir = ''
-      if (GLOBAL_urlParams.has('photo=')) {
-          photoDir = GLOBAL_urlParams.get('photo=')
-      }
-      else {
-          photoDir = GLOBAL_photo
-      }
+    GLOBAL_photo = getCookie('photo')
+    var photoDir = ''
+    if (GLOBAL_urlParams.has('photo=')) {
+      photoDir = GLOBAL_urlParams.get('photo=')
+    }
+    else {
+      photoDir = GLOBAL_photo
+    }
 
-      cameraType = false
-      $('#RT1').addClass('on')
-      $('.result-container').removeClass('off')
-      $('.whole-ad-camera').addClass('off')
-      //$('#TC').val(photoDir);
-      $('#OI').attr('src', photoDir)
-      $('#RTI').attr('src', photoDir)
+    cameraType = false
+    $('#RT1').addClass('on')
+    $('.result-container').removeClass('off')
+    $('.whole-ad-camera').addClass('off')
+    //$('#TC').val(photoDir);
+    $('#OI').attr('src', photoDir)
+    $('#RTI').attr('src', photoDir)
 
-      $.ajax({
+    $.ajax({
       xhr: function () {
         var progress = $('.progress'),
-          xhr = $.ajaxSettings.xhr()
+            xhr = $.ajaxSettings.xhr()
 
-              progress.show()
+        progress.show()
 
-              xhr.upload.onprogress = function (ev) {
+        xhr.upload.onprogress = function (ev) {
           if (ev.lengthComputable) {
             var percentComplete = parseInt((ev.loaded / ev.total) * 100)
-                      progress.val(percentComplete)
-                      if (percentComplete === 100) {
+            progress.val(percentComplete)
+            if (percentComplete === 100) {
               progress.hide().val(0)
-                      }
+            }
           }
         }
 
-              return xhr
-          },
+        return xhr
+      },
 
       url: 'https://35.201.207.10:8000/cupid/api/image/rank/' + photoDir.split('/').pop(),
       type: 'POST',
@@ -97,22 +96,22 @@ $(function () {
       processData: false,
       success: function (data, status, xhr) {
         $('.preloader').addClass('off')
-              console.log(JSON.stringify(data))
+        console.log(JSON.stringify(data))
 
-              var tmp_result = data
-              if (tmp_result != null) {
+        var tmp_result = data
+        if (tmp_result != null) {
           result = tmp_result
-                  hint_control()
-                  showItems = document.getElementById('showItems').value
-                  scrollItems = document.getElementById('scrollItems').value
-                  loop = document.getElementById('loop').checked
-                  process_result(result, 'camera-recommed-list', loop, rowItems, showItems, scrollItems)
-              }
+          hint_control()
+          showItems = document.getElementById('showItems').value
+          scrollItems = document.getElementById('scrollItems').valu
+          loop = document.getElementById('loop').checked
+          process_result(result, 'camera-recommed-list', loop, rowItems, showItems, scrollItems)
+        }
       },
       error: function (xhr, status, error) {
         $('.preloader').addClass('off')
-              alert('error')
-          }
+        console.log('error for https://35.201.207.10:8000/cupid/api/image/rank/')
+      }
     })
   }
 })
@@ -120,12 +119,12 @@ $(function () {
 var target
 
 function touches(e) {
-  var x = e.touches ? e.touches[0].clientX : e.clientX,
-    y = e.touches ? e.touches[0].clientY : e.clientY
-  TweenMax.to(target, 0, {
-    top: y - 20,
-    left: x - 50
-  })
+    var x = e.touches ? e.touches[0].clientX : e.clientX,
+        y = e.touches ? e.touches[0].clientY : e.clientY
+    TweenMax.to(target, 0, {
+        top: y - 20,
+        left: x - 50
+    })
 }
 
 function toggleBtnController() {
@@ -1294,9 +1293,9 @@ function getGoodsInfo() {
       $('#now-item').html(html)
     },
     error: function (xhr, ajaxOptions, thrownError) {
-      console.log('1:error')
-      console.log('2:' + xhr.status)
-      console.log('3:' + thrownError)
+      console.log('1: error')
+      console.log('2: ' + xhr.status)
+      console.log('3: ' + thrownError)
     }
   })
 }
@@ -1412,7 +1411,8 @@ $(function () {
       },
       error: function (xhr, status, error) {
         $('.preloader').addClass('off')
-        alert('error')
+        console.log('error for http://35.201.207.10:8000/cupid/api/image/rank/')
+        console.log('file path: ' + $('#file').val())
       }
     })
   }))
