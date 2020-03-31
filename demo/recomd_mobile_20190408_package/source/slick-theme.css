@@ -12,8 +12,8 @@
     font-weight: normal;
     font-style: normal;
 
-    src: url('http://220.128.219.108/recomd_mobile_20180329/source/fonts/slick.eot');
-    src: url('http://220.128.219.108/recomd_mobile_20180329/source/fonts/slick.eot?#iefix') format('embedded-opentype'), url('http://220.128.219.108/recomd_mobile_20180329/source/fonts/slick.woff') format('woff'), url('http://220.128.219.108/recomd_mobile_20180329/source/fonts/slick.ttf') format('truetype'), url('http://220.128.219.108/recomd_mobile_20180329/source/fonts/slick.svg#slick') format('svg');
+    src: url('fonts/slick.eot');
+    src: url('fonts/slick.eot?#iefix') format('embedded-opentype'), url('http://220.128.219.108/recomd_mobile_20180329/source/fonts/slick.woff') format('woff'), url('http://220.128.219.108/recomd_mobile_20180329/source/fonts/slick.ttf') format('truetype'), url('http://220.128.219.108/recomd_mobile_20180329/source/fonts/slick.svg#slick') format('svg');
 }
 /* Arrows */
 .slick-prev,
