@@ -1208,7 +1208,7 @@ function process_item1(addr, img, name, price, i, gid) {
   var html = `
     <div class="itemSlide col-6" style="margin-bottom: -2rem; position: relative;" hintIndex="${i}">
       <div style="padding: 2rem;">
-        <div class="slick-num${i}" onclick="dev_func(this)" style="width: 100%; text-align: center;" data-gid="${id}">
+        <div class="slick-num${i}" onclick="dev_func(this)" style="width: 100%; text-align: center;" data-gid="${gid}">
           <img src="${img}" style="width: 100%;" >
         </div>
         <div style="text-align: left;">
