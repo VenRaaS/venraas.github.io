@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link href="https://kenwheeler.github.io/slick/slick/slick.css" type="text/css" rel="stylesheet">
+    <link href="https://kenwheeler.github.io/slick/slick/slick-theme.css" type="text/css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="https://kenwheeler.github.io/slick/slick/slick.js" type="text/javascript"></script>
+    <script src="https://venraas.github.io/demo/source/venraaspt.min.js" type="text/javascript"></script>
+    <script src="https://clipboardjs.com/dist/clipboard.min.js" type="text/javascript"></script>
+
+    <style>
+        .slick-prev:before, .slick-next:before {
+            color:white;}
+        .slick-demo{
+            margin: 0 50px;}
+        .switch-arrow-left{
+            top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; left: -40px; width: 30px; height: 100%;}
+        .switch-arrow-right{
+            top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; right: -40px; width: 30px; height: 100%;}
+        .switch-arrow-left:hover , .switch-arrow-right:hover{
+            background-color: rgba(0,0,0,0.05);}
+    </style>
+
+    <script>
+        $(function(){
+            try_it();
+        });
+
+        function try_it() {
+            var token = '5guOvNnKn2';
+            var rec_type = 'ClickStream' ;
+            var rec_pos = 'i' ;
+            var uid = 'u01' ;
+            var gid = '5742934' ;
+            var categ_code = '328208' ;
+            var device = 'pc' ;
+            var topk = '10' ;
+            rowItems = topk;
+            showItems = '5';
+            scrollItems = '5';
+            loop = 'true';
+            var recomdParam = {};
+            if (token) recomdParam.token = token;
+            if (rec_type) recomdParam.rec_type = rec_type;
+            if (rec_pos) recomdParam.rec_pos = rec_pos;
+            if (uid) recomdParam.uid = uid;
+            if (gid) recomdParam.gid = gid;
+            if (categ_code) recomdParam.categ_code = categ_code;
+            if (device) recomdParam.device = device;
+            if (topk) recomdParam.topk = Number(topk);
+            console.log(JSON.stringify(recomdParam));
+            venraastool.recomd(recomdParam, recomdCallback);
+        }
+
+        function print_rec(jsonStr) {
+            var pretty = JSON.stringify(JSON.parse(jsonStr), null, 2);
+            document.getElementById("recomd_result").innerHTML = pretty; }
+        var rowItems;
+        var showItems;
+        var scrollItems;
+        var loop;
+
+        function recomdCallback(jsonStr) {
+            print_rec(jsonStr);
+            var result = JSON.parse(jsonStr);
+            if (result.recomd_list != null) { process_slick(result, "slick-demo", loop, rowItems, showItems, scrollItems); } }
+        var bSlick = false;
+        function process_slick(result, div_class, loop, rowItems, showItems, scrollItems) {
+            var html = "";
+            for (i=0; i<result.recomd_list.length; i++) { html += process_item(result.recomd_list[i].goods_page_url, result.recomd_list[i].goods_img_url, result.recomd_list[i].name, result.recomd_list[i].sale_price); }
+            if (bSlick == true) { $("." + div_class).slick("unslick");
+                $("." + div_class).html("");
+                bSlick = false;
+            }
+            $('.slick-demo').css({'background-color':'rgb(255, 255, 255)'});
+            console.log("loop=" + loop);
+            console.log("rowItems=" + rowItems);
+            console.log("showItems=" + showItems);
+            console.log("scrollItems=" + scrollItems);
+            $("." + div_class).html(html);
+            $("." + div_class).slick({
+                infinite: Boolean(loop),
+                arrows: true,
+                prevArrow: '<div class="switch-arrow-left"><span class="glyphicon glyphicon-menu-left" style="top: 50%;font-size: 36px; transform: translate(0, -50%); color:rgb(153, 153, 153);"></span></div>',nextArrow: '<div class="switch-arrow-right"><span class="glyphicon glyphicon-menu-right" style="top: 50%;font-size: 36px; transform: translate(-4px, -50%); color:rgb(153, 153, 153);"></span></div>',
+                slidesPerRow: Number(rowItems),
+                slidesToShow: Number(showItems),
+                slidesToScroll: Number(scrollItems) });
+            bSlick = true;
+            img_hint();}
+
+        function process_item(addr, img, name, price) {
+            var html = '<div style="margin:10px;">';
+            html += '<a href="' + addr + '"><img src="' + img + '" style="width: 100%"></a><div><span style="margin: 5px 0;font-size: 14px;height: 42px;display: block;overflow: hidden;word-wrap: break-word;word-break: break-all; color:rgb(51, 51, 51);">' + name + '</span></div><div style="font-size: 18px;font-weight: 900;color:rgb(255, 0, 0);text-align:center;"><span style="font-weight: normal;font-size: 10px;color:rgb(255, 0, 0);">$</span>' + price + '</div></div>';
+            return html; }
+
+        function img_hint(){
+            $('.slick-slide').each(function () {
+                var temp_img = $(this).find('a').find('img'),
+                    temp_span = $(this).find('div:eq(0)').find('span'),
+                    temp_title = temp_span.text();
+                temp_img.attr('title',temp_title);
+                temp_span.attr('title',temp_title);
+            })
+        }
+
+    </script>
+</head>
+<body>
+<div class="slider slick-demo"> </div> <textarea style="display: none;" id="recomd_result" class="t2">HERE is for printing recomds result</textarea>
+</body>
+</html>
