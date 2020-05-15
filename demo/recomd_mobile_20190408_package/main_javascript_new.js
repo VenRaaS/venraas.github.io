@@ -1272,7 +1272,7 @@ function getGoodsInfo() {
   if (gid) data['gid'] = gid
 
   $.ajax({
-    url: 'https://apir.venraas.tw/cupid/api/goods/info',
+    url: 'https://apir-test.venraas.tw/cupid/api/goods/info',
     dataType: 'html',
     type: 'GET',
     data: data,
