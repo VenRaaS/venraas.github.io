@@ -87,7 +87,7 @@ $(function () {
       },
 
       url: 'https://titan.venraas.tw/cupid/api/image/rank/' + photoDir.split('/').pop(),
-      headers: {  'Access-Control-Allow-Origin': * }
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {
         'file': photoDir
