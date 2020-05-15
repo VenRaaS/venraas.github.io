@@ -1385,6 +1385,7 @@ $(function () {
       },
 
       url: 'https://titan.venraas.tw/cupid/api/image/rank/' + $('#file').val().split('\\').pop(),
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: new FormData(this),
       contentType: false,
