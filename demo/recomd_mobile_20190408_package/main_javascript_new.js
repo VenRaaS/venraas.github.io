@@ -87,7 +87,6 @@ $(function () {
       },
 
       url: 'https://titan.venraas.tw/cupid/api/image/rank/' + photoDir.split('/').pop(),
-      //headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {
         'file': photoDir
@@ -655,9 +654,9 @@ function getGoodsKeyword() {
 function goodsKeywordsCallback(jsonStr) {
   console.log(jsonStr)
   var result = JSON.parse(jsonStr)
-  if (result.goods_keywords) {
+  if (result.length > 0) {
     var htmlStr = '<div id="tagON"></div>'
-    goodsKeywords = result.goods_keywords
+    goodsKeywords = result
     selectedGoodsKeywords = []
     for (i = 0; i < goodsKeywords.length; i++) {
       selectedGoodsKeywords[i] = false
@@ -1385,7 +1384,6 @@ $(function () {
       },
 
       url: 'https://titan.venraas.tw/cupid/api/image/rank/' + $('#file').val().split('\\').pop(),
-      //headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: new FormData(this),
       contentType: false,
