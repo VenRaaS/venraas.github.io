@@ -21,6 +21,11 @@
        gtag('js', new Date());
 
        gtag('config', 'UA-15220785-1');
+       
+       ga('send', {
+          hitType: 'pageview',
+          page: location.pathname
+        });
      </script>
 
     <style>
