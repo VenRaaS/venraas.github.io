@@ -100,7 +100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         //此範例為商品編號存在cookie:cart_list中
         //cookie cart_list 存放商品編號
         var trans_i = {};
-        var ref_info = [];
+        var ref_info = []; //必須是array
         var ca = document.cookie.split(";");
         for (var i=0; i<ca.length; i++) {
             var c = ca[i].trim();
