@@ -1,0 +1,1350 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2020-05-29 08:03:22",
+    "containerVersion": {
+        "path": "accounts/4630659176/containers/10741136/versions/0",
+        "accountId": "4630659176",
+        "containerId": "10741136",
+        "containerVersionId": "0",
+        "container": {
+            "path": "accounts/4630659176/containers/10741136",
+            "accountId": "4630659176",
+            "containerId": "10741136",
+            "name": "venraas.github.io",
+            "publicId": "GTM-K4T7HCQ",
+            "usageContext": [
+                "WEB"
+            ],
+            "fingerprint": "1579165976450",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/4630659176/containers/10741136/workspaces?apiLink=container"
+        },
+        "tag": [
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "tagId": "5",
+                "name": "ven weblog",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  (function() {\n    var data = {};\n    data[\"token\"] = {{ven token}};\n    data[\"uid\"] = {{ven uid}};\n    data[\"page_type\"] = {{ven page_type}};\n    data[\"action\"] = {{ven action}};\n    data[\"client_host\"] = {{ven client_host}};\n    data[\"tophost\"] = {{ven tophost}};\n    data[\"categ_le\"] = {{ven categ_le}};\n    data[\"categ_code\"] = {{ven categ_code}};\n    data[\"gid\"] = {{ven gid}};\n    data[\"trans_i\"] = {{ven trans_i}};\n    data[\"now_rec\"] = {{ven now_rec}};\n    data[\"from_rec\"] = {{ven from_rec}};\n    data[\"cc_session\"] = {{ven cc_session}};\n    data[\"cc_guid\"] = {{ven cc_guid}};\n    data[\"ven_session\"] = {{ven ven_session}};\n    data[\"ven_guid\"] = {{ven ven_guid}};\n    data[\"client_utc\"] = (new Date()).getTime();\n    data[\"client_tzo\"] = (new Date()).getTimezoneOffset();\n    data[\"web\"] = {{ven web}};\n    data[\"device\"] = {{ven device}};\n    data[\"uri\"] = {{ven uri}};\n    data[\"para\"] = {{ven para}};\n    data[\"referrer\"] = {{ven referrer}};\n    data[\"keyword\"] = {{ven keyword}};\n    var Data = {{ven action}} + \"=\" + encodeURIComponent(JSON.stringify(data));\n\n    //using venraaspt.js\n    var url_log = \"https://\" + venstrob.strserver + venstrob.strlogapi;\n    var xhr_log = venraastool.xhr();\n    //console.log(\"[ven weblog] xhr_log\");\n    xhr_log.open(\"POST\", url_log, true);\n    xhr_log.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded;charset=UTF-8\");\n    xhr_log.withCredentials = true;\n    xhr_log.onreadystatechange = function() {\n      try {\n        if (this.readyState == 4 && this.status == 200) {\n          console.log(\"[ven weblog] success: \" + this.responseText);\n        }\n      }\n      catch(e) {}\n    };\n    xhr_log.send(Data);\n    //console.log(\"[ven weblog] xhr_log.send()\");\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "true"
+                    }
+                ],
+                "fingerprint": "1587021603291",
+                "firingTriggerId": [
+                    "27"
+                ],
+                "parentFolderId": "20",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "tagId": "6",
+                "name": "ven session",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  (function() {\n    console.log(\"[ven session] Getting....\");\n    //get ven_session using venraaspt.js\n    var ven_session = venraastool.getcookie(\"vensession\");\n    if (ven_session == \"\") {\n      var url_session = \"https://\" + venstrob.strserver + venstrob.struuidapi + \"?id=\" + top.location.host + \"&typ=s&pt=a\";\n      var xhr_session = venraastool.xhr();\n      //console.log(\"[ven session] xhr_session\");\n      xhr_session.open(\"GET\", url_session, true);\n      xhr_session.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded;charset=UTF-8\");\n      xhr_session.withCredentials = true;\n      xhr_session.onreadystatechange = function() {\n        try {\n          if (this.readyState == 4 && this.status == 200) {\n            venraastool.doCookieSetup(\"vensession\", this.responseText, 1800000);\n            ven_session = this.responseText;\n            console.log(\"[ven session] ven_session=\" + ven_session);\n            dataLayer.push({\n              \"ven_weblog.ven_session\": ven_session,\n              \"event\": \"venGuid\"\n            });\n          }\n        }\n        catch(e) {}\n      };\n      xhr_session.send();\n    }\n    else {\n      console.log(\"[ven session] ven_session=\" + ven_session);\n      dataLayer.push({\n        \"ven_weblog.ven_session\": ven_session,\n        \"event\": \"venGuid\"\n      });\n    }\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "true"
+                    }
+                ],
+                "fingerprint": "1579165960240",
+                "firingTriggerId": [
+                    "52"
+                ],
+                "parentFolderId": "20",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "tagId": "7",
+                "name": "ven guid",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  (function() {\n    console.log(\"[ven guid] Getting....\");\n    //get ven_guid using venraaspt.js\n    var ven_guid = venraastool.getcookie(\"venguid\");\n    if (ven_guid == \"\") {\n      var url_guid = \"https://\" + venstrob.strserver + venstrob.struuidapi + \"?id=\" + top.location.host + \"&typ=g&pt=a\";\n      var xhr_guid = venraastool.xhr();\n      //console.log(\"[ven guid] xhr_guid\");\n      xhr_guid.open(\"GET\", url_guid, true);\n      xhr_guid.setRequestHeader(\"Content-type\",\"application/x-www-form-urlencoded;charset=UTF-8\");\n      xhr_guid.withCredentials = true;\n      xhr_guid.onreadystatechange = function() {\n        try {\n          if (this.readyState == 4 && this.status == 200) {\n            venraastool.doCookieSetup(\"venguid\", this.responseText, 315360000000);\n            ven_guid = this.responseText;\n            console.log(\"[ven guid] ven_guid=\" + ven_guid);\n            dataLayer.push({\n              \"ven_weblog.ven_guid\": ven_guid,\n              \"event\": \"venJob\"\n            });\n          }\n        }\n        catch(e) {}\n      };\n      xhr_guid.send();\n    }\n    else {\n      console.log(\"[ven guid] ven_guid=\" + ven_guid);\n      dataLayer.push({\n        \"ven_weblog.ven_guid\": ven_guid,\n        \"event\": \"venJob\"\n      });\n    }\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "true"
+                    }
+                ],
+                "fingerprint": "1579165777947",
+                "firingTriggerId": [
+                    "53"
+                ],
+                "parentFolderId": "20",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "tagId": "8",
+                "name": "ven cartAdd",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  (function() {\n    var data = {};\n    data[\"token\"] = {{ven token}};\n    data[\"uid\"] = {{ven uid}};\n    data[\"page_type\"] = {{ven page_type}};\n    data[\"action\"] = \"cartadd\";\n    data[\"client_host\"] = {{ven client_host}};\n    data[\"tophost\"] = {{ven tophost}};\n    data[\"categ_le\"] = {{ven categ_le}};\n    data[\"categ_code\"] = {{ven categ_code}};\n    data[\"gid\"] = {{ven gid}};\n    data[\"trans_i\"] = {{ven trans_i}};\n    data[\"now_rec\"] = {{ven now_rec}};\n    data[\"from_rec\"] = {{ven from_rec}};\n    data[\"cc_session\"] = {{ven cc_session}};\n    data[\"cc_guid\"] = {{ven cc_guid}};\n    data[\"ven_session\"] = {{ven ven_session}};\n    data[\"ven_guid\"] = {{ven ven_guid}};\n    data[\"client_utc\"] = (new Date()).getTime();\n    data[\"client_tzo\"] = (new Date()).getTimezoneOffset();\n    data[\"web\"] = {{ven web}};\n    data[\"device\"] = {{ven device}};\n    data[\"uri\"] = {{ven uri}};\n    data[\"para\"] = {{ven para}};\n    data[\"referrer\"] = {{ven referrer}};\n    data[\"keyword\"] = {{ven keyword}};\n    var Data = \"cartadd=\" + encodeURIComponent(JSON.stringify(data));\n\n    //using venraaspt.js\n    var url_log = \"https://\" + venstrob.strserver + venstrob.strlogapi;\n    var xhr_log = venraastool.xhr();\n    xhr_log.open(\"POST\", url_log, true);\n    xhr_log.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded;charset=UTF-8\");\n    xhr_log.withCredentials = true;\n    xhr_log.onreadystatechange = function() {\n      try {\n        if (this.readyState == 4 && this.status == 200) {\n          console.log(\"[ven cartAdd] success: \" + this.responseText);\n        }\n      }\n      catch(e) {}\n    };\n    xhr_log.send(Data);\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "true"
+                    }
+                ],
+                "fingerprint": "1587522732127",
+                "firingTriggerId": [
+                    "68"
+                ],
+                "parentFolderId": "20",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "tagId": "9",
+                "name": "ven recCall",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  (function() {\n    //reccall 是發送 呼叫/rank的傳回值中的recomd_id\n    var ven_response = JSON.parse({{ven response}});\n \n    var now_rec = [];\n    var now_rec_item = {};\n    now_rec_item[\"rec\"] = ven_response[\"recomd_id\"];\n    now_rec.push(now_rec_item);\n    var data = {};\n    data[\"now_rec\"] = now_rec;\n    data[\"token\"] = {{ven token}};\n    data[\"uid\"] = {{ven uid}};\n    data[\"page_type\"] = {{ven page_type}};\n    data[\"action\"] = \"reccall\";\n    data[\"client_host\"] = {{ven client_host}};\n    data[\"tophost\"] = {{ven tophost}};\n    data[\"categ_le\"] = {{ven categ_le}};\n    data[\"categ_code\"] = {{ven categ_code}};\n    data[\"gid\"] = {{ven gid}};\n    data[\"cc_session\"] = {{ven cc_session}};\n    data[\"cc_guid\"] = {{ven cc_guid}};\n    data[\"ven_session\"] = {{ven ven_session}};\n    data[\"ven_guid\"] = {{ven ven_guid}};\n    data[\"client_utc\"] = (new Date()).getTime();\n    data[\"client_tzo\"] = (new Date()).getTimezoneOffset();\n    data[\"web\"] = {{ven web}};\n    data[\"device\"] = {{ven device}};\n    data[\"uri\"] = {{ven uri}};\n    data[\"para\"] = {{ven para}};\n    data[\"referrer\"] = {{ven referrer}};\n    data[\"keyword\"] = {{ven keyword}};\n    var Data = \"reccall=\" + encodeURIComponent(JSON.stringify(data));\n\n    //using venraaspt.js\n    var url_log = \"https://\" + venstrob.strserver + venstrob.strlogapi;\n    var xhr_log = venraastool.xhr();\n    xhr_log.open(\"POST\", url_log, true);\n    xhr_log.setRequestHeader(\"Content-type\", \"application/x-www-form-urlencoded;charset=UTF-8\");\n    xhr_log.withCredentials = true;\n    xhr_log.onreadystatechange = function() {\n      try {\n        if (this.readyState == 4 && this.status == 200) {\n          console.log(\"[ven recCall] success: \" + this.responseText);\n        }\n      }\n\t  catch(e) {}\n    };\n    xhr_log.send(Data);\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "true"
+                    }
+                ],
+                "fingerprint": "1587021654772",
+                "firingTriggerId": [
+                    "202"
+                ],
+                "parentFolderId": "20",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "tagId": "18",
+                "name": "ven init",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  function ven_init(token, domain) {\n    try {\n      console.log(\"[ven init] venraaspt loading...\");\n\n      var venraas_dt = Math.floor((new Date()).getTime() / 86400000);\n      var venraas_script = document.createElement(\"script\");\n      venraas_script.src = \"https://venraas.github.io/demo/GTM/lib/venraaspt.min.js?_=\" + venraas_dt; // TODO: 請後續對應GCP環境的 domain name\n      venraas_script.async = true;\n\n      venraas_script.onload = venraas_script.onreadystatechange = function() {\n        try {\n          if ((venraas_script_done == false) &&\n              ((this.readyState === \"loaded\") || (this.reradyState === \"complete\") || (!this.readyState))) {\n            venraas_script_done = true;\n            venraas_script.onload = venraas_script.onreadystatechange = null;\n\n            console.log(\"[ven init] venraaspt loading finished!\");\n\n            //網頁載入時要做的事情\n            ven_uid();\n            ven_device();\n\n            dataLayer.push({\n              \"ven_weblog.token\" : token,\n              \"ven_weblog.client_host\" : domain,\n              \"ven_weblog.para\" : location.search,\n              \"ven_weblog.uri\" : location.pathname,\n              \"ven_weblog.tophost\" : top.location.host,\n              \"ven_weblog.referrer\" : document.referrer,\n              \"event\" : \"venSession\"\n            });\n          }\n        }\n        catch(e) { console.log(e); }\n      };\n\n      var head = document.getElementsByTagName(\"head\")[0];\n      if (head) {\n        head.appendChild(venraas_script);\n      }\n    }\n    catch(e) { console.log(\"[ven_init]\" + e); }\n  }\n\n  //頁面瀏覽紀錄\n  function ven_portal() {\n    //首頁\n    ven_log(\"pageload\", \"p\");\n  }\n  function ven_category() {\n    //分類頁面\n    ven_categ_code();\n    ven_log(\"pageload\", \"cap\");\n  }\n  function ven_good() {\n    //商品頁面\n    ven_keyword();\n    ven_categ_code();\n    ven_gid();\n    ven_from_rec();\n    ven_log(\"pageload\", \"gop\");\n  }\n  function ven_edm() {\n    //edm頁面\n    ven_log(\"pageload\", \"edm\");\n  }\n  function ven_search() {\n    //搜尋頁面\n    ven_keyword();\n    ven_log(\"pageload\", \"sep\");\n  }\n  function ven_cart(trans_i) {\n    //購物車頁面\n    ven_trans_i(trans_i);\n    ven_log(\"cartload\", \"scp\");\n  }\n  function ven_order(trans_i) {\n    //結帳頁面\n    ven_trans_i(trans_i);\n    ven_log(\"checkout\", \"orp\");\n  }\n  function ven_log(action, page_type) {\n    //自訂頁面\n    dataLayer.push(\n      {\n    \t\"ven_weblog.action\": action,\n\t    \"ven_weblog.page_type\": page_type,\n        \"event\": \"venWeblog\"\n      }\n    );\n  }\n  \n  //venraas recomd\n  //recPos : p, cap, gop...\n  //recType : AlsoView, ClickStream\n  //rowItems : 推薦商品數量\n  //recomdCallback : 呼叫推薦功能後, 所呼叫的function. 如：recomdCallback(jsonStr);\n  function ven_recomd(recPos, recType, rowItems, recomdCallback) {\n    //呼叫推薦\n    dataLayer.push({\n      \"ven_recomd.rec_pos\": recPos,\n      \"ven_recomd.rec_type\": recType,\n      \"ven_recomd.topk\": rowItems,\n      \"ven_recomd.callback\": recomdCallback,\n      \"event\" : \"venRecomd\"\n    });\n  }\n\n\n  //其他需要使用之函數\n  function getUrlParameter(name) {\n    name = name.replace(/[\\[]/, '\\\\[').replace(/[\\]]/, '\\\\]');\n    var regex = new RegExp('[\\\\?&]' + name + '=([^&#]*)');\n    var results = regex.exec(window.location.href);\n    return results === null ? '' : decodeURIComponent(results[1].replace(/\\+/g, ' '));\n  }\n  \n  //venraas device\n  function ven_device() {\n    //讀取使用者瀏覽網頁的裝置(如:pc, mb,...)\n    var locationUrl = window.location.toLocaleString();\n    var _device = \"pc\";\n    if (locationUrl.indexOf('https://m.') != -1) {\n      _device = \"mb\";\n    }\n\n    dataLayer.push({\n      \"ven_weblog.device\": _device\n    });\n  }\n\n  //venraas get user id if user had login\n  function ven_uid() {\n    //如果使用者已經登入,讀取user id(uid)\n    //此範例為uid在url中帶入\n    //uid=xxxxxx\n    /*\n    var url = new URL(location.href);\n    if (getUrlParameter(\"uid\") != '') {\n      dataLayer.push({\n        \"ven_weblog.uid\": url.searchParams.get(\"uid\")\n      });\n    }\n    */\n    dataLayer.push({\n      \"ven_weblog.uid\": \"venraaspt.gtm\"\n    });\n  }\n\n  //venraas keyword if web page is search page or good page\n  function ven_keyword() {\n    //搜尋頁:傳入搜尋keyword；商品頁:若前一頁是從搜尋結果點過來的，傳入搜尋keyword\n    //此範例為keyword在url中帶入\n    //search=xxxxxx\n    var value = getUrlParameter(\"search\");\n    if (value != '') {\n      dataLayer.push({\n        \"ven_weblog.keyword\": value\n      });\n    }\n  }\n\n  //venraas categ_code if web page is category page\n  function ven_categ_code() {\n    //當在分類頁面時,抓取分類代碼\n    //此範例為cid在url中帶入\n    //cid=xxxxxx\n    var value = getUrlParameter(\"cid\");\n    if (value != '') {\n      dataLayer.push({\n        \"ven_weblog.categ_code\": value\n      });\n    }\n  }\n\n  //venraas from_rec if web page is goods page\n  function ven_from_rec() {\n    //當在商品頁面時,抓取前頁推薦代碼\n    //此範例為from_rec在url中帶入\n    //from_rec=xxxxxxxxxx\n    var value = getUrlParameter(\"from_rec\");\n    if (value != '') {\n      dataLayer.push({\n        \"ven_weblog.from_rec\": value\n      });\n    }\n  }\n\n  //venraas gid if web page is goods page\n  function ven_gid() {\n    //當在商品頁面時,抓取商品代碼\n    //此範例為gid在url中帶入\n    //pid=xxxxxxx\n    var value = getUrlParameter(\"pid\");\n    if (value != '') {\n      dataLayer.push({\n        \"ven_weblog.gid\": value\n      });\n    }\n  }\n\n  //venraas trans_i for 購物車頁面,訂單/結帳頁面\n  function ven_trans_i(trans_i) {\n    dataLayer.push({\n      \"ven_weblog.trans_i\": trans_i\n    });\n  }\n\n  //venraas ref_info for 購物車頁面\n  function ven_ref_info(ref_info) {\n    dataLayer.push({\n      \"ven_recomd.ref_info\": ref_info\n    });\n  }\n\n  //venraas w_categ_info\n  function ven_w_categ_info(w_categ_info) {\n    dataLayer.push({\n      \"ven_recomd.w_categ_info\": w_categ_info\n    });\n  }\n\n  //venraas cartAdd for 商品頁面\n  //將商品放入購物車時呼叫\n  function ven_cartAdd(gid) {\n    dataLayer.push({\n      \"ven_weblog.gid\": gid,\n      \"event\" : \"venCartAdd\"\n    });\n  }\n\n  (function() {\n    //ven_init(token, domain);\n    //token : venraas提供的token\n    //domain : 網站主要domain\n    ven_init(\"xVtZLw5p4n\", \"venraas.github.io\"); // TODO: 請後續對應 VenRaaS Console 公司設定\n  })();\n\n  //venraas_script_done用來判斷venraaspt是否已經載入\n  var venraas_script_done = false;\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "true"
+                    }
+                ],
+                "fingerprint": "1590636926060",
+                "firingTriggerId": [
+                    "2147479553"
+                ],
+                "parentFolderId": "20",
+                "tagFiringOption": "ONCE_PER_LOAD",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "tagId": "20",
+                "name": "ven job",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  (function() {\n    //if found function venraasJob, execute it.\n    if (typeof venraasJob === \"function\") {\n      console.log(\"[ven job] found venraasJob, execute it!\");\n      venraasJob();\n    }\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1569570490413",
+                "firingTriggerId": [
+                    "199"
+                ],
+                "parentFolderId": "20",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "tagId": "21",
+                "name": "ven recomd",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n  function ven_recomd_reccall(jsonStr) {\n    var recomdCallback = {{ven callback}};\n  \n    //recCall\n    dataLayer.push({\n      \"ven_recomd.response\": jsonStr,\n      \"event\": \"venRecCall\"\n    });\n\n    recomdCallback(jsonStr);\n  }\n\n  (function() {\n    var recomdParam = {};\n    recomdParam.token = {{ven token}};\n    recomdParam.rec_pos = {{ven rec_pos}};\n    recomdParam.rec_type = {{ven rec_type}};\n    recomdParam.uid = {{ven uid}};\n    recomdParam.gid = {{ven gid}};\n    recomdParam.device = {{ven device}};\n    recomdParam.categ_code = {{ven categ_code}};\n    recomdParam.topk = {{ven topk}};\n    //購物車頁才會有此參數(ref_info)\n    if ((recomdParam.rec_pos == \"scp\") || (recomdParam.rec_pos == \"favor\")) {\n      recomdParam.ref_info = {{ven ref_info}};\n    }\n    recomdParam.w_categ_info = {{ven w_categ_info}};\n    console.log(\"[ven recomd] recomdParam=\" + JSON.stringify(recomdParam));\n    venraastool.recomd(recomdParam, ven_recomd_reccall);\n  })();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1590636692402",
+                "firingTriggerId": [
+                    "200"
+                ],
+                "parentFolderId": "20",
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                }
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "triggerId": "27",
+                "name": "ven weblog",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "venWeblog"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1569479420304",
+                "parentFolderId": "20"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "triggerId": "52",
+                "name": "ven session",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "venSession"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1569479404904",
+                "parentFolderId": "20"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "triggerId": "53",
+                "name": "ven guid",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "venGuid"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1569479469438",
+                "parentFolderId": "20"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "triggerId": "68",
+                "name": "ven cartAdd",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "venCartAdd"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1569551263387",
+                "parentFolderId": "20"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "triggerId": "199",
+                "name": "ven job",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "venJob"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1569479457935",
+                "parentFolderId": "20"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "triggerId": "200",
+                "name": "ven recomd",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "venRecomd"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1569479442331",
+                "parentFolderId": "20"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "triggerId": "202",
+                "name": "ven recCall",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "venRecCall"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1569484786802",
+                "parentFolderId": "20"
+            }
+        ],
+        "variable": [
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "26",
+                "name": "ven token",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.token"
+                    }
+                ],
+                "fingerprint": "1568859841213",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "27",
+                "name": "ven uid",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.uid"
+                    }
+                ],
+                "fingerprint": "1568859856378",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "28",
+                "name": "ven page_type",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.page_type"
+                    }
+                ],
+                "fingerprint": "1568859767344",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "29",
+                "name": "ven action",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.action"
+                    }
+                ],
+                "fingerprint": "1568859240212",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "30",
+                "name": "ven client_host",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.client_host"
+                    }
+                ],
+                "fingerprint": "1568859637167",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "31",
+                "name": "ven tophost",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.tophost"
+                    }
+                ],
+                "fingerprint": "1568859889418",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "32",
+                "name": "ven categ_le",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.categ_le"
+                    }
+                ],
+                "fingerprint": "1568859476308",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "33",
+                "name": "ven categ_code",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.categ_code"
+                    }
+                ],
+                "fingerprint": "1568859463079",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "34",
+                "name": "ven gid",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.gid"
+                    }
+                ],
+                "fingerprint": "1568859733230",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "35",
+                "name": "ven trans_i",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.trans_i"
+                    }
+                ],
+                "fingerprint": "1568859879290",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "36",
+                "name": "ven now_rec",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.now_rec"
+                    }
+                ],
+                "fingerprint": "1568859755825",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "37",
+                "name": "ven from_rec",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.from_rec"
+                    }
+                ],
+                "fingerprint": "1568859709091",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "38",
+                "name": "ven cc_session",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.cc_session"
+                    }
+                ],
+                "fingerprint": "1568859622946",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "39",
+                "name": "ven cc_guid",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.cc_guid"
+                    }
+                ],
+                "fingerprint": "1568859490288",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "40",
+                "name": "ven ven_session",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.ven_session"
+                    }
+                ],
+                "fingerprint": "1568859378268",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "41",
+                "name": "ven ven_guid",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.ven_guid"
+                    }
+                ],
+                "fingerprint": "1568859411740",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "42",
+                "name": "ven client_utc",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.client_utc"
+                    }
+                ],
+                "fingerprint": "1568859668178",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "43",
+                "name": "ven client_tzo",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.client_tzo"
+                    }
+                ],
+                "fingerprint": "1568859652790",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "44",
+                "name": "ven web",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.web"
+                    }
+                ],
+                "fingerprint": "1568859274289",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "45",
+                "name": "ven device",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.device"
+                    }
+                ],
+                "fingerprint": "1568859691383",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "46",
+                "name": "ven uri",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.uri"
+                    }
+                ],
+                "fingerprint": "1568859425699",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "47",
+                "name": "ven para",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.para"
+                    }
+                ],
+                "fingerprint": "1568859803644",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "48",
+                "name": "ven referrer",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.referrer"
+                    }
+                ],
+                "fingerprint": "1568859826761",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "49",
+                "name": "ven keyword",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_weblog.keyword"
+                    }
+                ],
+                "fingerprint": "1568859743617",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "76",
+                "name": "ven rec_type",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_recomd.rec_type"
+                    }
+                ],
+                "fingerprint": "1569479901383",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "77",
+                "name": "ven callback",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_recomd.callback"
+                    }
+                ],
+                "fingerprint": "1569479948312",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "78",
+                "name": "ven topk",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_recomd.topk"
+                    }
+                ],
+                "fingerprint": "1569479975953",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "79",
+                "name": "ven response",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_recomd.response"
+                    }
+                ],
+                "fingerprint": "1569485978433",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "80",
+                "name": "ven rec_pos",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_recomd.rec_pos"
+                    }
+                ],
+                "fingerprint": "1570073177871",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "222",
+                "name": "ven ref_info",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_recomd.ref_info"
+                    }
+                ],
+                "fingerprint": "1590562198277",
+                "parentFolderId": "20",
+                "formatValue": {}
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "variableId": "223",
+                "name": "ven w_categ_info",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "ven_recomd.w_categ_info"
+                    }
+                ],
+                "fingerprint": "1590636776889",
+                "parentFolderId": "20",
+                "formatValue": {}
+            }
+        ],
+        "folder": [
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "folderId": "20",
+                "name": "venraas",
+                "fingerprint": "1560998399969"
+            }
+        ],
+        "builtInVariable": [
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "PAGE_URL",
+                "name": "Page URL"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "PAGE_HOSTNAME",
+                "name": "Page Hostname"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "PAGE_PATH",
+                "name": "Page Path"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "REFERRER",
+                "name": "Referrer"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "EVENT",
+                "name": "Event"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "CLICK_ELEMENT",
+                "name": "Click Element"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "CLICK_CLASSES",
+                "name": "Click Classes"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "CLICK_ID",
+                "name": "Click ID"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "CLICK_TARGET",
+                "name": "Click Target"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "CLICK_URL",
+                "name": "Click URL"
+            },
+            {
+                "accountId": "4630659176",
+                "containerId": "10741136",
+                "type": "CLICK_TEXT",
+                "name": "Click Text"
+            }
+        ],
+        "fingerprint": "1590739402028",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/4630659176/containers/10741136/versions/0?apiLink=version"
+    }
+}
