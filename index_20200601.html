@@ -176,6 +176,7 @@
             min-width: 100%;
             height: 28rem;
         }
+        /* slider2 border top & bottom color need linear-gradient */
         .b-image{
             border: 2px solid transparent;
             border-width: 2px 0 2px 0;
@@ -183,7 +184,24 @@
             border-image-slice: 1;
             padding: .3em 0;
         }
-
+        /* slider2 skew line to seperate two containers */
+        .slider2-image{
+            position: relative;
+            /* border: 2px solid #ff7bac; */
+        }
+        .slider2-image::before{
+            content: "";
+            width: 100%;
+            height: 90%;
+            position: absolute;
+            border-left: 2px solid #ff7bac;
+            border-top: 2px solid transparent;
+            border-bottom: 2px solid transparent;
+            border-right: 2px solid transparent;
+            left: 14px;
+            top: 8px;
+            transform: skew(30deg);
+        }
         .b-contact{
             border: none;
             color: white;
@@ -404,15 +422,15 @@
                                     線上說明會</h1>
                             </div>
                         </div>
-                        <div class="row justify-content-around b-image" style="border-top: 2px solid #00abeb;border-bottom: 2px solid #00abeb; padding: .3em 0;">
+                        <div class="row justify-content-around b-image">
                             <div class="col-sm-6 text-left align-self-center">
-                                <p class="slider2-p" style="color: #000000; font-weight: 500; margin-bottom: 0px; text-align: left;">費用：報名即可免費參加<br>
+                                <p class="slider2-p slider2-image" style="color: #000000; font-weight: 500; margin-bottom: 0px; text-align: left;">費用：報名即可免費參加<br>
                                     &emsp;日期：2020.06.30 星期二<br>
                                     &emsp;&emsp;時間：14:00~15:00 (GMT+8)<br>
                                     &emsp;&emsp;&emsp;地點：<a href="#" style="color: #0000ff; text-decoration: underline; font-weight: 400;">點此進入</a>
                             </div>
                             <div class="col-sm-6 text-left align-self-center">
-                                <p class="slider2-p" style="color: #000000; font-weight: 500; margin-bottom: 0px; text-align: left;">精彩內容<br>
+                                <p class="slider2-p slider2-image" style="color: #000000; font-weight: 500; margin-bottom: 0px; text-align: left;">精彩內容<br>
                                     &emsp;&#8226;專訪VenRaaS研發團隊<br>
                                     &emsp;&emsp;&#8226;埋碼介接123<br>
                                     &emsp;&emsp;&emsp;&#8226;訂閱方案介紹<br>
