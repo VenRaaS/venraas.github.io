@@ -480,9 +480,9 @@
                             <div class="col-md-12">
                                 <p class="red-txt" style="color: #f00; font-weight: 500; margin-bottom: 5px;">
                                     席位有限，手刀卡位</span></p>
-                                <p style="margin-bottom:-10px;"><a class="btn btn-lg btn-primary"
+                                <p style="margin-bottom:-10px;"><a class="btn btn-lg btn-primary applySeminarBtn"
                                         href="https://docs.google.com/forms/d/e/1FAIpQLSdV3x60oOWEkrMnngaLN_yg3elcwYqJhC1kfzHbJQ6LGAHskg/viewform?usp=sf_link"
-                                        target="_blank" role="button">馬上報名</a><br>
+                                        target="_blank" role="button" data-event-action="click" data-event-cate="openSeminarForm">馬上報名</a><br>
                                     <span class="trialdate">報名期間至說明會開始前</span></p>
                             </div>
                         </div>
@@ -947,6 +947,7 @@
         }
 
         $('.freeTrialBtn').on('click', gaClickEvent);
+	$('.applySeminarBtn').on('click', gaClickEvent);
     </script>
 </body>
 
