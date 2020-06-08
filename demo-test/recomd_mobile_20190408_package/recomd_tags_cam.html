@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VenRaaS購物網</title>
+
+    <link rel="stylesheet" type="text/css" href="source/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="source/slick.css" />
+    <link rel="stylesheet" type="text/css" href="source/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="custom.css" />
+
+    <script src="source/jquery.min.js"></script>
+    <script src="source/jquery-ui.min.js"></script>
+    <script src="source/jquery-migrate.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="source/slick.min.js"></script>
+    <script src="source/venraaspt.js"></script>
+
+    <!--bootstrap-->
+    <!-- <script src="source/bootstrap/js/bootstrap.min.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="source/bootstrap/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="source/bootstrap/css/bootstrap-theme.min.css" /> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!--colorpicker-4-->
+    <script src="source/jscolor-2.0.4/jscolor.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+
+    <!-- scrollCheck -->
+    <script src="source/noframework.waypoints.min.js" charset="utf-8"></script>
+
+    <!-- touch swipe -->
+    <script src="source/jquery.touchSwipe.min.js" charset="utf-8"></script>
+
+    <!-- swiper app -->
+    <script src="source/swiper.app/js/swiper.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="source/swiper.app/css/swiper.min.css">
+
+    <style media="screen">
+        html {
+            font-size: 90%;
+        }
+
+        body {
+            overflow-x: hidden;
+            font-family: 'Muli', Microsoft JhengHei;
+        }
+
+        .ui-loader {
+            display: none !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div style="display:none;">
+        <form id="upload-form">
+            <input type="text" id="photoPosition" name="pos" value=""/>
+            <input type="file" id="file" name="file" />
+            <input type="submit" value="Submit" />
+            <progress class="progress" value="0" max="100"></progress>
+        </form>
+    </div>
+
+    <!-- settings -->
+    <div class="setting">
+        <div class="setting-container">
+            <form id="mobile-settings" class="input-content">
+                <div class="input-div">
+                    <div class="title">商品編號(gid)</div>
+                    <input class="lg-input" type="text" name="" value="" id="setting-gid">
+                </div>
+                <div class="input-div">
+                    <div class="title">商品分類編號(cid)</div>
+                    <input class="lg-input" type="text" value="" id="categ_code">
+                </div>
+                <div class="input-div" style="display: none;">
+                    <div class="title">推薦商品數(topk)</div>
+                    <input class="lg-input" type="text" name="" value="" id="setting-topk">
+                </div>
+                <div class="input-div on" style="text-align: left; display: none;">
+                    <div class="title">推薦方法(rec_type)</div>
+                    <input style="width: 2rem; height: 2rem;" class="rec-text-lg" type="radio" name="setting-rec_type" value="ClickStream" id="setting_rec_type_1"
+                    />
+                    <label for="setting_rec_type_1" class="rec-text-lg">&nbsp;ClickStream&nbsp;</label>
+                    <input style="width: 2rem; height: 2rem;" class="rec-text-lg" type="radio" name="setting-rec_type" value="AlsoView" id="setting_rec_type_2"
+                        checked="checked" />
+                    <label for="setting_rec_type_2" class="rec-text-lg">&nbsp;AlsoView&nbsp;</label>
+                    <br>
+                    <!--warn-->
+                </div>
+            </form>
+            <div class="confirm-content" style="visibility: hidden;">
+                <div class="confirm-btn" onclick="settingOn()">
+                    <img src="img/check-icon.svg" width="100" height="100" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="click-area" onclick="settingOn('#setting-toggle');"></div>
+
+    <!-- hint area -->
+    <div class="item-hint" id="hint-03">
+        <div data-target="#hint-03" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
+        <div class="item-hint-header" data-target="#hint-03">API參數格式</div>
+        <div class="item-hint-container" data-target="#hint-03">
+            <textarea id="api_ele_pop" class="t2" style="border-color: #189dbf;"></textarea>
+        </div>
+    </div>
+
+    <div class="item-hint" id="hint-04">
+        <div data-target="#hint-04" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
+        <div class="item-hint-header" data-target="#hint-04">API回應結果</div>
+        <div class="item-hint-container" data-target="#hint-04">
+            <textarea id="recomd_result_pop" class="t2" style="border-color: #189dbf;">HERE is for printing recomd's result</textarea>
+        </div>
+    </div>
+
+    <div class="info-hint display-none">
+        <div style="position: relative;">
+            <div id="hint_text">推薦度：95%
+                <br>推薦理由：顧客買了又買！</div>
+            <span class="glyphicon glyphicon-triangle-bottom" id="hint-triangle"></span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var position = $(window).scrollTop();
+        $(function () {
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+                if (scroll > position) {
+                    $('.header').addClass('off');
+                } else {
+                    $('.header').removeClass('off');
+                }
+                position = scroll;
+            })
+        })
+    </script>
+
+    <!-- header -->
+    <div class="header">
+        <div style="width: 8rem; position: relative;">
+            <a class="logo-icon" href="" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"></a>
+        </div>
+        <div class="title-area">
+            <span id="mainTitle">VenRaaS購物網</span>
+        </div>
+        <div id="cameraBtn" class="camera-icon">
+            <img src="./img/camera.svg" width="auto" height="45%" alt="">
+            <!-- <span class="glyphicon glyphicon-camera"></span> -->
+        </div>
+        <div id="setting-toggle" style="width: 8rem; position: relative;" onclick="settingOn(this)">
+            <div class="icon-content">
+                <div class="circle"></div>
+                <div class="line-1"></div>
+                <div class="line-2"></div>
+              </div>
+        </div>
+    </div>
+
+    <!--The object is detected scrolling event -->
+    <div id="waypointHide"></div>
+
+    <!-- camera search list -->
+    <div class="whole-ad-camera off">
+        <div class="now-item-title">您所拍攝的商品</div>
+        <div id="now-item-camera" class="now-item">
+            <!-- camera I/O container -->
+            <div class="camera-container off">
+                <!--<div class="result-container off">-->
+                <!--<div class="result">-->
+                <!--<div class="result-text">-->
+                <!--您照的是<br>-->
+                <!--MACBOOK<br>-->
+                <!--<span id="HE" class="glyphicon glyphicon-heart-empty" style="color: red;"></span>-->
+                <!--<span id="HF" class="glyphicon glyphicon-heart" style="color: red; font-size: 4rem;"></span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="preloader off">
+                    <div class="loader loader--style6" title="5">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            width="150px" height="150px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                            <rect x="0" y="13" width="4" height="5" fill="#333">
+                                <animate attributeName="height" attributeType="XML" values="5;21;5" begin="0s" dur="0.6s" repeatCount="indefinite" />
+                                <animate attributeName="y" attributeType="XML" values="13; 5; 13" begin="0s" dur="0.6s" repeatCount="indefinite" />
+                            </rect>
+                            <rect x="10" y="13" width="4" height="5" fill="#333">
+                                <animate attributeName="height" attributeType="XML" values="5;21;5" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+                                <animate attributeName="y" attributeType="XML" values="13; 5; 13" begin="0.15s" dur="0.6s" repeatCount="indefinite" />
+                            </rect>
+                            <rect x="20" y="13" width="4" height="5" fill="#333">
+                                <animate attributeName="height" attributeType="XML" values="5;21;5" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+                                <animate attributeName="y" attributeType="XML" values="13; 5; 13" begin="0.3s" dur="0.6s" repeatCount="indefinite" />
+                            </rect>
+                        </svg>
+                    </div>
+                    <div class="loader-text">
+                        分析中
+                    </div>
+                </div>
+                <input id="TC" class="camera-input off" type="file" accept="image/*">
+                <div id="CIC" class="camera-img-container">
+                    <img id="OI" class="camera-output off" src="recomd_tags_cam.html#" alt="your image" />
+                </div>
+            </div>
+        </div>
+        <div class="rec-item-title">推薦給您</div>
+        <div class="camera-recommed-list row">
+        </div>
+    </div>
+
+    <!-- recommed main list -->
+    <div class="whole-ad">
+        <div id="RT1" class="remember-tag">
+            <div class="tag-icon-container">
+                <!-- <span class="glyphicon glyphicon-heart"></span> -->
+                <img src="./img/heart.svg" width="30" height="30" alt="">
+            </div>
+            <div class="tag-img-container">
+                <img id="RTI" src="recomd_tags_cam.html#" alt="">
+            </div>
+        </div>
+        <div class="now-item-title">現在觀看商品</div>
+        <div id="now-item" class="now-item"></div>
+        <div id="YML" class="rec-item-title">您可能會喜歡</div>
+        <div id="outSwipe" class="tags-area-out">
+            <div id="swipe" class="new-tags-area show showout" swipe-data="0" swipe-type="0">
+                <!-- <div class="test" style="position: absolute; right: 0;bottom: 0; height: 100px;width: 100px; background-color: black; z-index: 1;" onclick="swipeToggle(2)">123</div> -->
+                <div class="selected" id="ST"></div>
+                <div class="not-select" id="FT"></div>
+            </div>
+            <div class="toggle-btn" onclick="swipeToggle(-1)">
+                <div class="arrow-container">
+                    <div class="dom1"></div>
+                    <div class="dom2"></div>
+                    <div class="dom3"></div>
+                  </div>
+            </div>
+        </div>
+        <div id="waypointTarget" class="slider slick-demo row">
+
+        </div>
+    </div>
+
+    <!-- Pushing recommed list custom setting
+although it not display in body
+but it still works in form -->
+    <div class="row row-2" style="display: none; border-bottom: 1px solid #d8d8d8;">
+        <div class="col-6">
+            <form id="rec_pos_form">
+                <div class="section-select">
+                    <div class="ss-title">推薦版位(rec_pos)</div>
+                    <div class="row">
+                        <div class="col-4 text-center">
+                            <!--warning-->
+                            <input class="radio-inline rec-text-16" id="rec_pos_1" type="radio" name="rec_pos" value="p" />
+                            <br>
+                            <label for="rec_pos_1" style="cursor: pointer; margin-top: 5px;">
+                                <img src="img/res_pos_1.png" width="100%" height="auto" style="max-width: 300px;">
+                                <br>
+                                <span class="rec-text-16">首頁(portal)</span>
+                            </label>
+                        </div>
+                        <div class="col-4 text-center">
+                            <input class="radio-inline rec-text-16" id="rec_pos_2" type="radio" name="rec_pos" value="cap" />
+                            <br>
+                            <label for="rec_pos_2" style="cursor: pointer; margin-top: 5px;">
+                                <img src="img/res_pos_2.png" width="100%" height="auto" style="max-width: 300px;">
+                                <br>
+                                <span class="rec-text-16">分類頁(category page)</span>
+                            </label>
+                        </div>
+                        <div class="col-4 text-center">
+                            <input class="radio-inline rec-text-16" id="rec_pos_3" type="radio" name="rec_pos" value="gop" checked="checked" />
+                            <br>
+                            <label for="rec_pos_3" style="cursor: pointer; margin-top: 5px;">
+                                <img src="img/res_pos_3.png" width="100%" height="auto" style="max-width: 300px;">
+                                <br>
+                                <span class="rec-text-16">單一商品頁(good page)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <div class="section-select">
+                <div class="ss-title">樣式設定</div>
+                <div class="row">
+                    <!--0706-->
+                    <form id="style-setting-form">
+                        <div class="col-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">背景</span>
+                            <br>
+                            <span class="color_frame">
+                                <button id="bg-color" class="jscolor {valueElement:null,value:'FFFFFF', onFineChange:'show_slick()'}"
+                                    style="width:15px; height:15px; border: none;"></button>
+                            </span>
+                        </div>
+                        <div class="col-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">左右按鈕</span>
+                            <br>
+                            <span class="color_frame">
+                                <button id="btn-color" class="jscolor {valueElement:null,value:'999999', onFineChange:'show_slick()'}"
+                                    style="width:15px; height:15px; border: none;"></button>
+                            </span>
+                        </div>
+                        <div class="col-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">品名</span>
+                            <br>
+                            <span class="color_frame">
+                                <button id="title-color" class="jscolor {valueElement:null,value:'333333', onFineChange:'show_slick()'}"
+                                    style="width:15px; height:15px; border: none;"></button>
+                            </span>&nbsp;
+                            <select id="title-size" onchange="show_slick()"></select>
+                            <script>
+                                $(function () {
+                                    for (var i = 12; i <= 20; i++) {
+                                        $('#title-size').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#title-size > option[value="14"]').attr('selected', 'selected');
+                                })
+                            </script>
+
+                        </div>
+                        <div class="col-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">價格</span>
+                            <br>
+                            <span class="color_frame">
+                                <button id="price-color" class="jscolor {valueElement:null,value:'FF0000', onFineChange:'show_slick()'}"
+                                    style="width:15px; height:15px; border: none;"></button>
+                            </span>
+                            <select id="price-size" onchange="show_slick()"></select>
+                            <script>
+                                $(function () {
+                                    for (var i = 12; i <= 30; i++) {
+                                        $('#price-size').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#price-size > option[value="18"]').attr('selected', 'selected');
+                                })
+                            </script>
+                        </div>
+                        <div class="col-2 text-center" style="padding: 0;">
+                            <span class="rec-text-16">$符號</span>
+                            <br>
+                            <span class="color_frame">
+                                <button id="price-sign-color" class="jscolor {valueElement:null,value:'FF0000', onFineChange:'show_slick()'}"
+                                    style="width:15px; height:15px; border: none;"></button>
+                            </span>
+                            <select id="price-sign-size" onchange="show_slick()"></select>
+                            <script>
+                                $(function () {
+                                    for (var i = 10; i <= 30; i++) {
+                                        $('#price-sign-size').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#price-sign-size > option[value="10"]').attr('selected', 'selected');
+                                })
+                            </script>
+                        </div>
+                    </form>
+                </div>
+
+                <br>
+
+                <div class="row" style="margin-top: 50px;">
+                    <!--warning-->
+                    <form id="items-form">
+                        <div class="col-4 text-center" style="padding: 0 5px;">
+                            <span class="rec-text-16">顯示推薦商品數</span>
+                            <select id="showItems"></select>
+                            <script>
+                                $(function () {
+                                    for (var i = 1; i <= 20; i++) {
+                                        $('#showItems').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#showItems > option[value="5"]').attr('selected', 'selected'); //2017/06/21
+                                })
+                            </script>
+                        </div>
+                        <div class="col-4 text-center" style="padding: 0 5px;">
+                            <span class="rec-text-16">一次捲動商品個數</span>
+                            <select id="scrollItems"></select>
+                            <script>
+                                $(function () {
+                                    for (var i = 1; i <= 20; i++) {
+                                        $('#scrollItems').append($('<option/>').val(i).html(i));
+                                    }
+                                    $('#scrollItems > option[value="5"]').attr('selected', 'selected'); //2017/06/21
+                                })
+                            </script>
+                        </div>
+                        <div class="col-2" style="padding: 0 5px;">
+                            <label for="loop">
+                                <input type="checkbox" id="loop" checked="checked">
+                                <span style="font-size: 16px !important;font-weight: 500 !important;">循環呈現</span>
+                            </label>
+                            <!--2017/06/21-->
+                            <label for="vs" style="display: none;">
+                                <input type="checkbox" id="vs">商品性價比較&nbsp;&nbsp;</label>
+                            <label for="feedback" style="display: none;">
+                                <input type="checkbox" id="feedback">回饋機制&nbsp;&nbsp;</label>
+                            <label for="ele" style="display: none;">
+                                <input type="checkbox" id="ele">屬性預測</label>
+                        </div>
+                        <div class="col-2" style="padding: 0 5px;">
+                            <label for="imgHint">
+                                <input type="checkbox" id="imgHint" checked="checked">
+                                <span style="font-size: 16px !important;font-weight: 500 !important;">推薦理由</span>
+                            </label>
+                            <!--2017/06/21-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="row_bot" style="display: none; border-bottom: 1px solid #d8d8d8;">
+        <!--warning-->
+
+        <div class="col-4">
+            <form id="device_form">
+                <div class="section-select" id="bot_0">
+                    <div class="ss-title">裝置類型(device)</div>
+                    <!--↓↓↓--2017/06/21--↓↓↓-->
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-2" style="text-align: center;">
+                            <input type="radio" name="device" id="device_1" value="pc" checked="checked" style="cursor: pointer;" />
+                            <br>
+                            <label for="device_1" class="rec-text-16" style="cursor: pointer;">
+                                <img height="38" width="auto" src="img/device_1.png" />
+                                <br> 電腦(pc)
+                            </label>
+                        </div>
+                        <div class="col-2" style="text-align: center;">
+                            <input type="radio" name="device" id="device_2" value="mb" style="cursor: pointer;" />
+                            <br>
+                            <label for="device_2" class="rec-text-16" style="cursor: pointer;">
+                                <img height="38" width="auto" src="img/device_4.png" />
+                                <br> 手機(mb)
+                            </label>
+                        </div>
+                        <div class="col-2" style="text-align: center;">
+                            <input type="radio" name="device" id="device_3" value="mbe" style="cursor: pointer;" />
+                            <br>
+                            <label for="device_3" class="rec-text-16" style="cursor: pointer;">
+                                <img height="38" width="auto" src="img/device_5.png" />
+                                <br> 手機app(mbe)
+                            </label>
+                        </div>
+                        <div class="col-2" style="text-align: center;">
+                            <input type="radio" name="device" id="device_4" value="tb" style="cursor: pointer;" />
+                            <br>
+                            <label for="device_4" class="rec-text-16" style="cursor: pointer;">
+                                <img height="38" width="auto" src="img/device_2.png" />
+                                <br> 平板(tb)
+                            </label>
+                        </div>
+                        <div class="col-2" style="text-align: center;">
+                            <input type="radio" name="device" id="device_5" value="tbe" style="cursor: pointer;" />
+                            <br>
+                            <label for="device_5" class="rec-text-16" style="cursor: pointer;">
+                                <img height="38" width="auto" src="img/device_3.png" />
+                                <br> 平板app(tbe)
+                            </label>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <!--↑↑↑--2017/06/21--↑↑↑-->
+                </div>
+            </form>
+        </div>
+
+        <div class="col-4 text-left">
+            <form id="advenced_option_form">
+                <div class="section-select" id="bot_1">
+                    <div class="ss-title">進階推薦參數設定</div>
+                    <span class="rec-text-16">token: </span>
+                    <input type="text" id="token" value="BqIVN6r681" class="defalut-input rec-text-16" />
+                    <div class="rec-text-16" style="text-decoration: underline; cursor: pointer; display: inline-block;">
+                        <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;取得專屬token</div>
+                    <br>
+                    <span class="rec-text-16">推薦方法(rec_type): </span>
+                    <!-- <input class="rec-text-16" type="radio" name="rec_type" value="ClickStream" id="rec_type_1" checked="checked"/><label for="rec_type_1" class="rec-text-16">&nbsp;ClickStream&nbsp;</label>
+                <input class="rec-text-16" type="radio" name="rec_type" value="AlsoView" id="rec_type_2"/><label for="rec_type_2" class="rec-text-16">&nbsp;AlsoView&nbsp;</label><br> -->
+                    <span class="rec-text-16">推薦商品數(topk): </span>
+                    <input class="rec-text-16" type="text" id="topk" value="10" placeholder="推薦範圍1-100" style="width: 50px;" />
+                    <br>
+                    <!--2017/06/21-->
+                    <span class="rec-text-16">使用者編號(uid): </span>
+                    <input type="text" id="uid" value="" placeholder="default" class="defalut-input rec-text-16"
+                    />
+                    <br>
+                    <!--warning-->
+                    <!--<span class="rec-text-16">商品分類編號(categ_code): </span><input type="text" id="categ_code" value="328208" placeholder="N/A" class="defalut-input rec-text-16"/><span class="glyphicon glyphicon-search" data-target="#hint-01" style="cursor: pointer;"></span><br>-->
+                    <span class="rec-text-16">商品編號(gid): </span>
+                    <input type="text" id="gid" value="5742934" placeholder="N/A" class="defalut-input rec-text-16"
+                    />
+                    <span class="glyphicon glyphicon-search" data-target="#hint-02" style="cursor: pointer;"></span>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-4 text-left">
+            <div class="section-select" id="bot_2">
+                <div class="ss-title">開發人員進階資訊</div>
+                <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(2,this)">API參數格式
+                    <span class="plusplus glyphicon glyphicon-plus" style="float: right;"></span>
+                    <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
+                    <span class="glyphicon glyphicon-search" data-target="#hint-03" style="float: right; cursor: pointer; margin-right: 5px;"></span>
+                </div>
+                <textarea id="api_ele" class="t2" style="display: none; border-color: #189dbf;"></textarea>
+                <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" onclick="toggle_area(1,this)">API回應結果
+                    <span class="plusplus glyphicon glyphicon-plus" style="float: right;"></span>
+                    <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span>
+                    <span class="glyphicon glyphicon-search" data-target="#hint-04" style="float:right; cursor: pointer; margin-right: 5px;"></span>
+                </div>
+                <textarea id="recomd_result" class="t2" style="display: none; border-color: #189dbf;">HERE is for printing recomd's result</textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- js only for this page  -->
+
+    <!-- developer toggle -->
+    <script>
+        function toggle_area(num, obj) {
+            if (num == 1) {
+                $('#recomd_result').slideToggle(200);
+                setTimeout(bot_height, 200);
+                $(obj).find('.plusplus').toggle();
+                $(obj).find('.lessless').toggle();
+            } else {
+                $('#api_ele').slideToggle(200);
+                setTimeout(bot_height, 200);
+                $(obj).find('.plusplus').toggle();
+                $(obj).find('.lessless').toggle();
+            }
+        }
+    </script>
+
+    <!-- div size control -->
+    <script>
+        $(function () {
+            // slider_width();
+            bot_height();
+            $(window).resize(function () {
+                bot_height();
+                // slider_width();
+            });
+        });
+
+        function bot_height() {
+            $(' #bot_0 , #bot_1 , #bot_2').removeAttr('style');
+
+            var bot_h = $(' #row_bot').height();
+
+            $(' #bot_0 , #bot_1 , #bot_2').css('height', bot_h + 'px');
+        }
+    </script>
+
+    <!-- hint demo 2017/07/17 -->
+    <script>
+        var hint = $('.info-hint');
+        var hint_demo = $('.info-hint-demo');
+
+        function hintFunc2() {
+            hint_demo.removeClass('display-none').css({
+                'width': '150px',
+                'top': '-48px',
+                'right': '10px'
+            });
+        }
+
+        function hintFunc() {
+            show_slick();
+            hintFunc2();
+        }
+    </script>
+
+    <!-- try it run timer -->
+    <script type="text/javascript">
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        window.onload = function () {
+            var cookieUid = getCookie('uid'),
+                cookieGid = getCookie('gid');
+            console.log(cookieUid + ', ' + cookieGid);
+            if (cookieUid > 0 && cookieGid > 0) {
+                $('#categ_code').val(cookieUid);
+                $('#setting-gid').val(cookieGid);
+                $('.click-listen').trigger('click');
+            }
+            setTimeout(function () {
+                try_it(true, true);
+            }, 50);
+
+            // 螢幕往下滾動後顯示tag區域
+            // $(window).on('scroll',function(){
+            //     var a = $(this).scrollTop();
+            //     var target = $('#waypointTarget').offset().top - $(this).height() + 300;
+            //     if(a > target && a != 0){
+            //         $('#swipe').addClass('showout');
+            //     }else if( a <= target || a == 0){
+            //         $('#swipe').removeClass('showout');
+            //     }
+            // });
+        };
+
+        // var waypoint = new Waypoint({
+        //     element: document.getElementById('waypointTarget'),
+        //     handler: function () {
+        //         $('#swipe').stop(true, false).addClass('showout');
+        //     },
+        //     offset: 100
+        // });
+
+        // var watpoint2 = new Waypoint({
+        //     element: document.getElementById('waypointHide'),
+        //     handler: function () {
+        //         $('#swipe').stop(true, false).removeClass('showout');
+        //     },
+        //     offset: -100
+        // });
+    </script>
+    <script type="text/javascript">
+        // header scroll display control
+        var position = $(window).scrollTop();
+        $(function () {
+            $(window).scroll(function () {
+                var scroll = $(window).scrollTop();
+                if (scroll > position) {
+                    $('.header').addClass('off');
+                } else {
+                    $('.header').removeClass('off');
+                }
+                position = scroll;
+            })
+        });
+
+        // left top refresh logo btn
+        function refresh_page() {
+            location.reload();
+        }
+
+        // mobile recommend list setting form submit
+        function settingOn(obj) {
+            if ($('.setting').hasClass('on')) {
+                $('.setting').removeClass('on');
+                $(obj).find('.icon-content').removeClass('on');
+                $(obj).find('.icon-content').off('click');
+                // $(obj).find('.glyphicon-remove').fadeOut(300);
+                // setTimeout(function () {
+                //     $(obj).find('.glyphicon-cog').fadeIn(300)
+                // }, 305);
+            } else {
+                $('.setting').addClass('on');
+                $(obj).find('.icon-content').addClass('on');
+                $(obj).find('.icon-content').on('click', function(e){
+                    e.stopPropagation();
+                    settingOn();
+                })
+                // $(obj).find('.glyphicon-cog').fadeOut(300);
+                // setTimeout(function () {
+                //     $(obj).find('.glyphicon-remove').fadeIn(300)
+                // }, 305);
+            }
+            if (!obj) {
+                $('.setting').removeClass('on');
+                $('#setting-toggle').find('.glyphicon-remove').fadeOut(300);
+                setTimeout(function () {
+                    $('#setting-toggle').find('.glyphicon-cog').fadeIn(300)
+                }, 305);
+                var item_gid = document.getElementById("setting-gid").value,
+                    item_cid = document.getElementById("categ_code").value;
+                GLOBAL_gid = item_gid;
+                GLOBAL_cid = item_cid;
+                // $('#now-item').html(clone_item.html());
+                var url = window.location.href;
+                // if (url.indexOf('?') > -1){
+                // url += '&param=1';
+                // }else{
+                // url += '?param=1';
+                // }
+                if(url.indexOf('?') > -1){
+                    url = url.substring(0, url.indexOf('?'));
+                }
+                url += '?gid=' + GLOBAL_gid + '&cid=' + GLOBAL_cid;
+                window.location.href = url;
+                try_it(true, true);
+            }
+        }
+    </script>
+
+    <!--main js-->
+    <script src="main_javascript_new.js"></script>
+    <script src="camera.js"></script>
+</body>
+
+</html>

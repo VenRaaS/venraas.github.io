@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客製化推薦清單</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="source/jquery-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="source/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="source/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="source/colorpicker.css">
+
+    <script src="source/jquery.min.js"></script>
+    <script src="source/jquery-ui.min.js"></script>
+
+    <script src="source/jquery-migrate.min.js"></script>
+    <script src="source/slick.min.js"></script>
+    <script src="source/venraaspt.min.js"></script>
+    <script src="source/clipboard.min.js"></script>
+    <script src="source/colorpicker.js"></script>
+
+    <!--bootstrap-->
+    <script src="source/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="source/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="source/bootstrap/css/bootstrap-theme.min.css"/>
+
+    <!--fancybox-->
+    <script src="source/fancybox/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="source/fancybox/jquery.fancybox.min.css"/>
+
+    <!--bootstrap helper-->
+    <script src="source/helper/js/bootstrap-formhelpers.js"></script>
+    <link rel="stylesheet" type="text/css" href="source/helper/css/bootstrap-formhelpers.min.css"/>
+
+    <!--drag and drop 5/5 新增外掛-->
+    <script src="jquery.dragsort-0.5.2.min.js"></script>
+
+    <!--main js-->
+    <script src="main_javascript_tag.js"></script>
+
+    <!--colorpicker-4-->
+    <script src="source/jscolor-2.0.4/jscolor.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+
+    <!-- Overscroll -->
+    <!-- <script src="source/scroll/jquery.overscroll.js"></script> -->
+
+    <style>
+        body{
+            overflow-x: hidden;
+            font-family:'Muli',Microsoft JhengHei;
+        }
+
+        a:-webkit-any-link{
+            text-decoration: none;
+        }
+
+        .rec-title{
+            width: 100%;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #0a8bac;
+            padding-top: 26px;
+            padding-bottom: 26px;
+            border-bottom: 1px solid #0a8bac;
+        }
+
+        .header{
+            background-color: #189DBF;
+            color: #ffffff;
+            width:100%;
+            height: 45px;
+            line-height: 45px;
+            position: relative;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .logo-icon{
+            background-image: url("img/account_Admin_icon.png");
+            width: 32px;
+            height: 32px;
+            float: right;
+            margin: 6px 5px;
+            cursor: pointer;
+        }
+
+        .col-inner{
+            margin: 15px 0;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 10px 15px;
+            position: relative;
+        }
+
+        input{
+            border-radius: 5px;
+            border: 1px solid #189DBF;
+            padding: 2px 5px;
+        }
+
+        .mb{
+            margin-bottom: 10px;
+        }
+
+        .btn-try{
+            border-radius: 5px;
+            background-color: #189DBF;
+            color: #ffffff;
+            text-align: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .slick-prev:before, .slick-next:before {
+            color:white;
+        }
+
+        .slick-demo{
+        }
+
+        .show_on_codepen{
+            border-radius: 5px;
+            background-color: #189DBF;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 2px 8px;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        .hr-1{
+            width: 100%;
+            height: 1px;
+            border-bottom: 1px solid #0a8bac;
+            position: relative;
+        }
+
+        .t1{
+            width: 100%;
+            height: 200px;
+        }
+
+        .t2{
+            width: 100%;
+            height: 150px;
+        }
+
+        .sub-title{
+            font-size: 18px;
+            color: #189DBF;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .copy-btn{
+            background-color: #189DBF;
+            color: #ffffff;
+            font-size: 12px;
+            padding: 2px 5px;
+            border-radius: 5px;
+            position: absolute;
+            right:10px;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        .input-sec{
+            margin: 20px 20px 30px 20px;
+            padding: 20px 20px 10px 20px;
+            border: 1px solid #189DBF;
+            position: relative;
+        }
+
+        .input-sec-title{
+            color: #189DBF;
+            background-color: #ffffff;
+            padding: 2px 10px;
+            position: absolute;
+            left: 10px;
+            top: -13px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .hr-12{
+            border-bottom: 1px solid #eeeeee;
+            height: 1px;
+            margin-bottom: 10px;
+        }
+
+        .input-color{
+            width: 130px;
+        }
+
+        .defalut-input{
+            width: 100px;
+        }
+
+        #advence-option {
+
+            /* Custom transition - fade from top*/
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all .3s;
+        }
+
+        .fancybox-slide--complete #advence-option {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .right-tab{
+            position: absolute;
+            top: -33px;
+            border-radius: 5px 5px 0 0 !important;
+            border-bottom: none !important;
+        }
+
+        .filter-btn{ /*-- 修改css 5/5 --*/
+            border-radius: 100px;
+            background-color: #FFFFFF;
+            display: inline-block;
+            border: 2px solid #999999;
+            color: #999999;
+            padding: 5px 15px;
+            cursor: pointer;
+            margin: 0 10px 10px 0;
+            vertical-align: middle;
+            font-weight: 900;
+        }
+
+        .filter-btn.act{
+        }
+
+        /*-- 新增css 5/5 --*/
+        #list1 li{
+            float: left;
+            list-style: none;
+        }
+
+        .section-select{
+            padding: 15px;
+            color: #189dbf; font-size: 12px;
+            height: 100%;
+        }
+
+        .section-select:first-child{
+            /*border-right: 1px solid #d8d8d8;*/
+        }
+
+        .ss-title{
+            font-size: 18px;
+            font-weight: bold;
+            color: #189DBF;
+            width: 100%;
+            text-align: center;
+            padding: 5px;
+        }
+
+        #token , #rec_type_1 , #rec_type_2 , #topk , #categ_code , #uid , #gid{
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            padding: 0 5px;
+            border-radius: 0px;
+            margin-bottom: 5px;
+        }
+
+        .rec-text-16{
+            font-size: 16px !important; color: #189dbf !important; font-weight: 500 !important;
+        }
+
+        .rec-text-14{
+            font-size: 14px !important; color: #189dbf !important; font-weight: 500 !important;
+        }
+
+        .color_frame{
+            font-weight: 400;
+            border: 1px solid #ccc;
+            display: inline-flex;
+        }
+
+        input:disabled::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: #CCCCCC;
+        }
+
+        /*------2017/06/21-------*/
+        .switch-arrow-left{
+            top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; left: -40px; width: 30px; height: 100%;
+        }
+        .switch-arrow-right{
+            top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; right: -40px; width: 30px; height: 100%;
+        }
+        .switch-arrow-left:hover , .switch-arrow-right:hover{
+            background-color: rgba(0,0,0,0.05);
+        }
+        .item-info{
+            cursor: default;
+            position: absolute;
+            border-radius: 8px;
+            font-weight: 900;
+            padding: 0 8px;
+            right: 10px;
+            top: 10px;
+        }
+        .info-hint{
+            padding: 5px 10px;
+            color: white;
+            background-color: #189DBF;
+            border-radius: 5px;
+            text-align: center;
+            position: absolute;
+            z-index: 5;
+            opacity: 0.7;
+        }
+        .display-none{
+            display: none;
+        }
+
+        /*--2017/07/18--*/
+        .tag-each{
+            margin: 0 2px;
+            height: 36px;
+            border-radius: 25px;
+            color: #FFFFFF;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 6px 12px;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+        }
+        .border{
+            height: 20px;
+            margin-bottom: 9px;
+            display: inline-block;
+            color: white;
+            position: relative;
+            top: -9px;
+        }
+        .name{
+            margin: 0 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            user-select: none;
+            display: inline-block;
+            position: relative;
+        }
+        .name.on{
+            color: #efe000;
+        }
+        .name.off{
+            color: #FFFFFF;
+        }
+        .tag-each.t01{
+            background-color: #07637a;
+        }
+        .tag-each.t02{
+            background-color: #3faa87;
+        }
+        .tag-each.t03{
+            background-color: #c45a3e;
+        }
+        .tag-each.t04{
+            background-color: #bcbf4d;
+        }
+        .tag-each.t05{
+            background-color: #0aa4c7;
+        }
+
+        .star-icon{
+            background-image: url("img/star-icon.png");
+            background-repeat: no-repeat;
+            width: 19px;
+            height: 17px;
+            position: relative;
+            display: inline-block;
+            z-index: 2;
+            top: 2px;
+            margin-right: 2px;
+        }
+
+        .glyphicon-heart{
+            font-size: 14px;
+            padding: 2px 0;
+            top:-12px;
+            cursor: pointer;
+            color: #ffc4e8;
+        }
+
+        /*------2017/06/21-------*/
+        .switch-arrow-left{
+            top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; left: -40px; width: 30px; height: 100%;
+        }
+        .switch-arrow-right{
+            top: 50%; transform: translate(0, -50%); position:absolute; cursor: pointer; right: -40px; width: 30px; height: 100%;
+        }
+        .switch-arrow-left:hover , .switch-arrow-right:hover{
+            background-color: rgba(0,0,0,0.05);
+        }
+        .item-info{
+            cursor: default;
+            position: absolute;
+            /*border-radius: 8px;
+            font-weight: 900;
+            padding: 0 8px;
+            right: 10px;
+            top: 10px;*/
+            top: 0;
+            right: 22px;
+            width: 20px;
+            height: 20px;
+        }
+        .info-hint{
+            padding: 5px 10px;
+            color: white;
+            background-color: #189DBF;
+            border-radius: 5px;
+            text-align: center;
+            position: absolute;
+            z-index: 5;
+            opacity: 0.7;
+        }
+        .info-hint-demo{
+            padding: 5px 10px;
+            color: white;
+            background-color: #189DBF;
+            border-radius: 5px;
+            text-align: center;
+            position: absolute;
+            z-index: 5;
+            opacity: 0.7;
+        }
+        .display-none{
+            display: none;
+        }
+        #hint-triangle , .hint-triangle{
+            color: #189dbf;
+            position: absolute;
+            right: 0;
+            bottom: -20px;
+            top: inherit;
+            font-size: 24px;
+            z-index: 4;
+        }
+        .p-50{
+            min-width: 75px;
+            width: 40%;
+            padding-right: 10px;
+            font-size: 10px;
+            text-align: right;
+            display: inline-block;
+        }
+        /*---2017/07/17---*/
+        .item-hint{
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            border: 1px solid #189dbf;
+            z-index: 3;
+            user-select: none;
+        }
+
+        .item-hint-header{
+            padding: 5px 10px;
+            background-color: #189dbf;
+            color: #FFFFFF;
+            text-align: center;
+            cursor: default;
+            white-space: nowrap;
+        }
+
+        .item-hint-container{
+            padding: 5px 10px;
+            color: #999999;
+            text-align: center;
+            background-color: #ffffff;
+            white-space: nowrap;
+            cursor: default;
+        }
+
+        /*2017/07/18*/
+        .tags-area::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        /*2017/08/01*/
+        .nowSeeBox{
+            width: 200px;
+        }
+
+        #now-item span {
+          height: auto !important;
+        }
+
+        /*2017/10/26*/
+        #tagON{
+          display: inline-block;
+        }
+
+        .move-icon{
+          background-image: url('./img/move-icon.png');
+          width: 20px;
+          height: 20px;
+          position: fixed;
+          z-index: 5;
+          display: none;
+        }
+
+        .scrollOff{
+          opacity: 0.3;
+          cursor: default;
+        }
+
+        .input-bar{
+          display: flex;
+          border: 1px solid #189dbf;
+        }
+
+        .input-bar-title{
+          font-size: 2rem;
+          line-height: 4rem;
+          padding: 0 2rem;
+          background-color: #189dbf;
+          color: #fff;
+          flex: 1;
+          min-width: 230px;
+        }
+
+        .input-bar-contain{
+          font-size: 2rem;
+          line-height: 4rem;
+          padding: 0 2rem;
+          background-color: #fff;
+          color: #189dbf;
+          flex: 4;
+        }
+
+        #advence-tool{
+          position: fixed;
+          overflow: hidden;
+          right: 10px;
+          bottom: 10px;
+          z-index: 100;
+          width: 50px;
+          height: 50px;
+          background-color: #fff;
+          border: 1px solid #189dbf;
+          /*border: 1px solid rbga(0,0,0,0);*/
+          border-radius: 300px;
+          transition: .5s;
+        }
+
+        #advence-tool.on{
+          bottom: 0;
+          right: 0;
+          padding: 10px;
+          height: 300px;
+          max-height: 100vh;
+          width: 100vw;
+          border-radius: 0;
+        }
+
+        #advence-cancel{
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          z-index: 101;
+          font-size: 3rem;
+          color: #189dbf;
+          display: none;
+          transition: .5s
+          transition-delay: .5s;
+        }
+
+        #advence-open{
+          position: absolute;
+          right: 8px;
+          top: 6px;
+          z-index: 101;
+          font-size: 3rem;
+          color: #189dbf;
+          transition: .5s
+          transition-delay: .5s;
+        }
+
+        .on #advence-cancel{
+          display: block;
+        }
+
+        .on #advence-open{
+          display: none;
+        }
+
+        .advence-contain{
+          opacity: 0;
+          transition: .5s;
+          transition-delay: .2s
+        }
+
+        .on .advence-contain{
+          opacity: 1;
+        }
+    </style>
+
+</head>
+<body style="text-align: center;">
+  <script type="text/javascript">
+    function toolOpen(bool){
+      var targetDOM = $('#advence-tool');
+      if(bool){
+        targetDOM.addClass('on');
+      }else{
+        targetDOM.removeClass('on');
+      }
+
+    }
+  </script>
+<div id="advence-tool">
+  <div id="advence-open" onclick="toolOpen(true)">
+    <svg xmlns="http://www.w3.org/2000/svg" style="width: 30px; height: 30px;" viewbox="0 0 36 32.71"><g data-name="圖層 2"><g data-name="圖層 1"><path style="fill: #189dbf;" d="M18 32.7H2.4a2.24 2.24 0 0 1-1.91-.86A2.17 2.17 0 0 1 0 30.61V2.3A2.1 2.1 0 0 1 1.24.23 3 3 0 0 1 2.44 0h31.2A2.18 2.18 0 0 1 36 2.36V30.2a2.35 2.35 0 0 1-2.53 2.51c-5.17-.04-10.34-.01-15.47-.01zM2.62 7.75v22.33h30.75V7.75zm21-3.66v.41a.79.79 0 0 0 .81.82 5.61 5.61 0 0 0 .82 0 .72.72 0 0 0 .75-.65 5.72 5.72 0 0 0 0-1.17.73.73 0 0 0-.72-.65h-.38c-1.12-.01-1.31.15-1.3 1.24zm4.92-1.24h-.36a.79.79 0 0 0-.84.79 7.08 7.08 0 0 0 0 1 .72.72 0 0 0 .69.65h.94a.74.74 0 0 0 .71-.69 6.61 6.61 0 0 0 0-1.09.74.74 0 0 0-.68-.66 3.23 3.23 0 0 0-.48 0zm4.86 1.23v-.35a.81.81 0 0 0-.89-.89h-.71a.72.72 0 0 0-.75.65 6 6 0 0 0 0 1.2.72.72 0 0 0 .69.62h.41c1.08.02 1.25-.15 1.25-1.23z"/><path style="fill: #189dbf;" d="M14.93 24.66c.05-.25.07-.43.12-.6q1.86-5.76 3.73-11.53a1.17 1.17 0 0 1 1.15-.89 1.05 1.05 0 0 1 1 .78 1.87 1.87 0 0 1-.06.91c-.69 2.19-1.4 4.37-2.1 6.56-.53 1.63-1.06 3.27-1.58 4.9a1.17 1.17 0 0 1-.9.88 1 1 0 0 1-1.1-.39 2.65 2.65 0 0 1-.26-.62zM10.85 18.7l1 .47 2.54 1.18a1.14 1.14 0 0 1 .26 2 1.05 1.05 0 0 1-1.14.13L7.8 19.79a1.14 1.14 0 0 1-.72-1.11 1.19 1.19 0 0 1 .79-1.11l5.18-2.4a3.12 3.12 0 0 1 .71-.29 1.12 1.12 0 0 1 .81 2.06c-.6.33-1.23.6-1.86.89zM25.13 18.7l-3.5-1.63a1.18 1.18 0 0 1-.72-1.36 1.13 1.13 0 0 1 1.64-.71c.72.32 1.44.66 2.16 1l3.42 1.59a1.16 1.16 0 0 1 .63 1.67 1.46 1.46 0 0 1-.59.54q-2.84 1.35-5.68 2.65a1.12 1.12 0 0 1-1.5-.53 1.14 1.14 0 0 1 .59-1.55l3.18-1.48z"/></g></g></svg>
+  </div>
+  <div class="glyphicon glyphicon-remove" id="advence-cancel" onclick="toolOpen('')"></div>
+  <div class="advence-contain">
+    <div class="ss-title">開發人員進階資訊</div>
+    <div class="w-100" style="height: 5px;"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3">
+          <form id="advenced_option_form_2" style="text-align: left;">
+            <div class="ss-title">進階推薦參數設定</div>
+            <span class="rec-text-16">token: </span><input type="text" id="token" value="5guOvNnKn2" class="defalut-input rec-text-16" />
+            <div class="rec-text-16" style="text-decoration: underline; cursor: pointer; display: inline-block;"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;取得專屬token</div><br>
+            <span class="rec-text-16">推薦方法(rec_type): </span>
+            <input class="rec-text-16" type="radio" name="rec_type" value="ClickStream" id="rec_type_1" /><label for="rec_type_1" class="rec-text-16">&nbsp;ClickStream&nbsp;</label>
+            <input class="rec-text-16" type="radio" name="rec_type" value="AlsoView" id="rec_type_2" checked="checked" /><label for="rec_type_2" class="rec-text-16">&nbsp;AlsoView&nbsp;</label><br>
+            <span class="rec-text-16">使用者編號(uid): </span>
+            <input type="text" id="uid" value="" placeholder="default" class="defalut-input rec-text-16" /><br>
+            <span class="rec-text-16">推薦商品數(topk): </span>
+            <input class="rec-text-16" type="text" id="topk" value="10" placeholder="推薦範圍1-100" style="width: 50px;" /><br>
+          </form>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <div class="ss-title">輸入API參數</div>
+          <textarea id="api_ele" class="t2" style="border-color: #189dbf;"></textarea>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <div class="ss-title">API回應結果</div>
+          <textarea id="recomd_result" class="t2" style="border-color: #189dbf;">HERE is for printing recomd's result</textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="move-icon"></div>
+<!-- hint -->
+<div class="item-hint" id="hint-01">
+    <div class="item-hint-header" data-target="#hint-01">正在瀏覽的商品分類&nbsp;&nbsp;&nbsp;&nbsp;<span data-target="#hint-01" class="glyphicon glyphicon-remove" style="float: right;cursor: pointer;"></span></div>
+    <div class="item-hint-container" data-target="#hint-01">
+        Oops...<br>
+        此商品編號編號<br>無對應之商品分類
+    </div>
+</div>
+
+<div class="item-hint" id="hint-02">
+    <div class="item-hint-header" data-target="#hint-02">正在瀏覽的商品<span data-target="#hint-02" class="glyphicon glyphicon-remove" style="float: right;cursor: pointer;"></span></div>
+    <div class="item-hint-container" data-target="#hint-02">
+        Oops...<br>
+        此商品編號無對應之商品
+    </div>
+</div>
+
+<div class="item-hint" id="hint-03">
+    <div data-target="#hint-03" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
+    <div class="item-hint-header" data-target="#hint-03">API參數格式</div>
+    <div class="item-hint-container" data-target="#hint-03">
+        <textarea id="api_ele_pop" class="t2" style="border-color: #189dbf;"></textarea>
+    </div>
+</div>
+
+<div class="item-hint" id="hint-04">
+    <div data-target="#hint-04" class="glyphicon glyphicon-remove" style="cursor: pointer;position: absolute;right: 10px;top: 7px;color: white;"></div>
+    <div class="item-hint-header" data-target="#hint-04">API回應結果</div>
+    <div class="item-hint-container" data-target="#hint-04">
+        <textarea id="recomd_result_pop" class="t2" style="border-color: #189dbf;">HERE is for printing recomd's result</textarea>
+    </div>
+</div>
+
+<div class="info-hint display-none">
+    <div style="position: relative;">
+        <div id="hint_text">推薦度：95%<br>推薦理由：顧客買了又買！</div>
+        <span class="glyphicon glyphicon-triangle-bottom" id="hint-triangle"></span>
+    </div>
+</div>
+
+<div class="header">
+  <a href="../index.html"><span class="glyphicon glyphicon-menu-left" style="font-size: 3rem; line-height:45px; color: #fff;"></span></a>
+  <div class="logo-icon" onclick="refresh_page()"></div>
+</div>
+
+<script>
+    function refresh_page() {
+        location.reload();
+    }
+</script>
+
+<div class="rec-title">打造專屬於您的推薦清單，竟是如此簡單！</div>
+
+<br><br>
+<div class="container">
+  <form id="advenced_option_form" style="text-align: left;">
+    <div class="section-select" id="bot_1">
+      <!--2017/06/21-->
+      <span class="rec-text-16">商品分類編號(categ_code): </span>
+      <input type="text" id="categ_code" value="328208" placeholder="N/A" class="defalut-input rec-text-16" /> &nbsp;&nbsp;
+      <span class="rec-text-16">商品編號(gid): </span>
+      <input type="text" id="gid" value="5742934" placeholder="N/A" class="defalut-input rec-text-16" /> &nbsp;&nbsp;
+    </div>
+  </form>
+</div>
+<div class="whole-ad" style="height: 300px; display: inline-block; margin-left: 25vw;position:relative;">
+    <div style="position: absolute; left: -30vw; width:20vw; min-width:140px; top: 0; height: 50px;  z-index:3;"><span style="color:white;background-color:#189DBF;border-radius:30px;padding:5px 15px;font-weight: bold;font-size: 18px;">現在觀看商品</span></div>
+    <div class="d-flex flex-row-reverse" id="now-item" style="position: absolute; left: -30vw; top: 30px; height: 100%; width:20vw; padding:20px; border-right: 1px solid #0a8bac; min-width: 120px;"></div>
+    <span class="glyphicon glyphicon-triangle-left scrollOff" id="TAL" style="color: #07637a; position: absolute; left: -30px; top: 3px; font-size: 30px; cursor: pointer; display: none;"></span>
+    <span class="glyphicon glyphicon-triangle-right" id="TAR" style="color: #07637a; position: absolute; right: -30px; top: 3px; font-size: 30px; cursor: pointer; display: none;"></span>
+    <div class="tags-area" style="height: 76px; text-align: left; overflow-y: hidden !important; overflow-x: scroll; position: relative;  white-space: nowrap; padding-bottom: 20px; margin-bottom: -20px; ">
+      <div class="scroll-area" style="position: absolute; left: 0; top: 0;">
+        <div class="tag-each t01" id="FT">
+          <div class="tagON"></div>
+        </div>
+      </div>
+    </div>
+    <div class="slider slick-demo">
+
+    </div>
+</div>
+<div class="w-100" style="height: 5vh;"></div>
+<div class="row" style="height: 50px;"></div>
+
+<div class="hr-1" style="display: none;">
+    <div class="show_on_codepen" onclick="codepen_click()"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Show it on CodePen</div>
+</div>
+
+<div class="container">
+  <div class="row row-2">
+      <div class="col-sm-6" style="display: none;">
+          <form id="rec_pos_form">
+              <div class="section-select">
+                  <div class="ss-title">推薦版位(rec_pos)</div>
+                  <div class="row">
+                      <div class="col-xs-4 text-center"><!--warning-->
+                          <input class="radio-inline rec-text-16" id="rec_pos_1" type="radio" name="rec_pos" value="p"/><br>
+                          <label for="rec_pos_1" style="cursor: pointer; margin-top: 5px;"><img src="img/res_pos_1.png" width="100%" height="auto" style="max-width: 300px;"><br><span class="rec-text-16">首頁(portal)</span>
+                          </label>
+                      </div>
+                      <div class="col-xs-4 text-center">
+                          <input class="radio-inline rec-text-16" id="rec_pos_2" type="radio" name="rec_pos" value="cap"/><br>
+                          <label for="rec_pos_2" style="cursor: pointer; margin-top: 5px;"><img src="img/res_pos_2.png" width="100%" height="auto" style="max-width: 300px;"><br><span class="rec-text-16">分類頁(category page)</span>
+                          </label>
+                      </div>
+                      <div class="col-xs-4 text-center">
+                          <input class="radio-inline rec-text-16" id="rec_pos_3" type="radio" name="rec_pos" value="gop" checked="checked"/><br>
+                          <label for="rec_pos_3" style="cursor: pointer; margin-top: 5px;"><img src="img/res_pos_3.png" width="100%" height="auto" style="max-width: 300px;"><br><span class="rec-text-16">單一商品頁(good page)</span>
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+      <div class="col-sm-6" style="display: none;">
+          <div class="section-select">
+              <div class="ss-title">樣式設定</div>
+              <div class="row">
+                  <!--0706-->
+                  <form id="style-setting-form">
+                      <div class="col-xs-2 text-center" style="padding: 0;">
+                          <span class="rec-text-16">背景</span><br>
+                          <span class="color_frame"><button id="bg-color" class="jscolor {valueElement:null,value:'FFFFFF', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                      </div>
+                      <div class="col-xs-2 text-center" style="padding: 0;">
+                          <span class="rec-text-16">左右按鈕</span><br>
+                          <span class="color_frame"><button id="btn-color" class="jscolor {valueElement:null,value:'999999', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                      </div>
+                      <div class="col-xs-2 text-center" style="padding: 0;">
+                          <span class="rec-text-16">品名</span><br>
+                          <span class="color_frame"><button id="title-color" class="jscolor {valueElement:null,value:'333333', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>&nbsp;
+                          <select id="title-size" onchange="show_slick()"></select>
+                          <script>
+                              $(function(){
+                                  for(var i=12;i<=20;i++){
+                                      $('#title-size').append($('<option/>').val(i).html(i));
+                                  }
+                                  $('#title-size > option[value="14"]').attr('selected','selected');
+                              })
+                          </script>
+
+                      </div>
+                      <div class="col-xs-2 text-center" style="padding: 0;">
+                          <span class="rec-text-16">價格</span><br>
+                          <span class="color_frame"><button id="price-color" class="jscolor {valueElement:null,value:'FF0000', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                          <select id="price-size" onchange="show_slick()"></select>
+                          <script>
+                              $(function(){
+                                  for(var i=12;i<=30;i++){
+                                      $('#price-size').append($('<option/>').val(i).html(i));
+                                  }
+                                  $('#price-size > option[value="18"]').attr('selected','selected');
+                              })
+                          </script>
+                      </div>
+                      <div class="col-xs-2 text-center" style="padding: 0;">
+                          <span class="rec-text-16">$符號</span><br>
+                          <span class="color_frame"><button id="price-sign-color" class="jscolor {valueElement:null,value:'FF0000', onFineChange:'show_slick()'}" style="width:15px; height:15px; border: none;"></button></span>
+                          <select id="price-sign-size" onchange="show_slick()"></select>
+                          <script>
+                              $(function(){
+                                  for(var i=10;i<=30;i++){
+                                      $('#price-sign-size').append($('<option/>').val(i).html(i));
+                                  }
+                                  $('#price-sign-size > option[value="10"]').attr('selected','selected');
+                              })
+                          </script>
+                      </div>
+                      <!-- 0717 -->
+                      <div class="col-xs-2 text-center" id="imgHintPanel" style="padding: 0;position: relative;">
+                          <div class="info-hint-demo display-none">
+                              <div style="position: relative;">
+                                  <div>範例文字<br>Demo message</div>
+                                  <span class="glyphicon glyphicon-triangle-bottom hint-triangle"></span>
+                              </div>
+                          </div>
+                          <span class="rec-text-16">推薦理由</span><br>
+                          <span class="color_frame" onclick="hintFunc2()"><button id="hint-color" class="jscolor {valueElement:null,value:'189dbf', onFineChange:'hintFunc()'}" style="width:15px; height:15px; border: none;"></button></span>
+                          <span class="color_frame" onclick="hintFunc2()"><button id="hint-text-color" class="jscolor {valueElement:null,value:'ffffff', onFineChange:'hintFunc()'}" style="width:15px; height:15px; border: none;"></button></span>
+                          <select onclick="hintFunc2()" id="color-opacity" onchange="hintFunc()"></select>
+                          <script>
+                              $(function(){
+                                  for(var i=1;i<=10;i++){
+                                      $('#color-opacity').append($('<option/>').val(i/10).html(i*10 + "%"));
+                                  }
+                                  $('#color-opacity > option[value="0.7"]').attr('selected','selected');
+                              })
+                          </script>
+                          <select onclick="hintFunc2()" id="hint-style" onchange="hintFunc()">
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                          </select>
+                      </div>
+
+                  </form>
+              </div>
+
+              <br>
+
+              <div class="row" style="margin-top: 50px;"><!--warning-->
+                  <form id="items-form">
+                      <div class="col-xs-4 text-center" style="padding: 0 5px;">
+                          <span class="rec-text-16">顯示推薦商品數</span>
+                          <select id="showItems"></select>
+                          <script>
+                              $(function(){
+                                  for(var i=1;i<=20;i++){
+                                      $('#showItems').append($('<option/>').val(i).html(i));
+                                  }
+                                  $('#showItems > option[value="5"]').attr('selected','selected');//2017/06/21
+                              })
+                          </script>
+                      </div>
+                      <div class="col-xs-4 text-center" style="padding: 0 5px;">
+                          <span class="rec-text-16">一次捲動商品個數</span>
+                          <select id="scrollItems"></select>
+                          <script>
+                              $(function(){
+                                  for(var i=1;i<=20;i++){
+                                      $('#scrollItems').append($('<option/>').val(i).html(i));
+                                  }
+                                  $('#scrollItems > option[value="5"]').attr('selected','selected');//2017/06/21
+                              })
+                          </script>
+                      </div>
+                      <div class="col-xs-2" style="padding: 0 5px;">
+                          <label for="loop"><input type="checkbox" id="loop" checked="checked"><span style="font-size: 16px !important;font-weight: 500 !important;">循環呈現</span></label> <!--2017/06/21-->
+                          <label for="vs" style="display: none;"><input type="checkbox" id="vs">商品性價比較&nbsp;&nbsp;</label>
+                          <label for="feedback" style="display: none;"><input type="checkbox" id="feedback">回饋機制&nbsp;&nbsp;</label>
+                          <label for="ele" style="display: none;"><input type="checkbox" id="ele">屬性預測</label>
+                      </div>
+                      <div class="col-xs-2" style="padding: 0 5px;">
+                          <label for="imgHint"><input type="checkbox" id="imgHint" checked="checked"><span style="font-size: 16px !important;font-weight: 500 !important;">推薦理由</span></label> <!--2017/06/21-->
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row" id="row_bot"><!--warning-->
+      <div class="col-sm-4" style="display: none;">
+          <form id="device_form">
+              <div class="section-select" id="bot_0">
+                  <div class="ss-title">裝置類型(device)</div>
+                  <!--↓↓↓--2017/06/21--↓↓↓-->
+                  <div class="row">
+                      <div class="col-xs-1"></div>
+                      <div class="col-xs-2" style="text-align: center;">
+                          <input type="radio" name="device" id="device_1" value="pc" checked="checked" style="cursor: pointer;"/>
+                          <br>
+                          <label for="device_1" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_1.png"/><br>
+                              電腦(pc)</label>
+                      </div>
+                      <div class="col-xs-2" style="text-align: center;">
+                          <input type="radio" name="device" id="device_2" value="mb" style="cursor: pointer;"/>
+                          <br>
+                          <label for="device_2" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_4.png"/><br>
+                              手機(mb)</label>
+                      </div>
+                      <div class="col-xs-2" style="text-align: center;">
+                          <input type="radio" name="device" id="device_3" value="mbe" style="cursor: pointer;"/>
+                          <br>
+                          <label for="device_3" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_5.png"/><br>
+                              手機app(mbe)</label>
+                      </div>
+                      <div class="col-xs-2" style="text-align: center;">
+                          <input type="radio" name="device" id="device_4" value="tb" style="cursor: pointer;"/>
+                          <br>
+                          <label for="device_4" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_2.png"/><br>
+                              平板(tb)</label>
+                      </div>
+                      <div class="col-xs-2" style="text-align: center;">
+                          <input type="radio" name="device" id="device_5" value="tbe" style="cursor: pointer;"/>
+                          <br>
+                          <label for="device_5" class="rec-text-16" style="cursor: pointer;"><img height="38" width="auto" src="img/device_3.png"/><br>
+                              平板app(tbe)</label>
+                      </div>
+                      <div class="col-xs-1"></div>
+                  </div>
+                  <!--↑↑↑--2017/06/21--↑↑↑-->
+              </div>
+          </form>
+      </div>
+      <div class="col-12 text-left">
+        <!-- advenced_option_form 原本位置 -->
+      </div>
+      <div class="col-sm-4 text-left" style="display: none;">
+          <div class="section-select" id="bot_2">
+              <div class="ss-title">開發人員進階資訊</div>
+              <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" data-target="#hint-03" onclick="toggle_area(this, event)">API參數格式
+                  <!-- <span class="plusplus glyphicon glyphicon-plus" style="float: right;"></span>
+                  <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span> -->
+                  <span class="glyphicon glyphicon-search" style="float: right; cursor: pointer; margin-right: 5px;"></span>
+              </div>
+              <!-- textarea 程式碼原本位置保留 -->
+              <div style="width: 100%;padding: 2px;cursor: pointer; color: #189dbf; font-size: 16px; font-weight: 500;" data-target="#hint-04" onclick="toggle_area(this, event)">API回應結果
+                  <!-- <span class="plusplus glyphicon glyphicon-plus" style="float: right;"></span>
+                  <span class="lessless glyphicon glyphicon-minus" style="float: right; display: none;"></span> -->
+                  <span class="glyphicon glyphicon-search" style="float:right; cursor: pointer; margin-right: 5px;"></span>
+              </div>
+              <!-- textarea 程式碼原本位置保留 -->
+          </div>
+      </div>
+
+      <!-- hint 2017/07/17 -->
+      <script>
+          var target;
+
+          function touches(e){
+              var x = e.touches ? e.touches[0].clientX : e.clientX,
+                  y = e.touches ? e.touches[0].clientY : e.clientY;
+              TweenMax.to(target, 0, {
+                  top: y-20,
+                  left: x-50
+              });
+          }
+
+          $(function(){
+              $('.item-hint')
+                  .on('mousedown','.item-hint-header', function(){
+                      event.stopPropagation();
+                      target = $(this).attr('data-target');
+                      target = $(target);
+                      $('.item-hint').css({"z-index":2});
+                      target.css({"z-index":3});
+                      window.addEventListener("mousemove", touches ,false);
+                      $('body').css({'user-select':'none'});
+                  })
+                  .on('mouseup','.item-hint-header',function(){
+                      window.removeEventListener("mousemove" , touches , false);
+                      $('body').css({'user-select':'initial'});
+                  })
+                  .on('click','.glyphicon-remove',function(){
+                      event.stopPropagation();
+                      target = $(this).attr('data-target');
+                      target = $(target);
+                      target.hide(200);
+                  })
+                  .on('click','.item-hint-container',function(){
+                      event.stopPropagation();
+                      target = $(this).attr('data-target');
+                      target = $(target);
+                      $('.item-hint').css({"z-index":2});
+                      target.css({"z-index":3});
+                  });
+
+              setTimeout(trigger_btn,1000);
+              setTimeout(trigger_btn,2000);
+
+              function trigger_btn() {
+                  $('.switch-arrow-right').trigger('click');
+              }
+          })
+      </script>
+
+      <!-- tags control -->
+      <script>
+
+      </script>
+
+      <!-- developer toggle -->
+      <script>
+          // call toggle_area(2,this)
+          // function toggle_area(num , obj){
+          //     if(num == 1){
+          //         $('#recomd_result').slideToggle(200);
+          //         setTimeout(bot_height,200);
+          //         $(obj).find('.plusplus').toggle();
+          //         $(obj).find('.lessless').toggle();
+          //     }else{
+          //         $('#api_ele').slideToggle(200);
+          //         setTimeout(bot_height,200);
+          //         $(obj).find('.plusplus').toggle();
+          //         $(obj).find('.lessless').toggle();
+          //     }
+          // }
+
+          function toggle_area(obj, event){
+            var left = event.pageX,
+                top = event.pageY,
+                scrollTop = $(window).scrollTop(),
+                targetName = $(obj).attr('data-target'),
+                target = $(targetName);
+            if (targetName.indexOf('03')>=0 || targetName.indexOf('04')>=0){
+                $('.item-hint').css({"z-index":2});
+                target.show(200).css({'left':left - 100,'top':top - scrollTop - 300,'z-index':3});
+            }else {
+                $('.item-hint').css({"z-index": 2});
+                target.show(200).css({'left': left + 100, 'top': top - scrollTop - 300, 'z-index': 3});
+            }
+          }
+      </script>
+
+      <!-- div size control -->
+      <script>
+          $(function(){
+              slider_width();
+              $(window).resize(function(){
+                  slider_width();
+              });
+          });
+
+          //-- tag width control
+          function slider_width(){
+              //--0705--
+              var whole_ad = $('.whole-ad'),
+                  whole_height = whole_ad.css('height'),
+                  tags = $('.tags-area'),
+                  tags_height = tags.css('height'),
+                  slider_width = ( parseFloat(whole_height) - parseFloat(tags_height) - 10 ) * 3.738,
+                  window_width = $(window).width();
+
+              if((slider_width + 400) > parseInt(window_width)){
+                  $('.slider').css('width', window_width - 400);
+              }else{
+                  $('.slider').css('width', slider_width + "px");
+              }
+              slider_width =  $('.slider').css('width');
+              tags.css('width',slider_width);
+          }
+      </script>
+
+      <!-- hint demo 2017/07/17 -->
+      <script>
+          var hint = $('.info-hint');
+          var hint_demo = $('.info-hint-demo');
+
+          function hintFunc2() {
+              hint_demo.removeClass('display-none').css({'width': '150px' , 'top': '-48px' , 'right': '10px'});
+          }
+
+          function hintFunc(){
+              show_slick();
+              hintFunc2();
+          }
+
+          $(function(){
+              $('div.row').not('.row-2 , .row-2 .row').on('mouseenter',function(){hint_demo.addClass('display-none')});
+              $(window).resize(function(){
+                  coord = $('#imgHintPanel').offset();
+              });
+          })
+      </script>
+
+      <!-- try it run timer -->
+      <script type="text/javascript">
+          function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+              }
+            }
+            return "";
+          }
+          //$('.tags-area').overscroll();
+          window.onload = function(){
+            var cookieUid = getCookie('uid'), cookieGid = getCookie('gid');
+            console.log(cookieUid + ', ' + cookieGid );
+            if(cookieUid > 0 && cookieGid > 0){
+              $('#categ_code').val(cookieUid);
+              $('#gid').val(cookieGid);
+            }
+            setTimeout(function(){
+              try_it(true, true);
+              //$('.tags-area div:eq(0), .tags-area div:eq(1)').remove();
+            }, 50);
+          };
+      </script>
+  </div>
+</div>
+
+</body>
+</html>
