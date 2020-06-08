@@ -263,8 +263,15 @@
             }
 
             .carousel-item {
-                height: 28rem;
+                height: 31rem;
             }
+            .carousel-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            height: 31rem;
+        }
 
             .jumbotron dt h1 {
                 font-size: 32px;
@@ -459,10 +466,11 @@
                             <div class="col-sm-6 text-left align-self-center">
                                 <p class="slider2-p slider2-image"
                                     style="color: #000000; font-weight: 500; margin-bottom: 0px; text-align: left;">
-                                    費用：免費<br>
-                                    &emsp;日期：2020.06.30 星期二<br>
-                                    &emsp;&emsp;時間：15:00~16:00 (GMT+8)<br>
-                                    &emsp;&emsp;&emsp;地點：線上
+                                    主辦單位：工研院巨資中心×工研院產業學院<br>
+                                    &emsp;費用：免費<br>
+                                    &emsp;&emsp;日期：2020.06.30 星期二<br>
+                                    &emsp;&emsp;&emsp;時間：15:00~16:00<br>
+                                    &emsp;&emsp;&emsp;&emsp;地點：線上<br>
                                 </p>
                             </div>
                             <div class="col-sm-6 text-left align-self-center">
@@ -947,7 +955,7 @@
         }
 
         $('.freeTrialBtn').on('click', gaClickEvent);
-	$('.applySeminarBtn').on('click', gaClickEvent);
+        $('.applySeminarBtn').on('click', gaClickEvent);
     </script>
 </body>
 
