@@ -664,6 +664,9 @@ function recomdCallback(jsonStr) {
     var tmp_result = JSON.parse(jsonStr);
     if (tmp_result != null) {
         result = tmp_result;
+        if (!result.recomd_list) {
+            result.re_list = [];
+        }
         show_slick();
     }
 }
