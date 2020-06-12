@@ -29,10 +29,11 @@
       .f{
         width: 650px;
         height: auto;
-        /* border: 1px solid #ccc;
-        background-color: #fff; */
+        border: 1px solid #ccc;
+        background-color: rgb(233, 225, 225);
         display: block;
         margin: 20px auto;
+        padding: 10px;
       }
 
       .f-layout{
@@ -42,6 +43,7 @@
         background-color: #fff;
         display: block;
         margin: 20px auto;
+        padding: 15px;
 
       }
 </style>
@@ -55,17 +57,17 @@
   <form class="f" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdV3x60oOWEkrMnngaLN_yg3elcwYqJhC1kfzHbJQ6LGAHskg/formResponse" method="POST">
     <div class="form-group f-layout">
       <label for="InputEmail1">你的電子郵件</label>
-      <input type="email" class="form-control" name="emailAddress" aria-describedby="emailHelp">
+      <input type="email" class="form-control" name="emailAddress" placeholder="ex. john@sampleec.com.tw" required>
       <small class="form-text text-muted text-need">這是必填欄位</small>
     </div>
     <div class="form-group f-layout">
       <label for="InputWebsite">您的電商官網</label>
-      <input type="url" class="form-control" name="entry.1479171958">
+      <input type="url" class="form-control" name="entry.1479171958" placeholder="ex. https://sampleec.com.tw" required>
       <small class="form-text text-muted">這是必填欄位</small>
     </div>
     <div class="form-group f-layout">
       <label for="InputName">姓名</label>
-      <input type="text" class="form-control" name="entry.1893148089">
+      <input type="text" class="form-control" name="entry.1893148089" required>
       <small class="form-text text-muted">這是必填欄位</small>
     </div>
 
@@ -95,7 +97,7 @@
 
     <div class="form-group f-layout">
       <label for="InputPhone">您的聯絡電話</label>
-      <input type="text" class="form-control" name="entry.211952265">
+      <input type="text" class="form-control" name="entry.211952265" required>
       <small class="form-text text-muted">這是必填欄位</small>
     </div>
 
@@ -110,7 +112,7 @@
 
     <div class="f-layout">
     <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" name="entry.363304688" value="VenRaaS個人化推薦技術之特色與優勢">
+      <input type="checkbox" class="form-check-input" name="entry.363304688" value="VenRaaS個人化推薦技術之特色與優勢" checked>
       <label class="form-check-label" for="exampleCheck1">VenRaaS個人化推薦技術之特色與優勢</label>
     </div>
     <div class="form-group form-check">
@@ -129,11 +131,12 @@
       <input type="checkbox" class="form-check-input" name="entry.363304688" value="其他">
       <label class="form-check-label" for="exampleCheck5">其他</label>
     </div>
+    <small class="form-text text-muted text-need">這是必填欄位</small>
   </div>
 
-    <div class="form-group form-check f-layout">
-      <input type="checkbox" class="form-check-input" name="entry.1727183614" value="本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。">
-      <label class="form-check-label" for="exampleCheck6">本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。</label>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" name="entry.1727183614" value="本人已閱讀" required>
+      <label class="form-check-label" for="exampleCheck6" style="text-align: left; padding: 5px">本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。</label>
     </div>
 
 
