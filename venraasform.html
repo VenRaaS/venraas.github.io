@@ -13,6 +13,19 @@
   <script src="./js/popper.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15220785-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-15220785-1', {
+          'page_title': document.title,
+          'page_path': location.pathname
+      });
+  </script>
+  
   <!-- <script src="jquery.min.js"></script> -->
   <script src="./jstree/dist/jstree.min.js"></script>
   <link rel="stylesheet" href="./jstree/dist/themes/default/style.min.css" />
@@ -140,8 +153,23 @@
     </div>
 
 
-    <button type="submit" class="btn btn-primary">提交</button>
+    <button type="submit" class="btn btn-primary formSubmitBtn"
+            data-event-action="click"
+			      data-event-cate="submitForm"
+            >提交</button>
   </form>
 
+  <script>
+      function gaClickEvent() {
+          gtag('event', this.getAttribute('data-event-action'), {
+              'event_category': this.getAttribute('data-event-cate'),
+              //                'event_label': <label>,
+              //                'value': <value>
+          });
+      }
+
+      $('.formSubmitBtn').on('click', gaClickEvent);
+  </script>
+  
 </body>
 </html>
