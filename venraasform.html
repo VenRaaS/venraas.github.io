@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,160 +17,273 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15220785-1"></script>
   <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-      gtag('config', 'UA-15220785-1', {
-          'page_title': document.title,
-          'page_path': location.pathname
-      });
+    gtag('config', 'UA-15220785-1', {
+      'page_title': document.title,
+      'page_path': location.pathname
+    });
   </script>
-  
+
   <!-- <script src="jquery.min.js"></script> -->
   <script src="./jstree/dist/jstree.min.js"></script>
   <link rel="stylesheet" href="./jstree/dist/themes/default/style.min.css" />
   <style>
-      @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;700;900&display=swap);
+    @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap);
 
-      * {
-          font-family: 'Noto Sans TC', sans-serif;
-      }
-      body{
-        width:100%;
-        background-color: #ccc;
-      }
-      .f{
-        width: 650px;
-        height: auto;
-        border: 1px solid #ccc;
-        background-color: rgb(233, 225, 225);
-        display: block;
-        margin: 20px auto;
-        padding: 10px;
-      }
+    * {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
 
-      .f-layout{
-        width: 600px;
-        height: auto;
-        border: 1px solid #ccc;
-        background-color: #fff;
-        display: block;
-        margin: 20px auto;
-        padding: 15px;
+    .txtheader {
+      font-size: 32px;
+      font-weight: 400;
+    }
+
+    .txtcontent {
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .txtalert {
+      color: #f00;
+    }
+
+    .txttitle {
+      font-size: 16px;
+      font-weight: 400;
+      padding-bottom: 20px;
+    }
+
+    .f {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      background-color: rgb(244, 244, 244);
+      display: block;
+      margin: auto;
+      padding: 10px;
+    }
+
+    .f-layout {
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      border-radius: 10px;
+      display: block;
+      margin: 20px auto;
+      padding: 20px 30px;
+      box-shadow: 0 10px 15px rgba(173, 171, 171, 0.5);
+    }
+    .f-layout-h{
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border-top: 12px solid rgb(198, 198, 198);
+      border-bottom: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      background-color: #fff;
+      border-radius: 10px;
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      box-shadow: 0 10px 15px rgba(173, 171, 171, 0.5);
+    }
+    .btn-f{
+      color: #fff;
+      background-color: #5f6368;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 20px;
 
       }
-</style>
+    .btn-f:hover{
+      color: #fff;
+      background-color: #83888f;
+      border: none;
+    }
+    .b-layout{
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      background-color: rgb(244, 244, 244);
+      display: block;
+      margin: 10px auto;
+      padding: 10px 30px;
+    }
+    .f-img{
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border: 1px solid #ccc;
+      display: block;
+      margin: 10px auto;
+      box-shadow: 0 10px 15px rgba(173, 171, 171, 0.5);
+    }
+    .f-img img{
+      width: 100%;
+      vertical-align: middle;
+    }
+  </style>
 
 
 
 
 </head>
+
 <body>
 
-  <form class="f" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdV3x60oOWEkrMnngaLN_yg3elcwYqJhC1kfzHbJQ6LGAHskg/formResponse" method="POST">
+  <form class="f"
+    action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdV3x60oOWEkrMnngaLN_yg3elcwYqJhC1kfzHbJQ6LGAHskg/formResponse"
+    method="POST">
+    <div class="form-group f-img">
+      <img src="../img/venraasform_header.png" alt="img">
+    </div>
+
+    <div class="form-group f-layout-h">
+      <h1 class="txtheader">[VenRaaS個人化推薦]線上說明會 報名表</h1>
+      <p class="txtcontent">
+        國內電商龍頭都在用的VenRaaS個人化推薦技術，受到各界熱烈詢問，為了讓大家深入了解此技術與服務方案，特邀請 工研院巨資中心 馮文生執行長 與 研發團隊
+        舉辦線上說明會。歡迎有興趣導入個人化推薦技術、想了解如何運用AI大數據技術進行數位轉型的電商朋友一同來參加。<br>
+        <br>
+        精彩內容<br>
+        <br>
+        ．專訪VenRaaS研發團隊<br>
+        ．埋碼介接123<br>
+        ．訂閱方案介紹<br>
+        ．Q&A<br>
+        <br>
+        活動時間<br>
+        <br>
+        2020/06/30(二) 15:00-16:00 (GMT+8)<br>
+        <br>
+        費用：完整填寫報名表資訊即可獲得「免費」入場資格<br>
+        <br>
+        ．最晚將於 活動7 日前 寄送邀請函及會議連結至您的電子信箱。<br>
+        ．錄取者請於活動時間，點擊會議連結入場即可。<br>
+        <br>
+        主辦單位：工研院巨資中心 × 工研院產業學院<br>
+        <br>
+        <span class="txtalert">*必填</span>
+      </p>
+    </div>
     <div class="form-group f-layout">
-      <label for="InputEmail1">你的電子郵件</label>
+      <label for="InputEmail1" class="txttitle">你的電子郵件<span class="txtalert"> *</span></label>
       <input type="email" class="form-control" name="emailAddress" placeholder="ex. john@sampleec.com.tw" required>
-      <small class="form-text text-muted text-need">這是必填欄位</small>
     </div>
     <div class="form-group f-layout">
-      <label for="InputWebsite">您的電商官網</label>
+      <label for="InputWebsite" class="txttitle">您的電商官網<span class="txtalert"> *</span></label>
       <input type="url" class="form-control" name="entry.1479171958" placeholder="ex. https://sampleec.com.tw" required>
-      <small class="form-text text-muted">這是必填欄位</small>
     </div>
     <div class="form-group f-layout">
-      <label for="InputName">姓名</label>
-      <input type="text" class="form-control" name="entry.1893148089" required>
-      <small class="form-text text-muted">這是必填欄位</small>
+      <label for="InputName" class="txttitle">姓名<span class="txtalert"> *</span></label>
+      <input type="text" class="form-control" name="entry.1893148089" placeholder="您的回答" required>
     </div>
 
     <div class="f-layout">
-    <div class="form-group form-check">
-      <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios1" value="女" checked>
-      <label class="form-check-label" for="exampleRadios1">
-        女
-      </label>
+      <div class="txttitle">
+        性別
+      </div>
+      <div class="form-group form-check">
+        <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios1" value="女" checked>
+        <label class="form-check-label" for="exampleRadios1">
+          女
+        </label>
+      </div>
+      <div class="form-group form-check">
+        <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios2" value="男">
+        <label class="form-check-label" for="exampleRadios2">
+          男
+        </label>
+      </div>
+      <div class="form-group form-check">
+        <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios3" value="其他">
+        <label class="form-check-label" for="exampleRadios3">
+          其他
+        </label>
+      </div>
     </div>
-    <div class="form-group form-check">
-      <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios2" value="男">
-      <label class="form-check-label" for="exampleRadios2">
-        男
-      </label>
-    </div>
-    <div class="form-group form-check">
-      <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios3" value="其他">
-      <label class="form-check-label" for="exampleRadios3">
-        其他
-      </label>
-    </div>
-  </div>
 
 
 
 
     <div class="form-group f-layout">
-      <label for="InputPhone">您的聯絡電話</label>
-      <input type="text" class="form-control" name="entry.211952265" required>
-      <small class="form-text text-muted">這是必填欄位</small>
+      <label for="InputPhone" class="txttitle">您的聯絡電話<span class="txtalert"> *</span></label>
+      <input type="text" class="form-control" name="entry.211952265" placeholder="您的回答" required>
     </div>
 
+    <div class="f-layout">
+      <div class="txttitle">
+        期望在說明會獲得什麼資訊<span class="txtalert"> *</span>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="entry.363304688" value="VenRaaS個人化推薦技術之特色與優勢" checked>
+        <label class="form-check-label" for="exampleCheck1">VenRaaS個人化推薦技術之特色與優勢</label>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="entry.363304688" value="使用VenRaaS個人化推薦能帶來的效益">
+        <label class="form-check-label" for="exampleCheck2">使用VenRaaS個人化推薦能帶來的效益</label>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="entry.363304688" value="訂閱之方案與價格">
+        <label class="form-check-label" for="exampleCheck3">訂閱之方案與價格</label>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="entry.363304688" value="介接之方式">
+        <label class="form-check-label" for="exampleCheck4">介接之方式</label>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="entry.363304688" value="其他">
+        <label class="form-check-label" for="exampleCheck5">其他</label>
+      </div>
+    </div>
 
     <div class="form-group f-layout">
-      <label for="InputAdvice">其他建議？</label>
+      <label for="InputAdvice" class="txttitle">其他建議？</label>
       <input type="text" class="form-control" name="entry.512310171" placeholder="您的回答">
-      <!-- <small class="form-text text-muted">這是必填欄位</small> -->
     </div>
-
-
 
     <div class="f-layout">
+      <div class="txttitle">
+        個人資料蒐集、處理及運用之告知暨同意書<span class="txtalert"> *</span>
+      </div>
+      <p class="txtcontent">
+        告知事項：工業技術研究院(簡稱：工研院)為了蒐集、處理及運用基於確認用戶身份，您所提供或未來基於各種事由將提供的個人資料(下稱個資)，謹先告知下列事項：1.	蒐集目的：為連繫用戶參加VenRaaS線上說明會及傳遞VenRaaS近期活動之目的。2.	個資類別：姓名、性別 (非必填)、聯絡電話、EMAIL信箱、電商網址。3.	利用期間：至蒐集目的消失為止。4.	利用地區：中華民國。5.	利用者：工研院。6.	利用方式：在不違反蒐集目的的前提下，以網際網路、電子郵件、書面、傳真及其他合法方式運用之。7.	您得以書面主張下列權利：(一)	查詢或請求閱覽。(二)	請求製給複製本。(三)	請求補充或更正。(四)	請求停止蒐集、處理或運用。(五)	請求刪除。8.	對工研院所持有您的個資，工研院會按照政府相關法規保密並予以妥善保管。財團法人工業技術研究院
+      </p>
     <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" name="entry.363304688" value="VenRaaS個人化推薦技術之特色與優勢" checked>
-      <label class="form-check-label" for="exampleCheck1">VenRaaS個人化推薦技術之特色與優勢</label>
+      <input type="checkbox" class="form-check-input" name="entry.1727183614"
+        value="本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。" required>
+      <label class="form-check-label" for="exampleCheck6">
+      本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。</label>
     </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" name="entry.363304688" value="使用VenRaaS個人化推薦能帶來的效益">
-      <label class="form-check-label" for="exampleCheck2">使用VenRaaS個人化推薦能帶來的效益</label>
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" name="entry.363304688" value="訂閱之方案與價格">
-      <label class="form-check-label" for="exampleCheck3">訂閱之方案與價格</label>
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" name="entry.363304688" value="介接之方式">
-      <label class="form-check-label" for="exampleCheck4">介接之方式</label>
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" name="entry.363304688" value="其他">
-      <label class="form-check-label" for="exampleCheck5">其他</label>
-    </div>
-    <small class="form-text text-muted text-need">這是必填欄位</small>
   </div>
 
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" name="entry.1727183614" value="本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。" required>
-      <label class="form-check-label" for="exampleCheck6" style="text-align: left; padding: 5px">本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。</label>
-    </div>
-
-
-    <button type="submit" class="btn btn-primary formSubmitBtn"
-            data-event-action="click"
-	    data-event-cate="submitSeminarForm"
-            >提交</button>
+<div class="b-layout">
+    <button type="submit" class="btn btn-primary btn-lg formSubmitBtn btn-f" data-event-action="click"
+      data-event-cate="submitSeminarForm">提交</button>
+      <small>請勿利用此表單送出密碼</small>
+      </div>
   </form>
 
   <script>
-      function gaClickEvent() {
-          gtag('event', this.getAttribute('data-event-action'), {
-              'event_category': this.getAttribute('data-event-cate'),
-              //                'event_label': <label>,
-              //                'value': <value>
-          });
-      }
+    function gaClickEvent() {
+      gtag('event', this.getAttribute('data-event-action'), {
+        'event_category': this.getAttribute('data-event-cate'),
+        //                'event_label': <label>,
+        //                'value': <value>
+      });
+    }
 
-      $('.formSubmitBtn').on('click', gaClickEvent);
+    $('.formSubmitBtn').on('click', gaClickEvent);
   </script>
-  
+
 </body>
+
 </html>
