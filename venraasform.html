@@ -40,6 +40,10 @@
     .txtheader {
       font-size: 32px;
       font-weight: 400;
+      text-align: center;
+      border-bottom: 2px solid rgb(146, 131, 131);
+      padding-bottom: 5px;
+
     }
 
     .txtcontent {
@@ -61,7 +65,7 @@
       width: 100%;
       height: auto;
       border: 1px solid #ccc;
-      background-color: rgb(244, 244, 244);
+      background: linear-gradient(50deg, rgb(158, 203, 248), #fff);
       display: block;
       margin: auto;
       padding: 10px;
@@ -73,29 +77,45 @@
       height: auto;
       border: 1px solid #ccc;
       background-color: #fff;
-      border-radius: 10px;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
       display: block;
-      margin: 20px auto;
+      margin: 10px auto;
       padding: 20px 30px;
-      box-shadow: 0 10px 15px rgba(173, 171, 171, 0.5);
+      box-shadow: 0 10px 15px rgba(104, 164, 243, 0.5);
     }
 
-    .f-layout-h {
+    .f-layout-l {
       width: 100%;
       max-width: 640px;
       height: auto;
-      border-top: 12px solid rgb(198, 198, 198);
+      border-top: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
-      border-left: 1px solid #ccc;
+      border-left: 10px solid #1b6ca8;
       border-right: 1px solid #ccc;
       background-color: #fff;
-      border-radius: 10px;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
       display: block;
-      margin: 20px auto;
-      padding: 10px 30px;
-      box-shadow: 0 10px 15px rgba(173, 171, 171, 0.5);
+      margin: 10px auto;
+      padding: 20px 30px;
+      box-shadow: 0 10px 15px rgba(104, 164, 243, 0.5);
     }
-
+    .f-layout-r {
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      border-left: 10px solid rgb(238, 56, 65);
+      border-right: 1px solid #ccc;
+      background-color: #fff;
+      /* border-radius: 10px; */
+      display: block;
+      margin: 10px auto;
+      padding: 20px 30px;
+      box-shadow: 0 10px 15px rgba(104, 164, 243, 0.5);
+    }
     .btn-f {
       color: #fff;
       background-color: #5f6368;
@@ -117,10 +137,11 @@
       width: 100%;
       max-width: 640px;
       height: auto;
-      background-color: rgb(244, 244, 244);
+      /* background-color: rgb(244, 244, 244); */
       display: block;
       margin: 10px auto;
       padding: 10px 30px;
+      text-align: center;
     }
 
     .f-img {
@@ -136,6 +157,8 @@
     .f-img img {
       width: 100%;
       vertical-align: middle;
+      margin: 0;
+      padding: 0;
     }
   </style>
 
@@ -150,11 +173,11 @@
     action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdV3x60oOWEkrMnngaLN_yg3elcwYqJhC1kfzHbJQ6LGAHskg/formResponse"
     method="POST">
     <div class="form-group f-img">
-      <img src="./img/venraasform_header.PNG" alt="img">
+      <img src="./img/venraasform_header.png" alt="img">
     </div>
 
-    <div class="form-group f-layout-h">
-      <h1 class="txtheader">[VenRaaS個人化推薦]線上說明會 報名表</h1>
+    <div class="form-group f-layout-l">
+      <h1 class="txtheader">線上說明會 報名表</h1>
       <p class="txtcontent">
         國內電商龍頭都在用的VenRaaS個人化推薦技術，受到各界熱烈詢問，為了讓大家深入了解此技術與服務方案，特邀請 工研院巨資中心 馮文生執行長 與 研發團隊
         舉辦線上說明會。歡迎有興趣導入個人化推薦技術、想了解如何運用AI大數據技術進行數位轉型的電商朋友一同來參加。<br>
@@ -176,15 +199,47 @@
         ．錄取者請於活動時間，點擊會議連結入場即可。<br>
         <br>
         主辦單位：工研院巨資中心 × 工研院產業學院<br>
-        <br>
-        <span class="txtalert">*必填</span>
+        <!-- <br>
+        <span class="txtalert">*必填</span> -->
       </p>
     </div>
-    <div class="form-group f-layout">
-      <label for="InputEmail1" class="txttitle">你的電子郵件<span class="txtalert"> *</span></label>
+    <div class="form-group f-layout-l">
+      <p><small class="txtalert">*必填</small></p>
+      <label for="InputEmail1" class="txttitle">1. 您的電子郵件<span class="txtalert"> *</span></label>
       <input type="email" class="form-control" name="emailAddress" placeholder="ex. john@sampleec.com.tw" required>
+      <br>
+      <label for="InputWebsite" class="txttitle">2. 您的電商官網<span class="txtalert"> *</span></label>
+      <input type="url" class="form-control" name="entry.1479171958" placeholder="ex. https://sampleec.com.tw" required>
+      <br>
+      <label for="InputName" class="txttitle">3. 姓名<span class="txtalert"> *</span></label>
+      <input type="text" class="form-control" name="entry.1893148089" placeholder="您的姓名" required>
+      <br>
+      <div class="txttitle">
+        4. 性別
+      </div>
+      <div class="form-group form-check">
+        <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios1" value="女">
+        <label class="form-check-label" for="exampleRadios1">
+          女
+        </label>
+      </div>
+      <div class="form-group form-check">
+        <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios2" value="男">
+        <label class="form-check-label" for="exampleRadios2">
+          男
+        </label>
+      </div>
+      <div class="form-group form-check">
+        <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios3" value="其他">
+        <label class="form-check-label" for="exampleRadios3">
+          其他
+        </label>
+      </div>
+      <br>
+      <label for="InputPhone" class="txttitle">5. 您的聯絡電話<span class="txtalert"> *</span></label>
+      <input type="text" class="form-control" name="entry.211952265" placeholder="您的聯絡電話" required>
     </div>
-    <div class="form-group f-layout">
+    <!-- <div class="form-group f-layout">
       <label for="InputWebsite" class="txttitle">您的電商官網<span class="txtalert"> *</span></label>
       <input type="url" class="form-control" name="entry.1479171958" placeholder="ex. https://sampleec.com.tw" required>
     </div>
@@ -198,7 +253,7 @@
         性別
       </div>
       <div class="form-group form-check">
-        <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios1" value="女" checked>
+        <input class="form-check-input" type="radio" name="entry.1939900952" id="exampleRadios1" value="女">
         <label class="form-check-label" for="exampleRadios1">
           女
         </label>
@@ -222,15 +277,15 @@
 
     <div class="form-group f-layout">
       <label for="InputPhone" class="txttitle">您的聯絡電話<span class="txtalert"> *</span></label>
-      <input type="text" class="form-control" name="entry.211952265" placeholder="您的回答" required>
-    </div>
+      <input type="text" class="form-control" name="entry.211952265" placeholder="您的聯絡電話" required>
+    </div> -->
 
-    <div class="f-layout">
+    <div class="f-layout-l">
       <div class="txttitle">
-        期望在說明會獲得什麼資訊<span class="txtalert"> *</span>
+        6. 期望在說明會獲得什麼資訊<span class="txtalert"> *</span>
       </div>
       <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" name="entry.363304688" value="VenRaaS個人化推薦技術之特色與優勢" checked>
+        <input type="checkbox" class="form-check-input" name="entry.363304688" value="VenRaaS個人化推薦技術之特色與優勢">
         <label class="form-check-label" for="exampleCheck1">VenRaaS個人化推薦技術之特色與優勢</label>
       </div>
       <div class="form-group form-check">
@@ -249,16 +304,19 @@
         <input type="checkbox" class="form-check-input" name="entry.363304688" value="其他">
         <label class="form-check-label" for="exampleCheck5">其他</label>
       </div>
+      <br>
+      <label for="InputAdvice" class="txttitle">7. 其他建議？</label>
+      <input type="text" class="form-control" name="entry.512310171" placeholder="您的建議">
     </div>
 
-    <div class="form-group f-layout">
+    <!-- <div class="form-group f-layout">
       <label for="InputAdvice" class="txttitle">其他建議？</label>
       <input type="text" class="form-control" name="entry.512310171" placeholder="您的回答">
-    </div>
+    </div> -->
 
-    <div class="f-layout">
+    <div class="f-layout-l">
       <div class="txttitle">
-        個人資料蒐集、處理及運用之告知暨同意書<span class="txtalert"> *</span>
+        8. 個人資料蒐集、處理及運用之告知暨同意書<span class="txtalert"> *</span>
       </div>
       <p class="txtcontent">
         告知事項：工業技術研究院(簡稱：工研院)為了蒐集、處理及運用基於確認用戶身份，您所提供或未來基於各種事由將提供的個人資料(下稱個資)，謹先告知下列事項：1.
@@ -275,9 +333,10 @@
     </div>
 
     <div class="b-layout">
-      <button type="submit" class="btn btn-primary btn-lg formSubmitBtn btn-f" data-event-action="click"
-        data-event-cate="submitSeminarForm">提交</button>
-      <small>請勿利用此表單送出密碼</small>
+      <button type="submit" class="btn btn-primary btn-lg formSubmitBtn" data-event-action="click"
+        data-event-cate="submitSeminarForm">送出報名表</button><br>
+        <br>
+      <small style="color:rgba(139, 134, 134, 0.8)">此報名表是採用google form技術及服務原則</small>
     </div>
   </form>
 
