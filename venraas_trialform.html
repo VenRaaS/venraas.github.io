@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>venraas form</title>
+  <link rel="stylesheet" href="./css/fontawesome.min.css">
+  <link rel="stylesheet" href="./css/brands.min.css">
+  <link rel="stylesheet" href="./css/solid.min.css">
+
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/jquery-3.4.1.min.js"></script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15220785-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-15220785-1', {
+      'page_title': document.title,
+      'page_path': location.pathname
+    });
+  </script> -->
+
+  <!-- <script src="jquery.min.js"></script> -->
+  <script src="./jstree/dist/jstree.min.js"></script>
+  <link rel="stylesheet" href="./jstree/dist/themes/default/style.min.css" />
+  <style>
+    @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap);
+
+    * {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .txtheader {
+      font-size: 32px;
+      font-weight: 400;
+      text-align: center;
+      border-bottom: 2px solid rgb(146, 131, 131);
+      padding-bottom: 5px;
+
+    }
+
+    .txtcontent {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .txtalert {
+      color: #f00;
+    }
+
+    .txttitle {
+      font-size: 16px;
+      font-weight: 400;
+      padding-bottom: 20px;
+    }
+
+    .f {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      background: linear-gradient(-130deg, #189DBF, #fff);
+      display: block;
+      margin: auto;
+      padding: 10px;
+    }
+
+    .f-layout {
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      display: block;
+      margin: 10px auto;
+      padding: 20px 30px;
+      box-shadow: 0 10px 15px rgba(104, 164, 243, 0.5);
+    }
+
+    .f-layout-l {
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      border-left: 10px solid #189DBF;
+      border-right: 1px solid #ccc;
+      background-color: #fff;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      display: block;
+      margin: 10px auto;
+      padding: 20px 30px;
+      box-shadow: 0 10px 15px rgba(104, 164, 243, 0.5);
+    }
+
+    .btn-f {
+      color: #fff;
+      background-color: #189DBF;
+      border: none;
+    }
+
+    .btn-f:hover {
+      color: #fff;
+      background-color: #1191b1e0;
+      border: none;
+    }
+
+    .b-layout {
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      display: block;
+      margin: 10px auto;
+      padding: 10px 30px;
+      text-align: center;
+    }
+
+    .f-img {
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      border: 1px solid #ccc;
+      display: block;
+      margin: 10px auto;
+      box-shadow: 0 10px 15px rgba(173, 171, 171, 0.5);
+    }
+
+    .f-img img {
+      width: 100%;
+      vertical-align: middle;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+
+
+
+</head>
+
+<body>
+
+  <form class="f"
+    action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeXUddPXnxv95FmmP9D2gjy9mUmkFG8hF0YcaCENK7DeHA8AQ/formResponse" target="_self"
+    method="POST">
+    <div class="form-group f-img">
+      <img src="./img/venraas_trialform_header.png" alt="img">
+    </div>
+
+    <div class="form-group f-layout-l">
+      <h1 class="txtheader">VenRaaS免費試用申請</h1>
+      <p class="txtcontent">國內電商龍頭都在用的智慧推薦技術開放訂閱囉！即日起，提供30日免費試用申請，歡迎大小電商一起來體驗~</p>
+      <p><small class="txtalert">*必填</small></p>
+      <label for="InputEmail1" class="txttitle">您的電子郵件<span class="txtalert"> *</span></label>
+      <input type="email" class="form-control" name="emailAddress" placeholder="ex. john@sampleec.com.tw" required>
+      <br>
+      <label for="InputWebsite" class="txttitle">您的電商官網<span class="txtalert"> *</span></label>
+      <input type="url" class="form-control" name="entry.1151843433" placeholder="ex. https://sampleec.com.tw" required>
+      <br>
+      <label for="InputPhone" class="txttitle">您的聯絡電話<span class="txtalert"> *</span></label>
+      <input type="text" class="form-control" name="entry.1384321721" placeholder="您的聯絡電話" required>
+    </div>
+
+
+    <div class="f-layout-l">
+      <div class="txttitle">
+        個人資料蒐集、處理及運用之告知暨同意書<span class="txtalert"> *</span>
+      </div>
+      <p class="txtcontent">
+        告知事項：工業技術研究院(簡稱：工研院)為了蒐集、處理及運用基於確認用戶身份，您所提供或未來基於各種事由將提供的個人資料(下稱個資)，謹先告知下列事項：1.
+        蒐集目的：為連繫用戶參加VenRaaS線上說明會及傳遞VenRaaS近期活動之目的。2. 個資類別：姓名、性別 (非必填)、聯絡電話、EMAIL信箱、電商網址。3. 利用期間：至蒐集目的消失為止。4.
+        利用地區：中華民國。5. 利用者：工研院。6. 利用方式：在不違反蒐集目的的前提下，以網際網路、電子郵件、書面、傳真及其他合法方式運用之。7. 您得以書面主張下列權利：(一) 查詢或請求閱覽。(二) 請求製給複製本。(三)
+        請求補充或更正。(四) 請求停止蒐集、處理或運用。(五) 請求刪除。8. 對工研院所持有您的個資，工研院會按照政府相關法規保密並予以妥善保管。財團法人工業技術研究院
+      </p>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="entry.365115235"
+          value="本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。" required>
+        <label class="form-check-label" for="exampleCheck6">
+          本人已閱讀並瞭解上述告知事項，同意貴院在符合上述告知事項範圍內，蒐集、處理及利用本人的個資。本項同意得以電子文件方式表達。</label>
+      </div>
+    </div>
+
+    <div class="b-layout">
+      <button type="submit" class="btn btn-primary btn-lg formSubmitBtn btn-f" data-event-action="click"
+        data-event-cate="submitSeminarForm">送出申請表</button><br>
+      <br>
+      <small style="color:rgba(139, 134, 134, 0.8)">此申請表是採用google form技術及服務原則</small>
+    </div>
+  </form>
+
+  <!-- <script>
+    function gaClickEvent() {
+      gtag('event', this.getAttribute('data-event-action'), {
+        'event_category': this.getAttribute('data-event-cate'),
+        //                'event_label': <label>,
+        //                'value': <value>
+      });
+    }
+
+    $('.formSubmitBtn').on('click', gaClickEvent);
+  </script> -->
+
+</body>
+
+</html>
