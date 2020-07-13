@@ -38,6 +38,32 @@
         });
     </script>
 
+    <!-- video control -->
+    <script>
+        $(function () {
+            var video = document.getElementById("myVideo");
+            $('[data-toggle="popover"]').popover();
+            $(document).ready(function () {
+                $("#myButton").click();
+            })
+            $("#vModal").modal({
+                show: false,
+                backdrop: "static",
+                keyboard: true
+            })
+            $("#close").click(function () {
+                video.pause();
+            });
+            setInterval(function () {
+                if (video.paused) {
+                    $('[data-toggle="popover"]').popover("show");
+                } else {
+                    $('[data-toggle="popover"]').popover("hide");
+                }
+            }, 2000);
+        });
+    </script>
+
     <style>
         @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap);
 
@@ -224,6 +250,33 @@
             background-color: #189dbf;
         }
 
+        .modal-dialog {
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 0px;
+        }
+
+        .close {
+            position: absolute;
+            right: -30px;
+            top: 0;
+            z-index: 999;
+            font-size: 2rem;
+            font-weight: normal;
+            color: #fff;
+            opacity: 1;
+        }
+
+        /* #myButton {
+            position:fixed;
+            top:50%;
+            z-index:1;
+            } */
+
         /* medias to show different font size */
         @media (max-width: 768.98px) {
             .carousel-caption h1 {
@@ -265,13 +318,14 @@
             .carousel-item {
                 height: 31rem;
             }
+
             .carousel-item img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            min-width: 100%;
-            height: 31rem;
-        }
+                position: absolute;
+                top: 0;
+                left: 0;
+                min-width: 100%;
+                height: 31rem;
+            }
 
             .jumbotron dt h1 {
                 font-size: 32px;
@@ -445,7 +499,8 @@
                             <span class="red-txt"
                                 style="color: #F75378; font-weight: 500;">敬&#8226;請&#8226;期&#8226;待</span></p>
                         <p style="margin-bottom:-10px;">
-                            <a class="btn btn-lg btn-primary freeTrialBtn" href="https://venraas.github.io/venraas_trialform.html" target="_blank"
+                            <a class="btn btn-lg btn-primary freeTrialBtn"
+                                href="https://venraas.github.io/venraas_trialform.html" target="_blank"
                                 data-event-action="click" role="button">有消息，通知我</a>
                             <br>
                             <span class="trialdate">體驗活動申請至2020年6月30日止 </span>
@@ -453,7 +508,7 @@
                     </div>
                 </div>
                 <!-- Carousel - 1st Slide -->
-                <div class="carousel-item  active">
+                <div class="carousel-item active">
                     <img src="./img/slider_ad_freetrial_hori_ xhdpi.png" class="d-block w-100" alt="Second slide">
                     <div class="carousel-caption text-center">
                         <div class="row">
@@ -489,10 +544,8 @@
                             <div class="col-md-12">
                                 <p class="red-txt" style="color: #F75378; font-weight: 500; margin-bottom: 5px;">
                                     席位有限，手刀卡位</span></p>
-                                <p style="margin-bottom:-10px;"><a class="btn btn-lg btn-secondary applySeminarBtn disabled"
-                                        href="https://venraas.github.io/venraasform.html"
-                                        target="_blank" role="button" data-event-action="click" data-event-cate="openSeminarForm" aria-disabled="true">報名結束</a><br>
-                                    <span class="trialdate">報名期間至說明會開始前</span></p>
+                                <p style="margin-bottom:5px;"><button type="button" class="btn btn-primary"
+                                        data-toggle="modal" data-target="#vModal">觀看線上說明會</btton><br>
                             </div>
                         </div>
                     </div>
@@ -687,8 +740,9 @@
                     <p class="lead">
                         工研院自2013年發展電商推薦技術，歷經多家大型電商試煉，現推出訂閱服務，讓中小型電商花少少成本，就能引進大型電商都在使用的高品質推薦技術。
                     </p>
-                    <a class="btn btn-lg btn-primary freeTrialBtn float-right" href="https://venraas.github.io/venraas_trialform.html" target="_blank"
-                                data-event-action="click" role="button">免費試用</a>
+                    <a class="btn btn-lg btn-primary freeTrialBtn float-right"
+                        href="https://venraas.github.io/venraas_trialform.html" target="_blank"
+                        data-event-action="click" role="button">免費試用</a>
                 </dd>
             </dl>
         </div>
@@ -808,8 +862,9 @@
                     <p class="lead">
                         只要您有電商官網即可埋碼界接，免費體驗，滿意再訂閱，工研院保留審核試用之權利。
                     </p>
-                    <a class="btn btn-lg btn-primary freeTrialBtn float-right" href="https://venraas.github.io/venraas_trialform.html" target="_blank"
-                                data-event-action="click" role="button">免費試用</a>
+                    <a class="btn btn-lg btn-primary freeTrialBtn float-right"
+                        href="https://venraas.github.io/venraas_trialform.html" target="_blank"
+                        data-event-action="click" role="button">免費試用</a>
                 </dd>
             </dl>
         </div>
@@ -845,8 +900,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+                        <span>&times;</span>
                 </div>
                 <div class="container">
                     <div class="row">
@@ -863,6 +918,27 @@
         </div>
     </div>
 
+    <!-- Modal Video-->
+    <div class="modal fade" id="vModal" tabindex="-1" role="dialog" aria-labelledby="myModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close"
+                    aria-hidden="true">
+                    <span>&times;</span>
+                </button>
+                <div class="modal-body" width="500px" height="500px" style="padding:0">
+                    <video controls="controls" volume="1" id="myVideo" loop="loop" width="100%" height="100%">
+                        <source src="https://storage.googleapis.com/venraas-github/video/VenRaaS_2.mp4"
+                            type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- line -->
@@ -913,6 +989,9 @@
         $('.freeTrialBtn').on('click', gaClickEvent);
         $('.applySeminarBtn').on('click', gaClickEvent);
     </script>
+
+
+
 </body>
 
 </html>
