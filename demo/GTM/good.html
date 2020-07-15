@@ -80,6 +80,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div style="margin:5% 20% 2px 20%; text-align:left;"><h3>看此商品也看</h3></div>
     <div class="slider slick-demo"></div>
 
+    <div style="margin:5% 20% 2px 20%; text-align:left;"><h3>依您的歷程推薦</h3></div>
+    <div class="slider slick-demo1"></div>
+
 <script>
     var strUrl = location.search;
     var getPara, ParaVal;
@@ -133,6 +136,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         ven_good();
 
         ven_recomd("gop", "AlsoView", 10, recomd_callback);
+
+        slick_id = "slick-demo1";
+        ven_recomd("gop_cs", "ClickStream", 10, recomd_callback);
     }
     
     function recomd_callback(jsonStr) {
