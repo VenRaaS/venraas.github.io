@@ -156,9 +156,10 @@ function process_slick(result, slickClass, loop, rowItems, showItems, scrollItem
 
 }
 
+var slick_id = "slick-demo";
 function show_slick(showItems, scrollItems, loop) {
 //    hint_control();
-    process_slick(recomd_result, "slick-demo", loop, rowItems, showItems, scrollItems);
+    process_slick(recomd_result, slick_id, loop, rowItems, showItems, scrollItems);
 }
 
 function recomdCallback(jsonStr) {
