@@ -136,12 +136,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         ven_good();
 
         ven_recomd("gop", "AlsoView", 10, recomd_callback);
+    }
+
+    function recomd_callback(jsonStr) {
+        console.log("recomd callback data: " + jsonStr);
+
+        //處理recomd傳回資料, 並顯示在網頁上.
+        rowItems = 10;
+        showItems = 5;
+        scrollItems = 5;
+        loop = true;
+        recomdCallback(jsonStr);
 
         slick_id = "slick-demo1";
-        ven_recomd("gop_cs", "ClickStream", 10, recomd_callback);
+        ven_recomd("gop_cs", "ClickStream", 10, recomd_callback_1);
     }
-    
-    function recomd_callback(jsonStr) {
+
+    function recomd_callback_1(jsonStr) {
         console.log("recomd callback data: " + jsonStr);
 
         //處理recomd傳回資料, 並顯示在網頁上.
