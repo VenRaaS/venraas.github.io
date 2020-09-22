@@ -41,6 +41,10 @@ public class Venraaspt {
     private String fromRec;
     private String device = "mbe";
     private String keyword;
+    //2020新增參數
+    private String refInfo;
+    private String wCategInfo;
+    private String bCategInfo;
 
     public JSONObject jGoods = null;
 
@@ -60,8 +64,8 @@ public class Venraaspt {
      * @param _serverHermes  recomd server domain
      * @param _token  電商的token
      * @param _domain  電商的domain
-     * @param _clientHost
-     * @param _topHost
+     * @param _clientHost  　
+     * @param _topHost  　
      * @param _venGuid  使用者的guid(null或""將會由server產生)
      *
      */
@@ -82,7 +86,7 @@ public class Venraaspt {
                     venGuid = httpGet("https://" + serverLog + apiUuid + "?id=" + domain + "&typ=g&pt=a");
                 }
                 venSession = httpGet("https://" + serverLog + apiUuid + "?id=" + domain + "&typ=s&pt=a");
-        }}).start();
+            }}).start();
     }
 
     /**
@@ -164,16 +168,14 @@ public class Venraaspt {
      * @param goodsId 商品代碼
      * @param keyword 搜尋字串
      * @param fromRec 來源推薦方式代碼
-     * @param nowRec 推薦方式代碼
      *
      */
-    public void ven_goods(String categoryCode, String goodsId, String keyword, String fromRec, String nowRec) {
+    public void ven_goods(String categoryCode, String goodsId, String keyword, String fromRec) {
         ven_clear();
         this.categoryCode = categoryCode;
         this.goodsId = goodsId;
         this.keyword = keyword;
         this.fromRec = fromRec;
-        this.nowRec = nowRec;
         ven_log("pageload", "gop");
     }
 
@@ -302,7 +304,7 @@ public class Venraaspt {
                     Log.i("[ven_log]", "Exception='" + e.toString() + "'");
                 }
                 httpPost("https://" + serverLog + apiLog, "application/x-www-form-urlencoded;charset=UTF-8", params);
-        }}).start();
+            }}).start();
     }
 
     /**
@@ -407,6 +409,39 @@ public class Venraaspt {
     }
 
     /**
+     * venraas ref_info for 商品推薦(購物車頁面)
+     * "ref_info":[{"gid":"123"},{"gid":"456"}]
+     *
+     * @param _refInfo
+     *
+     */
+    public void ven_refInfo(String _refInfo) {
+        this.refInfo = _refInfo;
+    }
+
+    /**
+     * venraas w_categ_info for 商品推薦
+     * "w_categ_info":[ { "code":"368156" } ]
+     *
+     * @param _wCategInfo
+     *
+     */
+    public void ven_wCategInfo(String _wCategInfo) {
+        this.wCategInfo = _wCategInfo;
+    }
+
+    /**
+     * venraas b_categ_info for 商品推薦
+     * "b_categ_info":[ { "code":"368156" } ]
+     *
+     * @param _bCategInfo
+     *
+     */
+    public void ven_bCategInfo(String _bCategInfo) {
+        this.bCategInfo = _bCategInfo;
+    }
+
+    /**
      * 商品推薦
      *
      * @param recPos p, cap, gop...
@@ -428,15 +463,29 @@ public class Venraaspt {
                     venSession = httpGet("https://" + serverLog + apiUuid + "?id=" + domain + "&typ=s&pt=a");
                 }
 
-                String params = null;
-                params = "{\"token\":\"" + token + "\""
-                        + ",\"rec_pos\":\"" + recPos + "\""
-                        + ",\"rec_type\":\"" + recType + "\""
-                        + ",\"device\":\"" + device + "\""
-                        + ",\"ven_guid\":\"" + venGuid + "\""
-                        + ",\"ven_session\":\"" + venSession + "\""
-                        + ",\"topk\":" + rowItems
-                        + "}";
+                String params = "";
+                params += "{\"token\":\"" + token + "\"";
+                params += ",\"rec_pos\":\"" + recPos + "\"";
+                params += ",\"rec_type\":\"" + recType + "\"";
+                if ((categoryCode != null) && (categoryCode.trim().length() > 0)) {
+                    params += ",\"categ_code\":\"" + categoryCode + "\"";
+                }
+                if (recPos.equalsIgnoreCase("scp") || recPos.equalsIgnoreCase("favor")) {
+                    if ((refInfo != null) && (refInfo.trim().length() > 0)) {
+                        params += ",\"ref_info\":\"" + refInfo + "\"";
+                    }
+                }
+                if ((wCategInfo != null) && (wCategInfo.trim().length() > 0)) {
+                    params += ",\"w_categ_info\":\"" + wCategInfo + "\"";
+                }
+                if ((bCategInfo != null) && (bCategInfo.trim().length() > 0)) {
+                    params += ",\"b_categ_info\":\"" + bCategInfo + "\"";
+                }
+                params += ",\"device\":\"" + device + "\"";
+                params += ",\"ven_guid\":\"" + venGuid + "\"";
+                params += ",\"ven_session\":\"" + venSession + "\"";
+                params += ",\"topk\":" + rowItems;
+                params += "}";
                 String result = httpPost("https://" + serverHermes + apiHermes, "application/json;charset=UTF-8", params);
                 Log.i("[ven_recomd]", "result='" + result + "'");
 
