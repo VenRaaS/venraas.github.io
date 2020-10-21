@@ -1,6 +1,6 @@
 {
     "exportFormatVersion": 2,
-    "exportTime": "2020-05-29 08:03:22",
+    "exportTime": "2020-10-21 06:20:10",
     "containerVersion": {
         "path": "accounts/4630659176/containers/10741136/versions/0",
         "accountId": "4630659176",
@@ -1344,7 +1344,7 @@
                 "name": "Click Text"
             }
         ],
-        "fingerprint": "1590739402028",
+        "fingerprint": "1603261210090",
         "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/4630659176/containers/10741136/versions/0?apiLink=version"
     }
 }
