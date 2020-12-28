@@ -81,7 +81,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div style="margin:5% 20% 2px 20%; text-align:left;"><h3>猜你喜歡</h3></div>
     <div class="slider slick-demo"></div>
-
+    <button type="button" id="myBtn">Show ID List</button>
+    <div class="box" id="boxOne">#boxOne</div>
 <script>
     function venraasJob() {
         ven_portal();
@@ -99,6 +100,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         loop = true;
         recomdCallback(jsonStr);
     }
+
+    $(function () {
+        //declare function 
+        $("#myBtn").click(function(){
+                //alert("testing");
+                var ven_guid = venraastool.getcookie("venguid");
+                var ven_session = venraastool.getcookie("vensession");
+                $("#boxOne").text(ven_guid +"<br>"+ ven_session);
+            });
+    })
 </script>
 </body>
 </html>
