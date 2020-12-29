@@ -82,7 +82,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div style="margin:5% 20% 2px 20%; text-align:left;"><h3>猜你喜歡</h3></div>
     <div class="slider slick-demo"></div>
     <button type="button" id="myBtn">Show ID List</button>
-    <div class="box" id="boxOne">#boxOne</div>
+    <div class="box" id="boxOne"></div>
 <script>
     function venraasJob() {
         ven_portal();
@@ -101,14 +101,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         recomdCallback(jsonStr);
     }
 
-    $(function () {
+    $(function () {        
         //declare function 
-        $("#myBtn").click(function(){
+        var urlParams = new URLSearchParams(window.location.search);
+        if( urlParams.has('debug') ) {
+            $("#myBtn").click(function(){
                 //alert("testing");
                 var ven_guid = venraastool.getcookie("venguid");
                 var ven_session = venraastool.getcookie("vensession");
                 $("#boxOne").html("venguid:" + ven_guid +"<br/>"+ "ven_session:" + ven_session);
             });
+            $("#myBtn").show();
+        } else {
+            $("#myBtn").hide();
+        }
     })
 </script>
 </body>
