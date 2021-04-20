@@ -47,6 +47,20 @@ class CheckoutViewController: UIViewController, WKNavigationDelegate, WKScriptMe
 
         // Do any additional setup after loading the view.
 
+        if (StorageData.mInstance.orderList.isEmpty) {
+            Venraaspt.mInstance.ven_order(transI: "")
+        } else {
+            var transI = "{\"id\":null,\"iList\":["
+            for (index, value) in StorageData.mInstance.orderList.enumerated() {
+                if (index > 0) {
+                    transI += ","
+                }
+                transI += "{\"id\":\"" + value + "\"}"
+            }
+            transI += "]}"
+            Venraaspt.mInstance.ven_order(transI: transI)
+        }
+
         let url = URL(string: "https://venraas.github.io/demo/GTM/checkout_iOS.html")
         if let url = url {
             let request = URLRequest(url: url)

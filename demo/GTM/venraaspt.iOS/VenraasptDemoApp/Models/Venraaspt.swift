@@ -257,55 +257,55 @@ class Venraaspt: NSObject {
                 params += ",\"uid\":\"" + self.userId + "\""
             }
             else {
-                params += ",\"uid\":null"
+                //params += ",\"uid\":null"
             }
             if (self.categoryCode.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"categ_code\":\"" + self.categoryCode + "\""
             }
             else {
-                params += ",\"categ_code\":null"
+                //params += ",\"categ_code\":null"
             }
             if (self.goodsId.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"gid\":\"" + self.goodsId + "\""
             }
             else {
-                params += ",\"gid\":null"
+                //params += ",\"gid\":null"
             }
             if (self.transI.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-                params += ",\"trans_i\":\"" + self.transI + "\""
+                params += ",\"trans_i\":" + self.transI
             }
             else {
-                params += ",\"trans_i\":null"
+                params += ",\"trans_i\":[]"
             }
             if (self.nowRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-                params += ",\"now_rec\":\"" + self.nowRec + "\""
+                params += ",\"now_rec\":" + self.nowRec
             }
             else {
-                params += ",\"now_rec\":null"
+                params += ",\"now_rec\":[]"
             }
             if (self.fromRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"from_rec\":\"" + self.fromRec + "\""
             }
             else {
-                params += ",\"from_rec\":null"
+                //params += ",\"from_rec\":null"
             }
             if (self.venGuid.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"ven_guid\":\"" + self.venGuid + "\""
             }
             else {
-                params += ",\"ven_guid\":null"
+                //params += ",\"ven_guid\":null"
             }
             if (self.venSession.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"ven_session\":\"" + self.venSession + "\""
             }
             else {
-                params += ",\"ven_session\":null"
+                //params += ",\"ven_session\":null"
             }
             if (self.keyword.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"keyword\":\"" + self.keyword + "\""
             }
             else {
-                params += ",\"keyword\":null"
+                //params += ",\"keyword\":null"
             }
             params += "}"
             self.Log(msg: "[ven_log] params='\(params)'")
@@ -370,57 +370,52 @@ class Venraaspt: NSObject {
                 params += ",\"uid\":\"" + self.userId + "\""
             }
             else {
-                params += ",\"uid\":null"
+                //params += ",\"uid\":null"
             }
             if (self.categoryCode.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"categ_code\":\"" + self.categoryCode + "\""
             }
             else {
-                params += ",\"categ_code\":null"
+                //params += ",\"categ_code\":null"
             }
             if (self.goodsId.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"gid\":\"" + self.goodsId + "\""
             }
             else {
-                params += ",\"gid\":null"
+                //params += ",\"gid\":null"
             }
             if (self.transI.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-                params += ",\"trans_i\":\"" + self.transI + "\""
+                params += ",\"trans_i\":" + self.transI
             }
             else {
-                params += ",\"trans_i\":null"
-            }
-            if (self.nowRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-                params += ",\"now_rec\":\"" + self.nowRec + "\""
-            }
-            else {
-                params += ",\"now_rec\":null"
+                params += ",\"trans_i\":[]"
             }
             if (self.fromRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"from_rec\":\"" + self.fromRec + "\""
             }
             else {
-                params += ",\"from_rec\":null"
+                //params += ",\"from_rec\":null"
             }
             if (self.venGuid.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"ven_guid\":\"" + self.venGuid + "\""
             }
             else {
-                params += ",\"ven_guid\":null"
+                //params += ",\"ven_guid\":null"
             }
             if (self.venSession.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"ven_session\":\"" + self.venSession + "\""
             }
             else {
-                params += ",\"ven_session\":null"
+                //params += ",\"ven_session\":null"
             }
             if (self.keyword.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"keyword\":\"" + self.keyword + "\""
             }
             else {
-                params += ",\"keyword\":null"
+                //params += ",\"keyword\":null"
             }
             params += "}"
+            self.Log(msg: "[ven_addCart] params='\(params)'")
             let Params = params.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             if (Params != nil) {
                 params = Params!
@@ -494,17 +489,25 @@ class Venraaspt: NSObject {
             params += "{\"token\":\"" + self.token + "\""
             params += ",\"rec_pos\":\"" + recPos + "\""
             params += ",\"rec_type\":\"" + recType + "\""
+            params += ",\"uid\":\"" + self.userId + "\""
+            params += ",\"gid\":\"" + self.goodsId + "\""
             params += ",\"categ_code\":\"" + self.categoryCode + "\""
             if ((recPos == "scp") || (recPos == "favor")) {
                 if (self.refInfo != "") {
-                    params += ",\"ref_info\":\"" + self.refInfo + "\""
+                    params += ",\"ref_info\":" + self.refInfo
+                } else {
+                    params += ",\"ref_info\":[]"
                 }
             }
             if (self.wCategInfo != "") {
-                params += ",\"w_categ_info\":\"" + self.wCategInfo + "\""
+                params += ",\"w_categ_info\":" + self.wCategInfo
+            } else {
+                params += ",\"w_categ_info\":[]"
             }
             if (self.bCategInfo != "") {
-                params += ",\"b_categ_info\":\"" + self.bCategInfo + "\""
+                params += ",\"b_categ_info\":" + self.bCategInfo
+            } else {
+                params += ",\"b_categ_info\":[]"
             }
             params += ",\"device\":\"" + self.device + "\""
             params += ",\"ven_guid\":\"" + self.venGuid + "\""
@@ -549,7 +552,7 @@ class Venraaspt: NSObject {
                 }
                 if let data = results.data {
                     result = String(decoding: data, as: UTF8.self)
-                    self.Log(msg: "[ven_recomd] data='\(result)'\n\n")
+//                    self.Log(msg: "[ven_recomd] data='\(result)'\n\n")
                     do {
                         // make sure this JSON is in the format we expect
                         if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
@@ -579,7 +582,11 @@ class Venraaspt: NSObject {
 
      */
     private func ven_reccall(_nowRec: String) {
-        self.nowRec = _nowRec
+        if (_nowRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
+            self.nowRec = "[{\"rec\":\"" + _nowRec + "\"}]"
+        } else {
+            self.nowRec = "[]"
+        }
 
         let tick: Int64 = Int64((Date().timeIntervalSince1970 * 1000).rounded())
         let zoneOffset = TimeZone.current.secondsFromGMT()
@@ -598,49 +605,40 @@ class Venraaspt: NSObject {
         if (userId.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
             params += ",\"uid\":\"" + userId + "\""
         } else {
-            params += ",\"uid\":null"
+            //params += ",\"uid\":null"
         }
         if (categoryCode.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
             params += ",\"categ_code\":\"" + categoryCode + "\""
         } else {
-            params += ",\"categ_code\":null"
+            //params += ",\"categ_code\":null"
         }
         if (goodsId.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
             params += ",\"gid\":\"" + goodsId + "\""
         } else {
-            params += ",\"gid\":null"
+            //params += ",\"gid\":null"
         }
         if (transI.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-            params += ",\"trans_i\":\"" + transI + "\""
+            params += ",\"trans_i\":" + transI
         } else {
-            params += ",\"trans_i\":null"
+            params += ",\"trans_i\":[]"
         }
         if (nowRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-            params += ",\"now_rec\":\"" + nowRec + "\""
+            params += ",\"now_rec\":" + nowRec
         } else {
-            params += ",\"now_rec\":null"
-        }
-        if (fromRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-            params += ",\"from_rec\":\"" + fromRec + "\""
-        } else {
-            params += ",\"from_rec\":null"
+            params += ",\"now_rec\":[]"
         }
         if (venGuid.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
             params += ",\"ven_guid\":\"" + venGuid + "\""
         } else {
-            params += ",\"ven_guid\":null"
+            //params += ",\"ven_guid\":null"
         }
         if (venSession.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
             params += ",\"ven_session\":\"" + venSession + "\""
         } else {
-            params += ",\"ven_session\":null"
-        }
-        if (keyword.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-            params += ",\"keyword\":\"" + keyword + "\""
-        } else {
-            params += ",\"keyword\":null"
+            //params += ",\"ven_session\":null"
         }
         params += "}"
+        self.Log(msg: "[ven_reccall] params='\(params)'")
         let Params = params.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         if (Params != nil) {
             params = Params!
@@ -676,6 +674,9 @@ class Venraaspt: NSObject {
         self.nowRec = ""
         self.fromRec = ""
         self.keyword = ""
+        self.refInfo = ""
+        self.wCategInfo = ""
+        self.bCategInfo = ""
     }
 
     private func check_venGuid() -> Bool {
@@ -751,7 +752,7 @@ class Venraaspt: NSObject {
     }
 
     func httpPost(url: String, contentType: String, postData: String, callback: @escaping (_ results: Results) -> Void) {
-        Log(msg: "[httpPost] url='\(url)'\n postData='\(postData)'")
+//        Log(msg: "[httpPost] url='\(url)'\n postData='\(postData)'")
 
         guard let url = URL(string: url) else {
             Log(msg: "[httpGet] url error!");

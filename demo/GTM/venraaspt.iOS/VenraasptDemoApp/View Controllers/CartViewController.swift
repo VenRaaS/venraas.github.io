@@ -57,8 +57,19 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-
-        Venraaspt.mInstance.ven_cart(transI: "")
+        if (StorageData.mInstance.orderList.isEmpty) {
+            Venraaspt.mInstance.ven_cart(transI: "")
+        } else {
+            var transI = "{\"id\":null,\"iList\":["
+            for (index, value) in StorageData.mInstance.orderList.enumerated() {
+                if (index > 0) {
+                    transI += ","
+                }
+                transI += "{\"id\":\"" + value + "\"}"
+            }
+            transI += "]}"
+            Venraaspt.mInstance.ven_cart(transI: transI)
+        }
 
     }
 
