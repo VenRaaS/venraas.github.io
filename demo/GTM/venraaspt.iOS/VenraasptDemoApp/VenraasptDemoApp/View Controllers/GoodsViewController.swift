@@ -38,10 +38,17 @@ class GoodsViewController: UIViewController, UICollectionViewDelegate, UICollect
     // 點選 cell 後執行的動作
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         StorageData.mInstance.name = recomdItems[indexPath.row].name
-        StorageData.mInstance.cid = recomdItems[indexPath.row].cid
+        if (recomdItems[indexPath.row].cid.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
+            StorageData.mInstance.cid = recomdItems[indexPath.row].cid
+        } else {
+            let gids = recomdItems[indexPath.row].gid.split(separator:"-")
+            StorageData.mInstance.cid = String(gids.first!)
+        }
         StorageData.mInstance.gid = recomdItems[indexPath.row].gid
         StorageData.mInstance.url = recomdItems[indexPath.row].url
         StorageData.mInstance.data = recomdItems[indexPath.row].data
+        //Venraaspt.mInstance.Log(msg: "collectionView...\nname='\(StorageData.mInstance.name)'\ncid='\(StorageData.mInstance.cid)'\ngid='\(StorageData.mInstance.gid)'\nurl='\(StorageData.mInstance.url)'")
+
         weak var pvc = self.presentingViewController
         dismiss(animated: true) {
             if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GoodsViewController") {
@@ -151,7 +158,10 @@ class GoodsViewController: UIViewController, UICollectionViewDelegate, UICollect
         myCollectionView.dataSource = self
 
 
-        Venraaspt.mInstance.ven_goods(categoryCode: StorageData.mInstance.cid, goodsId: StorageData.mInstance.gid, keyword: StorageData.mInstance.keyword, fromRec: StorageData.mInstance.recomd_id, nowRec: "")
+        Venraaspt.mInstance.ven_goods(categoryCode: StorageData.mInstance.cid,
+                                      goodsId: StorageData.mInstance.gid,
+                                      keyword: StorageData.mInstance.keyword,
+                                      fromRec: StorageData.mInstance.recomd_id)
 
         Venraaspt.mInstance.ven_recomd(recPos: "gop", recType: "AlsoView", rowItems: 10) {  (completion) in
             let data = Data(completion.utf8)
@@ -264,6 +274,7 @@ class GoodsViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
 
     @objc func addCartButton(_ sender: UIButton) {
+        StorageData.mInstance.orderList.append(StorageData.mInstance.gid)
         Venraaspt.mInstance.ven_cartAdd(_goodsId: StorageData.mInstance.gid)
     }
 

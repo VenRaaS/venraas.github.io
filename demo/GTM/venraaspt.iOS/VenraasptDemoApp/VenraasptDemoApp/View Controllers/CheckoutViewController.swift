@@ -11,6 +11,9 @@ import WebKit
 
 class CheckoutViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
+    
+    var recomdItems = [RecomdItem]()
+
 
     var mWebView: WKWebView? = nil
 
@@ -46,6 +49,94 @@ class CheckoutViewController: UIViewController, WKNavigationDelegate, WKScriptMe
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        var ref_info = "[]"
+        if (StorageData.mInstance.orderList.isEmpty) {
+            Venraaspt.mInstance.ven_order(transI: "")
+        } else {
+            let tick: Int64 = Int64((Date().timeIntervalSince1970 * 1000).rounded())
+            var transI = "{\"id\":\"" + String(tick) + "\",\"iList\":["
+            ref_info = "["
+            for (index, value) in StorageData.mInstance.orderList.enumerated() {
+                if (index > 0) {
+                    transI += ","
+                    ref_info += ","
+                }
+                transI += "{\"id\":\"" + value + "\"}"
+                ref_info += "{\"gid\":\"" + value + "\"}"
+            }
+            ref_info += "]"
+            transI += "]}"
+            Venraaspt.mInstance.ven_order(transI: transI)
+        }
+        Venraaspt.mInstance.ven_refInfo(refInfo: ref_info)
+
+        Venraaspt.mInstance.ven_recomd(recPos: "orp", recType: "AlsoView", rowItems: 10) {  (completion) in
+            let data = Data(completion.utf8)
+
+            do {
+                // make sure this JSON is in the format we expect
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    // try to read out a string array
+                    if let recomd_list = json["recomd_list"] as? [[String:Any]] {
+                        for recomd in recomd_list {
+                            var _name = ""
+                            var _cid = ""
+                            var _gid = ""
+                            var _url = ""
+                            if let name = recomd["name"] as? String {
+                                _name = name
+                            }
+                            if let gid = recomd["id"] as? String {
+                                _gid = gid
+                            }
+                            if let cid = recomd["category_code"] as? String {
+                                _cid = cid
+                            }
+                            if let url = recomd["goods_img_url"] as? String {
+                                _url = url
+                            }
+                            var item = RecomdItem(name: _name, cid: _cid, gid: _gid, url: _url, data: nil)
+
+                            guard let url = URL(string: item.url) else {
+                                self.recomdItems.append(item)
+                                return
+                            }
+
+                            let semaphore = DispatchSemaphore(value: 0)
+                            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                                guard let data = data else {
+                                    self.recomdItems.append(item)
+                                    return
+                                }
+
+                                item.data = data
+                                self.recomdItems.append(item)
+
+                                semaphore.signal()
+                            }
+                            task.resume()
+                            semaphore.wait()
+
+                        }
+
+                        if recomd_list.count == 0 {
+                            self.recomdItems.append(RecomdItem(name: "iPhone_1", cid: "", gid: "", url: "https://b.ecimg.tw/items/DYAJ2UA900A9HIJ/000002_1574060256.jpg", data: nil))
+                            self.recomdItems.append(RecomdItem(name: "iPhone_2", cid: "", gid: "", url: "https://b.ecimg.tw/items/DYAJ2UA900A9HIJ/000002_1574060256.jpg", data: nil))
+                        }
+
+                    }
+                }
+
+                DispatchQueue.main.async {
+                    // 加入畫面中
+                    //self.view.addSubview(myCollectionView)
+                }
+
+            } catch let error as NSError {
+                Venraaspt.mInstance.Log(msg: "Failed to load: \(error.localizedDescription)")
+            }
+        }
+
 
         let url = URL(string: "https://venraas.github.io/demo/GTM/checkout_iOS.html")
         if let url = url {

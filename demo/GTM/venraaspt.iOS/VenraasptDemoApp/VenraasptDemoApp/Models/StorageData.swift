@@ -19,4 +19,6 @@ class StorageData {
     var recomd_id = ""
     var keyword = ""
     var data: Data?
+
+    var orderList = [String]()
 }

@@ -38,10 +38,17 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     // 點選 cell 後執行的動作
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         StorageData.mInstance.name = recomdItems[indexPath.row].name
-        StorageData.mInstance.cid = recomdItems[indexPath.row].cid
+        if (recomdItems[indexPath.row].cid.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
+            StorageData.mInstance.cid = recomdItems[indexPath.row].cid
+        } else {
+            let gids = recomdItems[indexPath.row].gid.split(separator:"-")
+            StorageData.mInstance.cid = String(gids.first!)
+        }
         StorageData.mInstance.gid = recomdItems[indexPath.row].gid
         StorageData.mInstance.url = recomdItems[indexPath.row].url
         StorageData.mInstance.data = recomdItems[indexPath.row].data
+        Venraaspt.mInstance.Log(msg: "collectionView...\nname='\(StorageData.mInstance.name)'\ncid='\(StorageData.mInstance.cid)'\ngid='\(StorageData.mInstance.gid)'\nurl='\(StorageData.mInstance.url)'")
+
         weak var pvc = self.presentingViewController
         dismiss(animated: true) {
             if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GoodsViewController") {
