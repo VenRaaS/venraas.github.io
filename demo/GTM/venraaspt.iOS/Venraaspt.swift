@@ -275,13 +275,13 @@ class Venraaspt: NSObject {
                 params += ",\"trans_i\":" + self.transI
             }
             else {
-                params += ",\"trans_i\":[]"
+                //params += ",\"trans_i\":[]"
             }
             if (self.nowRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"now_rec\":" + self.nowRec
             }
             else {
-                params += ",\"now_rec\":[]"
+                //params += ",\"now_rec\":[]"
             }
             if (self.fromRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"from_rec\":\"" + self.fromRec + "\""
@@ -388,7 +388,7 @@ class Venraaspt: NSObject {
                 params += ",\"trans_i\":" + self.transI
             }
             else {
-                params += ",\"trans_i\":[]"
+                //params += ",\"trans_i\":[]"
             }
             if (self.fromRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
                 params += ",\"from_rec\":\"" + self.fromRec + "\""
@@ -425,7 +425,7 @@ class Venraaspt: NSObject {
                      contentType: "application/x-www-form-urlencoded;charset=UTF-8",
                      postData: params) { (results) in
                 if let response = results.response {
-                    self.Log(msg: "[ven_recomd] httpStatusCode='\(response.httpStatusCode)'")
+                    self.Log(msg: "[ven_addCart] httpStatusCode='\(response.httpStatusCode)'")
                 }
                 if let data = results.data {
                     self.Log(msg: "[ven_addCart] data='\(String(decoding: data, as: UTF8.self))'")
@@ -502,12 +502,12 @@ class Venraaspt: NSObject {
             if (self.wCategInfo != "") {
                 params += ",\"w_categ_info\":" + self.wCategInfo
             } else {
-                params += ",\"w_categ_info\":[]"
+                //params += ",\"w_categ_info\":[]"
             }
             if (self.bCategInfo != "") {
                 params += ",\"b_categ_info\":" + self.bCategInfo
             } else {
-                params += ",\"b_categ_info\":[]"
+                //params += ",\"b_categ_info\":[]"
             }
             params += ",\"device\":\"" + self.device + "\""
             params += ",\"ven_guid\":\"" + self.venGuid + "\""
@@ -620,12 +620,12 @@ class Venraaspt: NSObject {
         if (transI.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
             params += ",\"trans_i\":" + transI
         } else {
-            params += ",\"trans_i\":[]"
+            //params += ",\"trans_i\":[]"
         }
         if (nowRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
             params += ",\"now_rec\":" + nowRec
         } else {
-            params += ",\"now_rec\":[]"
+            //params += ",\"now_rec\":[]"
         }
         if (venGuid.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
             params += ",\"ven_guid\":\"" + venGuid + "\""

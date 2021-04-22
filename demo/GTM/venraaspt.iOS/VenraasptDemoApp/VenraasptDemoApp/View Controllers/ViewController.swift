@@ -212,11 +212,5 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
 
-    @objc func goodsButton(_ sender: UIButton) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "GoodsViewController") {
-            present(vc, animated: true, completion: nil)
-        }
-    }
-
 
 }

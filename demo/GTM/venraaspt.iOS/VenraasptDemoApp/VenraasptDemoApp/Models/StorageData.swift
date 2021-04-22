@@ -20,5 +20,7 @@ class StorageData {
     var keyword = ""
     var data: Data?
 
-    var orderList = [String]()
+    var orderList_name = [String]()
+    var orderList_cid = [String]()
+    var orderList_gid = [String]()
 }

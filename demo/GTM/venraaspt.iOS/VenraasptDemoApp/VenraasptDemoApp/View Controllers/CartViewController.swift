@@ -8,10 +8,55 @@
 
 import UIKit
 
-class CartViewController: UIViewController {
+class CartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
 
 
     var recomdItems = [RecomdItem]()
+    var orderListLabel: UILabel?
+
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return recomdItems.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        // 依據前面註冊設置的識別名稱 "Cell" 取得目前使用的 cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! RecomdCollectionCell
+
+        // 設置 cell 內容 (即自定義元件裡 增加的圖片與文字元件)
+        if recomdItems[indexPath.row].data == nil {
+            cell.imageView.image = UIImage(named: "iPhone 11 pro.jpg")
+        }
+        else {
+            cell.imageView.image = UIImage(data: recomdItems[indexPath.row].data!)
+        }
+
+        return cell
+
+    }
+
+    // 點選 cell 後執行的動作
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        StorageData.mInstance.name = recomdItems[indexPath.row].name
+        if (recomdItems[indexPath.row].cid.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
+            StorageData.mInstance.cid = recomdItems[indexPath.row].cid
+        } else {
+            let gids = recomdItems[indexPath.row].gid.split(separator:"-")
+            StorageData.mInstance.cid = String(gids.first!)
+        }
+        StorageData.mInstance.gid = recomdItems[indexPath.row].gid
+        StorageData.mInstance.url = recomdItems[indexPath.row].url
+        StorageData.mInstance.data = recomdItems[indexPath.row].data
+        //Venraaspt.mInstance.Log(msg: "collectionView...\nname='\(StorageData.mInstance.name)'\ncid='\(StorageData.mInstance.cid)'\ngid='\(StorageData.mInstance.gid)'\nurl='\(StorageData.mInstance.url)'")
+
+        weak var pvc = self.presentingViewController
+        dismiss(animated: true) {
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GoodsViewController") {
+                pvc?.present(vc, animated: true, completion: nil)
+            }
+        }
+    }
 
 
     override func loadView() {
@@ -46,7 +91,16 @@ class CartViewController: UIViewController {
         searchButton.addTarget(self, action: #selector(searchButton(_:)), for: .touchUpInside)
         self.view.addSubview(searchButton)
 
-        let checkoutButton = UIButton(frame: CGRect(x: 166, y: 448, width: 83, height: 40))
+        let orderLabel = UILabel(frame: CGRect(x: 0, y: 120, width: 414, height: 200))
+        orderLabel.text = ""
+        orderLabel.textColor = UIColor.black
+        orderLabel.backgroundColor = UIColor.white
+        orderLabel.textAlignment = .center
+        orderLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+        self.view.addSubview(orderLabel)
+        orderListLabel = orderLabel
+
+        let checkoutButton = UIButton(frame: CGRect(x: 166, y: 280, width: 83, height: 40))
         checkoutButton.setTitle("結帳", for: .normal)
         checkoutButton.setTitleColor(UIColor.white, for: .normal)
         checkoutButton.backgroundColor = UIColor.init(red: 51/255, green: 122/255, blue: 183/255, alpha: 1)
@@ -60,13 +114,57 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+        // 建立 UICollectionViewFlowLayout
+        let layout = UICollectionViewFlowLayout()
+
+        // 設置 section 的間距 四個數值分別代表 上、左、下、右 的間距
+        layout.sectionInset = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7);
+
+        // 設置每一行的間距
+        layout.minimumLineSpacing = 3
+
+        // 設置每個 cell 的尺寸
+        layout.itemSize = CGSize(width: 400, height: 400)
+
+        // 設置 header 及 footer 的尺寸
+        layout.headerReferenceSize = CGSize(width: 414, height: 0)
+        layout.footerReferenceSize = CGSize(width: 414, height: 0)
+
+        // 建立 UICollectionView
+        let myCollectionView = UICollectionView(frame: CGRect(x: 0, y: 360, width: 414, height: 416), collectionViewLayout: layout)
+
+        // 註冊 cell 以供後續重複使用
+        myCollectionView.register(RecomdCollectionCell.self, forCellWithReuseIdentifier: "Cell")
+
+        // 註冊 section 的 header 跟 footer 以供後續重複使用
+        myCollectionView.register(RecomdCollectionCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header")
+        myCollectionView.register(RecomdCollectionCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "Footer")
+
+        // 設置委任對象
+        myCollectionView.delegate = self
+        myCollectionView.dataSource = self
+
+
         var ref_info = "[]"
-        if (StorageData.mInstance.orderList.isEmpty) {
-            Venraaspt.mInstance.ven_cart(transI: "[]")
+        if (StorageData.mInstance.orderList_gid.isEmpty) {
+            Venraaspt.mInstance.ven_cart(transI: "")
         } else {
+            var nameList = ""
+            for (index, value) in StorageData.mInstance.orderList_name.enumerated() {
+                if (index > 0) {
+                    nameList += "\n"
+                }
+                nameList += value
+            }
+            //Venraaspt.mInstance.Log(msg: "viewDidLoad...\nnameList='\(nameList)'")
+            orderListLabel!.lineBreakMode = NSLineBreakMode.byWordWrapping
+            orderListLabel!.numberOfLines = 0
+            orderListLabel!.text = nameList
+
             var transI = "{\"id\":null,\"iList\":["
             ref_info = "["
-            for (index, value) in StorageData.mInstance.orderList.enumerated() {
+            for (index, value) in StorageData.mInstance.orderList_gid.enumerated() {
                 if (index > 0) {
                     transI += ","
                     ref_info += ","
@@ -139,7 +237,7 @@ class CartViewController: UIViewController {
 
                 DispatchQueue.main.async {
                     // 加入畫面中
-                    //self.view.addSubview(myCollectionView)
+                    self.view.addSubview(myCollectionView)
                 }
 
             } catch let error as NSError {
