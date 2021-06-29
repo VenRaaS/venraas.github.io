@@ -128,7 +128,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 var html = '<img src="' + url + '" style="width:320px;"><div><span style="margin:5px 0;font-size:' + title_size + 'px;height:' + parseInt(title_size * 3) + 'px;display:block;overflow:hidden;word-wrap:break-word;word-break:break-all;color:' + title_color +';">' + ret.goods_name + '</span></div><div style="font-size:' + price_size + 'px; font-weight:900; color:' + price_color + '; text-align:center;"><span style="font-weight:normal; font-size:' + price_sign_size + 'px; color:' + price_sign_color + ';">$</span>' + ret.sale_price + '</div></a></div>';
                 if (isAddCart == true) {
                     html += '<a id="addCart" class="btn btn-primary" onclick="addCart(\'' + gid + '\')">&nbsp;放入購物車&nbsp;</a>';
-                    html += '<a id="addFollow" class="btn btn-primary" onclick="addFollow(\'' + gid + '\')">&nbsp;我的最愛&nbsp;</a>';
+                    html += '&nbsp;&nbsp;<a id="addFollow" class="btn btn-primary" onclick="addFollow(\'' + gid + '\')">&nbsp;我的最愛&nbsp;</a>';
                 }
                 $("#" +imgClass).html(html);
             },
