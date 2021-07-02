@@ -40,6 +40,11 @@ class Venraaspt: NSObject {
     var refInfo = ""
     var wCategInfo = ""
     var bCategInfo = ""
+    //2021年新增參數
+    var excludedIds = ""
+    var blocklist = ""
+    var refTagList = ""
+    var rescoreTagList = ""
 
     var jGoods = ""
 
@@ -110,7 +115,17 @@ class Venraaspt: NSObject {
     }
 
     /**
-     設定使用者的帳號
+     讀取使用者的帳號
+
+     :return: userId  使用者的帳號
+
+     */
+    func ven_getUid() -> String {
+        return self.userId;
+    }
+
+    /**
+     ven_uid(userId) 設定uid(使用者的帳號) for webLog
 
      :param: userId  使用者的帳號
 
@@ -120,14 +135,66 @@ class Venraaspt: NSObject {
     }
 
     /**
-     讀取使用者的帳號
+     ven_keyword(keyword) 設定keyword for webLog(搜尋頁或商品頁)
 
-     :return: userId  使用者的帳號
+     :param: keyword  搜尋keyword
 
      */
-    func ven_getUid() -> String {
-        return self.userId;
+    func ven_keyword(keyword: String) {
+        self.keyword = keyword;
     }
+
+    /**
+     ven_goodsId(goodsId) 設定gid(商品代碼) for webLog(商品頁)
+
+     :param: goodsId  商品代碼
+
+     */
+    func ven_goodsId(goodsId: String) {
+        self.goodsId = goodsId;
+    }
+
+    /**
+     * ven_fromRec(fromRec) 設定from_rec(來源推薦方式代碼) for webLog(商品頁,等等...)
+     *
+     * @param fromRec  來源推薦方式代碼
+     *
+     */
+    func ven_fromRec(fromRec: String) {
+        self.fromRec = fromRec;
+    }
+
+    /**
+     * ven_nowRec(nowRec) 設定now_rec(推薦方式代碼) for webLog(商品頁,等等...)
+     * "now_rec":[{"rec":"recomd-api-76bq_normal_1520877021_0001"}]
+     *
+     * @param nowRec  推薦方式代碼
+     *
+     */
+    func ven_nowRec(nowRec: String) {
+        self.nowRec = nowRec;
+    }
+
+    /**
+     * ven_transI(transI) 設定trans_i(購物車資訊,結帳資訊) for webLog(購物車頁,結帳頁)
+     *
+     * @param transI  購物車資訊,結帳資訊
+     *
+     */
+    func ven_transI(transI: String) {
+        self.transI = transI;
+    }
+
+    /**
+     * ven_categoryCode(categoryCode) 設定category_code for webLog(分類頁或商品頁) or 商品推薦
+     *
+     * @param categoryCode  分類頁代碼
+     *
+     */
+    func ven_categoryCode(categoryCode: String) {
+        self.categoryCode = categoryCode;
+    }
+
 
     /**
      webLog for portal(首頁)
@@ -435,28 +502,61 @@ class Venraaspt: NSObject {
     }
 
     /**
-     venraas ref_info for 商品推薦(購物車頁面)
+     ven_refInfo(refInfo)  設定ref_info for 商品推薦(購物車頁面)
      "ref_info":[{"gid":"123"},{"gid":"456"}]
      */
     func ven_refInfo(refInfo: String) {
-        self.refInfo = refInfo;
+        self.refInfo = refInfo
     }
 
     /**
-     venraas w_categ_info for 商品推薦
+     ven_wCategInfo(wCategInfo)  設定w_categ_info for 商品推薦
      "w_categ_info":[ { "code":"368156" } ]
      */
     func ven_wCategInfo(wCategInfo: String) {
-        self.wCategInfo = wCategInfo;
+        self.wCategInfo = wCategInfo
     }
 
     /**
-     venraas b_categ_info for 商品推薦
+     ven_bCategInfo(bCategInfo)  設定b_categ_info for 商品推薦
      "b_categ_info":[ { "code":"368156" } ]
      */
     func ven_bCategInfo(bCategInfo: String) {
-        self.bCategInfo = bCategInfo;
+        self.bCategInfo = bCategInfo
     }
+
+    /**
+     ven_excludedIds(excludedIds)  設定excluded_ids for 商品推薦
+     "excluded_ids":["excluded_gid_1","excluded_gid_2"]
+     */
+    func ven_excludedIds(excludedIds: String) {
+        self.excludedIds = excludedIds
+    }
+
+    /**
+     ven_blocklist(blocklist)  設定blocklist for 商品推薦
+     "blocklist":[{"id": "excluded_gid_1"},{"id": "excluded_gid_2"}]
+     */
+    func ven_blocklist(blocklist: String) {
+        self.blocklist = blocklist;
+    }
+
+    /**
+     ven_refTagList(refTagList)  設定ref_tag_list for 商品推薦
+     "ref_tag_list":[{"field":"occasion_id","value":"A1234","score":1}]
+     */
+    func ven_refTagList(refTagList: String) {
+        self.refTagList = refTagList;
+    }
+
+    /**
+     ven_rescoreTagList(rescoreTagList)  設定rescore_tag_list for 商品推薦
+     "rescore_tag_list":[{"field":"style_id","value":"A1234","score":50}]
+     */
+    func ven_rescoreTagList(rescoreTagList: String) {
+        self.rescoreTagList = rescoreTagList;
+    }
+
 
     /**
      商品推薦
@@ -508,6 +608,26 @@ class Venraaspt: NSObject {
                 params += ",\"b_categ_info\":" + self.bCategInfo
             } else {
                 //params += ",\"b_categ_info\":[]"
+            }
+            if (self.excludedIds != "") {
+                params += ",\"excluded_ids\":" + self.excludedIds
+            } else {
+                //params += ",\"excluded_ids\":[]"
+            }
+            if (self.blocklist != "") {
+                params += ",\"blocklist\":" + self.blocklist
+            } else {
+                //params += ",\"blocklist\":[]"
+            }
+            if (self.refTagList != "") {
+                params += ",\"ref_tag_list\":" + self.refTagList
+            } else {
+                //params += ",\"ref_tag_list\":[]"
+            }
+            if (self.rescoreTagList != "") {
+                params += ",\"rescore_tag_list\":" + self.rescoreTagList
+            } else {
+                //params += ",\"rescore_tag_list\":[]"
             }
             params += ",\"device\":\"" + self.device + "\""
             params += ",\"ven_guid\":\"" + self.venGuid + "\""
@@ -583,7 +703,7 @@ class Venraaspt: NSObject {
      */
     private func ven_reccall(_nowRec: String) {
         if (_nowRec.trimmingCharacters(in: .whitespacesAndNewlines).count > 0) {
-            self.nowRec = "[{\"rec\":\"" + _nowRec + "\"}]"
+            self.nowRec = _nowRec
         } else {
             self.nowRec = "[]"
         }
@@ -677,6 +797,10 @@ class Venraaspt: NSObject {
         self.refInfo = ""
         self.wCategInfo = ""
         self.bCategInfo = ""
+        self.excludedIds = ""
+        self.blocklist = ""
+        self.refTagList = ""
+        self.rescoreTagList = ""
     }
 
     private func check_venGuid() -> Bool {

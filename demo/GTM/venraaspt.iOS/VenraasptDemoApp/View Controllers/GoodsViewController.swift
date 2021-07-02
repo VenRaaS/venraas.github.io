@@ -274,7 +274,9 @@ class GoodsViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
 
     @objc func addCartButton(_ sender: UIButton) {
-        StorageData.mInstance.orderList.append(StorageData.mInstance.gid)
+        StorageData.mInstance.orderList_name.append(StorageData.mInstance.name)
+        StorageData.mInstance.orderList_cid.append(StorageData.mInstance.cid)
+        StorageData.mInstance.orderList_gid.append(StorageData.mInstance.gid)
         Venraaspt.mInstance.ven_cartAdd(_goodsId: StorageData.mInstance.gid)
     }
 
